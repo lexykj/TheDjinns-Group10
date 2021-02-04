@@ -1,4 +1,4 @@
-# Big Blue's PArking Genie
+# Big Blue's Parking Genie
 
 ## Team 10
 
