@@ -1,6 +1,6 @@
 # Big Blue's Parking Genie
 
-## Team 10
+## The Djinns - Group 10
 
 Explanation of the organization/name scheme for the workspace
 
