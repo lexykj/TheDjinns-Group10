@@ -40,4 +40,4 @@ This section contains requirements or constraints on the functioning of the prop
 
 ## 6.	Glossary
 
-This section contains a list important terms and their definition.
+*Add specific terms and their definitions here as requirements are fleshed out with more specific processes and features.*
