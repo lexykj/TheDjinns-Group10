@@ -9,7 +9,7 @@
 | Project plan: Risk analysis (5)                                           | Autumn    |     |      |
 | Use Case Diagrams: 8 use case diagrams (16)                               | Lexy/Joel |     |      |
 | Requirements Definition: Introduction and Context (3)                     | Joel      |     |  *   |
-| Requirements Definition: Users and their Goals (2)                        | Joel      |  *  |      |
+| Requirements Definition: Users and their Goals (2)                        | Joel      |  *  | (needs UML diagrams but is otherwise done)  |
 | Requirements Definition: Functional Requirements (5)                      | Palani    |     |      |
 | Requirements Definition: Non-functional Requirements (2)                  | Joel      |     |      |
 | Requirements Definition: Future Features (2)                              | Joel      |     |      |
