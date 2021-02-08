@@ -10,7 +10,7 @@ Requirements Definition
 
 ## 2.	Users and their Goals
 
-*Users of Big Blue's Parking Genie fall into four main categories. These categories include Clients, Lot Attendants, Lot Owners, and University Administrators. Each user type has all of the permissions of lower user types. For example, a Parking Lot Owner has management ability for his owned lots, lot attendant privileges for each lots he owns, and the basic system privileges afforded to each client. While user permissions are backwards-inclusive, each user type still has distinct goals. User goals and permissions are detailed in the below table and UML Use Case diagrams.*
+*Users of Big Blue's Parking Genie fall into four main categories. These categories include Clients, Lot Attendants, Lot Owners, and University Administrators. Each user type has all of the permissions of lower user types. For example, a Parking Lot Owner has management ability for his owned lots, lot attendant privileges for each lots he owns, and the basic system privileges afforded to each client. While user permissions are backwards-inclusive, each user type still has distinct goals. User goals and permissions are detailed in the below table and UML Use Case diagrams. One -could- requirement is a request system for users to request to be accepted as lot owners, etc.*
 
 | **Actor** | **Goals**| **Permissions** |
 |------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
@@ -25,7 +25,13 @@ This section contains requirements or constraints on the functioning of the prop
 
 ## 4.	Non-functional Requirements
 
-This section contains requirements that describe and/or constrain the development process.  For example, a non-functional requirement may state that development will follow an Agile method with weekly iteration meetings.
+1. *During each phase (similar to an Agile Sprint) a project leader will be nominated who will track the effort and hours spent working on the project by individual team members. This effort will typically be measured using Canvas points as a guideline for difficulty levels.*
+2. *The application will utilize a database to track accounts and user permissions.*
+3. *The website hosting the application should be able to be accessed by users on mobile or desktop devices.*
+4. *The web application should be able to handle multiple users simultaneously making parking spot reservations at any time.*
+5. *User accounts will require passwords of length 8 characters or more*
+6. *The system must be able to store University events registered at least 6 months in advance. This will allow University admin users to add events as semester schedules are created.*
+*Further non-functional requirements may be added as the project progresses.*
 
 ## 5.	Future Features
 
