@@ -35,7 +35,8 @@ This section contains requirements or constraints on the functioning of the prop
 
 ## 5.	Future Features
 
-This section contains a list of ideas or features that are beyond the scope of the project.
+1. *Add a request system to regulate the process by which users submit applications to the university admin to be added as lot owners.*
+2. **
 
 ## 6.	Glossary
 
