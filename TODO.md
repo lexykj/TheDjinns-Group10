@@ -12,8 +12,8 @@
 | Requirements Definition: Users and their Goals (2)                        | Joel      |     | (needs UML diagrams but is otherwise done)  |
 | Requirements Definition: Functional Requirements (5)                      | Palani    |     |      |
 | Requirements Definition: Non-functional Requirements (2)                  | Joel      |     |  *   |
-| Requirements Definition: Future Features (2)                              | Joel      |  *  |      |
-| Requirements Definition: Glossary (2)                                     | Joel      |  *  |      |
+| Requirements Definition: Future Features (2)                              | Joel      |     |  *   |
+| Requirements Definition: Glossary (2)                                     | Joel      |     |  *   |
 | README.md: Explanation of the organization/name scheme for workspace (2)  | Palani    |     | *    |
 | README.md: Version-control procedures (2)                                 | Palani    |     | *    |
 | README.md: Tool stack description and setup procedure (2)                 | Palani    | *   |      |

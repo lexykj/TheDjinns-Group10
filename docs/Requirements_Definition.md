@@ -46,7 +46,7 @@ Requirements Definition
     - Allows navigation of all pages based on permissions of diffrent actors
     - Shows information like current reservations and event information
 9. About Page (no permissions)
-    - Informaion page
+    - Information page
     - Tells potential actors about Parking Genie
 
 
@@ -54,7 +54,7 @@ Requirements Definition
 
 1. *During each phase (similar to an Agile Sprint) a project leader will be nominated who will track the effort and hours spent working on the project by individual team members. This effort will typically be measured using Canvas points as a guideline for difficulty levels.*
 2. *The application will utilize a database to track accounts and user permissions.*
-3. *The website hosting the application should be able to be accessed by users on mobile or desktop devices.*
+3. *Project progress and deliverables will be managed via GitHub and the Git version control system.*
 4. *The web application should be able to handle multiple users simultaneously making parking spot reservations at any time.*
 5. *User accounts will require passwords of length 8 characters or more*
 6. *The system must be able to store University events registered at least 6 months in advance. This will allow University admin users to add events as semester schedules are created.*
@@ -68,4 +68,15 @@ Requirements Definition
 
 ## 6.	Glossary
 
-*Add specific terms and their definitions here as requirements are fleshed out with more specific processes and features.*
+**Authentication**  
+The process used site-wide to verify the identity of a user, access their account details, and follow proper use cases based on the permissions of the user. Authentication takes place at login.
+
+**Front-Facing**  
+The portion of Big Blue's Parking Genie which is available to the public without user accounts can be referred to as the front-facing end of the application. Here potential users from the public can browse the features of the application and choose to sign up for an account.
+
+**Permissions**  
+Permissions refer to the access level associated with each user account. Based on the account type, different users have access to different views and functionalities within the site.
+
+**User**  
+In the documentation for Big Blue's Parking Genie, users refers to any potential individual who uses the application. Each user can be categorized as one of several user types defined in Section 2 of this document.
+
