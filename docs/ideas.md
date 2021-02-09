@@ -67,7 +67,7 @@
 * Optional phone number
 * 8+ digit password
 
-**Use Cases Discussion**
+**USE CASES DISCUSSION**  
 Public user (new user, no account yet, anyone)
 - Setup account
 - Register as a lot owner (Request A)
