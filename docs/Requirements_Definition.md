@@ -21,7 +21,33 @@ Requirements Definition
 
 ## 3.	Functional Requirements
 
-This section contains requirements or constraints on the functioning of the proposed system, written in way that doesn’t pre-suppose “how” the system will accomplish those requirements.  The requirements should be organized in hierarchy of increasing specificity and presented in outline form so they are easy to reference.  Each requirement must stand on its own because it could be referenced or quoted in other documents without the benefit contextual information.  Where appropriate, the requirements could include statements about of the rationale (motivation) and/or priority (importance to the client.)
+1. Sign-up Page (no permissions)
+    - Allows for sign up and registration from diffrent actors
+    - Client and Lot Owners can register on main page (without private link)
+    - Lot Attendants and University Admin must be sent a private link
+2. Map Page (Client-level permissions)
+    - Contains a map of avalible lots for a given event
+3. Lot Page (Client-level permissions)
+    - Linked from map page
+    - Contains specific information about the lot including owner name, number of spots, reservation options, etc.
+4. Lot Attendant Page (Lot Attendent permissions)
+    - Allows Lot Attendants to view current reservations and events.
+    - Allows Lot Attendants to check-in Clients.
+5. Lot Owner Page (Lot Owner permissions)
+    - Allows Lot Owners to add/remove avalible lots, set reservation price for lot, and manage parking space types
+6. Event Management Page (University Admin permissions)
+    - Allows University Admins to create new events and manage lot owners.
+7. Lot Attendant admin page (Lot Owner permissions)
+    - Allows Lot Owners and University Admins to add/remive Lot attendents
+    - University Admins can also add new University Admins
+    - Sends a private sign up link to new new Attendent/Admin
+8. Main Page (all permissions)
+    - Allows navigation of all pages based on permissions of diffrent actors
+    - Shows information like current reservations and event information
+9. About Page (no permissions)
+    - Informaion page
+    - Tells potential actors about Parking Genie
+
 
 ## 4.	Non-functional Requirements
 
