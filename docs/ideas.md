@@ -67,6 +67,40 @@
 * Optional phone number
 * 8+ digit password
 
+**Use Cases Discussion**
+Public user (new user, no account yet, anyone)
+- Setup account
+- Register as a lot owner (Request A)
+
+Customer
+- reserving a spot
+- manage their reservations
+- access a map to their parking lot
+- Register/promote to lot owner (Request B)
+????? Locate VS Reserve Spot ?????
+
+Lot Attendant
+- checking in reservations 
+
+Lot Owner
+- add a parking lot
+	- add/define a spot (id (database), type, price)
+	- set a pin/define location with Google Maps API
+		- MUST: address
+		- COULD: pin/enclosed area via Maps API
+- manage lot attendants (promote, demote)
+
+University Admin
+- add events
+- approve requests for lot owners
+- demote/kick lot owners
+
+TODO: Joel - change client to customer in Req Def
+
+FUTURE FEATURE
+- verify/prove ownership of lots
+
+
 
 # Autumn's Ideas
 
