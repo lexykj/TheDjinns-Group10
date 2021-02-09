@@ -10,14 +10,15 @@ Requirements Definition
 
 ## 2.	Users and their Goals
 
-*Users of Big Blue's Parking Genie fall into four main categories. These categories include Customers, Lot Attendants, Lot Owners, and University Administrators. Each user type has all of the permissions of lower user types. For example, a Parking Lot Owner has management ability for his owned lots, lot attendant privileges for each lots he owns, and the basic system privileges afforded to each customer. While user permissions are backwards-inclusive, each user type still has distinct goals. User goals and permissions are detailed in the below table and UML Use Case diagrams. One -could- requirement is a request system for users to request to be accepted as lot owners, etc.*
+*Users of Big Blue's Parking Genie fall into five main categories. These categories include Public Users, Customers, Lot Attendants, Lot Owners, and University Administrators. Each user type has all of the permissions of lower user types. For example, a Parking Lot Owner has management ability for his owned lots, lot attendant privileges for each lots he owns, and the basic system privileges afforded to each customer. While user permissions are backwards-inclusive, each user type still has distinct goals. User goals and permissions are detailed in the below table and UML Use Case diagrams.*
 
-| **Actor** | **Goals**| **Permissions** |
-|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
-| Customer           | View and select upcoming events, view and select available parking lots for each event, purchase parking spots for events, manage parking reservations, and view account balance and information. | Basic viewing and reservation permissions          |
-| Lot Attendant    | View all reservations for the current/next event, check customers into parking spots.                                                                                                               | Customer permissions, reservation permissions.       |
-| Lot Owner        | Add or remove registered lots, add attendants for lots, set prices and types of parking spots.                                                                                                    | Attendant permissions, lot management permissions. |
-| University Admin | View and manage all parking lot owners, their lots, and lot attendants. Manage and add upcoming events.                                                                                           | Owner permissions, event permissions.              |
+| **Actor** | **Goals** | **Permissions** |
+|-|-|-|
+| Public | Users without an account can browse the front-facing page and sign up for an account. | Front-facing page permissions; create accounts. |
+| Client | View and select upcoming events, view and select available parking lots for each event, purchase parking spots for events, manage parking reservations, and view account balance and information. | Basic viewing and reservation permissions |
+| Lot Attendant | View all reservations for the current/next event, check clients into parking spots. | Client permissions, reservation permissions. |
+| Lot Owner | Add or remove registered lots, add attendants for lots, set prices and types of parking spots. | Attendant permissions, lot management permissions. |
+| University Admin | View and manage all parking lot owners, their lots, and lot attendants. Manage and add upcoming events. | Owner permissions, event permissions. |
 
 ## 3.	Functional Requirements
 
@@ -63,6 +64,7 @@ Requirements Definition
 
 1. *Add a request system to regulate the process by which users submit applications to the university admin to be added as lot owners.*
 2. *Rating system which allows users to rate their liking of the parking spot they used*
+3. *Add process of verifying the proper ownership of lots*
 
 ## 6.	Glossary
 
