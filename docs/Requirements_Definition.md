@@ -36,7 +36,7 @@ This section contains requirements or constraints on the functioning of the prop
 ## 5.	Future Features
 
 1. *Add a request system to regulate the process by which users submit applications to the university admin to be added as lot owners.*
-2. **
+2. *Rating system which allows users to rate their liking of the parking spot they used*
 
 ## 6.	Glossary
 
