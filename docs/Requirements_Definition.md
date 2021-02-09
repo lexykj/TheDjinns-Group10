@@ -10,12 +10,12 @@ Requirements Definition
 
 ## 2.	Users and their Goals
 
-*Users of Big Blue's Parking Genie fall into four main categories. These categories include Clients, Lot Attendants, Lot Owners, and University Administrators. Each user type has all of the permissions of lower user types. For example, a Parking Lot Owner has management ability for his owned lots, lot attendant privileges for each lots he owns, and the basic system privileges afforded to each client. While user permissions are backwards-inclusive, each user type still has distinct goals. User goals and permissions are detailed in the below table and UML Use Case diagrams. One -could- requirement is a request system for users to request to be accepted as lot owners, etc.*
+*Users of Big Blue's Parking Genie fall into four main categories. These categories include Customers, Lot Attendants, Lot Owners, and University Administrators. Each user type has all of the permissions of lower user types. For example, a Parking Lot Owner has management ability for his owned lots, lot attendant privileges for each lots he owns, and the basic system privileges afforded to each customer. While user permissions are backwards-inclusive, each user type still has distinct goals. User goals and permissions are detailed in the below table and UML Use Case diagrams. One -could- requirement is a request system for users to request to be accepted as lot owners, etc.*
 
 | **Actor** | **Goals**| **Permissions** |
 |------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
-| Client           | View and select upcoming events, view and select available parking lots for each event, purchase parking spots for events, manage parking reservations, and view account balance and information. | Basic viewing and reservation permissions          |
-| Lot Attendant    | View all reservations for the current/next event, check clients into parking spots.                                                                                                               | Client permissions, reservation permissions.       |
+| Customer           | View and select upcoming events, view and select available parking lots for each event, purchase parking spots for events, manage parking reservations, and view account balance and information. | Basic viewing and reservation permissions          |
+| Lot Attendant    | View all reservations for the current/next event, check customers into parking spots.                                                                                                               | Customer permissions, reservation permissions.       |
 | Lot Owner        | Add or remove registered lots, add attendants for lots, set prices and types of parking spots.                                                                                                    | Attendant permissions, lot management permissions. |
 | University Admin | View and manage all parking lot owners, their lots, and lot attendants. Manage and add upcoming events.                                                                                           | Owner permissions, event permissions.              |
 
@@ -23,16 +23,16 @@ Requirements Definition
 
 1. Sign-up Page (no permissions)
     - Allows for sign up and registration from diffrent actors
-    - Client and Lot Owners can register on main page (without private link)
+    - Customer and Lot Owners can register on main page (without private link)
     - Lot Attendants and University Admin must be sent a private link
-2. Map Page (Client-level permissions)
+2. Map Page (Customer-level permissions)
     - Contains a map of avalible lots for a given event
-3. Lot Page (Client-level permissions)
+3. Lot Page (Customer-level permissions)
     - Linked from map page
     - Contains specific information about the lot including owner name, number of spots, reservation options, etc.
 4. Lot Attendant Page (Lot Attendent permissions)
     - Allows Lot Attendants to view current reservations and events.
-    - Allows Lot Attendants to check-in Clients.
+    - Allows Lot Attendants to check-in Customers.
 5. Lot Owner Page (Lot Owner permissions)
     - Allows Lot Owners to add/remove avalible lots, set reservation price for lot, and manage parking space types
 6. Event Management Page (University Admin permissions)
