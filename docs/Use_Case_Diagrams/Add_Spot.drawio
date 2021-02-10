@@ -1,1 +1,49 @@
-<mxfile host="app.diagrams.net" modified="2021-02-10T08:01:12.198Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36" version="14.3.0" etag="Q0TsiAdfRIJg9bjRkMXy" type="github"><diagram id="hxcbYbdwiF2dNqMyg2ey">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2021-02-10T08:06:45.592Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36" etag="Xlm2IS7VO71E-VN7VZ3E" version="14.3.0" type="github">
+  <diagram id="hxcbYbdwiF2dNqMyg2ey" name="Page-1">
+    <mxGraphModel dx="868" dy="482" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="3VvNxUzx8rqqSgdZ5wgO-1" value="Parking Lot Owner" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="370" y="50" width="55" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="3VvNxUzx8rqqSgdZ5wgO-3" value="Add parking spot(s)" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="328" y="240" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="3VvNxUzx8rqqSgdZ5wgO-4" value="" style="endArrow=none;html=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="230" as="sourcePoint" />
+            <mxPoint x="400" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3VvNxUzx8rqqSgdZ5wgO-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="3VvNxUzx8rqqSgdZ5wgO-5" target="3VvNxUzx8rqqSgdZ5wgO-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3VvNxUzx8rqqSgdZ5wgO-5" value="Select parking lot" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="370" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="3VvNxUzx8rqqSgdZ5wgO-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="3VvNxUzx8rqqSgdZ5wgO-6" target="3VvNxUzx8rqqSgdZ5wgO-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3VvNxUzx8rqqSgdZ5wgO-6" value="Select spot size" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="327.5" y="410" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="3VvNxUzx8rqqSgdZ5wgO-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="3VvNxUzx8rqqSgdZ5wgO-7" target="3VvNxUzx8rqqSgdZ5wgO-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3VvNxUzx8rqqSgdZ5wgO-7" value="Select associated spot number" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="370" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="3VvNxUzx8rqqSgdZ5wgO-12" value="Includes" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="250" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="3VvNxUzx8rqqSgdZ5wgO-13" value="Extends" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="395" y="360" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="3VvNxUzx8rqqSgdZ5wgO-14" value="Extends" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="250" width="60" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
