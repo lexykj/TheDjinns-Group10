@@ -2,11 +2,11 @@
 
 | Task                                                                      | Assignment| Out | Done |
 |---------------------------------------------------------------------------|-----------|:---:|:----:|
-| Project plan: A summary of the project being built (5)                    | Autumn    |     |      |
-| Project plan: A description of team organization (5)                      | Autumn    |     |      |
-| Project plan: Description of the overall software development process (6) | Autumn    |     |      |
-| Project plan: Policies, procedures, or tools for communication (5)        | Autumn    |     |      |
-| Project plan: Risk analysis (5)                                           | Autumn    |     |      |
+| Project plan: A summary of the project being built (5)                    | Autumn    |     |   *  |
+| Project plan: A description of team organization (5)                      | Autumn    |  *  |      |
+| Project plan: Description of the overall software development process (6) | Autumn    |     |   *  |
+| Project plan: Policies, procedures, or tools for communication (5)        | Autumn    |     |   *  |
+| Project plan: Risk analysis (5)                                           | Autumn    |  *  |      |
 | Use Case Diagrams: 8 use case diagrams (16)                               | Lexy/Joel |     |      |
 | Requirements Definition: Introduction and Context (3)                     | Joel      |     |  *   |
 | Requirements Definition: Users and their Goals (2)                        | Joel      |     | (needs UML diagrams but is otherwise done)  |

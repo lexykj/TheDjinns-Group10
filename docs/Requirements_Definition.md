@@ -20,6 +20,32 @@ Requirements Definition
 | Lot Owner | Add or remove registered lots, add attendants for lots, set prices and types of parking spots. | Attendant permissions, lot management permissions. |
 | University Admin | View and manage all parking lot owners, their lots, and lot attendants. Manage and add upcoming events. | Owner permissions, event permissions. |
 
+
+Figure 1  
+![Figure 1 - Add Event](Use_Case_Diagrams/Add_Event.png "Add Event")
+
+Figure 2  
+![Figure 2 - Add Lot](Use_Case_Diagrams/Add_Lot.png "Add Lot")
+
+Figure 3  
+![Figure 3 - Add Spot](Use_Case_Diagrams/Add_Spot.png "Add Spot")
+
+Figure 4  
+![Figure 4 - Check In](Use_Case_Diagrams/Check_in.png "Check In")
+
+Figure 5  
+![Figure 5 - Create Account](Use_Case_Diagrams/CreateAccount.png "Create Account")
+
+Figure 6  
+![Figure 6 - Open Lot](Use_Case_Diagrams/Open_Lot.png "Open Lot")
+
+Figure 7  
+![Figure 7 - Reserve Spot](Use_Case_Diagrams/Reserve_Spot.png "Reserve Spot")
+
+Figure 8  
+![Figure 8 - Use Reservation](Use_Case_Diagrams/Use_Reservation.png "Use Reservation")
+
+
 ## 3.	Functional Requirements
 
 1. Sign-up Page (no permissions)
