@@ -37,8 +37,12 @@ Our team will mainly use text messaging and Zoom to communicate about the projec
     - **Likelihood:** Medium
     - **Severity:** Medium
     - **Consequences:** Loss of revenue. Without independent lot owners, there won't be as many parking spots for sale.
-    - **Workaround:** 
-2. Task: Extend system to Andriod and iOS mobile devices
+    - **Workaround:** List independent parking spots through university parking lots
+        - **Difficulty:** Medium
+        - **Impact:** This would create an hour of two of work for the developers to add the functionality to the university lot owners' page to add parking spots that aren't in their specified lots.
+        - **Pros:** The university would be able to control who they allow to sell parking spots.
+        - **Cons:** The ease of listing a parking spot would become more difficult, requiring the independent owners to go through the university.
+2. **Task:** Extend system to Andriod and iOS mobile devices
     - **Likelihood:** Medium
     - **Severity:** Medium
     - **Consequences:** The system will be very limited in its accessibility. We need to get it running on mobile devices so it can be accessed wherever.
