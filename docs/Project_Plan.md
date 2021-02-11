@@ -10,9 +10,9 @@ The system will be designed for large events on the campus such as sporting even
 ## Team Organization
 *(The team description should be complete and accurate, yet concise. You may refer to the text book or other authors for standard team organizations. Be sure to describe any team philosophies that you intend to adapt (e.g. egoless programming). You may use a figure to describe your team organization.  Also, you may anticipate shifts in responsibilities as the project progresses)*
 
-Our team is made up of four software developers/designers. We will work together to design and build the system (front and back end). There are two project managers, Dan Watson and Bradley Payne, who will oversee the project and interact with the client.
+Our team is made up of four software developers/designers and two project managers, Dan Watson and Bradley Payne. The project managers will oversee the project and interact with the client. As the designers and developers, we will work together to design and build the system (front and back end) according to the requirements given from the managers.
 
-For each milestone/phase in the project, there will be a different project leader who will help divide the work out for each developer. Each phase, the work will be evenly distributed to each team member. The phase tasks have assigned point values, which will help the leader in delegating them.
+For each milestone/phase in the project, there will be a different project leader, of the four developers, who will help divide the work out for each team member. Each phase, the work will be evenly distributed to each person. The phase tasks have assigned point values, which will help the leader in delegating them out.
 
 ## Software Development Process
 
@@ -30,18 +30,16 @@ Each phase will also be a little like an iteration in a Spiral process, in that 
 We will use Unified Modeling Language (UML) to document user goals, structural concepts, component interactions, and behaviors.
 
 ## Communication Policies, Procedures, and Tools
-*(Describe your communication policies and procedures.)*
-
 Our team will mainly use text messaging and Zoom to communicate about the project. Outside of regular class time, we will meet at least once a week for updates on the project and plans moving forward. We will all be working on the same Git repository, so we will communicate about details there as well. We have sections of the repo that contain our brainstorming/idea documents and other collaborations. We have a Slack channel set up for us to share documents and have meetings as well. It will help us keep track of our progress on each phase of the project.
 
 ## Risk Analysis
 
-# Task: Add independent lot owners
+1. Task: Add independent lot owners
     - Likelihood: Medium
     - Severity: Medium
     - Consequences: Loss of revenue. Without independent lot owners, there won't be as many parking spots for sale.
     - Workaround: 
-# Task: Extend system to Andriod and iOS mobile devices
+2. Task: Extend system to Andriod and iOS mobile devices
     - Likelihood: Medium
     - Severity: Medium
     - Consequences: The system will be very limited in its accessibility. We need to get it running on mobile devices so it can be accessed wherever.
@@ -49,7 +47,16 @@ Our team will mainly use text messaging and Zoom to communicate about the projec
         - Difficulty: Easy. This is already the plan for the system.
         - Impact: 
         - Pros: All of the system's features can be used on a desktop browser.
-        - Cons: Customers will not be able to access the system when they are on the go.
+        - Cons: Customers will not be able to access the system when they are on the go, making it difficult to reserve parking spots and access reservation info anytime.
+3. Task: Use Google Maps API for the parking spot navigation
+    - Likelihood: Medium
+    - Severity: High
+    - Consequences: Specific directions to locate parking spots will be limited. 
+    - Workaround: Use a pdf map of the campus and surrounding streets and allow lot owners to mark the locations of their parking spots.
+        - Difficulty: Medium
+        - Impact: This will create extra work for the developer. They will need to add functionality to the map where lot owners can mark their locations.
+        - Pros: Customers will be able to see the general area of their reserved parking spots.
+        - Cons: The map is not as versatile and does not use GPS to guide users to the marked locations.
 
 ## Configuration Management
 See the README.md in the Git repository.
