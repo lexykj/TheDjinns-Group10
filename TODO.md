@@ -10,7 +10,7 @@
 | Use Case Diagrams: 8 use case diagrams (16)                               | Lexy/Joel |     |  *   |
 | Requirements Definition: Introduction and Context (3)                     | Joel      |     |  *   |
 | Requirements Definition: Users and their Goals (2)                        | Joel      |     |  *   |
-| Requirements Definition: Functional Requirements (5)                      | Palani    |  *  |      |
+| Requirements Definition: Functional Requirements (5)                      | Palani    |     |  *   |
 | Requirements Definition: Non-functional Requirements (2)                  | Joel      |     |  *   |
 | Requirements Definition: Future Features (2)                              | Joel      |     |  *   |
 | Requirements Definition: Glossary (2)                                     | Joel      |     |  *   |
@@ -19,5 +19,5 @@
 | README.md: Tool stack description and setup procedure (2)                 | Palani    |     |  *   |
 | README.md: Build instructions (2)                                         | Palani    |     |  *   |
 | README.md: Unit testing instructions (2)                                  | Palani    |     |  *   |
-| README.md: System testing instructions (2)                                | Palani    | *   |      |
-| README.md: Other development notes, as needed (0)                         | Palani    |     |      |
+| README.md: System testing instructions (2)                                | Palani    |     |  *   |
+| README.md: Other development notes, as needed (0)                         | Palani    |     |  *   |

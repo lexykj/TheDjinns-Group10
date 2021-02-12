@@ -58,17 +58,16 @@ Requirements Definition
 ## 3.	Functional Requirements
 
 1. Sign-up Page (no permissions)
-    - Allows for sign up and registration from diffrent actors
-    - Customer and Lot Owners can register on main page (without private link)
-    - Lot Attendants and University Admin must be sent a private link
-2. Map Page (Customer-level permissions)
+    - Allows for sign up and registration of diffrent actors
+    - Client and Lot Owners can register as such
+2. Map Page (Client-level permissions)
     - Contains a map of avalible lots for a given event
-3. Lot Page (Customer-level permissions)
+3. Lot Page (Client-level permissions)
     - Linked from map page
     - Contains specific information about the lot including owner name, number of spots, reservation options, etc.
 4. Lot Attendant Page (Lot Attendent permissions)
     - Allows Lot Attendants to view current reservations and events.
-    - Allows Lot Attendants to check-in Customers.
+    - Allows Lot Attendants to check-in Clients.
 5. Lot Owner Page (Lot Owner permissions)
     - Allows Lot Owners to add/remove avalible lots, set reservation price for lot, and manage parking space types
 6. Event Management Page (University Admin permissions)

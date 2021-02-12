@@ -1,5 +1,5 @@
 # Palani's Ideas
-
+ - [Version control idea](https://github.com/ideaconsult/etc/wiki/IDEA-Development-Collaboration-Best-Practices)
 
 # Joel's Ideas
 **ACTORS**  
