@@ -5,13 +5,13 @@ Project Plan
 ## Project Overview
 This project’s objective is to provide a system for providing and reserving parking spots at Utah State University.
 
-The system will be designed for large events on the campus such as sporting events, musical productions, graduation, etc. Owners of large parking lots as well as single parking spaces will be able to list various types of parking spots available through the system. Customers looking for a parking spot on or near USU’s campus will be able to purchase one or more spots and receive their confirmation ticket through the system. Other users will be able to use the system as well, such as university admin and parking lot attendants. The browser-based system will be capable of running through the web on a PC, Android, and iOS mobile device.
+The system will be designed for large events on the campus such as sporting events, musical productions, graduation, etc. Owners of large parking lots as well as single parking spaces will be able to list various types of parking spots available through the system. Customers looking for a parking spot on or near USU’s campus will be able to reserve one or more spots and receive their confirmation ticket through the system. Other users will be able to use the system as well, such as university admin and parking lot attendants. The browser-based system will be capable of running through the web on a PC, Android, and iOS mobile device.
 
 ## Team Organization
 
-Our team is made up of four software developers/designers and two project managers, Dan Watson and Bradley Payne. The project managers will oversee the project and interact with the client. As the designers and developers, we will work together to design and build the system (front and back end) according to the requirements given from the managers.
+Our team is made up of four software developers/designers and two project managers, Dan Watson and Bradley Payne. The project managers will oversee the project and interact with the client. The four developers are Joel Christensen, Palani Johnson, Lexy Simmons, and Autumn Arbon. As the designers and developers, we will work together to design and build the system (front and back end) according to the requirements given from the managers.
 
-For each milestone/phase in the project, there will be a different project leader, from the four developers, who will help divide the work out for each team member. Each phase, the work will be evenly distributed to each person. The phase tasks have assigned point values, which will help the leader in delegating them out.
+For each milestone/phase in the project, there will be a different project leader, from the four developers, who will help divide the work out for each team member. Each phase, the work will be evenly distributed to each person. The phase tasks have assigned point values, which will help the leader in delegating them out. Palani Johnson will be the project leader for Milestone 1. The project leaders for the following three milestones are undecided.
 
 ## Software Development Process
 
@@ -37,25 +37,25 @@ Our team will mainly use text messaging and Zoom to communicate about the projec
     - **Likelihood:** Medium
     - **Severity:** Medium
     - **Consequences:** Loss of revenue. Without independent lot owners, there won't be as many parking spots for sale.
-    - **Workaround:** List independent parking spots through university parking lots
+    - **Workaround:** List independent parking spots through university parking lots.
         - **Difficulty:** Medium
         - **Impact:** This would create an hour of two of work for the developers to add the functionality to the university lot owners' page to add parking spots that aren't in their specified lots.
         - **Pros:** The university would be able to control who they allow to sell parking spots.
-        - **Cons:** The ease of listing a parking spot would become more difficult, requiring the independent owners to go through the university.
+        - **Cons:** The ease of listing a parking spot would become more difficult, requiring the independent owners to go through the university instead of directly through the system.
 2. **Task:** Extend system to Andriod and iOS mobile devices
     - **Likelihood:** Medium
     - **Severity:** Medium
     - **Consequences:** The system will be very limited in its accessibility. We need to get it running on mobile devices so it can be accessed wherever.
     - **Workaround:** Use desktop browser to access Parking Genie.
         - **Difficulty:** Easy. This is already the plan for the system.
-        - **Impact:** This won't add much work, because itwill be implemented already.
+        - **Impact:** This won't add much work, because it will be implemented already.
         - **Pros:** All of the system's features can be used on a desktop browser.
-        - **Cons:** Customers will not be able to access the system when they are on the go, making it difficult to reserve parking spots and access reservation info anytime.
+        - **Cons:** Customers will not be able to access the system when they are on the go, making it difficult to reserve parking spots and access reservation information anytime.
 3. **Task:** Use Google Maps API for the parking spot navigation
     - **Likelihood:** Medium
     - **Severity:** High
     - **Consequences:** Specific directions to locate parking spots will be limited. 
-    - **Workaround:** Use a pdf map of the campus and surrounding streets and allow lot owners to mark the locations of their parking spots.
+    - **Workaround:** Use a pdf or png formatted map of the campus and surrounding streets and allow lot owners to mark the locations of their parking spots.
         - **Difficulty:** Medium
         - **Impact:** This will create extra work for the developer. They will need to add functionality to the map where lot owners can mark their locations.
         - **Pros:** Customers will be able to see the general area of their reserved parking spots.
