@@ -25,34 +25,155 @@ Requirements Definition
 
 ![Figure 1 - Add Event](Use_Case_Diagrams/Add_Event.png "Add Event")  
 **Figure 1.** Admin Adds Event  
+Participating Actor:
+- University Admin
+
+Entry Condition:
+- University has a campus-based event
+
+Exit Conditions:
+- Event is visible by all users on Big Blue Parking Genie
+
+Event Flow:
+- University admin selects the date, time, and location of event
+- University admin submits the event
+- Database saves and displays event
 
 
 ![Figure 2 - Add Lot](Use_Case_Diagrams/Add_Lot.png "Add Lot")  
 **Figure 2.** Owner Adds Parking Lot  
+Participating Actor:
+- Parking Lot Owner
+
+Entry Condition:
+- User owns a parking lot near the university
+
+Exit Condition:
+- Parking lot is saved in the owner's parking lot database
+
+Event Flow:
+- Lot Owner selects address
+- Lot Owner adds parking spots according to size
+- Database saves parking lot and associated spots
 
 
 ![Figure 3 - Add Spot](Use_Case_Diagrams/Add_Spot.png "Add Spot")  
 **Figure 3.** Owner Adds Parking Spot  
+Participating Actor:
+- Parking Lot Owner
+
+Entry Condition:
+- Owner has rights to list the property
+
+Exit Condition:
+- Parking spot available for customers
+
+Event Flow:
+- Lot owner selects lot to add spots to
+- Lot owner selects the "edit" button on the lot
+- Lot owner selects the spot size to add and the associated spot number(s)
+- Lot owner clicks "save"
+- Designated parking lot is updated with new spot(s)
 
 
 ![Figure 4 - Check In](Use_Case_Diagrams/Check_in.png "Check In")  
 **Figure 4.** Attendant Checks In Customer  
+Participating Actor:
+- Parking Attendant
+
+Entry Condition:
+- Attendant is at the specified parking lot
+- Customer is at the designated parking lot
+
+Exit Condition:	
+- Customer is granted access to parking lot
+
+Event Flow:
+- Attendant selects event
+- Attendant selects their lot
+- Customer provides authentication code
+		-Attendant enters in authentication code
+		-Website confirms Customer Reservation
+		-Customer enters parking lot
 
 
 ![Figure 5 - Create Account](Use_Case_Diagrams/CreateAccount.png "Create Account")  
 **Figure 5.** Public User Creates Account  
+Participating Actor(s):
+- All users: Customer, Parking Attendant, Parkint Lot Owner, or University Admin
+
+Entry Condition:
+- Website is available to any given user
+
+Exit Condition:
+- User has credentials for their account with their desired permissions
+
+Event Flow:
+- User selects "new account"
+- User selects desired permissions/role
+- User enters in username and password
+- User saves account
+- Account is saved in the database
 
 
 ![Figure 6 - Open Lot](Use_Case_Diagrams/Open_Lot.png "Open Lot")  
 **Figure 6.** Owner Opens Lot for Reservations  
+Participating Actor:
+- Parking Lot Owner
+
+Entry Conditions:
+- Event is listed in DB
+- Lot was previously added to owner's account
+
+Exit Condition:	
+- Customers can view and reserve from the specified parking lot
+
+Event Flow:
+- Lot owner selects event
+- Lot owner selects lot(s)
+- Lot owner selects "all" spots or specific spots available
+- Lot owner saves selection
+- Added lots are available for reservation
 
 
 ![Figure 7 - Reserve Spot](Use_Case_Diagrams/Reserve_Spot.png "Reserve Spot")  
 **Figure 7.** Customer Reserves Parking Spot  
+Participating Actor:
+- Customer
+
+Entry Conditions:
+- Event is listed in DB
+- At least one parking lot is listed with available parking spots
+- Customer has sufficient funds for purchase
+	
+Exit Conditions:
+- Reserved parking spot is no longer listed as available
+- Customer can review and use reserved parking spot
+
+Event Flow:
+- Customer selects event/date
+- Customer selects parking lot
+- Customer selects parking spot
+- Customer saves reservation
+- Reservation information is available for Customer
 
 
 ![Figure 8 - Use Reservation](Use_Case_Diagrams/Use_Reservation.png "Use Reservation")  
 **Figure 8.** Customer Uses their Reserved Parking Spot  
+Participating Actor:
+- Customer
+
+Entry Condition:
+- Customer has reserved parking spot
+
+Exit Condition:
+- Customer has unique code to present to the parking attendant
+	
+Event Flow:
+- Customer selects "review reservations"
+- Customer selects desired reservation
+- Customer selects "generate reservation"
+- Database generates unique authentication code
 
 
 ## 3.	Functional Requirements
