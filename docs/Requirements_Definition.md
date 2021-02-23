@@ -35,9 +35,9 @@ Exit Conditions:
 - Event is visible by all users on Big Blue Parking Genie
 
 Event Flow:
-- University admin selects the date, time, and location of event
-- University admin submits the event
-- Database saves and displays event
+1. University admin selects the date, time, and location of event
+2. University admin submits the event
+3. Database saves and displays event
 
 
 ![Figure 2 - Add Lot](Use_Case_Diagrams/Add_Lot.png "Add Lot")  
@@ -52,9 +52,9 @@ Exit Condition:
 - Parking lot is saved in the owner's parking lot database
 
 Event Flow:
-- Lot Owner selects address
-- Lot Owner adds parking spots according to size
-- Database saves parking lot and associated spots
+1. Lot Owner selects address
+2. Lot Owner adds parking spots according to size
+3. Database saves parking lot and associated spots
 
 
 ![Figure 3 - Add Spot](Use_Case_Diagrams/Add_Spot.png "Add Spot")  
@@ -69,11 +69,11 @@ Exit Condition:
 - Parking spot available for customers
 
 Event Flow:
-- Lot owner selects lot to add spots to
-- Lot owner selects the "edit" button on the lot
-- Lot owner selects the spot size to add and the associated spot number(s)
-- Lot owner clicks "save"
-- Designated parking lot is updated with new spot(s)
+1. Lot owner selects lot to add spots to
+2. Lot owner selects the "edit" button on the lot
+3. Lot owner selects the spot size to add and the associated spot number(s)
+4. Lot owner clicks "save"
+5. Designated parking lot is updated with new spot(s)
 
 
 ![Figure 4 - Check In](Use_Case_Diagrams/Check_in.png "Check In")  
@@ -89,12 +89,12 @@ Exit Condition:
 - Customer is granted access to parking lot
 
 Event Flow:
-- Attendant selects event
-- Attendant selects their lot
-- Customer provides authentication code
-		-Attendant enters in authentication code
-		-Website confirms Customer Reservation
-		-Customer enters parking lot
+1. Attendant selects event
+2. Attendant selects their lot
+3. Customer provides authentication code
+4. Attendant enters in authentication code
+5. Website confirms Customer Reservation
+6. Customer enters parking lot
 
 
 ![Figure 5 - Create Account](Use_Case_Diagrams/CreateAccount.png "Create Account")  
@@ -109,11 +109,11 @@ Exit Condition:
 - User has credentials for their account with their desired permissions
 
 Event Flow:
-- User selects "new account"
-- User selects desired permissions/role
-- User enters in username and password
-- User saves account
-- Account is saved in the database
+1. User selects "new account"
+2. User selects desired permissions/role
+3. User enters in username and password
+4. User saves account
+5. Account is saved in the database
 
 
 ![Figure 6 - Open Lot](Use_Case_Diagrams/Open_Lot.png "Open Lot")  
@@ -129,11 +129,11 @@ Exit Condition:
 - Customers can view and reserve from the specified parking lot
 
 Event Flow:
-- Lot owner selects event
-- Lot owner selects lot(s)
-- Lot owner selects "all" spots or specific spots available
-- Lot owner saves selection
-- Added lots are available for reservation
+1. Lot owner selects event
+2. Lot owner selects lot(s)
+3. Lot owner selects "all" spots or specific spots available
+4. Lot owner saves selection
+5. Added lots are available for reservation
 
 
 ![Figure 7 - Reserve Spot](Use_Case_Diagrams/Reserve_Spot.png "Reserve Spot")  
@@ -151,11 +151,11 @@ Exit Conditions:
 - Customer can review and use reserved parking spot
 
 Event Flow:
-- Customer selects event/date
-- Customer selects parking lot
-- Customer selects parking spot
-- Customer saves reservation
-- Reservation information is available for Customer
+1. Customer selects event/date
+2. Customer selects parking lot
+3. Customer selects parking spot
+4. Customer saves reservation
+5. Reservation information is available for Customer
 
 
 ![Figure 8 - Use Reservation](Use_Case_Diagrams/Use_Reservation.png "Use Reservation")  
@@ -170,10 +170,10 @@ Exit Condition:
 - Customer has unique code to present to the parking attendant
 	
 Event Flow:
-- Customer selects "review reservations"
-- Customer selects desired reservation
-- Customer selects "generate reservation"
-- Database generates unique authentication code
+1. Customer selects "review reservations"
+2. Customer selects desired reservation
+3. Customer selects "generate reservation"
+4. Database generates unique authentication code
 
 
 ## 3.	Functional Requirements
