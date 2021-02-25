@@ -1,0 +1,108 @@
+SCRUM Notes
+
+	1 Sprint only 
+	2/23/21 - 3/1/21
+
+	Mtg 1: Sprint Planning
+		2/23/21 5:00pm - 
+
+		Agenda:
+			Update/talk about GitHub
+
+			Know the Beginning from the End
+				Sprint due date: Monday -- March 1, 2021
+				Mtg TODO: 
+					- Estimate how many hours we have to work on this project this sprint?
+						~8 hr each?
+					- Discuss availability
+					- Discuss using milestone project points again as metric
+						17.5 Canvas points per person TOTAL
+							-16 for milestone 1 revisions divied up as described below
+						54 / 4 = 13.5 points per person
+
+
+
+						*Each person revise their specific documents from Milestone 1 as needed
+							Revisions to milestone 1
+								risk analysis 
+								use case info sheets
+								functional requirements numbering
+
+					- Discuss improvements from last sprint
+					- Assign ProjectLeader/ScrumMaster for this sprint (Milestone 2)
+			Filling out details for stories (big picture tasks)
+				After-mtg Tasks:
+					- JOEL: Organize Milestones, Sprints, Tasks/Stories for GitHub moving forward
+					- JOEL: Add all previous stories (big picture tasks) to Done column of GitHub
+
+				Mtg TODO: 
+					- List stories for the sprint
+					- Describe each of following for each story/task
+						1. Size estimate (pts, S/M/L)
+						2. Description of scope (in/out of)
+						3. Acceptance criteria for completion
+						4. List tasks for this story to be completed
+							- created in GitHub as notes (then convert to issues assigned to a person)
+							- assign size estimate to each (pts, S/M/L)
+
+		
+		Immediate Tasks:
+			- JOEL: 
+				1. Create Spring Backlog and Organize GitHub repo with Milestones, Sprints, Tasks/Stories
+				2. Add all previous TODO tasks to Done column of GitHub
+			- PALANI:
+				1. Add in old tasks from TODOs and read commit history to ?backdate? issues
+				2. 
+
+			- Ask about in class: 
+				Use Case diagrams on Rubric - existing or new?
+				Difference in Product Backlog requirements in Rubric
+
+
+		Sprint Stories(to be filled out in mtg):
+			1. Example Story
+				1. Size estimate (pts, S/M/L)
+						2. Description of scope (in/out of)
+						3. Acceptance criteria for completion
+						4. List tasks for this story to be completed
+							- created in GitHub as notes (then convert to issues assigned to a person)
+							- assign size estimate to each (pts, S/M/L)
+
+
+
+		PROTOTYPES:
+			High
+				Google maps api page
+			Low
+				wireframe outlining different Django views 
+
+
+		Joel - Low fidelity
+		Lexy - Backlog
+		Palani - Add past backlog commits to GitHub, High fidelity
+		Autumn - Diagrams
+
+
+
+		Product Backlog in GitHub repo issues (12)
+			Stories? 10+ items (10pts)
+			small items (2)
+			* ask about difference in class
+
+		README revisions
+		project plan revisiosn
+		req def revisions
+			SAME ASSIGNMENTS AS MILESTONE 1
+
+		use case diagrams (4)
+			ask about in class
+		class diagrams (6)
+		activity diagrams (6)
+
+		high fidelity prototypes (12)
+			google maps page?
+		low fidelity prototype (10)
+
+
+		history on scrum board showing who is working which items and when they are completed (4)
+
