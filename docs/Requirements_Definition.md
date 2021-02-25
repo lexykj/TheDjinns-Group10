@@ -75,8 +75,7 @@ Requirements Definition
 7. Lot Attendant admin page (Lot Owner permissions)
     - Allows Lot Owners and University Admins to add/remive Lot attendents
     - University Admins can also add new University Admins
-    - Sends a private sign up link to new new Attendent/Admin
-8. Main Page (all permissions)
+8. Main Page (any permissions)
     - Allows navigation of all pages based on permissions of diffrent actors
     - Shows information like current reservations and event information
 9. About Page (no permissions)
