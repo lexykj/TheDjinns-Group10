@@ -179,29 +179,29 @@ Event Flow:
 ## 3.	Functional Requirements
 
 1. Sign-up Page (no permissions)
-    - Allows for sign up and registration of diffrent actors
-    - Client and Lot Owners can register as such
+    - 1.1. Allows for sign up and registration of diffrent actors
+    - 1.2. Client and Lot Owners can register as such
 2. Map Page (Client-level permissions)
-    - Contains a map of avalible lots for a given event
+    - 2.1. Contains a map of avalible lots for a given event
 3. Lot Page (Client-level permissions)
-    - Linked from map page
-    - Contains specific information about the lot including owner name, number of spots, reservation options, etc.
+    - 3.1.  Linked from map page
+    - 3.2. Contains specific information about the lot including owner name, number of spots, reservation options, etc.
 4. Lot Attendant Page (Lot Attendent permissions)
-    - Allows Lot Attendants to view current reservations and events.
-    - Allows Lot Attendants to check-in Clients.
+    - 4.1. Allows Lot Attendants to view current reservations and events.
+    - 4.2. Allows Lot Attendants to check-in Clients.
 5. Lot Owner Page (Lot Owner permissions)
-    - Allows Lot Owners to add/remove avalible lots, set reservation price for lot, and manage parking space types
+    - 5.1. Allows Lot Owners to add/remove avalible lots, set reservation price for lot, and manage parking space types
 6. Event Management Page (University Admin permissions)
-    - Allows University Admins to create new events and manage lot owners.
+    - 6.1. Allows University Admins to create new events and manage lot owners.
 7. Lot Attendant admin page (Lot Owner permissions)
-    - Allows Lot Owners and University Admins to add/remive Lot attendents
-    - University Admins can also add new University Admins
+    - 7.1. Allows Lot Owners and University Admins to add/remive Lot attendents
+    - 7.2. University Admins can also add new University Admins
 8. Main Page (any permissions)
-    - Allows navigation of all pages based on permissions of diffrent actors
-    - Shows information like current reservations and event information
+    - 8.1. Allows navigation of all pages based on permissions of diffrent actors
+    - 8.2. Shows information like current reservations and event information
 9. About Page (no permissions)
-    - Information page
-    - Tells potential actors about Parking Genie
+    - 9.1. Information page
+    - 9.2. Tells potential actors about Parking Genie
 
 
 ## 4.	Non-functional Requirements
