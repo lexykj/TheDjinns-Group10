@@ -32,17 +32,7 @@ We will use Unified Modeling Language (UML) to document user goals, structural c
 Our team will mainly use text messaging and Zoom to communicate about the project. Outside of regular class time, we will meet at least once a week for updates on the project and plans moving forward. We will all be working on the same Git repository, so we will communicate about details there as well. We have sections of the repo that contain our brainstorming/idea documents and other collaborations. We have a Slack channel set up for us to share documents and have meetings as well. It will help us keep track of our progress on each phase of the project.
 
 ## Risk Analysis
-
-1. **Task:** Add independent lot owners
-    - **Likelihood:** Medium
-    - **Severity:** Medium
-    - **Consequences:** Loss of revenue. Without independent lot owners, there won't be as many parking spots for sale.
-    - **Workaround:** List independent parking spots through university parking lots.
-        - **Difficulty:** Medium
-        - **Impact:** This would create an hour of two of work for the developers to add the functionality to the university lot owners' page to add parking spots that aren't in their specified lots.
-        - **Pros:** The university would be able to control who they allow to sell parking spots.
-        - **Cons:** The ease of listing a parking spot would become more difficult, requiring the independent owners to go through the university instead of directly through the system.
-2. **Task:** Extend system to Andriod and iOS mobile devices
+1. **Task:** Extend system to Andriod and iOS mobile devices
     - **Likelihood:** Medium
     - **Severity:** Medium
     - **Consequences:** The system will be very limited in its accessibility. We need to get it running on mobile devices so it can be accessed wherever.
@@ -51,7 +41,7 @@ Our team will mainly use text messaging and Zoom to communicate about the projec
         - **Impact:** This won't add much work, because it will be implemented already.
         - **Pros:** All of the system's features can be used on a desktop browser.
         - **Cons:** Customers will not be able to access the system when they are on the go, making it difficult to reserve parking spots and access reservation information anytime.
-3. **Task:** Use Google Maps API for the parking spot navigation
+2. **Task:** Use Google Maps API for the parking spot navigation
     - **Likelihood:** Medium
     - **Severity:** High
     - **Consequences:** Specific directions to locate parking spots will be limited. 
@@ -60,6 +50,15 @@ Our team will mainly use text messaging and Zoom to communicate about the projec
         - **Impact:** This will create extra work for the developer. They will need to add functionality to the map where lot owners can mark their locations.
         - **Pros:** Customers will be able to see the general area of their reserved parking spots.
         - **Cons:** The map is not as versatile and does not use GPS to guide users to the marked locations.
+5. **Task:** Add independent lot owners
+    - **Likelihood:** Medium
+    - **Severity:** Medium
+    - **Consequences:** Loss of revenue. Without independent lot owners, there won't be as many parking spots for sale.
+    - **Workaround:** List independent parking spots through university parking lots.
+        - **Difficulty:** Medium
+        - **Impact:** This would create an hour of two of work for the developers to add the functionality to the university lot owners' page to add parking spots that aren't in their specified lots.
+        - **Pros:** The university would be able to control who they allow to sell parking spots.
+        - **Cons:** The ease of listing a parking spot would become more difficult, requiring the independent owners to go through the university instead of directly through the system.
 
 ## Configuration Management
 See the README.md in the Git repository.
