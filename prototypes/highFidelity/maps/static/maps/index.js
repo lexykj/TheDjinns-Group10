@@ -5,13 +5,13 @@ function initMap() {
     const Lot     = { lat: 41.762074, lng: -111.812874 };
 
     map = new google.maps.Map(document.getElementById("map"), {
-        center: Maverik,
-        zoom: 15,
+        center:     Maverik,
+        zoom:       15,
     });
 
     const maverikMarker = new google.maps.Marker({
-        position: Maverik,
-        map: map,
+        position:   Maverik,
+        map:        map,
     });
 
     const maverikString =
@@ -20,7 +20,7 @@ function initMap() {
         "</div>" +
         '<h1 id="firstHeading" class="firstHeading">Maverik Stadium</h1>' +
         '<div id="bodyContent">' +
-        "<p>Figure out a way for django to handel this</p>" +
+        "<p>Make an API in Django to manage some of this?</p>" +
         "</div>" +
         "</div>";
     
@@ -45,15 +45,16 @@ function initMap() {
         "</div>" +
         '<h1 id="firstHeading" class="firstHeading">Example Parking Lot</h1>' +
         '<div id="bodyContent">' +
-        "<p>Figure out a way for django to handel this</p>" +
+        "<p>Figure out a way for django to handle this</p>" +
         "</div>" +
         "</div>";
 
     const lotWindow = new google.maps.InfoWindow({
-        content: lotString,
+        content:    lotString,
     });
 
     lotMarker.addListener("click", () => {
         map.setCenter(lotMarker.getPosition());
+        lotWindow.open(map,lotMarker);
     });
 }
