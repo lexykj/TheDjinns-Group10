@@ -1,3 +1,8 @@
+The following website framework is developed from an HTML5UP template. It has been modified to meet the needs of the Big Blue Parking Genie application. @christensenjo for questions.
+
+
+ORIGINAL README TEXT:
+------------------------------------------------------------------
 Alpha by HTML5 UP
 html5up.net | @ajlkn
 Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
