@@ -1,6 +1,7 @@
 from django.http import JsonResponse
-
+from django.core.serializers import serialize
 from .models import Event, ParkingLot, ParkingSpot
+from django.http import HttpResponse
 
 
 def get_events(request):
@@ -8,11 +9,11 @@ def get_events(request):
         number = int(request.GET['num'])
         events = Event.objects.order_by('-date')[:number]
 
-        response = JsonResponse(events)
-        response['Access-Control-Allow-Origin'] = '*'
-        return response
+        json = serialize("json", events, fields=('name', 'date'))
+
+        return HttpResponse(json, content_type="application/json")
     except:
-        response = JsonResponse({"error": "Invalid unit conversion request"})
+        response = JsonResponse({"error": "Invalid event list request"})
         response['Access-Control-Allow-Origin'] = '*'
         return response
 
