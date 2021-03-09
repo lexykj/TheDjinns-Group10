@@ -1,24 +1,35 @@
 <!DOCTYPE HTML>
 <!--
-	Template:
+	Big Blue's Parking Genie
+	USU CS3450
+	Group 10 - The Djinns
+	Autumn Arbon, Joel Christensen, Palani Johnson, Lexy Simmons
+	https://github.com/palani-johnson/TheDjinns-Group10
+
+
+	TEMPLATE: 
 	Alpha by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 	<head>
-		<title>Big Blue's Parking Genie</title>
+		<title>Parking Maps</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel='icon' href='images/favicon.ico' type='image/x-icon' />
+		<!-- The following tags are taken straight from the high fidelity prototype -->
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	    {% load static %}
+	    <link rel="stylesheet" type="text/css" href={% static 'maps/style.css' %} />
+	    <script src="{% static 'maps/index.js' %}"></script>
 	</head>
-	<body class="landing is-preload">
+	<body class="is-preload">
 		<div id="page-wrapper">
 
 			<!-- Header -->
-				<header id="header" class="alt">
-					<h1><a href="index.html">Redesign to Map Page</a></h1>
+				<header id="header">
+					<h1>Big Blue's Parking Genie</h1>
 					<nav id="nav">
 						<ul>
 							<li><a href="index.html">Home</a></li>
@@ -39,165 +50,27 @@
 									</li>
 								</ul>
 							</li> -->
-							<li><a href="#cta" class="button">Sign Up</a></li>
+							<li><a href="#" class="button">My Account</a></li>
 						</ul>
 					</nav>
 				</header>
 
-			<!-- Banner -->
-				<section id="banner">
-					<h2>Redesign to Map Page</h2>
-					<p>Reserve parking spots for Utah State University events</p>
-					<ul class="actions special">
-						<li><a href="#cta" class="button">Sign Up</a></li>
-						<li><a href="#" class="button">Login</a></li>
-					</ul>
-				</section>
-
 			<!-- Main -->
 				<section id="main" class="container">
+					<header>
+						<h2>Available Lots for {{Event}}</h2>
+						<p>{{Event Description}}</p>
+					</header>
+					<div class="box">
+						<h3>Map to display below</h3>
+						<div id="map"></div>
 
-					<section class="box special">
-						<header class="major">
-							<h2>Introducing the one-stop application
-							<br />
-							for finding parking at Utah State</h2>
-							<p>Big Blue’s Parking Genie intends to make parking a more positive experience at Utah State University by collecting the universal parking experience into a single tool.</p>
-						</header>
-						<span class="image featured"><img src="images/parkingIvy.jpg" alt="Parking Lot at USU" /></span>
-					</section>
-
-					<section class="box special">
-						<header class="major">
-							<h2>Upcoming Utah State Events</h2>
-							<br />
-							<h4>{{--INSERT MONTH HERE--}}</h4>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Date/Time</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>{{MonthEvent 1}}</td>
-													<td>{{Description?}}}</td>
-													<td>{{DATE/TIME}}</td>
-												</tr>
-												<tr>
-													<td>{{MonthEvent 2}}</td>
-													<td>{{Description?}}}</td>
-													<td>{{DATE/TIME}}</td>
-												</tr>
-												<tr>
-													<td>{{MonthEvent 3}}</td>
-													<td>{{Description?}}}</td>
-													<td>{{DATE/TIME}}</td>
-												</tr>
-												<tr>
-													<td>{{MonthEvent 4}}</td>
-													<td>{{Description?}}}</td>
-													<td>{{DATE/TIME}}</td>
-												</tr>
-												<tr>
-													<td>{{MonthEvent 5}}</td>
-													<td>{{Description?}}}</td>
-													<td>{{DATE/TIME}}</td>
-												</tr>
-											</tbody>
-											<!-- <tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot> -->
-										</table>
-									</div>
-						</header>
-						<!-- 
-							Place an image here?
-							<span class="image featured"><img src="images/parkingIvy.jpg" alt="Parking Lot at USU" /></span> -->
-					</section>
-
-					<!-- 4 Section Divider 
-					<section class="box special features">
-						<div class="features-row">
-							<section>
-								<span class="icon solid major fa-bolt accent2"></span>
-								<h3>Magna etiam</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-							<section>
-								<span class="icon solid major fa-chart-area accent3"></span>
-								<h3>Ipsum dolor</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-						</div>
-						<div class="features-row">
-							<section>
-								<span class="icon solid major fa-cloud accent4"></span>
-								<h3>Sed feugiat</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-							<section>
-								<span class="icon solid major fa-lock accent5"></span>
-								<h3>Enim phasellus</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-						</div>
-					</section>
-
-					-->
-
-					<div class="row">
-						<div class="col-6 col-12-narrower">
-
-							<section class="box special">
-								<span class="image featured"><img src="images/googleMapsUSU.jpg" alt="" /></span>
-								<h3>Navigate Easily with Maps</h3>
-								<p>Big Blue's Parking Genie interfaces with Google Maps API to provide high quality navigation guidance.</p>
-								<ul class="actions special">
-									<li><a href="#" class="button alt">See Map of USU</a></li>
-								</ul>
-							</section>
-
-						</div>
-						<div class="col-6 col-12-narrower">
-
-							<section class="box special">
-								<span class="image featured"><img src="images/terrace.jpg" alt="" /></span>
-								<h3>Remember your Favorite Spots</h3>
-								<p>See all your past reservations from within your account, making it easy to attend again.</p>
-								<ul class="actions special">
-									<li><a href="#" class="button alt">Login</a></li>
-								</ul>
-							</section>
-
-						</div>
+					    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+					    <script
+					      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlw0MBCKArRLweJTAHNxphjw30njY9agw&callback=initMap&libraries=&v=weekly"
+					      async
+					    ></script>
 					</div>
-
-				</section>
-
-			<!-- CTA -->
-				<section id="cta">
-
-					<h2>Sign up for an account</h2>
-					<p>Create an account with Big Blue's Parking Genie to reserve parking for USU events.</p>
-
-					<form>
-						<div class="row gtr-50 gtr-uniform">
-							<div class="col-8 col-12-mobilep">
-								<input type="email" name="email" id="email" placeholder="Email Address" />
-							</div>
-							<div class="col-4 col-12-mobilep">
-								<input type="submit" value="Sign Up" class="fit" />
-							</div>
-						</div>
-					</form>
-
 				</section>
 
 			<!-- Footer -->
