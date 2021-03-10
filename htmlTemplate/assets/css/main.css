@@ -123,7 +123,7 @@
 		-ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 		transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 		border-bottom: dotted 1px;
-		color: #fff;
+		color: #00263A;
 		text-decoration: none;
 	}
 
@@ -3308,6 +3308,10 @@
 		padding: 3.5em 0 4em 0;
 		text-align: center;
 	}
+
+		#cta a {
+			color: #fff;
+		}
 
 		#cta h2, #cta h3, #cta h4, #cta h5, #cta h6 {
 			color: inherit;
