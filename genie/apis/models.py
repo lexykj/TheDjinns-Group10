@@ -1,12 +1,9 @@
 from django.db import models
+from django.db.models.deletion import CASCADE
 
 class Event(models.Model):
     name = models.CharField(max_length=200)
-    date = models.CharField(max_length=200)
-    eventId = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.name
+    date = models.DateTimeField('event date')
 
 class User(models.Model):
     username = models.CharField(max_length=200)
@@ -14,19 +11,19 @@ class User(models.Model):
     accountBalance = models.FloatField(default=100.0)
 
 class Owner(models.Model):
-    pass
+    user = models.ForeignKey(User, on_delete=CASCADE)
 
 class ParkingLot(models.Model):
-    eventsAvailable = models.ManyToManyField(Event)
+    event = models.ForeignKey(Event, on_delete=CASCADE)
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
 
 class ParkingSpot(models.Model):
     spotType = models.CharField(max_length=200)
     price = models.FloatField(default=0.0)
-    eventsReserved = models.ManyToManyField(Event)
     lot = models.ForeignKey(ParkingLot, on_delete=models.CASCADE)
 
 class Attendant(models.Model):
+    user = models.ForeignKey(User, on_delete=CASCADE)
     parkingLot = models.ForeignKey(ParkingLot, on_delete=models.CASCADE)
 
 class Reservation(models.Model):
@@ -43,4 +40,4 @@ class Permission(models.Model):
     adminPermish = models.BooleanField()
 
 class Admin(models.Model):
-    pass
+    user = models.ForeignKey(User, on_delete=CASCADE)
