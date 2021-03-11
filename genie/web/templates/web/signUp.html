@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<!--
+	Template:
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Big Blue's Parking Genie</title>
+		<meta charset="utf-8" />
+		{% load static %}
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href={% static "web/assets/css/main.css" %} />
+		<link rel='icon' href={% static 'web/images/favicon.ico' %} type='image/x-icon' />
+	</head>
+	<body class="landing is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header" class="alt">
+					<h1>Big Blue's Parking Genie</h1>
+					<nav id="nav">
+						<ul>
+							<li><a href={% url "web:home"%}>Home</a></li>
+							<li><a href="#cta" class="button">Sign Up</a></li>
+							<li><a href="https://github.com/palani-johnson/TheDjinns-Group10" class="icon brands fa-github"><span class="label">Github</span></a></li>	
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Banner -->
+				<section id="banner">
+					<h2>Big Blue's Parking Genie</h2>
+					<p>Reserve parking spots for Utah State University events</p>
+					<ul class="actions special">
+						<li><a href="#cta" class="button">Sign Up</a></li>
+						<li><a href="login.html" class="button">Login</a></li>
+					</ul>
+				</section>
+
+			<!-- Main -->
+				<section id="main" class="container">
+
+					<section class="box special">
+						<header class="major">
+							<h2>Introducing the one-stop application
+							<br />
+							for finding parking at Utah State</h2>
+							<p>Big Blue’s Parking Genie intends to make parking a more positive experience at Utah State University by collecting the universal parking experience into a single tool.</p>
+						</header>
+						<span class="image featured"><img src={% static "web/images/parkingIvy.jpg" %} alt="Parking Lot at USU" /></span>
+					</section>
+
+					<section class="box special">
+						<header class="major">
+							<h2>Upcoming Utah State Events</h2>
+							<br />
+						</header>
+						<!-- 
+							Place an image here?
+							<span class="image featured"><img src="images/parkingIvy.jpg" alt="Parking Lot at USU" /></span> -->
+					</section>
+
+					<div class="row">
+						<div class="col-6 col-12-narrower">
+
+							<section class="box special">
+								<span class="image featured"><img src={% static "web/images/googleMapsUSU.jpg" %} alt="" /></span>
+								<h3>Navigate Easily with Maps</h3>
+								<p>Big Blue's Parking Genie interfaces with Google Maps API to provide high quality navigation guidance.</p>
+								<ul class="actions special">
+									<li><a href="#" class="button alt">See Map of USU</a></li>
+								</ul>
+							</section>
+
+						</div>
+						<div class="col-6 col-12-narrower">
+
+							<section class="box special">
+								<span class="image featured"><img src={% static "images/terrace.jpg"%} alt="" /></span>
+								<h3>Remember your Favorite Spots</h3>
+								<p>See all your past reservations from within your account, making it easy to attend again.</p>
+								<ul class="actions special">
+									<li><a href="#" class="button alt">Login</a></li>
+								</ul>
+							</section>
+
+						</div>
+					</div>
+
+				</section>
+
+			<!-- CTA -->
+				<section id="cta">
+
+					<h2>Sign up for an account</h2>
+					<p>Create an account with Big Blue's Parking Genie to reserve parking for USU events.</p>
+
+					<form>
+						<div class="row gtr-50 gtr-uniform">
+							<div class="col-12 col-12-mobilep">
+								<input type="email" name="email" id="email" placeholder="Email Address" />
+							</div>
+							<div class="col-12 col-12-mobilep">
+								<input type="password" name="password" id="password" placeholder="Password" />
+							</div>
+							<div class="col-8 col-12-mobilep">
+								<input type="password" name="password" id="password" placeholder="Confirm Password" />
+							</div>
+							<div class="col-4 col-12-mobilep">
+								<input type="submit" value="Sign Up" class="fit" />
+							</div>
+						</div>
+					</form>
+
+					<br />
+					<p>Did you mean to <a href="login.html">Login?</a></p>
+
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>USU CS 3540. Group 10- The Djinns: Joel Christensen, Autumn Arbon, Lexy Simmons, Palani Johnson.</li><li>HTML Template Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src={% static "assets/js/jquery.min.js" %}></script>
+			<script src={% static "assets/js/jquery.dropotron.min.js" %}></script>
+			<script src={% static "assets/js/jquery.scrollex.min.js" %}></script>
+			<script src={% static "assets/js/browser.min.js" %}></script>
+			<script src={% static "assets/js/breakpoints.min.js" %}></script>
+			<script src={% static "assets/js/util.js" %}></script>
+			<script src={% static "assets/js/main.js" %}></script>
+
+	</body>
+</html>

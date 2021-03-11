@@ -3,7 +3,7 @@ from django.core.serializers import serialize
 from .models import Event, ParkingLot, ParkingSpot
 from django.http import HttpResponse
 
-
+# http://127.0.0.1:8000/api/current_events/?num=5
 def get_events(request):
     try:
         number = int(request.GET['num'])
