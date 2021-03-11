@@ -7,7 +7,7 @@
 -->
 <html>
 	<head>
-		<title>Big Blue's Parking Genie</title>
+		<title>My Parking</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -21,55 +21,33 @@
 					<h1><a href="index.html">Big Blue's Parking Genie</a></h1>
 					<nav id="nav">
 						<ul>
-							<li><a href="index.html">Home</a></li>
-							<!-- <li>
-								<a href="#" class="icon solid fa-angle-down">Layouts</a>
-								<ul>
-									<li><a href="generic.html">Generic</a></li>
-									<li><a href="contact.html">Contact</a></li>
-									<li><a href="elements.html">Elements</a></li>
-									<li>
-										<a href="#">Submenu</a>
-										<ul>
-											<li><a href="#">Option One</a></li>
-											<li><a href="#">Option Two</a></li>
-											<li><a href="#">Option Three</a></li>
-											<li><a href="#">Option Four</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li> -->
-							<li><a href="#cta" class="button">Sign Up</a></li>
+							<li><a href="signUp.html">Home</a></li>
+							<li><a href="account.html" class="button">My Account</a></li>
+							<li><a href="https://github.com/palani-johnson/TheDjinns-Group10" class="icon brands fa-github"><span class="label">Github</span></a></li>	
 						</ul>
 					</nav>
 				</header>
 
 			<!-- Banner -->
 				<section id="banner">
-					<h2>Redesign to Customer Navigation Page</h2>
-					<p>Reserve parking spots for Utah State University events</p>
-					<ul class="actions special">
+					<h2>My Parking</h2>
+					<!-- <ul class="actions special">
 						<li><a href="#cta" class="button">Sign Up</a></li>
-						<li><a href="#" class="button">Login</a></li>
-					</ul>
+						<li><a href="login.html" class="button">Login</a></li>
+					</ul> -->
 				</section>
 
 			<!-- Main -->
-				<section id="main" class="container">
+				<section id="main" class="container navMain">
 
 					<section class="box special">
 						<header class="major">
-							<h2>Introducing the one-stop application
-							<br />
-							for finding parking at Utah State</h2>
-							<p>Big Blue’s Parking Genie intends to make parking a more positive experience at Utah State University by collecting the universal parking experience into a single tool.</p>
+							<h2>A Hub for all your Parking Needs</h2>
 						</header>
-						<span class="image featured"><img src="images/parkingIvy.jpg" alt="Parking Lot at USU" /></span>
-					</section>
-
-					<section class="box special">
+						<!-- <span class="image featured"><img src="images/parkingIvy.jpg" alt="Parking Lot at USU" /></span> -->
 						<header class="major">
-							<h2>Upcoming Utah State Events</h2>
+							<p style="width: 50em;"></p>
+							<h3>Upcoming Utah State Events</h3>
 							<br />
 							<h4>{{--INSERT MONTH HERE--}}</h4>
 									<div class="table-wrapper">
@@ -117,40 +95,41 @@
 										</table>
 									</div>
 						</header>
-						<!-- 
-							Place an image here?
-							<span class="image featured"><img src="images/parkingIvy.jpg" alt="Parking Lot at USU" /></span> -->
-					</section>
-
-					<!-- 4 Section Divider 
-					<section class="box special features">
-						<div class="features-row">
-							<section>
-								<span class="icon solid major fa-bolt accent2"></span>
-								<h3>Magna etiam</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-							<section>
-								<span class="icon solid major fa-chart-area accent3"></span>
-								<h3>Ipsum dolor</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-						</div>
-						<div class="features-row">
-							<section>
-								<span class="icon solid major fa-cloud accent4"></span>
-								<h3>Sed feugiat</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-							<section>
-								<span class="icon solid major fa-lock accent5"></span>
-								<h3>Enim phasellus</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
+						<div class="row">
+							<ul class="actions special">
+								<li><a href="reserveSpot.html" class="button">Reserve a Parking Spot</a></li>
+							</ul>
 						</div>
 					</section>
 
-					-->
+					<section class="box special">
+						<h3>Previous Reservations</h3>
+						<ul class="alt">
+							<li>
+								<div class="row">
+									<a href="#" class="button special col-4">{{Reservation 1}}</a>
+									<p class="col-4"><a href="map.html">View Map</a></p>
+									<p class="col-4"><a href="">Reservation Code</a></p>
+								</div>
+							</li>
+							<li>
+								<div class="row">
+									<a href="#" class="button special col-4">{{Reservation 2}}</a>
+									<p class="col-4"><a href="map.html">View Map</a></p>
+									<p class="col-4"><a href="">Reservation Code</a></p>
+								</div>
+							</li>
+							<li>
+								<div class="row">
+									<a href="#" class="button special col-4">{{Reservation 3}}</a>
+									<p class="col-4"><a href="map.html">View Map</a></p>
+									<p class="col-4"><a href="">Reservation Code</a></p>
+								</div>
+							</li>
+						</ul>
+
+						
+					</section>
 
 					<div class="row">
 						<div class="col-6 col-12-narrower">
@@ -189,14 +168,23 @@
 
 					<form>
 						<div class="row gtr-50 gtr-uniform">
-							<div class="col-8 col-12-mobilep">
+							<div class="col-12 col-12-mobilep">
 								<input type="email" name="email" id="email" placeholder="Email Address" />
+							</div>
+							<div class="col-12 col-12-mobilep">
+								<input type="password" name="password" id="password" placeholder="Password" />
+							</div>
+							<div class="col-8 col-12-mobilep">
+								<input type="password" name="password" id="password" placeholder="Confirm Password" />
 							</div>
 							<div class="col-4 col-12-mobilep">
 								<input type="submit" value="Sign Up" class="fit" />
 							</div>
 						</div>
 					</form>
+
+					<br />
+					<p>Did you mean to <a href="login.html">Login?</a></p>
 
 				</section>
 
