@@ -8,10 +8,10 @@
 <html>
 	<head>
 		<title>Big Blue's Parking Genie</title>
-		{% load static %}
 		<meta charset="utf-8" />
+		{% load static %}
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href={% static 'web/assets/main.css' %} />
+		<link rel="stylesheet" href={% static "web/assets/css/main.css" %} />
 		<link rel='icon' href={% static 'web/images/favicon.ico' %} type='image/x-icon' />
 	</head>
 	<body class="landing is-preload">
@@ -19,28 +19,12 @@
 
 			<!-- Header -->
 				<header id="header" class="alt">
-					<h1><a href={% static "web/index.html" %}>Big Blue's Parking Genie</a></h1>
+					<h1>Big Blue's Parking Genie</h1>
 					<nav id="nav">
 						<ul>
-							<li><a href="index.html">Home</a></li>
-							<!-- <li>
-								<a href="#" class="icon solid fa-angle-down">Layouts</a>
-								<ul>
-									<li><a href="generic.html">Generic</a></li>
-									<li><a href="contact.html">Contact</a></li>
-									<li><a href="elements.html">Elements</a></li>
-									<li>
-										<a href="#">Submenu</a>
-										<ul>
-											<li><a href="#">Option One</a></li>
-											<li><a href="#">Option Two</a></li>
-											<li><a href="#">Option Three</a></li>
-											<li><a href="#">Option Four</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li> -->
+							<li><a href={% url "web:home"%}>Home</a></li>
 							<li><a href="#cta" class="button">Sign Up</a></li>
+							<li><a href="https://github.com/palani-johnson/TheDjinns-Group10" class="icon brands fa-github"><span class="label">Github</span></a></li>	
 						</ul>
 					</nav>
 				</header>
@@ -51,7 +35,7 @@
 					<p>Reserve parking spots for Utah State University events</p>
 					<ul class="actions special">
 						<li><a href="#cta" class="button">Sign Up</a></li>
-						<li><a href="#" class="button">Login</a></li>
+						<li><a href="login.html" class="button">Login</a></li>
 					</ul>
 				</section>
 
@@ -65,99 +49,24 @@
 							for finding parking at Utah State</h2>
 							<p>Big Blue’s Parking Genie intends to make parking a more positive experience at Utah State University by collecting the universal parking experience into a single tool.</p>
 						</header>
-						<span class="image featured"><img src="images/parkingIvy.jpg" alt="Parking Lot at USU" /></span>
+						<span class="image featured"><img src={% static "web/images/parkingIvy.jpg" %} alt="Parking Lot at USU" /></span>
 					</section>
 
 					<section class="box special">
 						<header class="major">
 							<h2>Upcoming Utah State Events</h2>
 							<br />
-							<h4>{{--INSERT MONTH HERE--}}</h4>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Date/Time</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>{{MonthEvent 1}}</td>
-													<td>{{Description?}}}</td>
-													<td>{{DATE/TIME}}</td>
-												</tr>
-												<tr>
-													<td>{{MonthEvent 2}}</td>
-													<td>{{Description?}}}</td>
-													<td>{{DATE/TIME}}</td>
-												</tr>
-												<tr>
-													<td>{{MonthEvent 3}}</td>
-													<td>{{Description?}}}</td>
-													<td>{{DATE/TIME}}</td>
-												</tr>
-												<tr>
-													<td>{{MonthEvent 4}}</td>
-													<td>{{Description?}}}</td>
-													<td>{{DATE/TIME}}</td>
-												</tr>
-												<tr>
-													<td>{{MonthEvent 5}}</td>
-													<td>{{Description?}}}</td>
-													<td>{{DATE/TIME}}</td>
-												</tr>
-											</tbody>
-											<!-- <tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot> -->
-										</table>
-									</div>
 						</header>
 						<!-- 
 							Place an image here?
 							<span class="image featured"><img src="images/parkingIvy.jpg" alt="Parking Lot at USU" /></span> -->
 					</section>
 
-					<!-- 4 Section Divider 
-					<section class="box special features">
-						<div class="features-row">
-							<section>
-								<span class="icon solid major fa-bolt accent2"></span>
-								<h3>Magna etiam</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-							<section>
-								<span class="icon solid major fa-chart-area accent3"></span>
-								<h3>Ipsum dolor</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-						</div>
-						<div class="features-row">
-							<section>
-								<span class="icon solid major fa-cloud accent4"></span>
-								<h3>Sed feugiat</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-							<section>
-								<span class="icon solid major fa-lock accent5"></span>
-								<h3>Enim phasellus</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-						</div>
-					</section>
-
-					-->
-
 					<div class="row">
 						<div class="col-6 col-12-narrower">
 
 							<section class="box special">
-								<span class="image featured"><img src="images/googleMapsUSU.jpg" alt="" /></span>
+								<span class="image featured"><img src={% static "web/images/googleMapsUSU.jpg" %} alt="" /></span>
 								<h3>Navigate Easily with Maps</h3>
 								<p>Big Blue's Parking Genie interfaces with Google Maps API to provide high quality navigation guidance.</p>
 								<ul class="actions special">
@@ -169,7 +78,7 @@
 						<div class="col-6 col-12-narrower">
 
 							<section class="box special">
-								<span class="image featured"><img src="images/terrace.jpg" alt="" /></span>
+								<span class="image featured"><img src={% static "images/terrace.jpg"%} alt="" /></span>
 								<h3>Remember your Favorite Spots</h3>
 								<p>See all your past reservations from within your account, making it easy to attend again.</p>
 								<ul class="actions special">
@@ -190,14 +99,23 @@
 
 					<form>
 						<div class="row gtr-50 gtr-uniform">
-							<div class="col-8 col-12-mobilep">
+							<div class="col-12 col-12-mobilep">
 								<input type="email" name="email" id="email" placeholder="Email Address" />
+							</div>
+							<div class="col-12 col-12-mobilep">
+								<input type="password" name="password" id="password" placeholder="Password" />
+							</div>
+							<div class="col-8 col-12-mobilep">
+								<input type="password" name="password" id="password" placeholder="Confirm Password" />
 							</div>
 							<div class="col-4 col-12-mobilep">
 								<input type="submit" value="Sign Up" class="fit" />
 							</div>
 						</div>
 					</form>
+
+					<br />
+					<p>Did you mean to <a href="login.html">Login?</a></p>
 
 				</section>
 
@@ -219,13 +137,13 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src={% static "assets/js/jquery.min.js" %}></script>
+			<script src={% static "assets/js/jquery.dropotron.min.js" %}></script>
+			<script src={% static "assets/js/jquery.scrollex.min.js" %}></script>
+			<script src={% static "assets/js/browser.min.js" %}></script>
+			<script src={% static "assets/js/breakpoints.min.js" %}></script>
+			<script src={% static "assets/js/util.js" %}></script>
+			<script src={% static "assets/js/main.js" %}></script>
 
 	</body>
 </html>
