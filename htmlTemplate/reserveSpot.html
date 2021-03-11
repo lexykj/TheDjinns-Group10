@@ -1,27 +1,33 @@
 <!DOCTYPE HTML>
 <!--
-	Template:
+	Big Blue's Parking Genie
+	USU CS3450
+	Group 10 - The Djinns
+	Autumn Arbon, Joel Christensen, Palani Johnson, Lexy Simmons
+	https://github.com/palani-johnson/TheDjinns-Group10
+
+
+	TEMPLATE: 
 	Alpha by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 	<head>
-		<title>Big Blue's Parking Genie</title>
+		<title>Reserve Parking Spot</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel='icon' href='images/favicon.ico' type='image/x-icon' />
 	</head>
-	<body class="landing is-preload">
+	<body class="is-preload">
 		<div id="page-wrapper">
 
 			<!-- Header -->
-				<header id="header" class="alt">
-					<h1><a href="index.html">Big Blue's Parking Genie</a></h1>
+				<header id="header">
+					<h1>Big Blue's Parking Genie</h1>
 					<nav id="nav">
 						<ul>
-							<li><a href="index.html">Home</a></li>
+							<li><a href="nav.html">Home</a></li>
 							<!-- <li>
 								<a href="#" class="icon solid fa-angle-down">Layouts</a>
 								<ul>
@@ -39,165 +45,148 @@
 									</li>
 								</ul>
 							</li> -->
-							<li><a href="#cta" class="button">Sign Up</a></li>
+							<li><a href="#" class="button">My Account</a></li>
 						</ul>
 					</nav>
 				</header>
 
-			<!-- Banner -->
-				<section id="banner">
-					<h2>Redesign to Reserve a Parking Spot Page</h2>
-					<p>Reserve parking spots for Utah State University events</p>
-					<ul class="actions special">
-						<li><a href="#cta" class="button">Sign Up</a></li>
-						<li><a href="#" class="button">Login</a></li>
-					</ul>
-				</section>
-
 			<!-- Main -->
 				<section id="main" class="container">
+					<header>
+						<h2>Reserve a Parking Spot</h2>
+						<!-- <p>A generic page for every non-generic situation.</p> -->
+					</header>
+					<div class="box">
+						<span class="image featured"><img src="images/parkingGarage1.jpg" alt="" /></span>
+						<!-- Form -->
+								<section class="box">
+									<h3>Just tell us a little about the parking you're looking for...</h3>
+									<form method="post" action="#">
+										<div class="row gtr-uniform gtr-50">
+											<!-- <div class="col-6 col-12-mobilep">
+												<input type="text" name="name" id="name" value="" placeholder="Name" />
+											</div>
+											<div class="col-6 col-12-mobilep">
+												<input type="email" name="email" id="email" value="" placeholder="Email" />
+											</div> -->
+											<div class="col-12">
+												<select name="category" id="category">
+													<option value="">- Select Event -</option>
+													<option value="1">{{1}}</option>
+													<option value="1">{{2}}</option>
+													<option value="1">{{3}}</option>
+													<option value="1">{{4}}</option>
+												</select>
+											</div>
+											<div class="col-12">
+												<h5><a href="map.html">See map of available lots</a></h5>
+											</div>
+											<div class="col-12">
+												<select name="category" id="category">
+													<option value="">- Select Lot -</option>
+													<option value="1">{{1}}</option>
+													<option value="1">{{2}}</option>
+													<option value="1">{{3}}</option>
+													<option value="1">{{4}}</option>
+												</select>
+											</div>
+											<div class="col-12">
+												<select name="category" id="category">
+													<option value="">- Select Parking Type -</option>
+													<option value="1">{{1}}</option>
+													<option value="1">{{2}}</option>
+													<option value="1">{{3}}</option>
+													<option value="1">{{4}}</option>
+												</select>
+											</div>
+											<div class="row">
+												<div class="col-12">
+													<!-- Table -->
+													<section class="box">
+													<h3>Reservation Details</h3>
+														<div class="table-wrapper">
+															<table>
+																<thead>
+																	<tr>
+																		<th>Parking Lot</th>
+																		<th>Type</th>
+																		<th>Reserved Hours</th>
+																		<th>Price</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td><a href='#'>{{Lot}}</a></td> <!-- Link to lot map page here -->
+																		<td>{{Type}}</td>
+																		<td>{{Reserved Hours}}</td>
+																		<td>{{Subtotal Price}}</td>
+																	</tr>
+																</tbody>
+																<tfoot>
+																	<tr>
+																		<td colspan="3"></td>
+																		<td>{{Total Price}}</td>
+																	</tr>
+																</tfoot>
+															</table>
+														</div>
+												</div>
+											</div>	
+											<!-- <div class="col-4 col-12-narrower">
+												<input type="radio" id="priority-low" name="priority" checked>
+												<label for="priority-low">Low Priority</label>
+											</div>
+											<div class="col-4 col-12-narrower">
+												<input type="radio" id="priority-normal" name="priority">
+												<label for="priority-normal">Normal Priority</label>
+											</div>
+											<div class="col-4 col-12-narrower">
+												<input type="radio" id="priority-high" name="priority">
+												<label for="priority-high">High Priority</label>
+											</div>
+											<div class="col-6 col-12-narrower">
+												<input type="checkbox" id="copy" name="copy">
+												<label for="copy">Email me a copy of this message</label>
+											</div>
+											<div class="col-6 col-12-narrower">
+												<input type="checkbox" id="human" name="human" checked>
+												<label for="human">I am a human and not a robot</label>
+											</div>
+											<div class="col-12">
+												<textarea name="message" id="message" placeholder="Enter your message" rows="6"></textarea>
+											</div>
+											<div class="col-12">
+												<ul class="actions">
+													<li><input type="submit" value="Send Message" /></li>
+													<li><input type="reset" value="Reset" class="alt" /></li>
+												</ul>
+											</div> -->
+										</div>
+									</form>
 
-					<section class="box special">
-						<header class="major">
-							<h2>Introducing the one-stop application
-							<br />
-							for finding parking at Utah State</h2>
-							<p>Big Blue’s Parking Genie intends to make parking a more positive experience at Utah State University by collecting the universal parking experience into a single tool.</p>
-						</header>
-						<span class="image featured"><img src="images/parkingIvy.jpg" alt="Parking Lot at USU" /></span>
-					</section>
-
-					<section class="box special">
-						<header class="major">
-							<h2>Upcoming Utah State Events</h2>
-							<br />
-							<h4>{{--INSERT MONTH HERE--}}</h4>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Date/Time</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>{{MonthEvent 1}}</td>
-													<td>{{Description?}}}</td>
-													<td>{{DATE/TIME}}</td>
-												</tr>
-												<tr>
-													<td>{{MonthEvent 2}}</td>
-													<td>{{Description?}}}</td>
-													<td>{{DATE/TIME}}</td>
-												</tr>
-												<tr>
-													<td>{{MonthEvent 3}}</td>
-													<td>{{Description?}}}</td>
-													<td>{{DATE/TIME}}</td>
-												</tr>
-												<tr>
-													<td>{{MonthEvent 4}}</td>
-													<td>{{Description?}}}</td>
-													<td>{{DATE/TIME}}</td>
-												</tr>
-												<tr>
-													<td>{{MonthEvent 5}}</td>
-													<td>{{Description?}}}</td>
-													<td>{{DATE/TIME}}</td>
-												</tr>
-											</tbody>
-											<!-- <tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot> -->
-										</table>
-									</div>
-						</header>
-						<!-- 
-							Place an image here?
-							<span class="image featured"><img src="images/parkingIvy.jpg" alt="Parking Lot at USU" /></span> -->
-					</section>
-
-					<!-- 4 Section Divider 
-					<section class="box special features">
-						<div class="features-row">
-							<section>
-								<span class="icon solid major fa-bolt accent2"></span>
-								<h3>Magna etiam</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-							<section>
-								<span class="icon solid major fa-chart-area accent3"></span>
-								<h3>Ipsum dolor</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-						</div>
-						<div class="features-row">
-							<section>
-								<span class="icon solid major fa-cloud accent4"></span>
-								<h3>Sed feugiat</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-							<section>
-								<span class="icon solid major fa-lock accent5"></span>
-								<h3>Enim phasellus</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-						</div>
-					</section>
-
-					-->
-
-					<div class="row">
-						<div class="col-6 col-12-narrower">
-
-							<section class="box special">
-								<span class="image featured"><img src="images/googleMapsUSU.jpg" alt="" /></span>
-								<h3>Navigate Easily with Maps</h3>
-								<p>Big Blue's Parking Genie interfaces with Google Maps API to provide high quality navigation guidance.</p>
-								<ul class="actions special">
-									<li><a href="#" class="button alt">See Map of USU</a></li>
-								</ul>
-							</section>
-
-						</div>
-						<div class="col-6 col-12-narrower">
-
-							<section class="box special">
-								<span class="image featured"><img src="images/terrace.jpg" alt="" /></span>
-								<h3>Remember your Favorite Spots</h3>
-								<p>See all your past reservations from within your account, making it easy to attend again.</p>
-								<ul class="actions special">
-									<li><a href="#" class="button alt">Login</a></li>
-								</ul>
-							</section>
-
-						</div>
+									<form method="post" action="#">
+										<div class="row gtr-uniform gtr-50">
+											<div class="col-5 col-6-mobilep">
+												<h3>Total: {{Price}}</h3>
+											</div>
+											<div class="col-3 col-12-mobilep">
+												<input type="submit" value="Pay and Reserve" class="fit" />
+											</div>
+										</div>
+									</form>
+								</section>
+						<!-- <p>Cep risus aliquam gravida cep ut lacus amet. Adipiscing faucibus nunc placerat. Tempus adipiscing turpis non blandit accumsan eget lacinia nunc integer interdum amet aliquam ut orci non col ut ut praesent. Semper amet interdum mi. Phasellus enim laoreet ac ac commodo faucibus faucibus. Curae ante vestibulum ante. Blandit. Ante accumsan nisi eu placerat gravida placerat adipiscing in risus fusce vitae ac mi accumsan nunc in accumsan tempor blandit aliquet aliquet lobortis. Ultricies blandit lobortis praesent turpis. Adipiscing accumsan adipiscing adipiscing ac lacinia cep. Orci blandit a iaculis adipiscing ac. Vivamus ornare laoreet odio vis praesent nunc lorem mi. Erat. Tempus sem faucibus ac id. Vis in blandit. Nascetur ultricies blandit ac. Arcu aliquam. Accumsan mi eget adipiscing nulla. Non vestibulum ac interdum condimentum semper commodo massa arcu.</p>
+						<div class="row">
+							<div class="row-6 row-12-mobilep">
+								<h3>And now a subheading</h3>
+								<p>Adipiscing faucibus nunc placerat. Tempus adipiscing turpis non blandit accumsan eget lacinia nunc integer interdum amet aliquam ut orci non col ut ut praesent. Semper amet interdum mi. Phasellus enim laoreet ac ac commodo faucibus faucibus. Curae lorem ipsum adipiscing ac. Vivamus ornare laoreet odio vis praesent.</p>
+							</div>
+							<div class="row-6 row-12-mobilep">
+								<h3>And another subheading</h3>
+								<p>Adipiscing faucibus nunc placerat. Tempus adipiscing turpis non blandit accumsan eget lacinia nunc integer interdum amet aliquam ut orci non col ut ut praesent. Semper amet interdum mi. Phasellus enim laoreet ac ac commodo faucibus faucibus. Curae lorem ipsum adipiscing ac. Vivamus ornare laoreet odio vis praesent.</p>
+							</div>
+						</div> -->
 					</div>
-
-				</section>
-
-			<!-- CTA -->
-				<section id="cta">
-
-					<h2>Sign up for an account</h2>
-					<p>Create an account with Big Blue's Parking Genie to reserve parking for USU events.</p>
-
-					<form>
-						<div class="row gtr-50 gtr-uniform">
-							<div class="col-8 col-12-mobilep">
-								<input type="email" name="email" id="email" placeholder="Email Address" />
-							</div>
-							<div class="col-4 col-12-mobilep">
-								<input type="submit" value="Sign Up" class="fit" />
-							</div>
-						</div>
-					</form>
-
 				</section>
 
 			<!-- Footer -->
@@ -206,7 +195,7 @@
 						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="https://github.com/palani-johnson/TheDjinns-Group10" class="icon brands fa-github"><span class="label">Github</span></a></li>
 						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
 						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
 					</ul>

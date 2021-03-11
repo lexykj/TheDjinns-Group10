@@ -3158,7 +3158,7 @@
 				z-index: 0;
 			}
 
-/* Banner */
+/* Home Banner */
 
 	#banner {
 		background-attachment: scroll,							fixed;
@@ -3224,10 +3224,80 @@
 				color: #fff !important;
 			}
 
+/* Nav Banner */
+
+	#navBanner {
+		background-attachment: scroll,							fixed;
+		background-color: #666;
+		background-image: url("images/overlay.png"), url("../../images/parkingGarage2.jpg");
+		background-position: top left,						center center;
+		background-repeat: repeat,							no-repeat;
+		background-size: auto,							cover;
+		color: #fff;
+		padding: 12em 0 20em 0;
+		text-align: center;
+	}
+
+		#navBanner :last-child {
+			margin-bottom: 0;
+		}
+
+		#navBanner h2, #navBanner h3, #navBanner h4, #navBanner h5, #navBanner h6 {
+			color: #fff;
+		}
+
+		#navBanner h2 {
+			font-size: 3.5em;
+			line-height: 1em;
+			margin: 0 0 0.5em 0;
+			padding: 0;
+		}
+
+		#navBanner p {
+			font-size: 1.25em;
+			margin-bottom: 1.75em;
+		}
+
+		#navBanner input[type="submit"],
+		#navBanner input[type="reset"],
+		#navBanner input[type="button"],
+		#navBanner .button {
+			background-color: #00263A;
+			box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+			color: #fff;
+			min-width: 12em;
+		}
+
+			#navBanner input[type="submit"]:hover,
+			#navBanner input[type="reset"]:hover,
+			#navBanner input[type="button"]:hover,
+			#navBanner .button:hover {
+				background-color: rgba(255, 255, 255, 0.1);
+			}
+
+			#navBanner input[type="submit"]:active,
+			#navBanner input[type="reset"]:active,
+			#navBanner input[type="button"]:active,
+			#navBanner .button:active {
+				background-color: rgba(255, 255, 255, 0.2);
+			}
+
+			#navBanner input[type="submit"].primary,
+			#navBanner input[type="reset"].primary,
+			#navBanner input[type="button"].primary,
+			#navBanner .button.primary {
+				background: #00263A;
+				color: #fff !important;
+			}
+
 /* Main */
 
 	#main {
 		padding: 4em 0;
+	}
+
+	.navMain {
+		padding: 2em 0;
 	}
 
 		#main > header {
@@ -3304,10 +3374,14 @@
 
 	#cta {
 		background: #00263A;
-		color: #f9e6df;
+		color: #fff;
 		padding: 3.5em 0 4em 0;
 		text-align: center;
 	}
+
+		#cta a {
+			color: #fff;
+		}
 
 		#cta h2, #cta h3, #cta h4, #cta h5, #cta h6 {
 			color: inherit;
@@ -3382,6 +3456,10 @@
 				padding: 10em 0 18em 0;
 			}
 
+			#navBanner {
+				padding: 10em 0 18em 0;
+			}
+
 	}
 
 /* Normal */
@@ -3407,6 +3485,14 @@
 			}
 
 				#banner h2 {
+					font-size: 3.5em;
+				}
+
+			#navBanner {
+				background-attachment: scroll;
+			}
+
+				#navBanner h2 {
 					font-size: 3.5em;
 				}
 
@@ -3750,6 +3836,18 @@
 					font-size: 1.25em;
 				}
 
+			#navBanner {
+				padding: 4em 0;
+			}
+
+				#navBanner h2 {
+					font-size: 2.25em;
+				}
+
+				#navBanner p {
+					font-size: 1.25em;
+				}
+
 		/* Main */
 
 			#main {
@@ -3881,6 +3979,10 @@
 		/* Banner */
 
 			#banner {
+				padding: 5em 3em 4em 3em;
+			}
+
+			#navBanner {
 				padding: 5em 3em 4em 3em;
 			}
 
