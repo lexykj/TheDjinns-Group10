@@ -1,5 +1,6 @@
 # Palani's Ideas
  - [Version control idea](https://github.com/ideaconsult/etc/wiki/IDEA-Development-Collaboration-Best-Practices)
+ - [Dango login page](https://learndjango.com/tutorials/django-login-and-logout-tutorial)
 
 # Joel's Ideas
 **ACTORS**  
