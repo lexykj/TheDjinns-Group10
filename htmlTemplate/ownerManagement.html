@@ -14,7 +14,7 @@
 -->
 <html>
 	<head>
-		<title>Event Check-In</title>
+		<title>Lot Owner Management</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -37,31 +37,59 @@
 			<!-- Main -->
 				<section id="main" class="container">
 					<header>
-						<h2>Check In Customers for {{Event}}</h2> <!-- Attendants navigate here from main.html after selecting an event to check in -->
+						<h2>Lot Owner Management</h2>
+						<p>Add or remove parking lot owners here.</p>
 					</header>
-					<section class="box">
-						<div class="row">
-							<div class="col-6 col-12-narrower">
-								<!-- Form -->
-								<h3>Enter customer reservation codes here...</h3>
-								<form method="post" action="#">
-									<div class="row gtr-uniform gtr-50">
-										<div class="col-6 col-12-mobilep">
-											<input type="text" name="query" id="query" value="" placeholder="Reservation Code" />
-										</div>
-										<div class="col-4 col-12-mobilep">
-											<input type="submit" value="Check In" class="fit" />
-										</div>
+					<div class="box">
+						<span class="image fit"><img src="images/lotGuy.jpg" alt="" /></span>
+						<!-- Upcoming Events -->
+						<section class="box">
+							<h3 style="text-align: center;">All Current Parking Lot Owners</h3>
+							<ul class="alt">
+								<li>
+									<div class="row">
+										<p class="col-4" style="text-align: center;">{{Owner 1}}</p>
+										<p class="col-4" style="text-align: center;"><a href="map.html">{{Parking Lots}}</a></p>
+										<p class="col-4 button alt">Revoke Lot Owner Permissions</p>
 									</div>
-								</form>
-							</div>
-
-							<div class="col-6 col-12-narrower">
-								<!-- Image -->
-								<span class="image fit"><img src="images/huntsman.jpg" alt="" /></span>
-							</div>							
-						</div>
-					</section>					
+								</li>
+								<li>
+									<div class="row">
+										<p class="col-4" style="text-align: center;">{{Owner 2}}</p>
+										<p class="col-4" style="text-align: center;"><a href="map.html">{{Parking Lots}}</a></p>
+										<p class="col-4 button alt">Revoke Lot Owner Permissions</p>
+									</div>
+								</li>
+								<li>
+									<div class="row">
+										<p class="col-4" style="text-align: center;">{{Owner 3}}</p>
+										<p class="col-4" style="text-align: center;"><a href="map.html">{{Parking Lots}}</a></p>
+										<p class="col-4 button alt">Revoke Lot Owner Permissions</p>
+									</div>
+								</li>
+								<li><p style="text-align: center;">...</p></li>
+							</ul>
+						</section>
+						<section class="box">
+							<h3 style="text-align: center;">Add a Parking Lot Owner</h3>
+							<p style="text-align: center;">Enter the new owner's account information here...</p>
+							<form method="post" action="#">
+								<div class="row gtr-uniform gtr-50">
+									<div class="col-6 col-12-mobilep">
+										<input type="text" name="name" id="name" value="" placeholder="Username" />
+									</div>
+									<div class="col-6 col-12-mobilep">
+										<input type="email" name="email" id="email" value="" placeholder="Email" />
+									</div>
+									<div class="col-12">
+										<ul class="actions special">
+											<li><input type="submit" value="Add Owner" /></li>
+										</ul>
+									</div>
+								</div>
+							</form>
+						</section>
+					</div>
 				</section>
 
 			<!-- Footer -->

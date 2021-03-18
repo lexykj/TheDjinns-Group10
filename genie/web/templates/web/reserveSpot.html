@@ -16,8 +16,9 @@
 	<head>
 		<title>Reserve Parking Spot</title>
 		<meta charset="utf-8" />
+		{% load static %}
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href={% static "web/assets/css/main.css" %} />
 	</head>
 	<body class="is-preload">
 		<div id="page-wrapper">
@@ -27,9 +28,10 @@
 					<h1>Big Blue's Parking Genie</h1>
 					<nav id="nav">
 						<ul>
-							<li><a href="main.html">Home</a></li>
+							<!-- TODO: add links to main and account -->
+							<li><a href={% url "web:main" %}>Home</a></li>
 							<li><a href="account.html" class="button">My Account</a></li>
-							<li><a href="signUp.html" class="button">Log Out</a></li>
+							<li><a href={% url "web:home" %} class="button">Log Out</a></li>
 						</ul>
 					</nav>
 				</header>
@@ -40,7 +42,7 @@
 						<h2>Reserve a Parking Spot</h2>
 					</header>
 					<div class="box">
-						<span class="image featured"><img src="images/parkingGarage1.jpg" alt="" /></span>
+						<span class="image featured"><img src={% static "web/images/parkingGarage1.jpg" %} alt="" /></span>
 						<!-- Form -->
 								<section class="box">
 									<h3>Just tell us a little about the parking you're looking for...</h3>
@@ -49,10 +51,10 @@
 											<div class="col-12">
 												<select name="category" id="category">
 													<option value="">- Select Event -</option>
-													<option value="1">{{1}}</option>
-													<option value="1">{{2}}</option>
-													<option value="1">{{3}}</option>
-													<option value="1">{{4}}</option>
+													<option value="1">{{ events.0.name }}</option>
+													<option value="1">{{ events.1.name }}</option>
+													<option value="1">{{ events.2.name }}</option>
+													<option value="1">{{ events.3.name }}</option>
 												</select>
 											</div>
 											<div class="col-12">
@@ -61,19 +63,21 @@
 											<div class="col-12">
 												<select name="category" id="category">
 													<option value="">- Select Lot -</option>
-													<option value="1">{{1}}</option>
-													<option value="1">{{2}}</option>
-													<option value="1">{{3}}</option>
-													<option value="1">{{4}}</option>
+													<!--TODO: Add lot variables-->
+													<option value="1">1</option>
+													<option value="1">2</option>
+													<option value="1">3</option>
+													<option value="1">4</option>
 												</select>
 											</div>
 											<div class="col-12">
 												<select name="category" id="category">
 													<option value="">- Select Parking Type -</option>
-													<option value="1">{{1}}</option>
-													<option value="1">{{2}}</option>
-													<option value="1">{{3}}</option>
-													<option value="1">{{4}}</option>
+													<!--TODO: Add spot variables-->
+													<option value="1">1</option>
+													<option value="1">2</option>
+													<option value="1">3</option>
+													<option value="1">4</option>
 												</select>
 											</div>
 											<div class="row">
@@ -93,16 +97,18 @@
 																</thead>
 																<tbody>
 																	<tr>
-																		<td><a href='#'>{{Lot}}</a></td> <!-- Link to lot map page here -->
-																		<td>{{Type}}</td>
-																		<td>{{Reserved Hours}}</td>
-																		<td>{{Subtotal Price}}</td>
+																		<!-- TODO: change lot, type, hours, and price to variables-->
+																		<td><a href='#'>Lot</a></td> <!-- Link to lot map page here -->
+																		<td>Type</td>
+																		<td>Reserved Hours</td>
+																		<td>Subtotal Price</td>
 																	</tr>
 																</tbody>
 																<tfoot>
 																	<tr>
 																		<td colspan="3"></td>
-																		<td>{{Total Price}}</td>
+																		<!-- TODO: total price variable-->
+																		<td>Total Price</td>
 																	</tr>
 																</tfoot>
 															</table>
@@ -115,7 +121,8 @@
 									<form method="post" action="#">
 										<div class="row gtr-uniform gtr-50">
 											<div class="col-5 col-6-mobilep">
-												<h3>Total: {{Price}}</h3>
+												<!-- TODO: price variablel-->
+												<h3>Total: Price</h3>
 											</div>
 											<div class="col-3 col-12-mobilep">
 												<input type="submit" value="Pay and Reserve" class="fit" />
@@ -144,13 +151,13 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src={% static "assets/js/jquery.min.js" %}></script>
+			<script src={% static "assets/js/jquery.dropotron.min.js" %}></script>
+			<script src={% static "assets/js/jquery.scrollex.min.js" %}></script>
+			<script src={% static "assets/js/browser.min.js" %}></script>
+			<script src={% static "assets/js/breakpoints.min.js" %}></script>
+			<script src={% static "assets/js/util.js" %}></script>
+			<script src={% static "assets/js/main.js" %}></script>
 
 	</body>
 </html>

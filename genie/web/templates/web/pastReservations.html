@@ -16,8 +16,9 @@
 	<head>
 		<title>Past Reservations</title>
 		<meta charset="utf-8" />
+		{% load static %}
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href={% static "web/assets/css/main.css" %} />
 	</head>
 	<body class="is-preload">
 		<div id="page-wrapper">
@@ -27,9 +28,9 @@
 					<h1>Big Blue's Parking Genie</h1>
 					<nav id="nav">
 						<ul>
-							<li><a href="main.html">Home</a></li>
-							<li><a href="account.html" class="button">My Account</a></li>
-							<li><a href="signUp.html" class="button">Log Out</a></li>
+							<li><a href={% url "web:main" %}>Home</a></li>
+							<li><a href={% url "web:account" %} class="button">My Account</a></li>
+							<li><a href={% url "web:home" %} class="button">Log Out</a></li>
 						</ul>
 					</nav>
 				</header>
@@ -44,7 +45,7 @@
 													  margin-left: auto;
 													  margin-right: auto;
 													  width: 50%;">
-								<span class="image fit"><img src="images/dash.jpg" alt="" /></span>
+								<span class="image fit"><img src={% static "web/images/dash.jpg" %} alt="" /></span>
 							</div>
 						</div>
 
@@ -56,23 +57,24 @@
 							<ul class="alt">
 								<li>
 									<div class="row">
-										<a href="#" class="button alt col-4">{{Reservation 1}}</a>
+										<!-- TODO: add reservations and map -->
+										<a href="#" class="button alt col-4">Reservation 1</a>
 										<p class="col-4"><a href="map.html">View Map</a></p>
-										<p class="col-4"><a href="reserveSpot.html">Reserve This Spot Again</a></p>
+										<p class="col-4"><a href={% url "web:reserve" %}>Reserve This Spot Again</a></p>
 									</div>
 								</li>
 								<li>
 									<div class="row">
-										<a href="#" class="button alt col-4">{{Reservation 1}}</a>
+										<a href="#" class="button alt col-4">Reservation 1</a>
 										<p class="col-4"><a href="map.html">View Map</a></p>
-										<p class="col-4"><a href="reserveSpot.html">Reserve This Spot Again</a></p>
+										<p class="col-4"><a href={% url "web:reserve" %}>Reserve This Spot Again</a></p>
 									</div>
 								</li>
 								<li>
 									<div class="row">
-										<a href="#" class="button alt col-4">{{Reservation 1}}</a>
+										<a href="#" class="button alt col-4">Reservation 1</a>
 										<p class="col-4"><a href="map.html">View Map</a></p>
-										<p class="col-4"><a href="reserveSpot.html">Reserve This Spot Again</a></p>
+										<p class="col-4"><a href={% url "web:reserve" %}>Reserve This Spot Again</a></p>
 									</div>
 								</li>
 								<li><p style="text-align: center;">...</p></li>
@@ -99,13 +101,13 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src={% static "assets/js/jquery.min.js" %}></script>
+			<script src={% static "assets/js/jquery.dropotron.min.js" %}></script>
+			<script src={% static "assets/js/jquery.scrollex.min.js" %}></script>
+			<script src={% static "assets/js/browser.min.js" %}></script>
+			<script src={% static "assets/js/breakpoints.min.js" %}></script>
+			<script src={% static "assets/js/util.js" %}></script>
+			<script src={% static "assets/js/main.js" %}></script>
 
 	</body>
 </html>

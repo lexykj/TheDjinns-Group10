@@ -16,8 +16,9 @@
 	<head>
 		<title>Event Management</title>
 		<meta charset="utf-8" />
+		{% load static %}
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href={% static "web/assets/css/main.css" %} />
 	</head>
 	<body class="is-preload">
 		<div id="page-wrapper">
@@ -27,9 +28,9 @@
 					<h1>Big Blue's Parking Genie</h1>
 					<nav id="nav">
 						<ul>
-							<li><a href="main.html">Home</a></li>
-							<li><a href="account.html" class="button">My Account</a></li>
-							<li><a href="signUp.html" class="button">Log Out</a></li>
+							<li><a href={% url "web:main" %}>Home</a></li>
+							<li><a href={% url "web:account" %} class="button">My Account</a></li>
+							<li><a href={% url "web:home" %} class="button">Log Out</a></li>
 						</ul>
 					</nav>
 				</header>
@@ -41,29 +42,29 @@
 						<p>Update upcoming Utah State University events here.</p>
 					</header>
 					<div class="box">
-						<span class="image fit"><img src="images/event.jpg" alt="" /></span>
+						<span class="image fit"><img src={% static "web/images/event.jpg" %} alt="" /></span>
 						<!-- Upcoming Events -->
 						<section class="box">
 							<h3 style="text-align: center;">Upcoming Events</h3>
 							<ul class="alt">
 								<li>
 									<div class="row">
-										<p class="col-4" style="text-align: center;">{{Event 1}}</p>
-										<p class="col-4" style="text-align: center;">{{Date}}</p>
+										<p class="col-4" style="text-align: center;">Event 1</p>
+										<p class="col-4" style="text-align: center;">Date</p>
 										<p class="col-4 button alt">Delete This Event</p>
 									</div>
 								</li>
 								<li>
 									<div class="row">
-										<p class="col-4" style="text-align: center;">{{Event 2}}</p>
-										<p class="col-4" style="text-align: center;">{{Date}}</p>
+										<p class="col-4" style="text-align: center;">Event 2</p>
+										<p class="col-4" style="text-align: center;">Date</p>
 										<p class="col-4 button alt">Delete This Event</p>
 									</div>
 								</li>
 								<li>
 									<div class="row">
-										<p class="col-4" style="text-align: center;">{{Event 3}}</p>
-										<p class="col-4" style="text-align: center;">{{Date}}</p>
+										<p class="col-4" style="text-align: center;">Event 3</p>
+										<p class="col-4" style="text-align: center;">Date</p>
 										<p class="col-4 button alt">Delete This Event</p>
 									</div>
 								</li>
@@ -113,13 +114,13 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src={% static "assets/js/jquery.min.js" %}></script>
+			<script src={% static "assets/js/jquery.dropotron.min.js" %}></script>
+			<script src={% static "assets/js/jquery.scrollex.min.js" %}></script>
+			<script src={% static "assets/js/browser.min.js" %}></script>
+			<script src={% static "assets/js/breakpoints.min.js" %}></script>
+			<script src={% static "assets/js/util.js" %}></script>
+			<script src={% static "assets/js/main.js" %}></script>
 
 	</body>
 </html>
