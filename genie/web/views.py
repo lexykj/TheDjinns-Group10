@@ -22,3 +22,9 @@ def history(request):
 
 def attendant(request):
     return render(request, 'web/attendant.html')
+
+def events(request):
+    return render(request, 'web/eventManagement.html')
+
+def owners(request):
+    return render(request, 'web/ownerManagement.html')

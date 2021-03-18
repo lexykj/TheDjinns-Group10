@@ -11,4 +11,7 @@ urlpatterns = [
     path('account', views.account, name='account'),
     path('history', views.history, name='history'),
     path('attendant', views.attendant, name='attendant'),
+    path('events', views.events, name='events'),
+    path('owners', views.owners, name='owners'),
+
 ]
