@@ -13,3 +13,6 @@ def login(request):
 
 def main(request):
     return render(request, 'web/main.html')
+
+def account(request):
+    return render(request, 'web/account.html')
