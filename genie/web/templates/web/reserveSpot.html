@@ -51,10 +51,10 @@
 											<div class="col-12">
 												<select name="category" id="category">
 													<option value="">- Select Event -</option>
-													<option value="1">{{ events.0 }}</option>
-													<option value="1">{{ events.1 }}</option>
-													<option value="1">{{ events.2 }}</option>
-													<option value="1">{{ events.3 }}</option>
+													<option value="1">{{ events.0.name }}</option>
+													<option value="1">{{ events.1.name }}</option>
+													<option value="1">{{ events.2.name }}</option>
+													<option value="1">{{ events.3.name }}</option>
 												</select>
 											</div>
 											<div class="col-12">
@@ -63,6 +63,7 @@
 											<div class="col-12">
 												<select name="category" id="category">
 													<option value="">- Select Lot -</option>
+													<!--TODO: Add lot variables-->
 													<option value="1">1</option>
 													<option value="1">2</option>
 													<option value="1">3</option>
@@ -72,6 +73,7 @@
 											<div class="col-12">
 												<select name="category" id="category">
 													<option value="">- Select Parking Type -</option>
+													<!--TODO: Add spot variables-->
 													<option value="1">1</option>
 													<option value="1">2</option>
 													<option value="1">3</option>
@@ -95,6 +97,7 @@
 																</thead>
 																<tbody>
 																	<tr>
+																		<!-- TODO: change lot, type, hours, and price to variables-->
 																		<td><a href='#'>Lot</a></td> <!-- Link to lot map page here -->
 																		<td>Type</td>
 																		<td>Reserved Hours</td>
