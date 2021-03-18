@@ -16,3 +16,9 @@ def main(request):
 
 def account(request):
     return render(request, 'web/account.html')
+
+def history(request):
+    return render(request, 'web/pastReservations.html')
+
+def attendant(request):
+    return render(request, 'web/attendant.html')

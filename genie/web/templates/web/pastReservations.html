@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<!--
+	Big Blue's Parking Genie
+	USU CS3450
+	Group 10 - The Djinns
+	Autumn Arbon, Joel Christensen, Palani Johnson, Lexy Simmons
+	https://github.com/palani-johnson/TheDjinns-Group10
+
+
+	TEMPLATE: 
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Past Reservations</title>
+		<meta charset="utf-8" />
+		{% load static %}
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href={% static "web/assets/css/main.css" %} />
+	</head>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1>Big Blue's Parking Genie</h1>
+					<nav id="nav">
+						<ul>
+							<li><a href={% url "web:main" %}>Home</a></li>
+							<li><a href={% url "web:account" %} class="button">My Account</a></li>
+							<li><a href={% url "web:home" %} class="button">Log Out</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+						<h2>Past Reservations</h2>
+						<p>Review parking lots and spots which you have previously reserved.</p>
+						<div class="row">
+							<div class="col-6" style="display: block;
+													  margin-left: auto;
+													  margin-right: auto;
+													  width: 50%;">
+								<span class="image fit"><img src={% static "web/images/dash.jpg" %} alt="" /></span>
+							</div>
+						</div>
+
+					</header>
+					<div class="box">
+						<!-- Form -->
+						<section class="box">
+							<h3 style="text-align: center;">All Reservations</h3>
+							<ul class="alt">
+								<li>
+									<div class="row">
+										<!-- TODO: add reservations and map -->
+										<a href="#" class="button alt col-4">Reservation 1</a>
+										<p class="col-4"><a href="map.html">View Map</a></p>
+										<p class="col-4"><a href={% url "web:reserve" %}>Reserve This Spot Again</a></p>
+									</div>
+								</li>
+								<li>
+									<div class="row">
+										<a href="#" class="button alt col-4">Reservation 1</a>
+										<p class="col-4"><a href="map.html">View Map</a></p>
+										<p class="col-4"><a href={% url "web:reserve" %}>Reserve This Spot Again</a></p>
+									</div>
+								</li>
+								<li>
+									<div class="row">
+										<a href="#" class="button alt col-4">Reservation 1</a>
+										<p class="col-4"><a href="map.html">View Map</a></p>
+										<p class="col-4"><a href={% url "web:reserve" %}>Reserve This Spot Again</a></p>
+									</div>
+								</li>
+								<li><p style="text-align: center;">...</p></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://github.com/palani-johnson/TheDjinns-Group10" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>USU CS 3540. Group 10- The Djinns: Joel Christensen, Autumn Arbon, Lexy Simmons, Palani Johnson.</li><li>HTML Template Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src={% static "assets/js/jquery.min.js" %}></script>
+			<script src={% static "assets/js/jquery.dropotron.min.js" %}></script>
+			<script src={% static "assets/js/jquery.scrollex.min.js" %}></script>
+			<script src={% static "assets/js/browser.min.js" %}></script>
+			<script src={% static "assets/js/breakpoints.min.js" %}></script>
+			<script src={% static "assets/js/util.js" %}></script>
+			<script src={% static "assets/js/main.js" %}></script>
+
+	</body>
+</html>
