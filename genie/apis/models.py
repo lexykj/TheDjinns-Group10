@@ -18,6 +18,7 @@ class User(models.Model):
     password = models.CharField(max_length=200)
     account_balance = models.FloatField(default=100.0)
 
+    is_customer = models.BooleanField(default=True)
     is_owner = models.BooleanField(default=False)
     is_attendant = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
