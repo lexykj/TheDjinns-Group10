@@ -4,40 +4,56 @@ from django.db.models.deletion import CASCADE
 class Event(models.Model):
     name = models.CharField(max_length=200)
     date = models.DateTimeField('event date')
+    address = models.CharField(max_length=500, blank=True, default='')
+    latitude = models.FloatField(default=41.7429795162564)
+    longitude = models.FloatField(default=111.809492111206)
+
+    def __str__(self) -> str:
+        return self.name
 
 class User(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.EmailField(max_length=254)
     username = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
-    accountBalance = models.FloatField(default=100.0)
+    account_balance = models.FloatField(default=100.0)
 
-class Owner(models.Model):
-    user = models.ForeignKey(User, on_delete=CASCADE)
+    is_owner = models.BooleanField(default=False)
+    is_attendant = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
+
+    attendant_for = models.ManyToManyField('ParkingLot', blank=True) # must check if is attendant
+
+    def __str__(self) -> str:
+        return self.name
 
 class ParkingLot(models.Model):
-    event = models.ForeignKey(Event, on_delete=CASCADE)
-    owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+    address = models.CharField(max_length=500, blank=True, default='')
+    latitude = models.FloatField(default=41.7429795162564)
+    longitude = models.FloatField(default=111.809492111206)
+
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE) # must check if user is_owner
+
+    def __str__(self) -> str:
+        return self.name
 
 class ParkingSpot(models.Model):
     spotType = models.CharField(max_length=200)
     price = models.FloatField(default=0.0)
+    spots = models.IntegerField(default=1)
+
     lot = models.ForeignKey(ParkingLot, on_delete=models.CASCADE)
 
-class Attendant(models.Model):
-    user = models.ForeignKey(User, on_delete=CASCADE)
-    parkingLot = models.ForeignKey(ParkingLot, on_delete=models.CASCADE)
+    def __str__(self) -> str:
+        return self.spotType
 
 class Reservation(models.Model):
-    parkingSpot = models.ForeignKey(ParkingSpot, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    ticket = models.IntegerField(default=0)
+    uuid = models.IntegerField(default=0)
 
-class Permission(models.Model):
+    spot = models.ForeignKey(ParkingSpot, on_delete=models.CASCADE) # no more spots than ParkingSpot.spot
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    userPermish = models.BooleanField()
-    attendantPermish = models.BooleanField()
-    ownerPermish = models.BooleanField()
-    adminPermish = models.BooleanField()
 
-class Admin(models.Model):
-    user = models.ForeignKey(User, on_delete=CASCADE)
+    def __str__(self) -> str:
+        return str(self.uuid)
