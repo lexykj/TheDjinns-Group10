@@ -82,7 +82,7 @@
 								<h3>Remember your Favorite Spots</h3>
 								<p>See all your past reservations from within your account, making it easy to attend again.</p>
 								<ul class="actions special">
-									<li><a href="#" class="button alt">Login</a></li>
+									<li><a href={% url "web:login" %} class="button alt">Login</a></li>
 								</ul>
 							</section>
 
@@ -107,6 +107,9 @@
 								<input type="email" name="email" id="email" placeholder="Email Address" />
 							</div>
 							<div class="col-12 col-12-mobilep">
+								<input type="text" name="username" id="username" placeholder="Username" />
+							</div>
+							<div class="col-12 col-12-mobilep">
 								<input type="password" name="password" id="password" placeholder="Password" />
 							</div>
 							<div class="col-8 col-12-mobilep">
@@ -119,7 +122,7 @@
 					</form>
 
 					<br />
-					<p>Did you mean to <a href="login.html">Login?</a></p>
+					<p>Did you mean to <a href="{% url "web:login" %}">Login?</a></p>
 
 				</section>
 
