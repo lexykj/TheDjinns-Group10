@@ -35,11 +35,12 @@ def signUp(request):
     message = ""
     if request.method == 'POST':
         email = request.POST['email']
+        username = request.POST['username']
         password = request.POST['password']
         password1 = request.POST['password1']
         if password == password1:
-            User.objects.create_user(username=email, password=password)
-            user = authenticate(request, username=email, password=password)
+            User.objects.create_user(username=username, password=password)
+            user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
                 return redirect('/home')
