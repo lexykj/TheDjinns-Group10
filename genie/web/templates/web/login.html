@@ -33,6 +33,9 @@
 						<!-- <p>Tell us what you think about our little operation.</p> -->
 					</header>
 					<div class="box">
+						{% if message != "" %}
+							<p style="color:red">{{message}}</p>
+						{% endif %}
 						<form method="post" action={% url "web:signIn" %}>
 							{% csrf_token %}
 							<div class="row gtr-50 gtr-uniform">

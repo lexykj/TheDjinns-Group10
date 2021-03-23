@@ -17,6 +17,7 @@ def loginpage(request):
 def signIn(request):
     if request.user.is_authenticated:
         return redirect('/home')
+    message = ""
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -25,13 +26,13 @@ def signIn(request):
             login(request, user)
             return redirect('/home')
         else:
-            return render(request, 'web/login.html')
-    else:
-        return render(request, 'web/login.html')
+            message = "Invalid username/password"
+    return render(request, 'web/login.html', {'message': message})
 
 def signUp(request):
     if request.user.is_authenticated:
         return redirect('/home')
+    message = ""
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -43,11 +44,10 @@ def signUp(request):
                 login(request, user)
                 return redirect('/home')
             else:
-                return render(request, 'web/signUp.html')
+                message = "Error creating user"
         else:
-            return render(request, 'web/signUp.html')
-    else:
-        return render(request, 'web/signUp.html')
+            message = "Passwords do not match"
+    return render(request, 'web/signUp.html', {'message': message})
 
 def signOut(request):
     logout(request)
