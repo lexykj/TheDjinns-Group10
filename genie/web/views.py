@@ -28,3 +28,9 @@ def events(request):
 
 def owners(request):
     return render(request, 'web/ownerManagement.html')
+
+def lots(request):
+    return render(request, 'web/lotManagement.html')
+
+def info(request):
+    return render(request, 'web/lotInfo.html')
