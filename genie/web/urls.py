@@ -16,4 +16,6 @@ urlpatterns = [
     path('lots', views.lots, name='lots'),
     path('lot-info', views.info, name='lot-info'),
     path('signIn', views.signIn, name='signIn'),
+    path('signUp', views.signUp, name='signUp'),
+    path('logout', views.signOut, name='logout'),
 ]

@@ -97,7 +97,8 @@
 					<h2>Sign up for an account</h2>
 					<p>Create an account with Big Blue's Parking Genie to reserve parking for USU events.</p>
 
-					<form>
+					<form method="post" action={% url "web:signUp" %}>
+						{% csrf_token %}
 						<div class="row gtr-50 gtr-uniform">
 							<div class="col-12 col-12-mobilep">
 								<input type="email" name="email" id="email" placeholder="Email Address" />
@@ -106,7 +107,7 @@
 								<input type="password" name="password" id="password" placeholder="Password" />
 							</div>
 							<div class="col-8 col-12-mobilep">
-								<input type="password" name="password" id="password" placeholder="Confirm Password" />
+								<input type="password" name="password1" id="password1" placeholder="Confirm Password" />
 							</div>
 							<div class="col-4 col-12-mobilep">
 								<input type="submit" value="Sign Up" class="fit" />

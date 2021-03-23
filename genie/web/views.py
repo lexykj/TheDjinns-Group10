@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from apis.models import Event, ParkingLot, ParkingSpot
+
 
 def home(request):
     return render(request, 'web/signUp.html')
@@ -13,7 +15,7 @@ def loginpage(request):
     return render(request, 'web/login.html')
 
 def signIn(request):
-    if request.user.is_authenicated:
+    if request.user.is_authenticated:
         return redirect('/home')
     if request.method == 'POST':
         username = request.POST['username']
@@ -26,6 +28,31 @@ def signIn(request):
             return render(request, 'web/login.html')
     else:
         return render(request, 'web/login.html')
+
+def signUp(request):
+    if request.user.is_authenticated:
+        return redirect('/home')
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        password1 = request.POST['password1']
+        if password == password1:
+            User.objects.create_user(username=email, password=password)
+            user = authenticate(request, username=email, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('/home')
+            else:
+                return render(request, 'web/signUp.html')
+        else:
+            return render(request, 'web/signUp.html')
+    else:
+        return render(request, 'web/signUp.html')
+
+def signOut(request):
+    logout(request)
+    return redirect('/')
+        
 
 def main(request):
     return render(request, 'web/main.html')
