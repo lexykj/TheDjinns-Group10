@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect 
+from django.contrib.auth import authenticate, login
 from apis.models import Event, ParkingLot, ParkingSpot
 
 def home(request):
@@ -8,8 +9,23 @@ def reserve(request):
     events = Event.objects.order_by('-date')[:4]
     return render(request, 'web/reserveSpot.html', {'events': events})
 
-def login(request):
+def loginpage(request):
     return render(request, 'web/login.html')
+
+def signIn(request):
+    if request.user.is_authenicated:
+        return redirect('/home')
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/home')
+        else:
+            return render(request, 'web/login.html')
+    else:
+        return render(request, 'web/login.html')
 
 def main(request):
     return render(request, 'web/main.html')

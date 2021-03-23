@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib import admin
+from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 
 class Event(models.Model):
@@ -11,11 +13,8 @@ class Event(models.Model):
     def __str__(self) -> str:
         return self.name
 
-class User(models.Model):
-    name = models.CharField(max_length=200)
-    email = models.EmailField(max_length=254)
-    username = models.CharField(max_length=200)
-    password = models.CharField(max_length=200)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     account_balance = models.FloatField(default=100.0)
 
     is_customer = models.BooleanField(default=True)
@@ -35,7 +34,7 @@ class ParkingLot(models.Model):
     longitude = models.FloatField(default=111.809492111206)
 
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE) # must check if user is_owner
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE) # must check if user is_owner
 
     def __str__(self) -> str:
         return self.name
@@ -54,7 +53,10 @@ class Reservation(models.Model):
     uuid = models.IntegerField(default=0)
 
     spot = models.ForeignKey(ParkingSpot, on_delete=models.CASCADE) # no more spots than ParkingSpot.spot
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return str(self.uuid)
+
+# admin.site.unregister(User)
+# admin.site.register(User)

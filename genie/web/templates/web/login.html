@@ -33,7 +33,8 @@
 						<!-- <p>Tell us what you think about our little operation.</p> -->
 					</header>
 					<div class="box">
-						<form method="post" action="#">
+						<form method="post" action={% url "web:signIn" %}>
+							{% csrf_token %}
 							<div class="row gtr-50 gtr-uniform">
 								<div class="col-12">
 									<input type="text" name="username" id="loginUsername" value="" placeholder="Username" />
