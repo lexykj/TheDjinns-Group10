@@ -98,7 +98,7 @@
 										{% for event in events %}
 											<tr>
 												<td>{{ event.name }}</td>
-												<td>{{ event.description|truncatewords:25 }}</td>
+												<td>{{ event.description|truncatewords:8 }}</td>
 												<td>{{ event.date }}</td>
 											</tr>
 										{% endfor %}
