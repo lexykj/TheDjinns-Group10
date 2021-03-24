@@ -5,7 +5,8 @@ from apis.models import Event, ParkingLot, ParkingSpot
 
 
 def home(request):
-    return render(request, 'web/signUp.html')
+    events = Event.objects.order_by('date')[:4]
+    return render(request, 'web/signUp.html', {'events': events})
 
 def reserve(request):
     events = Event.objects.order_by('-date')[:4]
