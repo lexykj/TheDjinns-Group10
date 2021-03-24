@@ -5,6 +5,7 @@ from django.db.models.deletion import CASCADE
 
 class Event(models.Model):
     name = models.CharField(max_length=200)
+    description = models.CharField(max_length=1500)
     date = models.DateTimeField('event date')
     address = models.CharField(max_length=500, blank=True, default='')
     latitude = models.FloatField(default=41.7429795162564)

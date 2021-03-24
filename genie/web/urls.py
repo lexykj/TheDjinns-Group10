@@ -18,4 +18,5 @@ urlpatterns = [
     path('signIn', views.signIn, name='signIn'),
     path('signUp', views.signUp, name='signUp'),
     path('logout', views.signOut, name='logout'),
+    path('map/<int:id>', views.map, name='map')
 ]

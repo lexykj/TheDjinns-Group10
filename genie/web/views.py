@@ -78,3 +78,6 @@ def lots(request):
 
 def info(request):
     return render(request, 'web/lotInfo.html')
+
+def map(request, id):
+    return render(request, 'web/map.html')
