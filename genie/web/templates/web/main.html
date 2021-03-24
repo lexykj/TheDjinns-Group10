@@ -61,63 +61,60 @@
 					<div id="customerFunctions">
 						<h2 style="text-align: center;">Customer Functions</h2>
 						<section class="box special">
-							<header class="major">
-							<h3>Upcoming Utah State Events</h3>
+						<header class="major">
+							<h2>Upcoming Utah State Events</h2>
 							<br />
-							<!-- TODO: add current month -->
-							<h4>INSERT MONTH HERE</h4>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Date/Time</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<!-- TODO: add each event -->
-													<td>MonthEvent 1</td>
-													<td>Description?</td>
-													<td>DATE/TIME</td>
-												</tr>
-												<tr>
-													<td>MonthEvent 2</td>
-													<td>Description?</td>
-													<td>DATE/TIME</td>
-												</tr>
-												<tr>
-													<td>MonthEvent 3</td>
-													<td>Description?</td>
-													<td>DATE/TIME</td>
-												</tr>
-												<tr>
-													<td>MonthEvent 4</td>
-													<td>Description?</td>
-													<td>DATE/TIME</td>
-												</tr>
-												<tr>
-													<td>MonthEvent 5</td>
-													<td>Description?</td>
-													<td>DATE/TIME</td>
-												</tr>
-											</tbody>
-											<!-- <tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot> -->
-										</table>
-									</div>
-						</header>
-						<div class="row">
+							<div id="monthTitle"></div>
+							<script>
+								//Get and display current Month
+								var staticTitle = document.createElement('h4');
+								var d = new Date();
+								var month = new Array();
+								month[0] = "January";
+								month[1] = "February";
+								month[2] = "March";
+								month[3] = "April";
+								month[4] = "May";
+								month[5] = "June";
+								month[6] = "July";
+								month[7] = "August";
+								month[8] = "September";
+								month[9] = "October";
+								month[10] = "November";
+								month[11] = "December";
+								var month = month[d.getMonth()];
+								var titleText = document.createTextNode(month);
+								staticTitle.appendChild(titleText);
+								document.getElementById('monthTitle').insertBefore(staticTitle, document.getElementById('eventTable'));
+							</script>
+							<div id="eventTable" class="table-wrapper">
+									<table>
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Description</th>
+												<th>Date/Time</th>
+											</tr>
+										</thead>
+										<tbody>
+										{% for event in events %}
+											<tr>
+												<td>{{ event.name }}</td>
+												<td>{{ event.description|truncatewords:8 }}</td>
+												<td>{{ event.date }}</td>
+											</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							<div class="row">
 							<ul class="actions special">
 								<li><a href={% url "web:reserve" %} class="button">Reserve a Parking Spot</a></li>
 							</ul>
 						</div>
+						</header>
 					</section>
+
 					<section class="box special">
 
 							<h3>Current Upcoming Reservations</h3>

@@ -57,7 +57,8 @@ def signOut(request):
         
 
 def main(request):
-    return render(request, 'web/main.html')
+    events = Event.objects.order_by('date')[:4]
+    return render(request, 'web/main.html', {'events': events})
 
 def account(request):
     return render(request, 'web/account.html')
