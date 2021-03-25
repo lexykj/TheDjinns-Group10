@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from apis.models import Event, ParkingLot, ParkingSpot
+from apis.models import Event, ParkingLot, ParkingSpot, Reservation
 
 
 def home(request):
@@ -23,6 +23,14 @@ def selectSpot(request):
     spot = ParkingSpot.objects.get(pk=spotId)
     print(event)
     return render(request, 'web/reserveSpot.html', {'event': event, 'lot': lot, 'spot': spot})
+
+def pay(request, eventId, spotId):
+    event = Event.objects.get(pk=eventId)
+    spot = ParkingSpot.objects.get(pk=spotId)
+    user = request.user
+    spot.spots -= 1
+    Reservation.objects.create(uuid=event.id, spot=spot, user=user)
+    return redirect('/home')
 
 def loginpage(request):
     return render(request, 'web/login.html')
