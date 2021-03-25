@@ -71,7 +71,12 @@ def signOut(request):
 
 def main(request):
     events = Event.objects.order_by('date')[:4]
-    return render(request, 'web/main.html', {'events': events})
+    lots = ParkingLot.objects.order_by('id')
+    context = {
+        'events': events,
+        'lots': lots,
+    }
+    return render(request, 'web/main.html', context)
 
 def account(request):
     return render(request, 'web/account.html')

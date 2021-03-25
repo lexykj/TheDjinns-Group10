@@ -28,7 +28,6 @@
 					<h1>Big Blue's Parking Genie</h1>
 					<nav id="nav">
 						<ul>
-							<!-- TODO: add links to main and account -->
 							<li><a href={% url "web:main" %}>Home</a></li>
 							<li><a href={% url "web:account" %} class="button">My Account</a></li>
 							<li><a href={% url "web:logout" %} class="button">Log Out</a></li>
@@ -50,6 +49,7 @@
 										{% csrf_token %}
 										<div class="row gtr-uniform gtr-50">
 											<div class="col-12">
+
 												<select name="eventCategory" id="category">
 													{% if events %}
 														<option value="">- Select Event -</option>
@@ -60,11 +60,14 @@
 													{% if event %}
 														<option value=''>{{event.name}} - {{event.description}}</option>
 													{% endif %}
+
+
 												</select>
 											</div>
 											<div class="col-12">
 												<h5><a href="map.html">See map of available lots</a></h5>
 											</div>
+
 											<div class="col-12" id="newDiv">
 												<select name="lotCategory" id="category">
 													{% if lots %}
