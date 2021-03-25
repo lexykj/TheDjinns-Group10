@@ -51,7 +51,7 @@
 												<select name="category" id="eventCategory">
 													<option value="">Select an Event</option>
 													{% for event in events %}
-														<option value="{{ event.id }}">{{ event.name }}</option>
+														<option value="{{ event.id }}">{{ event.name }}  |  {{ event.date }}</option>
 													{% endfor %}
 												</select>
 											</div>
