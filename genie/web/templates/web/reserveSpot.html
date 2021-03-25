@@ -46,89 +46,105 @@
 						<!-- Form -->
 								<section class="box">
 									<h3>Just tell us a little about the parking you're looking for...</h3>
-									<form method="post" action="#">
+									<form method="get" action={% url "web:selectSpot" %}>
+										{% csrf_token %}
 										<div class="row gtr-uniform gtr-50">
 											<div class="col-12">
-												<select name="category" id="category">
-													<option value="">- Select Event -</option>
-													<option value="1">{{ events.0.name }}</option>
-													<option value="1">{{ events.1.name }}</option>
-													<option value="1">{{ events.2.name }}</option>
-													<option value="1">{{ events.3.name }}</option>
+												<select name="eventCategory" id="category">
+													{% if events %}
+														<option value="">- Select Event -</option>
+														{% for event in events %}
+															<option value={{event.id}}>{{ event.name }} - {{event.description}}</option>
+														{% endfor %}
+													{% endif %}
+													{% if event %}
+														<option value=''>{{event.name}} - {{event.description}}</option>
+													{% endif %}
 												</select>
 											</div>
 											<div class="col-12">
 												<h5><a href="map.html">See map of available lots</a></h5>
 											</div>
-											<div class="col-12">
-												<select name="category" id="category">
-													<option value="">- Select Lot -</option>
-													<!--TODO: Add lot variables-->
-													<option value="1">1</option>
-													<option value="1">2</option>
-													<option value="1">3</option>
-													<option value="1">4</option>
+											<div class="col-12" id="newDiv">
+												<select name="lotCategory" id="category">
+													{% if lots %}
+														<option value="">- Select Lot -</option>
+														{% for lot in lots %}
+															<option value={{lot.id}}>{{ lot.name }} - {{lot.address}}</option>
+														{% endfor %}
+													{% endif %}
+													{% if lot %}
+														<option value=''>{{ lot.name }} - {{lot.address}}</option>
+													{% endif %}
 												</select>
 											</div>
 											<div class="col-12">
-												<select name="category" id="category">
-													<option value="">- Select Parking Type -</option>
-													<!--TODO: Add spot variables-->
-													<option value="1">1</option>
-													<option value="1">2</option>
-													<option value="1">3</option>
-													<option value="1">4</option>
+												<select name="spotCategory" id="category">
+													{% if spots %}
+														<option value="">- Select Parking Type -</option>
+														{% for spot in spots %}
+															<option value={{spot.id}}>{{ spot.spotType }}</option>
+														{% endfor %}
+													{% endif %}
+													{% if spot %}
+														<option>{{spot.spotType}}</option>
+													{% endif %}
 												</select>
 											</div>
-											<div class="row">
-												<div class="col-12">
-													<!-- Table -->
-													<section class="box">
-													<h3>Reservation Details</h3>
-														<div class="table-wrapper">
-															<table>
-																<thead>
-																	<tr>
-																		<th>Parking Lot</th>
-																		<th>Type</th>
-																		<th>Reserved Hours</th>
-																		<th>Price</th>
-																	</tr>
-																</thead>
-																<tbody>
-																	<tr>
-																		<!-- TODO: change lot, type, hours, and price to variables-->
-																		<td><a href='#'>Lot</a></td> <!-- Link to lot map page here -->
-																		<td>Type</td>
-																		<td>Reserved Hours</td>
-																		<td>Subtotal Price</td>
-																	</tr>
-																</tbody>
-																<tfoot>
-																	<tr>
-																		<td colspan="3"></td>
-																		<!-- TODO: total price variable-->
-																		<td>Total Price</td>
-																	</tr>
-																</tfoot>
-															</table>
-														</div>
+											<div class="col-3 col-12">
+												<input type="submit" value="Select" class="fit" />
+											</div>
+										</div>
+									</form>
+									{% if event and lot and spot %}
+										<form>
+											<div>
+												<div class="row">
+													<div class="col-12">
+														<!-- Table -->
+														<section class="box">
+														<h3>Reservation Details</h3>
+															<div class="table-wrapper">
+																<table>
+																	<thead>
+																		<tr>
+																			<th>Parking Lot</th>
+																			<th>Type</th>
+																			<th>Reserved Hours</th>
+																			<th>Price</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+																			<td><a href='#'>{{lot}}</a></td> <!-- Link to lot map page here -->
+																			<td>{{spot.spotType}}</td>
+																			<td>{{event.date}}</td>
+																			<td>{{spot.price}}</td>
+																		</tr>
+																	</tbody>
+																	<tfoot>
+																		<tr>
+																			<td colspan="3"></td>
+																			<td><b>{{spot.price}}</b></td>
+																		</tr>
+																	</tfoot>
+																</table>
+															</div>
+													</div>
 												</div>
 											</div>
-										</div>
-									</form>
-
-									<form method="post" action="#">
-										<div class="row gtr-uniform gtr-50">
-											<div class="col-5 col-6-mobilep">
-												<!-- TODO: price variablel-->
-												<h3>Total: Price</h3>
+										</form>
+										<form method="post" action="#">
+											<div class="row gtr-uniform gtr-50">
+												<div class="col-5 col-6-mobilep">
+													<h3>Total: {{spot.price}}</h3>
+												</div>
+												<div class="col-3 col-12-mobilep">
+													<input type="submit" value="Pay and Reserve" class="fit" />
+												</div>
 											</div>
-											<div class="col-3 col-12-mobilep">
-												<input type="submit" value="Pay and Reserve" class="fit" />
-											</div>
-										</div>
-									</form>
+										</form>
+									{% endif %}
 								</section>
 					</div>
 				</section>
