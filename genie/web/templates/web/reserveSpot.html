@@ -100,7 +100,8 @@
 										</div>
 									</form>
 									{% if event and lot and spot %}
-										<form>
+										<form method="post" action={% url 'web:pay' event.id spot.id %}>
+											{% csrf_token %}
 											<div>
 												<div class="row">
 													<div class="col-12">
@@ -119,9 +120,9 @@
 																	</thead>
 																	<tbody>
 																		<tr>
-																			<td><a href='#'>{{lot}}</a></td> <!-- Link to lot map page here -->
-																			<td>{{spot.spotType}}</td>
-																			<td>{{event.date}}</td>
+																			<td name='lot' value='{{lot.id}}'><a href='#'>{{lot}}</a></td> <!-- Link to lot map page here -->
+																			<td name='spotId' value='{{spot.id}}'>{{spot.spotType}}</td>
+																			<td name='eventId'>{{event.date}}</td>
 																			<td>{{spot.price}}</td>
 																		</tr>
 																	</tbody>
@@ -136,8 +137,6 @@
 													</div>
 												</div>
 											</div>
-										</form>
-										<form method="post" action="#">
 											<div class="row gtr-uniform gtr-50">
 												<div class="col-5 col-6-mobilep">
 													<h3>Total: {{spot.price}}</h3>
