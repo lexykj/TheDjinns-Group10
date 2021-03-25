@@ -29,6 +29,9 @@ def pay(request, eventId, spotId):
     spot = ParkingSpot.objects.get(pk=spotId)
     user = request.user
     spot.spots -= 1
+    spot.save()
+    user.profile.account_balance -= spot.price
+    user.profile.save()
     Reservation.objects.create(uuid=event.id, spot=spot, user=user)
     return redirect('/home')
 
