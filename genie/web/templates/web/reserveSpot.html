@@ -28,7 +28,6 @@
 					<h1>Big Blue's Parking Genie</h1>
 					<nav id="nav">
 						<ul>
-							<!-- TODO: add links to main and account -->
 							<li><a href={% url "web:main" %}>Home</a></li>
 							<li><a href={% url "web:account" %} class="button">My Account</a></li>
 							<li><a href={% url "web:logout" %} class="button">Log Out</a></li>
@@ -49,29 +48,26 @@
 									<form method="post" action="#">
 										<div class="row gtr-uniform gtr-50">
 											<div class="col-12">
-												<select name="category" id="category">
-													<option value="">- Select Event -</option>
-													<option value="1">{{ events.0.name }}</option>
-													<option value="1">{{ events.1.name }}</option>
-													<option value="1">{{ events.2.name }}</option>
-													<option value="1">{{ events.3.name }}</option>
+												<select name="category" id="eventCategory">
+													<option value="">Select an Event</option>
+													{% for event in events %}
+														<option value="{{ event.id }}">{{ event.name }}</option>
+													{% endfor %}
 												</select>
 											</div>
 											<div class="col-12">
 												<h5><a href="map.html">See map of available lots</a></h5>
 											</div>
 											<div class="col-12">
-												<select name="category" id="category">
-													<option value="">- Select Lot -</option>
-													<!--TODO: Add lot variables-->
-													<option value="1">1</option>
-													<option value="1">2</option>
-													<option value="1">3</option>
-													<option value="1">4</option>
+												<select name="category" id="lotCategory">
+													<option value="">Select a Lot</option>
+													{% for lot in lots %}
+														<option value="{{ lot.id }}">{{ lot.name }}</option>
+													{% endfor %}
 												</select>
 											</div>
 											<div class="col-12">
-												<select name="category" id="category">
+												<select name="category" id="parkingCategory">
 													<option value="">- Select Parking Type -</option>
 													<!--TODO: Add spot variables-->
 													<option value="1">1</option>
@@ -97,8 +93,7 @@
 																</thead>
 																<tbody>
 																	<tr>
-																		<!-- TODO: change lot, type, hours, and price to variables-->
-																		<td><a href='#'>Lot</a></td> <!-- Link to lot map page here -->
+																		<td><a href='{% url "web:lot-info" %}'>Lot</a></td> <!-- Link to lot map page here -->
 																		<td>Type</td>
 																		<td>Reserved Hours</td>
 																		<td>Subtotal Price</td>
