@@ -10,7 +10,12 @@ def home(request):
 
 def reserve(request):
     events = Event.objects.order_by('-date')[:4]
-    return render(request, 'web/reserveSpot.html', {'events': events})
+    lots = ParkingLot.objects.order_by('id')
+    context = {
+                'events': events,
+                'lots': lots,
+               }
+    return render(request, 'web/reserveSpot.html', context)
 
 def loginpage(request):
     return render(request, 'web/login.html')
