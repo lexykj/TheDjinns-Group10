@@ -10,12 +10,19 @@ def home(request):
 
 def reserve(request):
     events = Event.objects.order_by('-date')[:4]
-    lots = ParkingLot.objects.order_by('id')
-    context = {
-                'events': events,
-                'lots': lots,
-               }
-    return render(request, 'web/reserveSpot.html', context)
+    lots = ParkingLot.objects.order_by('name')
+    spots = ParkingSpot.objects.order_by('price')
+    return render(request, 'web/reserveSpot.html', {'events': events, 'lots': lots, 'spots': spots})
+
+def selectSpot(request):
+    eventId = request.GET['eventCategory']
+    event = Event.objects.get(pk=eventId)
+    lotId = request.GET['lotCategory']
+    lot = ParkingLot.objects.get(pk=lotId)
+    spotId = request.GET['spotCategory']
+    spot = ParkingSpot.objects.get(pk=spotId)
+    print(event)
+    return render(request, 'web/reserveSpot.html', {'event': event, 'lot': lot, 'spot': spot})
 
 def loginpage(request):
     return render(request, 'web/login.html')
