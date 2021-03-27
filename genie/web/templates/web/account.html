@@ -46,23 +46,27 @@
 								<span class="icon solid major fa-cloud accent4"></span>
 								<h3>Essentials</h3>
 								<!-- TODO: add user email-->
-								<h4>Email: Email</h4>
-								<form>
+								<h4>Email: {{email}}</h4>
+								<form method="post" action={% url 'web:change-password' %}>
+									{% csrf_token %}
 									<div class="row gtr-50 gtr-uniform">
 										<div class="col-12 col-12-mobilep">
-											<input type="password" name="password" id="oldPass" placeholder="Old Password" />
+											<input type="password" name="oldPass" id="oldPassword" placeholder="Old Password" />
 										</div>
 										<div class="col-12 col-12-mobilep">
-											<input type="password" name="password" id="newPass" placeholder="New Password" />
+											<input type="password" name="newPass" id="newPassword" placeholder="New Password" />
 										</div>
 										<div class="col-6 col-12-mobilep">
-											<input type="password" name="password" id="confNewPass" placeholder="Confirm New Password" />
+											<input type="password" name="confNewPass" id="confNewPassword" placeholder="Confirm New Password" />
 										</div>
 										<div class="col-6 col-12-mobilep">
 											<input type="submit" value="Change Password" class="fit" />
 										</div>
 									</div>
 								</form>
+								{% if message != '' %}
+									<p style="color: red;">{{message}}</p>
+								{% endif %}
 							</section>
 							<section>
 								<span class="icon solid major fa-lock accent5"></span>
@@ -71,9 +75,10 @@
 									<br />
 									<div class="col-12 col-12-mobilep">
 										<!--TODO: add user balance-->
-										<h4>Current Balance: Balance</h4>
+										<h4>Current Balance: ${{balance}}0</h4>
 									</div>
-									<form>
+									<form method="post" action={% url 'web:balance' %}>
+										{% csrf_token %}
 										<div class="row gtr-50 gtr-uniform">
 											<div class="col-6 col-12-mobilep">
 												<input type="text" name="addFunds" id="addFunds" placeholder="Enter Amount" />
@@ -102,13 +107,11 @@
 								<h3>Usage</h3>
 								<h4>Previous Reservations</h4>
 								<ul class="alt">
-									<!-- TODO: add reservations -->
-									<li>Date, Parking Lot X, Type Y, ID, Price</li>
-									<li>Date, Parking Lot X, Type Y, ID, Price</li>
-									<li>Date, Parking Lot X, Type Y, ID, Price</li>
-									<li>Date, Parking Lot X, Type Y, ID, Price</li>
+									{% for r in reservations %}
+										<li>{{r.event.date}}, {{r.spot.lot}}, {{r.spot.spotType}}, {{r.spot.price}}</li>
+									{% endfor %}
 								</ul>
-								<p><a href="pastReservations.html">See all past reservations...</a></p>
+								<p><a href={% url "web:history" %}>See all past reservations...</a></p>
 							</section>
 						</div>
 					</section>
