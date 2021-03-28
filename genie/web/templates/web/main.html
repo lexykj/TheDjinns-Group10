@@ -56,189 +56,199 @@
 						</header>
 					</section>
 
-					<!-- Customer Functionality -->
-					<br />
-					<div id="customerFunctions">
-						<h2 style="text-align: center;">Customer Functions</h2>
-						<section class="box special">
-						<header class="major">
-							<h2>Upcoming Utah State Events</h2>
+					{% for profile in profile %}
+						<!-- Customer Functionality -->
+						{% if profile.is_customer %}
 							<br />
-							<div id="monthTitle"></div>
-							<script>
-								//Get and display current Month
-								var staticTitle = document.createElement('h4');
-								var d = new Date();
-								var month = new Array();
-								month[0] = "January";
-								month[1] = "February";
-								month[2] = "March";
-								month[3] = "April";
-								month[4] = "May";
-								month[5] = "June";
-								month[6] = "July";
-								month[7] = "August";
-								month[8] = "September";
-								month[9] = "October";
-								month[10] = "November";
-								month[11] = "December";
-								var month = month[d.getMonth()];
-								var titleText = document.createTextNode(month);
-								staticTitle.appendChild(titleText);
-								document.getElementById('monthTitle').insertBefore(staticTitle, document.getElementById('eventTable'));
-							</script>
-							<div id="eventTable" class="table-wrapper">
-									<table>
-										<thead>
-											<tr>
-												<th>Name</th>
-												<th>Description</th>
-												<th>Date/Time</th>
-											</tr>
-										</thead>
-										<tbody>
-										{% for event in events %}
-											<tr>
-												<td>{{ event.name }}</td>
-												<td>{{ event.description|truncatewords:8 }}</td>
-												<td>{{ event.date }}</td>
-											</tr>
-										{% endfor %}
-										</tbody>
-									</table>
-								</div>
-							<div class="row">
-							<ul class="actions special">
-								<li><a href={% url "web:reserve" %} class="button">Reserve a Parking Spot</a></li>
-							</ul>
-						</div>
-						</header>
-					</section>
-
-					<section class="box special">
-
-							<h3>Current Upcoming Reservations</h3>
-							<ul class="alt">
-								<li>
-									<div class="row">
-										<a href="#" class="button alt col-4">Reservation 1</a>
-										<p class="col-4"><a href="map.html">View Map</a></p>
-										<p class="col-4"><a href="">Reservation Code</a></p>
-									</div>
-								</li>
-							</ul>
-
-							<h3>Previous Reservations</h3>
-							<ul class="alt">
-								<li>
-									<div class="row">
-										<a href="#" class="button alt col-4">Reservation 1</a>
-										<p class="col-4"><a href="map.html">View Map</a></p>
-										<p class="col-4"><a href="">Reservation Code</a></p>
-									</div>
-								</li>
-								<li>
-									<div class="row">
-										<a href="#" class="button alt col-4">Reservation 2</a>
-										<p class="col-4"><a href="map.html">View Map</a></p>
-										<p class="col-4"><a href="">Reservation Code</a></p>
-									</div>
-								</li>
-								<li>
-									<div class="row">
-										<a href="#" class="button alt col-4">Reservation 3</a>
-										<p class="col-4"><a href="map.html">View Map</a></p>
-										<p class="col-4"><a href="">Reservation Code</a></p>
-									</div>
-								</li>
-								<li><a href={% url "web:history" %} class="button special fit">See all past reservations</a></li>
-							</ul>
-						</section>
-					</div>
-
-					<!-- Attendant Functionality -->
-					<div id="attendantFunctions">
-						<h2 style="text-align: center;">Attendant Functions</h2>
-						<section class="box special">
-								<span class="image featured"><img src={% static "web/images/checkIn.jpg" %} alt="" /></span>
-								<h3>Check In Customers</h3>
-								<div class="col-12">
-									<select name="category" id="category">
-										<option value="">Select Event</option>
-										<!-- TODO: add events -->
-										{% for event in events %}
-											<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
-										{% endfor %}
-									</select>
-								</div>
-								<br />
-								<ul class="actions special">
-									<li><a href={% url "web:attendant" %} class="button special">Fill Event Reservations</a></li>
-								</ul>
-						</section>
-					</div>
-
-					<!-- Owner Functionality -->
-					<div id="ownerFunctions">
-						<h2 style="text-align: center;">Lot Owner Functions</h2>
-						<div class="row">
-							<div class="col-6 col-12-narrower">
-
+							<div id="customerFunctions">
+								<h2 style="text-align: center;">Customer Functions</h2>
 								<section class="box special">
-									<span class="image featured"><img src={% static "web/images/parkingGarage2.jpg" %} alt="" /></span>
-									<h3>Manage my Parking Lots</h3>
-									<p>Assign new attendants; manage parking types and prices.</p>
+								<header class="major">
+									<h2>Upcoming Utah State Events for {{ profile }}</h2>
+									<br />
+									<div id="monthTitle"></div>
+									<script>
+										//Get and display current Month
+										var staticTitle = document.createElement('h4');
+										var d = new Date();
+										var month = new Array();
+										month[0] = "January";
+										month[1] = "February";
+										month[2] = "March";
+										month[3] = "April";
+										month[4] = "May";
+										month[5] = "June";
+										month[6] = "July";
+										month[7] = "August";
+										month[8] = "September";
+										month[9] = "October";
+										month[10] = "November";
+										month[11] = "December";
+										var month = month[d.getMonth()];
+										var titleText = document.createTextNode(month);
+										staticTitle.appendChild(titleText);
+										document.getElementById('monthTitle').insertBefore(staticTitle, document.getElementById('eventTable'));
+									</script>
+									<div id="eventTable" class="table-wrapper">
+											<table>
+												<thead>
+													<tr>
+														<th>Name</th>
+														<th>Description</th>
+														<th>Date/Time</th>
+													</tr>
+												</thead>
+												<tbody>
+												{% for event in events %}
+													<tr>
+														<td>{{ event.name }}</td>
+														<td>{{ event.description|truncatewords:8 }}</td>
+														<td>{{ event.date }}</td>
+													</tr>
+												{% endfor %}
+												</tbody>
+											</table>
+										</div>
+									<div class="row">
 									<ul class="actions special">
-										<li><a href={% url "web:lots" %} class="button special">See my parking lots</a></li>
+										<li><a href={% url "web:reserve" %} class="button">Reserve a Parking Spot</a></li>
+									</ul>
+								</div>
+								</header>
+							</section>
+
+							<section class="box special">
+
+									<h3>Current Upcoming Reservations</h3>
+									<ul class="alt">
+										<li>
+											<div class="row">
+												<a href="#" class="button alt col-4">Reservation 1</a>
+												<p class="col-4"><a href="map.html">View Map</a></p>
+												<p class="col-4"><a href="">Reservation Code</a></p>
+											</div>
+										</li>
+									</ul>
+
+									<h3>Previous Reservations</h3>
+									<ul class="alt">
+										<li>
+											<div class="row">
+												<a href="#" class="button alt col-4">Reservation 1</a>
+												<p class="col-4"><a href="map.html">View Map</a></p>
+												<p class="col-4"><a href="">Reservation Code</a></p>
+											</div>
+										</li>
+										<li>
+											<div class="row">
+												<a href="#" class="button alt col-4">Reservation 2</a>
+												<p class="col-4"><a href="map.html">View Map</a></p>
+												<p class="col-4"><a href="">Reservation Code</a></p>
+											</div>
+										</li>
+										<li>
+											<div class="row">
+												<a href="#" class="button alt col-4">Reservation 3</a>
+												<p class="col-4"><a href="map.html">View Map</a></p>
+												<p class="col-4"><a href="">Reservation Code</a></p>
+											</div>
+										</li>
+										<li><a href={% url "web:history" %} class="button special fit">See all past reservations</a></li>
 									</ul>
 								</section>
-
 							</div>
-							<div class="col-6 col-12-narrower">
+						{% endif %}
 
-								<section class="box special">
-									<span class="image featured"><img src={% static "web/images/sunset.jpg" %} alt="" /></span>
-									<h3>View current lot reservations</h3>
+					<!-- Attendant Functionality -->
+					{% if profile.is_attendant %}
+						<div id="attendantFunctions">
+							<h2 style="text-align: center;">Attendant Functions</h2>
+							<section class="box special">
+									<span class="image featured"><img src={% static "web/images/checkIn.jpg" %} alt="" /></span>
+									<h3>Check In Customers</h3>
 									<div class="col-12">
-										<select name="category" id="eventOwnerCategory">
+										<select name="category" id="category">
 											<option value="">Select Event</option>
+											<!-- TODO: add events -->
 											{% for event in events %}
 												<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
-											{% endfor %}
-										</select>
-										<br />
-										<select name="category" id="lotOwnerCategory">
-											<option value="">Select Parking Lot</option>
-											{% for lot in lots %}
-												<option value="{{ lot.id }}">{{ lot.name }}</option>
 											{% endfor %}
 										</select>
 									</div>
 									<br />
 									<ul class="actions special">
-										<li><a href="#" class="button special">View Lot Reservations</a></li>
+										<li><a href={% url "web:attendant" %} class="button special">Fill Event Reservations</a></li>
 									</ul>
-								</section>
+							</section>
+						</div>
+					{% endif %}
 
+					<!-- Owner Functionality -->
+					{% if profile.is_owner %}
+						<div id="ownerFunctions">
+							<h2 style="text-align: center;">Lot Owner Functions</h2>
+							<div class="row">
+								<div class="col-6 col-12-narrower">
+
+									<section class="box special">
+										<span class="image featured"><img src={% static "web/images/parkingGarage2.jpg" %} alt="" /></span>
+										<h3>Manage my Parking Lots</h3>
+										<p>Assign new attendants; manage parking types and prices.</p>
+										<ul class="actions special">
+											<li><a href={% url "web:lots" %} class="button special">See my parking lots</a></li>
+										</ul>
+									</section>
+
+								</div>
+								<div class="col-6 col-12-narrower">
+
+									<section class="box special">
+										<span class="image featured"><img src={% static "web/images/sunset.jpg" %} alt="" /></span>
+										<h3>View current lot reservations</h3>
+										<div class="col-12">
+											<select name="category" id="eventOwnerCategory">
+												<option value="">Select Event</option>
+												{% for event in events %}
+													<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
+												{% endfor %}
+											</select>
+											<br />
+											<select name="category" id="lotOwnerCategory">
+												<option value="">Select Parking Lot</option>
+												{% for lot in lots %}
+													<option value="{{ lot.id }}">{{ lot.name }}</option>
+												{% endfor %}
+											</select>
+										</div>
+										<br />
+										<ul class="actions special">
+											<li><a href="#" class="button special">View Lot Reservations</a></li>
+										</ul>
+									</section>
+
+								</div>
 							</div>
 						</div>
-					</div>
+					{% endif %}
+
 
 					<!-- University Admin Functionality -->
-					<div id="adminFunctions">
-						<h2 style="text-align: center;">University Admin Functions</h2>
-						<section class="box special">
-								<span class="image featured"><img src={% static "web/images/desk.jpg" %} alt="" /></span>
-								<h3>Manage Upcoming USU Events</h3>
-								<ul class="actions special">
-									<li><a href="eventManagement.html" class="button special">See All</a></li>
-								</ul>
-								<h3>Manage Parking Lot Owners</h3>
-								<ul class="actions special">
-									<li><a href="ownerManagement.html" class="button special">See All</a></li>
-								</ul>
-						</section>
-					</div>
+					{% if profile.is_admin %}
+						<div id="adminFunctions">
+							<h2 style="text-align: center;">University Admin Functions</h2>
+							<section class="box special">
+									<span class="image featured"><img src={% static "web/images/desk.jpg" %} alt="" /></span>
+									<h3>Manage Upcoming USU Events</h3>
+									<ul class="actions special">
+										<li><a href="eventManagement.html" class="button special">See All</a></li>
+									</ul>
+									<h3>Manage Parking Lot Owners</h3>
+									<ul class="actions special">
+										<li><a href="ownerManagement.html" class="button special">See All</a></li>
+									</ul>
+							</section>
+						</div>
+					{% endif %}
 					
 
 				</section>
@@ -252,6 +262,9 @@
 					<a href="account.html" class="button alt">My Account</a>
 
 				</section>
+
+				{% endfor %}
+
 
 			<!-- Footer -->
 				<footer id="footer">

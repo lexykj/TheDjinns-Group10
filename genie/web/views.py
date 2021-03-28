@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from apis.models import Event, ParkingLot, ParkingSpot, Reservation
+from apis.models import Event, ParkingLot, ParkingSpot, Reservation, Profile
 
 
 def home(request):
@@ -82,9 +82,11 @@ def signOut(request):
 def main(request):
     events = Event.objects.order_by('date')[:4]
     lots = ParkingLot.objects.order_by('id')
+    profile = Profile.objects.all()
     context = {
         'events': events,
         'lots': lots,
+        'profile': profile,
     }
     return render(request, 'web/main.html', context)
 
