@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from apis.models import Event, ParkingLot, ParkingSpot, Reservation, Profile
+
 import random
 import string
 
@@ -114,9 +115,13 @@ def signOut(request):
 def main(request):
     events = Event.objects.order_by('date')[:4]
     lots = ParkingLot.objects.order_by('id')
+    user = request.user
+    thisProfile = Profile.objects.get(user_id=user.id)
     context = {
         'events': events,
         'lots': lots,
+        'user': user,
+        'profile': thisProfile,
     }
     return render(request, 'web/main.html', context)
 
