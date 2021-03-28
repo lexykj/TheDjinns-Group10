@@ -10,7 +10,7 @@ class Event(models.Model):
     date = models.DateTimeField('event date')
     address = models.CharField(max_length=500, blank=True, default='')
     latitude = models.FloatField(default=41.7429795162564)
-    longitude = models.FloatField(default=111.809492111206)
+    longitude = models.FloatField(default=-111.809492111206)
 
     def __str__(self) -> str:
         return self.name
@@ -33,7 +33,7 @@ class ParkingLot(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=500, blank=True, default='')
     latitude = models.FloatField(default=41.7429795162564)
-    longitude = models.FloatField(default=111.809492111206)
+    longitude = models.FloatField(default=-111.809492111206)
 
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     owner = models.ForeignKey(User, on_delete=models.CASCADE) # must check if user is_owner
