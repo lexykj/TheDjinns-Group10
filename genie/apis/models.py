@@ -54,7 +54,7 @@ class ParkingSpot(models.Model):
 class Reservation(models.Model):
     uuid = models.CharField(max_length=200)
 
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, default=1)
     spot = models.ForeignKey(ParkingSpot, on_delete=models.CASCADE) # no more spots than ParkingSpot.spot
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
