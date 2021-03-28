@@ -5,11 +5,17 @@ from apis.models import Event, ParkingLot, ParkingSpot
 
 
 def home(request):
-    return render(request, 'web/signUp.html')
+    events = Event.objects.order_by('date')[:4]
+    return render(request, 'web/signUp.html', {'events': events})
 
 def reserve(request):
     events = Event.objects.order_by('-date')[:4]
-    return render(request, 'web/reserveSpot.html', {'events': events})
+    lots = ParkingLot.objects.order_by('id')
+    context = {
+                'events': events,
+                'lots': lots,
+               }
+    return render(request, 'web/reserveSpot.html', context)
 
 def loginpage(request):
     return render(request, 'web/login.html')
@@ -56,7 +62,13 @@ def signOut(request):
         
 
 def main(request):
-    return render(request, 'web/main.html')
+    events = Event.objects.order_by('date')[:4]
+    lots = ParkingLot.objects.order_by('id')
+    context = {
+        'events': events,
+        'lots': lots,
+    }
+    return render(request, 'web/main.html', context)
 
 def account(request):
     return render(request, 'web/account.html')
@@ -80,4 +92,5 @@ def info(request):
     return render(request, 'web/lotInfo.html')
 
 def map(request, id):
-    return render(request, 'web/map.html')
+    event = Event.objects.all().get(id)
+    return render(request, 'web/map.html', {'event': event})

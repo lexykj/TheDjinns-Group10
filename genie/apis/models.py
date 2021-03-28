@@ -5,7 +5,7 @@ from django.db.models.deletion import CASCADE
 
 class Event(models.Model):
     name = models.CharField(max_length=200)
-    description = models.CharField(max_length=1500)
+    description = models.CharField(max_length=1500, default='')
     date = models.DateTimeField('event date')
     address = models.CharField(max_length=500, blank=True, default='')
     latitude = models.FloatField(default=41.7429795162564)
@@ -26,7 +26,7 @@ class Profile(models.Model):
     attendant_for = models.ManyToManyField('ParkingLot', blank=True) # must check if is attendant
 
     def __str__(self) -> str:
-        return self.name
+        return self.user.username
 
 class ParkingLot(models.Model):
     name = models.CharField(max_length=200)
