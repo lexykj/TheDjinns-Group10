@@ -115,11 +115,13 @@ def signOut(request):
 def main(request):
     events = Event.objects.order_by('date')[:4]
     lots = ParkingLot.objects.order_by('id')
-    profile = Profile.objects.all()
+    user = request.user
+    thisProfile = Profile.objects.get(user_id=user.id)
     context = {
         'events': events,
         'lots': lots,
-        'profile': profile,
+        'user': user,
+        'profile': thisProfile,
     }
     return render(request, 'web/main.html', context)
 
