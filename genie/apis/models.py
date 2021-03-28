@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
+import uuid
 
 class Event(models.Model):
     name = models.CharField(max_length=200)
@@ -51,8 +52,9 @@ class ParkingSpot(models.Model):
         return self.spotType
 
 class Reservation(models.Model):
-    uuid = models.IntegerField(default=0)
+    uuid = models.CharField(max_length=200)
 
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
     spot = models.ForeignKey(ParkingSpot, on_delete=models.CASCADE) # no more spots than ParkingSpot.spot
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
