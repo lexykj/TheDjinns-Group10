@@ -165,5 +165,5 @@ def info(request):
     return render(request, 'web/lotInfo.html')
 
 def map(request, id):
-    event = Event.objects.all().get(id)
+    event = Event.objects.all().get(id=id)
     return render(request, 'web/map.html', {'event': event})

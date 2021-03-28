@@ -21,8 +21,9 @@
 		<!-- The following tags are taken straight from the high fidelity prototype -->
 		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 	    {% load static %}
-	    <link rel="stylesheet" type="text/css" href={% static 'maps/style.css' %} />
-	    <script src="{% static 'web/assets/js/map.js' %}"></script>
+	    <link rel="stylesheet" type="text/css" href={% static "web/assets/css/main.css" %} />
+	    
+		<script src={% static "web/assets/js/map.js" %}></script>
 	</head>
 	<body class="is-preload">
 		<div id="page-wrapper">
@@ -42,17 +43,11 @@
 			<!-- Main -->
 				<section id="main" class="container">
 					<header>
-<<<<<<< HEAD
-						<h2>Available Lots for 1</h2>
-						<p>add event info</p>
-=======
 						<h2>Available Lots for {{ event.name }}</h2>
 						<p>{{ event.description }}</p>
->>>>>>> c5e6da76c7670ef97bdb281a440aecf88b5379ab
 					</header>
 					<div class="box">
-						<h3>Map to display below</h3>
-						<div id="map"></div>
+						<div id="map" eventid={{ event.id }} style="height:800px; width:100%;"></div>
 
 					    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 					    <script
@@ -80,13 +75,12 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
+			<script src={% static "web/assets/js/jquery.min.js" %}></script>
+			<script src={% static "web/assets/js/jquery.dropotron.min.js" %}></script>
+			<script src={% static "web/assets/js/jquery.scrollex.min.js" %}></script>
+			<script src={% static "web/assets/js/browser.min.js" %}></script>
+			<script src={% static "web/assets/js/breakpoints.min.js" %}></script>
+			<script src={% static "web/assets/js/util.js" %}></script>
+			<script src={% static "web/assets/js/main.js" %}></script>
 	</body>
 </html>

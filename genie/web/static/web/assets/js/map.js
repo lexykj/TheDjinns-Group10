@@ -1,4 +1,6 @@
-let map;    
+let map;
+
+event_id = document.getElementById("map");
 
 function initMap() {
     const Maverik = { lat: 41.752074, lng: -111.812874 };
