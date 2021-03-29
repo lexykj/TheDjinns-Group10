@@ -121,38 +121,28 @@
 
 							<h3>Current Upcoming Reservations</h3>
 							<ul class="alt">
-								<li>
-									<div class="row">
-										<a href="#" class="button alt col-4">Reservation 1</a>
-										<p class="col-4"><a href="map.html">View Map</a></p>
-										<p class="col-4"><a href="">Reservation Code</a></p>
-									</div>
-								</li>
+								{% for reservation in allReservations %}
+									<li>
+										<div class="row">
+											<a href="#" class="button alt col-4">{{ reservation.event }}</a>
+											<p class="col-4"><a href="map.html">View Map</a></p>
+											<p class="col-4"><a href="">Reservation Code</a></p>
+										</div>
+									</li>
+								{% endfor %}
 							</ul>
 
 							<h3>Previous Reservations</h3>
 							<ul class="alt">
-								<li>
-									<div class="row">
-										<a href="#" class="button alt col-4">Reservation 1</a>
-										<p class="col-4"><a href="map.html">View Map</a></p>
-										<p class="col-4"><a href="">Reservation Code</a></p>
-									</div>
-								</li>
-								<li>
-									<div class="row">
-										<a href="#" class="button alt col-4">Reservation 2</a>
-										<p class="col-4"><a href="map.html">View Map</a></p>
-										<p class="col-4"><a href="">Reservation Code</a></p>
-									</div>
-								</li>
-								<li>
-									<div class="row">
-										<a href="#" class="button alt col-4">Reservation 3</a>
-										<p class="col-4"><a href="map.html">View Map</a></p>
-										<p class="col-4"><a href="">Reservation Code</a></p>
-									</div>
-								</li>
+								{% for reservation in allReservations %}
+									<li>
+										<div class="row">
+											<a href="#" class="button alt col-4">{{ reservation.event }}</a>
+											<p class="col-4"><a href="map.html">View Map</a></p>
+											<p class="col-4"><a href="">Reservation Code</a></p>
+										</div>
+									</li>
+								{% endfor %}
 								<li><a href={% url "web:history" %} class="button special fit">See all past reservations</a></li>
 							</ul>
 						</section>

@@ -117,11 +117,13 @@ def main(request):
     lots = ParkingLot.objects.order_by('id')
     user = request.user
     thisProfile = Profile.objects.get(user_id=user.id)
+    allReservations = Reservation.objects.all()
     context = {
         'events': events,
         'lots': lots,
         'user': user,
         'profile': thisProfile,
+        'allReservations': allReservations,
     }
     return render(request, 'web/main.html', context)
 
