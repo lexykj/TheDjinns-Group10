@@ -1,7 +1,18 @@
 let map;
 
+//This init method is for the default map page with lesser functionality
+function initDefault() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 41.743389, lng: -111.812058 },
+    zoom: 16,
+  });
+}
+
 function initMap() {
     event_id = document.getElementById("map").getAttribute("eventid");
+    //The below code is for the defaultMap view
+
+
     url = "http://127.0.0.1:8000/api/map_data/?event_id="+event_id;
 
     fetch(url)

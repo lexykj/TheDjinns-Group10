@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect 
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from apis.models import Event, ParkingLot, ParkingSpot, Reservation, Profile
@@ -8,7 +8,7 @@ import string
 
 def home(request):
     events = Event.objects.order_by('date')[:4]
-    return render(request, 'web/signUp.html', {'events': events})
+    return render(request, 'web/signUp.html', {'events': events,})
 
 def reserve(request):
     events = Event.objects.order_by('-date')[:4]
@@ -76,7 +76,7 @@ def signUp(request):
                 message = "Error creating user"
         else:
             message = "Passwords do not match"
-    return render(request, 'web/signUp.html', {'message': message})
+    return render(request, 'web/signUp.html', {'message': message,})
 
 def change(request):
     message = ''
@@ -172,3 +172,6 @@ def info(request):
 def map(request, id):
     event = Event.objects.all().get(id=id)
     return render(request, 'web/map.html', {'event': event})
+
+def defaultMap(request):
+    return render(request, 'web/defaultMap.html')

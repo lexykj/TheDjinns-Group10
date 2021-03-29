@@ -43,15 +43,20 @@
 			<!-- Main -->
 				<section id="main" class="container">
 					<header>
-						<h2>Available Lots for {{ event.name }}</h2>
-						<p>{{ event.description }}</p>
+						<h2>Map Of USU</h2>
+						<p>Big Blue's Parking Genie is interfaced directly with Google Maps API for a convenient navigation experience</p>
+						<ul class="actions special">
+							<li><a href={% url "web:home" %} class="button">Return to Home</a></li>
+							<li><a href="{% url 'web:home' %}#cta" class="button">Sign Up</a></li>
+						</ul>
 					</header>
 					<div class="box">
-						<div id="map" eventid={{ event.id }} style="height:50em; width:100%;"></div>
+						<p style="text-align: center;">Here's an example of how Big Blue's Parking Genie interfaces with Google Maps</p>
+						<div id="map" eventid='default' style="height:50em; width:100%;"></div>
 
 					    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 					    <script
-					      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlw0MBCKArRLweJTAHNxphjw30njY9agw&callback=initMap&libraries=&v=weekly&map_ids=da9b4daab158add3"
+					      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlw0MBCKArRLweJTAHNxphjw30njY9agw&callback=initDefault&libraries=&v=weekly"
 					      async
 					    ></script>
 					</div>
