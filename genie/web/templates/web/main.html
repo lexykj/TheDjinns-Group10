@@ -158,19 +158,20 @@
 						<section class="box special">
 								<span class="image featured"><img src={% static "web/images/checkIn.jpg" %} alt="" /></span>
 								<h3>Check In Customers</h3>
-								<div class="col-12">
-									<select name="category" id="category">
+								<form class="col-12" action="{% url 'web:reserve' %}" method="post" >
+									{% csrf_token %}
+									<select name="event" id="eventSelect">
 										<option value="">Select Event</option>
-										<!-- TODO: add events -->
 										{% for event in events %}
 											<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
 										{% endfor %}
 									</select>
-								</div>
-								<br />
-								<ul class="actions special">
-									<li><a href={% url "web:attendant" %} class="button special">Fill Event Reservations</a></li>
-								</ul>
+									<br />
+									<ul class="actions special">
+										<li><input type="submit" value="Fill Event Reservations" class="button special"/></li>
+									</ul>
+								</form>
+
 						</section>
 					</div>
 				{% endif %}
