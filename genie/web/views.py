@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from apis.models import Event, ParkingLot, ParkingSpot, Reservation, Profile
 
+# import datetime
+from django.utils import timezone
 import random
 import string
 
@@ -117,13 +119,27 @@ def main(request):
     lots = ParkingLot.objects.order_by('id')
     user = request.user
     thisProfile = Profile.objects.get(user_id=user.id)
-    allReservations = Reservation.objects.all()
+    allReservations = Reservation.objects.order_by('event')
+    res_list = []
+    pastRes = []
+    currRes = []
+    now = timezone.now()
+    for r in allReservations:
+        if r.user == user:
+            dateStr = r.event.date
+            if dateStr < now:
+                pastRes.append(r)
+            else:
+                currRes.append(r)
+            res_list.append(r)
     context = {
         'events': events,
         'lots': lots,
         'user': user,
         'profile': thisProfile,
-        'allReservations': allReservations,
+        'myReservations': res_list,
+        'pastReservations': pastRes,
+        'currentReservations': currRes,
     }
     return render(request, 'web/main.html', context)
 

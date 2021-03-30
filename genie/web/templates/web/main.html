@@ -121,12 +121,13 @@
 
 							<h3>Current Upcoming Reservations</h3>
 							<ul class="alt">
-								{% for reservation in allReservations %}
+								{% for reservation in currentReservations %}
 									<li>
 										<div class="row">
-											<a href="#" class="button alt col-4">{{ reservation.event }}</a>
-											<p class="col-4"><a href="map.html">View Map</a></p>
-											<p class="col-4"><a href="">Reservation Code</a></p>
+											<p class="col-3">{{ reservation.event.date }}</p>
+											<a class="button alt col-3">{{ reservation.event }}</a>
+											<p class="col-3"><a data-code="{{ reservation.uuid }}" class="code">Reservation Code</a></p>
+											<p class="col-3"><a href="{% url 'web:lot-info' %}">See Lot Details</a></p>
 										</div>
 									</li>
 								{% endfor %}
@@ -134,12 +135,13 @@
 
 							<h3>Previous Reservations</h3>
 							<ul class="alt">
-								{% for reservation in allReservations %}
+								{% for reservation in pastReservations %}
 									<li>
 										<div class="row">
-											<a href="#" class="button alt col-4">{{ reservation.event }}</a>
-											<p class="col-4"><a href="map.html">View Map</a></p>
-											<p class="col-4"><a href="">Reservation Code</a></p>
+											<p class="col-3">{{ reservation.event.date }}</p>
+											<a class="button alt col-3">{{ reservation.event }}</a>
+											<p class="col-3"><a data-code="{{ reservation.uuid }}" class="code">Reservation Code</a></p>
+											<p class="col-3"><a href="{% url 'web:lot-info' %}">See Lot Details</a></p>
 										</div>
 									</li>
 								{% endfor %}
@@ -273,13 +275,13 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src={% static "assets/js/jquery.min.js" %}></script>
-			<script src={% static "assets/js/jquery.dropotron.min.js" %}></script>
-			<script src={% static "assets/js/jquery.scrollex.min.js" %}></script>
-			<script src={% static "assets/js/browser.min.js" %}></script>
-			<script src={% static "assets/js/breakpoints.min.js" %}></script>
-			<script src={% static "assets/js/util.js" %}></script>
-			<script src={% static "assets/js/main.js" %}></script>
-
+			<script src="{% static 'web/assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'web/assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'web/assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'web/assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'web/assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'web/assets/js/util.js' %}"></script>
+			<script src="{% static 'web/assets/js/main.js' %}"></script>
+			<script src="{% static 'web/assets/js/custom.js' %}"></script>
 	</body>
 </html>
