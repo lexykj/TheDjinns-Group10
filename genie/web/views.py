@@ -86,28 +86,17 @@ def change(request):
     newPassword = request.POST['newPass']
     confirmPassword = request.POST['confNewPass']
     user = request.user
-    if user.password == oldPassword:
+    username = user.username
+    if user.check_password(oldPassword):
         if newPassword == confirmPassword:
-            user.password = newPassword
+            user.set_password(newPassword)
             user.save()
+            return redirect('/login')
         else:
             message = "New passwords do not match"
     else:
         message = "Old password is incorrect"
-
-    # reservations = Reservation.objects.order_by('event')
-    # res_list = []
-    # for r in reservations:
-    #     if r.user == user:
-    #         res_list.append(r)    
-
-    # context = {
-    #     'email': user.email,
-    #     'balance': user.profile.account_balance,
-    #     'message': message,
-    #     'reservations': res_list,
-    # }
-    return redirect('/account', message)
+    return redirect('/account/' + message)
 
 def signOut(request):
     logout(request)
@@ -143,22 +132,30 @@ def main(request):
     }
     return render(request, 'web/main.html', context)
 
-def account(request):
+def account(request, message=""):
     user = request.user
     balance = user.profile.account_balance
     email = user.email
-    message = ''
     reservations = Reservation.objects.order_by('event')
     res_list = []
+    pastRes = []
+    currRes = []
+    now = timezone.now()
     for r in reservations:
         if r.user == user:
+            dateStr = r.event.date
+            if dateStr < now:
+                pastRes.append(r)
+            else:
+                currRes.append(r)
             res_list.append(r)
-
     context = {
         'balance': balance,
         'email': email,
         'message': message,
         'reservations': res_list,
+        'pastReservations': pastRes[:4],
+        'currentReservations': currRes,
     }
     return render(request, 'web/account.html', context)
 

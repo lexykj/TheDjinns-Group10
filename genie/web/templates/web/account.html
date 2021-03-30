@@ -107,7 +107,7 @@
 								<h3>Usage</h3>
 								<h4>Previous Reservations</h4>
 								<ul class="alt">
-									{% for r in reservations %}
+									{% for r in pastReservations %}
 										<li>{{r.event.date}}, {{r.spot.lot}}, {{r.spot.spotType}}, {{r.spot.price}}</li>
 									{% endfor %}
 								</ul>

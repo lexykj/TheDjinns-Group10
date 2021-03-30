@@ -12,6 +12,7 @@ urlpatterns = [
     path('change-password', views.change, name='change-password'),
     path('home', views.main, name='main'),
     path('account', views.account, name='account'),
+    path('account/<str:message>', views.account, name='account'),
     path('balance', views.balance, name='balance'),
     path('history', views.history, name='history'),
     path('attendant', views.attendant, name='attendant'),
