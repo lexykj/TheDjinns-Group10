@@ -138,7 +138,7 @@ def main(request):
         'user': user,
         'profile': thisProfile,
         'myReservations': res_list,
-        'pastReservations': pastRes,
+        'pastReservations': pastRes[:4],
         'currentReservations': currRes,
     }
     return render(request, 'web/main.html', context)
@@ -170,7 +170,26 @@ def balance(request):
     return redirect('/account')
 
 def history(request):
-    return render(request, 'web/pastReservations.html')
+    user = request.user
+    allReservations = Reservation.objects.order_by('event')
+    res_list = []
+    pastRes = []
+    currRes = []
+    now = timezone.now()
+    for r in allReservations:
+        if r.user == user:
+            dateStr = r.event.date
+            if dateStr < now:
+                pastRes.append(r)
+            else:
+                currRes.append(r)
+            res_list.append(r)
+    context = {
+        'myReservations': res_list,
+        'pastReservations': pastRes,
+        'currentReservations': currRes,
+    }
+    return render(request, 'web/pastReservations.html', context)
 
 def attendant(request):
     return render(request, 'web/attendant.html')

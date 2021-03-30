@@ -127,13 +127,13 @@
 											<p class="col-3">{{ reservation.event.date }}</p>
 											<a class="button alt col-3">{{ reservation.event }}</a>
 											<p class="col-3"><a data-code="{{ reservation.uuid }}" class="code">Reservation Code</a></p>
-											<p class="col-3"><a href="{% url 'web:lot-info' %}">See Lot Details</a></p>
+											<p class="col-3"><a href="{% url 'web:lot-info' %}">See Lot Map and Details</a></p>
 										</div>
 									</li>
 								{% endfor %}
 							</ul>
 
-							<h3>Previous Reservations</h3>
+							<h3>Recent Previous Reservations</h3>
 							<ul class="alt">
 								{% for reservation in pastReservations %}
 									<li>
@@ -141,7 +141,7 @@
 											<p class="col-3">{{ reservation.event.date }}</p>
 											<a class="button alt col-3">{{ reservation.event }}</a>
 											<p class="col-3"><a data-code="{{ reservation.uuid }}" class="code">Reservation Code</a></p>
-											<p class="col-3"><a href="{% url 'web:lot-info' %}">See Lot Details</a></p>
+											<p class="col-3"><a href="{% url 'web:lot-info' %}">See Lot Map and Details</a></p>
 										</div>
 									</li>
 								{% endfor %}

@@ -51,33 +51,19 @@
 
 					</header>
 					<div class="box">
-						<!-- Form -->
 						<section class="box">
-							<h3 style="text-align: center;">All Reservations</h3>
+							<h3 style="text-align: center;">All Past Reservations</h3>
 							<ul class="alt">
-								<li>
-									<div class="row">
-										<!-- TODO: add reservations and map -->
-										<a href="#" class="button alt col-4">Reservation 1</a>
-										<p class="col-4"><a href="map.html">View Map</a></p>
-										<p class="col-4"><a href={% url "web:reserve" %}>Reserve This Spot Again</a></p>
-									</div>
-								</li>
-								<li>
-									<div class="row">
-										<a href="#" class="button alt col-4">Reservation 1</a>
-										<p class="col-4"><a href="map.html">View Map</a></p>
-										<p class="col-4"><a href={% url "web:reserve" %}>Reserve This Spot Again</a></p>
-									</div>
-								</li>
-								<li>
-									<div class="row">
-										<a href="#" class="button alt col-4">Reservation 1</a>
-										<p class="col-4"><a href="map.html">View Map</a></p>
-										<p class="col-4"><a href={% url "web:reserve" %}>Reserve This Spot Again</a></p>
-									</div>
-								</li>
-								<li><p style="text-align: center;">...</p></li>
+								{% for reservation in pastReservations %}
+									<li>
+										<div class="row">
+											<p class="col-3">{{ reservation.event.date }}</p>
+											<a class="button alt col-3">{{ reservation.event }}</a>
+											<p class="col-3"><a href="">Reserve this Spot Again</a></p>
+											<p class="col-3"><a href="{% url 'web:lot-info' %}">See Lot Map and Details</a></p>
+										</div>
+									</li>
+								{% endfor %}
 							</ul>
 						</section>
 					</div>
