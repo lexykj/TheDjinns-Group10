@@ -192,7 +192,12 @@ def history(request):
     return render(request, 'web/pastReservations.html', context)
 
 def attendant(request):
-    return render(request, 'web/attendant.html')
+    eventId = request.POST['event']
+    thisEvent = Event.objects.all().get(id=eventId)
+    context = {
+        'event': thisEvent,
+    }
+    return render(request, 'web/attendant.html', context)
 
 def events(request):
     return render(request, 'web/eventManagement.html')

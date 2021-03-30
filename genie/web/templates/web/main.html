@@ -158,9 +158,9 @@
 						<section class="box special">
 								<span class="image featured"><img src={% static "web/images/checkIn.jpg" %} alt="" /></span>
 								<h3>Check In Customers</h3>
-								<form class="col-12" action="{% url 'web:reserve' %}" method="post" >
+								<form class="col-12" action="{% url 'web:attendant' %}" method="post" >
 									{% csrf_token %}
-									<select name="event" id="eventSelect">
+									<select name="event" id="event">
 										<option value="">Select Event</option>
 										{% for event in events %}
 											<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
