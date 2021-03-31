@@ -206,7 +206,15 @@ def lots(request):
     return render(request, 'web/lotManagement.html')
 
 def info(request):
-    return render(request, 'web/lotInfo.html')
+    eventId = request.POST.get('eventForLot', 1)
+    lotId = request.POST.get('lot', 1)
+    thisEvent = Event.objects.all().get(id=eventId)
+    thisLot = ParkingLot.objects.all().get(id=lotId)
+    context = {
+        'event': thisEvent,
+        'lot': thisLot,
+    }
+    return render(request, 'web/lotInfo.html', context)
 
 def map(request, id):
     event = Event.objects.all().get(id=id)
