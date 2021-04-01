@@ -104,11 +104,10 @@
 							</section>
 							<section>
 								<span class="icon solid major fa-chart-area accent3"></span>
-								<h3>Usage</h3>
-								<h4>Previous Reservations</h4>
+								<h3>Previous Reservations</h3>
 								<ul class="alt">
 									{% for r in pastReservations %}
-										<li>{{r.event.date}}, {{r.spot.lot}}, {{r.spot.spotType}}, {{r.spot.price}}</li>
+										<li>{{r.event.date | date }}: {{r.spot.lot}} - ${{r.spot.price}}0</li>
 									{% endfor %}
 								</ul>
 								<p><a href={% url "web:history" %}>See all past reservations...</a></p>
