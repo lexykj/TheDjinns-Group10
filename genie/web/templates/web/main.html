@@ -141,7 +141,9 @@
 											<p class="col-3">{{ reservation.event.date }}</p>
 											<a class="button alt col-3">{{ reservation.event }}</a>
 											<p class="col-3"><a data-code="{{ reservation.uuid }}" class="code">Reservation Code</a></p>
-											<p class="col-3"><a href="{% url 'web:lot-info' %}">See Lot Map and Details</a></p>
+											<form class="col-3" action="{% url 'web:lot-info' %}" method="post">
+												<input class="button" type="submit" value="See Lot Map and Details"/>
+											</form>
 										</div>
 									</li>
 								{% endfor %}
@@ -187,9 +189,13 @@
 									<span class="image featured"><img src={% static "web/images/parkingGarage2.jpg" %} alt="" /></span>
 									<h3>Manage my Parking Lots</h3>
 									<p>Assign new attendants; manage parking types and prices.</p>
+									<br />
+									<br />
+									<br />
 									<ul class="actions special">
 										<li><a href={% url "web:lots" %} class="button special">See my parking lots</a></li>
 									</ul>
+									<br />
 								</section>
 
 							</div>
@@ -198,25 +204,29 @@
 								<section class="box special">
 									<span class="image featured"><img src={% static "web/images/sunset.jpg" %} alt="" /></span>
 									<h3>View current lot reservations</h3>
-									<div class="col-12">
-										<select name="category" id="eventOwnerCategory">
+									<form class="col-12" method="post" action="{% url 'web:lot-info' %}">
+										{% csrf_token %}
+										<select name="eventForLot" id="eventForLot">
 											<option value="">Select Event</option>
 											{% for event in events %}
 												<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
 											{% endfor %}
 										</select>
 										<br />
-										<select name="category" id="lotOwnerCategory">
+										<select name="lot" id="lot">
 											<option value="">Select Parking Lot</option>
 											{% for lot in lots %}
+												{% if lot.owner == user %}
 												<option value="{{ lot.id }}">{{ lot.name }}</option>
+												{% endif %}
 											{% endfor %}
 										</select>
-									</div>
-									<br />
-									<ul class="actions special">
-										<li><a href="#" class="button special">View Lot Reservations</a></li>
-									</ul>
+										<br />
+										<ul class="actions special">
+											<li><input type="submit" class="button special" value="View Lot Reservations" /></li>
+										</ul>
+									</form>
+
 								</section>
 
 							</div>
