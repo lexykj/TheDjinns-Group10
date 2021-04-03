@@ -207,12 +207,15 @@ def lots(request):
 
 def info(request):
     eventId = request.POST.get('eventForLot', 1)
-    lotId = request.POST.get('lot', 1)
+    lotId = request.POST['lot']
+    whichLotId = request.POST.get('whichLot', 1)
     thisEvent = Event.objects.all().get(id=eventId)
     thisLot = ParkingLot.objects.all().get(id=lotId)
+    whichLot = ParkingLot.objects.all().get(id=whichLotId)
     context = {
         'event': thisEvent,
         'lot': thisLot,
+        'whichLot': whichLot,
     }
     return render(request, 'web/lotInfo.html', context)
 

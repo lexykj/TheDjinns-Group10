@@ -142,6 +142,8 @@
 											<a class="button alt col-3">{{ reservation.event }}</a>
 											<p class="col-3"><a data-code="{{ reservation.uuid }}" class="code">Reservation Code</a></p>
 											<form class="col-3" action="{% url 'web:lot-info' %}" method="post">
+												{% csrf_token %}
+												<input type="hidden" value="{{ reservation.spot.lot.id }}" id="whichLot" name="lot" class="button special"/>
 												<input class="button" type="submit" value="See Lot Map and Details"/>
 											</form>
 										</div>

@@ -50,7 +50,7 @@
 										<div class="row gtr-uniform gtr-50">
 											<div class="col-12">
 
-												<select name="eventCategory" id="category">
+												<select name="eventCategory" id="eventCategory">
 													{% if events %}
 														<option value="">- Select Event -</option>
 														{% for event in events %}
@@ -69,7 +69,7 @@
 											</div>
 
 											<div class="col-12" id="newDiv">
-												<select name="lotCategory" id="category">
+												<select name="lotCategory" id="lotCategory">
 													{% if lots %}
 														<option value="">- Select Lot -</option>
 														{% for lot in lots %}
@@ -82,7 +82,7 @@
 												</select>
 											</div>
 											<div class="col-12">
-												<select name="spotCategory" id="category">
+												<select name="spotCategory" id="spotCategory">
 													{% if spots %}
 														<option value="">- Select Parking Type -</option>
 														{% for spot in spots %}
