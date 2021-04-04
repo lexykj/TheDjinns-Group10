@@ -79,6 +79,38 @@
 		appearance: none;
 	}
 
+    /* Styles for Collapsible used with Become a Parking Lot Owner tab */
+	.collapsible{
+	    cursor: pointer;
+	    padding: 18px;
+	    text-align: left;
+	    font-size: 20px;
+	}
+
+	.active, .collapsible:hover{
+        background-color: #bbb;
+	}
+
+	.content{
+	    padding: 0 18px;
+	    overflow: hidden;
+	    background-color: #fff;
+	    max-height: 0;
+	    transition: max-height 0.2s ease-out;
+	}
+
+	.collapsible:after{
+	    content: '\02795';
+	    font-size: 20px;
+	    color: white;
+	    float: right;
+	    margin-left: 5px;
+	}
+
+	.active:after{
+	    content: "\2796";
+	}
+
 /* Basic */
 
 	@-ms-viewport {

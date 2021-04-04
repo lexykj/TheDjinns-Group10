@@ -127,7 +127,11 @@
 											<p class="col-3">{{ reservation.event.date }}</p>
 											<a class="button alt col-3">{{ reservation.event }}</a>
 											<p class="col-3"><a data-code="{{ reservation.uuid }}" class="code">Reservation Code</a></p>
-											<p class="col-3"><a href="{% url 'web:lot-info' %}">See Lot Map and Details</a></p>
+											<form class="col-3" action="{% url 'web:lot-info' %}" method="post">
+												{% csrf_token %}
+												<input type="hidden" value="{{ reservation.spot.lot.id }}" id="whichCurrentLot" name="whichCurrentLot" class="button special"/>
+												<input class="button" type="submit" value="See Lot Map and Details"/>
+											</form>
 										</div>
 									</li>
 								{% endfor %}
@@ -153,7 +157,54 @@
 							</ul>
 						</section>
 					</div>
+
+					<!-- Become an Owner Functionality -->
+					<section class="box special">
+						<header class="major">
+							<h3>Register to Own a Parking Lot</h3>
+							<p>Do you live close to the university? Have you ever wanted to rent out space in your driveway, but not known how to advertise? Wonder no more. Big Blue's Parking Genie will allow you to register, advertise, and manage reservations for your personal lot. Sign up here!</p>
+							<br />
+							<br />
+							<br />
+							<button class="collapsible button alt fit">Enter Lot Details</button>
+							<div class="content">
+								<form class="" action="{% url 'web:lot-info' %}" method="post">
+									{% csrf_token %}
+									<input type="hidden" value="doRegisterLot" id="registerNewLot" name="registerNewLot" />
+									<input type="text" placeholder="Name..." id="lotName" />
+									<input type="text" placeholder="Address..." id="lotAddress" />
+									<select name="event" id="chooseEvent">
+										<option value="">Select Event</option>
+										{% for event in events %}
+											<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
+										{% endfor %}
+									</select>
+									<input type="hidden" value="{{ user.id }}" id="newOwnerId" name="newOwnerId" />
+									<br />
+									<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Latitude</a></h4>
+									<input type="number" class="button alt" value="Latitude..." id="latitude" />
+									<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Longtitude</a></h4>
+									<input type="number" class="button alt" value="Longtitude..." id="longtitude" />
+									<br />
+									<br />
+									<br />
+									<select name="spotType" id="spotType">
+										<option value="">Select Parking Spot Type</option>
+										{% for lot in lots %}
+											{% if lot.owner == user %}
+											<option value="{{ lot.id }}">{{ lot.name }}</option>
+											{% endif %}
+										{% endfor %}
+									</select>
+									<input type="hidden" value="{{ reservation.spot.lot.id }}" id="newLot" name="lot" />
+									<input class="button" type="submit" value="See Lot Map and Details"/>
+								</form>
+							</div>
+						</header>
+					</section>
+
 				{% endif %}
+
 
 				<!-- Attendant Functionality -->
 				{% if profile.is_attendant %}
