@@ -171,33 +171,40 @@
 								<form class="" action="{% url 'web:lot-info' %}" method="post">
 									{% csrf_token %}
 									<input type="hidden" value="doRegisterLot" id="registerNewLot" name="registerNewLot" />
+									<br />
 									<input type="text" placeholder="Name..." id="lotName" />
+									<br />
 									<input type="text" placeholder="Address..." id="lotAddress" />
+									<br />
 									<select name="event" id="chooseEvent">
-										<option value="">Select Event</option>
+										<option value="">Select Initial Event to Offer Parking For</option>
 										{% for event in events %}
 											<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
 										{% endfor %}
 									</select>
 									<input type="hidden" value="{{ user.id }}" id="newOwnerId" name="newOwnerId" />
 									<br />
-									<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Latitude</a></h4>
-									<input type="number" class="button alt" value="Latitude..." id="latitude" />
-									<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Longtitude</a></h4>
-									<input type="number" class="button alt" value="Longtitude..." id="longtitude" />
+									<div class="row row-gtr-uniform">
+										<div class="col-6">
+											<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Latitude</a></h4>
+											<input type="number" class="button alt" id="latitude" />
+										</div>
+										<div class="col-6">
+											<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Longtitude</a></h4>
+											<input type="number" class="button alt" id="longtitude" />
+										</div>
+									</div>
 									<br />
 									<br />
 									<br />
-									<select name="spotType" id="spotType">
-										<option value="">Select Parking Spot Type</option>
-										{% for lot in lots %}
-											{% if lot.owner == user %}
-											<option value="{{ lot.id }}">{{ lot.name }}</option>
-											{% endif %}
-										{% endfor %}
-									</select>
-									<input type="hidden" value="{{ reservation.spot.lot.id }}" id="newLot" name="lot" />
-									<input class="button" type="submit" value="See Lot Map and Details"/>
+									<!-- Register spots for this parking lot -->
+									<div class="row row-gtr-uniform" style="padding-left: 2em;">
+										<input type="text" class="col-4 button alt" placeholder="Spot Type..." />
+										<input type="number" class="col-4 button alt" placeholder="Quantity..." />
+										<input type="number" class="col-4 button alt" placeholder="Price..." />
+									</div>
+									<br />
+									<input class="button" type="submit" value="Register your New Lot"/>
 								</form>
 							</div>
 						</header>
