@@ -45,7 +45,6 @@
 							<section>
 								<span class="icon solid major fa-cloud accent4"></span>
 								<h3>Essentials</h3>
-								<!-- TODO: add user email-->
 								<h4>Email: {{email}}</h4>
 								<form method="post" action={% url 'web:change-password' %}>
 									{% csrf_token %}

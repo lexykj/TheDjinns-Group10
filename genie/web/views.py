@@ -104,7 +104,8 @@ def signOut(request):
         
 
 def main(request):
-    events = Event.objects.order_by('date')[:4]
+    events = Event.objects.order_by('date')
+    upcomingEvents = []
     lots = ParkingLot.objects.order_by('id')
     user = request.user
     thisProfile = Profile.objects.get(user_id=user.id)
@@ -121,6 +122,10 @@ def main(request):
             else:
                 currRes.append(r)
             res_list.append(r)
+    for e in events:
+        dateStr = e.date
+        if not dateStr < now:
+            upcomingEvents.append(e)
     context = {
         'events': events,
         'lots': lots,
@@ -129,6 +134,7 @@ def main(request):
         'myReservations': res_list,
         'pastReservations': pastRes[:4],
         'currentReservations': currRes,
+        'upcomingEvents': upcomingEvents[:4],
     }
     return render(request, 'web/main.html', context)
 
