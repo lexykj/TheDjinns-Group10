@@ -208,7 +208,27 @@ def attendant(request):
     return render(request, 'web/attendant.html', context)
 
 def events(request):
-    return render(request, 'web/eventManagement.html')
+    allEvents = Event.objects.order_by('-date')
+    events = []
+    now = timezone.now()
+    for e in allEvents:
+        if e.date > now:
+            events.append(e)
+    context = {
+        'events': events,
+    }
+    return render(request, 'web/eventManagement.html', context)
+
+def addEvent(request):
+    name = request.POST['name']
+    date = request.POST['date']
+    description = request.POST['description']
+    address = request.POST['address']
+    latitude = request.POST['latitude']
+    longitude = request.POST['longitude']
+
+    Event.objects.create(name=name, description=description, date=date, address=address, latitude=latitude, longitude=longitude)
+    return redirect('/events')
 
 def owners(request):
     return render(request, 'web/ownerManagement.html')

@@ -17,6 +17,7 @@ urlpatterns = [
     path('history', views.history, name='history'),
     path('attendant', views.attendant, name='attendant'),
     path('events', views.events, name='events'),
+    path('add-event', views.addEvent, name='add-event'),
     path('owners', views.owners, name='owners'),
     path('lots', views.lots, name='lots'),
     path('lot-info', views.info, name='lot-info'),
