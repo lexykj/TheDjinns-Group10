@@ -13,10 +13,15 @@ def home(request):
     return render(request, 'web/signUp.html', {'events': events,})
 
 def reserve(request):
-    events = Event.objects.order_by('-date')[:4]
+    allEvents = Event.objects.order_by('-date')
+    events = []
+    now = timezone.now()
+    for e in allEvents:
+        if e.date > now:
+            events.append(e)
     lots = ParkingLot.objects.order_by('name')
     spots = ParkingSpot.objects.order_by('price')
-    return render(request, 'web/reserveSpot.html', {'events': events, 'lots': lots, 'spots': spots})
+    return render(request, 'web/reserveSpot.html', {'events': events[:10], 'lots': lots, 'spots': spots, 'select': True})
 
 def selectSpot(request):
     eventId = request.GET['eventCategory']
@@ -26,7 +31,7 @@ def selectSpot(request):
     spotId = request.GET['spotCategory']
     spot = ParkingSpot.objects.get(pk=spotId)
     print(event)
-    return render(request, 'web/reserveSpot.html', {'event': event, 'lot': lot, 'spot': spot})
+    return render(request, 'web/reserveSpot.html', {'event': event, 'lot': lot, 'spot': spot, 'select': False})
 
 def pay(request, eventId, spotId):
     event = Event.objects.get(pk=eventId)

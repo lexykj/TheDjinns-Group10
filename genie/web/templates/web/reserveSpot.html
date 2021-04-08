@@ -44,6 +44,7 @@
 						<span class="image featured"><img src={% static "web/images/parkingGarage1.jpg" %} alt="" /></span>
 						<!-- Form -->
 								<section class="box">
+									{% if select %}
 									<h3>Just tell us a little about the parking you're looking for...</h3>
 									<form method="get" action={% url "web:selectSpot" %}>
 										{% csrf_token %}
@@ -51,47 +52,30 @@
 											<div class="col-12">
 
 												<select name="eventCategory" id="eventCategory">
-													{% if events %}
 														<option value="">- Select Event -</option>
 														{% for event in events %}
 															<option value={{event.id}}>{{ event.name }} - {{event.description}}</option>
 														{% endfor %}
-													{% endif %}
-													{% if event %}
-														<option value=''>{{event.name}} - {{event.description}}</option>
-													{% endif %}
-
-
 												</select>
 											</div>
 											<div class="col-12">
-												<h5><a href="map.html">See map of available lots</a></h5>
+												<h5><a href={% url "web:defaultMap" %}>See map of available lots</a></h5>
 											</div>
 
 											<div class="col-12" id="newDiv">
 												<select name="lotCategory" id="lotCategory">
-													{% if lots %}
 														<option value="">- Select Lot -</option>
 														{% for lot in lots %}
 															<option value={{lot.id}}>{{ lot.name }} - {{lot.address}}</option>
 														{% endfor %}
-													{% endif %}
-													{% if lot %}
-														<option value=''>{{ lot.name }} - {{lot.address}}</option>
-													{% endif %}
 												</select>
 											</div>
 											<div class="col-12">
 												<select name="spotCategory" id="spotCategory">
-													{% if spots %}
-														<option value="">- Select Parking Type -</option>
-														{% for spot in spots %}
-															<option value={{spot.id}}>{{ spot.spotType }}</option>
-														{% endfor %}
-													{% endif %}
-													{% if spot %}
-														<option>{{spot.spotType}}</option>
-													{% endif %}
+													<option value="">- Select Parking Type -</option>
+													{% for spot in spots %}
+														<option value={{spot.id}}>{{ spot.spotType }}</option>
+													{% endfor %}
 												</select>
 											</div>
 											<div class="col-3 col-12">
@@ -99,7 +83,7 @@
 											</div>
 										</div>
 									</form>
-									{% if event and lot and spot %}
+									{% else %}
 										<form method="post" action={% url 'web:pay' event.id spot.id %}>
 											{% csrf_token %}
 											<div>
@@ -122,14 +106,14 @@
 																		<tr>
 																			<td name='lot' value='{{lot.id}}'><a href='#'>{{lot}}</a></td> <!-- Link to lot map page here -->
 																			<td name='spotId' value='{{spot.id}}'>{{spot.spotType}}</td>
-																			<td name='eventId'>{{event.date}}</td>
-																			<td>{{spot.price}}</td>
+																			<td name='eventId'>{{event.date | date}}</td>
+																			<td>${{spot.price}}0</td>
 																		</tr>
 																	</tbody>
 																	<tfoot>
 																		<tr>
 																			<td colspan="3"></td>
-																			<td><b>{{spot.price}}</b></td>
+																			<td><b>${{spot.price}}0</b></td>
 																		</tr>
 																	</tfoot>
 																</table>
@@ -139,7 +123,7 @@
 											</div>
 											<div class="row gtr-uniform gtr-50">
 												<div class="col-5 col-6-mobilep">
-													<h3>Total: {{spot.price}}</h3>
+													<h3>Total: ${{spot.price}}0</h3>
 												</div>
 												<div class="col-3 col-12-mobilep">
 													<input type="submit" value="Pay and Reserve" class="fit" />
