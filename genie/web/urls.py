@@ -26,4 +26,6 @@ urlpatterns = [
     path('logout', views.signOut, name='logout'),
     path('map/<int:id>', views.map, name='map'),
     path('map/default', views.defaultMap, name='defaultMap'),
+    path('about', views.about, name='about'),
 ]
+
