@@ -259,3 +259,7 @@ def map(request, id):
 
 def defaultMap(request):
     return render(request, 'web/defaultMap.html')
+
+def about(request):
+    return render(request, 'web/about.html')
+
