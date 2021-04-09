@@ -29,7 +29,11 @@ While Git and Bash are already likely to be set up on your system, Django and Py
 $ pip install --user django
 ```
 
-Any other required softwere will also be listed here as the need develops
+You will also need to install a font package:
+
+```
+$ pip install --user django-static-fontawesome
+```
 
 ## Build instructions
 
