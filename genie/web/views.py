@@ -230,7 +230,9 @@ def addEvent(request):
     Event.objects.create(name=name, description=description, date=date, address=address, latitude=latitude, longitude=longitude)
     return redirect('/events')
 
-def deleteEvent(request):
+def deleteEvent(request, eventId):
+    event = Event.objects.get(pk=eventId)
+    event.delete()
     return redirect('/events')
 
 def owners(request):
