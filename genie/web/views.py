@@ -230,6 +230,9 @@ def addEvent(request):
     Event.objects.create(name=name, description=description, date=date, address=address, latitude=latitude, longitude=longitude)
     return redirect('/events')
 
+def deleteEvent(request):
+    return redirect('/events')
+
 def owners(request):
     return render(request, 'web/ownerManagement.html')
 
