@@ -13,10 +13,15 @@ def home(request):
     return render(request, 'web/signUp.html', {'events': events,})
 
 def reserve(request):
-    events = Event.objects.order_by('-date')[:4]
+    allEvents = Event.objects.order_by('-date')
+    events = []
+    now = timezone.now()
+    for e in allEvents:
+        if e.date > now:
+            events.append(e)
     lots = ParkingLot.objects.order_by('name')
     spots = ParkingSpot.objects.order_by('price')
-    return render(request, 'web/reserveSpot.html', {'events': events, 'lots': lots, 'spots': spots})
+    return render(request, 'web/reserveSpot.html', {'events': events[:10], 'lots': lots, 'spots': spots, 'select': True})
 
 def selectSpot(request):
     eventId = request.GET['eventCategory']
@@ -26,7 +31,7 @@ def selectSpot(request):
     spotId = request.GET['spotCategory']
     spot = ParkingSpot.objects.get(pk=spotId)
     print(event)
-    return render(request, 'web/reserveSpot.html', {'event': event, 'lot': lot, 'spot': spot})
+    return render(request, 'web/reserveSpot.html', {'event': event, 'lot': lot, 'spot': spot, 'select': False})
 
 def pay(request, eventId, spotId):
     event = Event.objects.get(pk=eventId)
@@ -104,7 +109,8 @@ def signOut(request):
         
 
 def main(request):
-    events = Event.objects.order_by('date')[:4]
+    events = Event.objects.order_by('date')
+    upcomingEvents = []
     lots = ParkingLot.objects.order_by('id')
     user = request.user
     thisProfile = Profile.objects.get(user_id=user.id)
@@ -121,6 +127,10 @@ def main(request):
             else:
                 currRes.append(r)
             res_list.append(r)
+    for e in events:
+        dateStr = e.date
+        if not dateStr < now:
+            upcomingEvents.append(e)
     context = {
         'events': events,
         'lots': lots,
@@ -129,6 +139,7 @@ def main(request):
         'myReservations': res_list,
         'pastReservations': pastRes[:4],
         'currentReservations': currRes,
+        'upcomingEvents': upcomingEvents[:4],
     }
     return render(request, 'web/main.html', context)
 
@@ -197,7 +208,27 @@ def attendant(request):
     return render(request, 'web/attendant.html', context)
 
 def events(request):
-    return render(request, 'web/eventManagement.html')
+    allEvents = Event.objects.order_by('-date')
+    events = []
+    now = timezone.now()
+    for e in allEvents:
+        if e.date > now:
+            events.append(e)
+    context = {
+        'events': events,
+    }
+    return render(request, 'web/eventManagement.html', context)
+
+def addEvent(request):
+    name = request.POST['name']
+    date = request.POST['date']
+    description = request.POST['description']
+    address = request.POST['address']
+    latitude = request.POST['latitude']
+    longitude = request.POST['longitude']
+
+    Event.objects.create(name=name, description=description, date=date, address=address, latitude=latitude, longitude=longitude)
+    return redirect('/events')
 
 def owners(request):
     return render(request, 'web/ownerManagement.html')
@@ -207,7 +238,7 @@ def lots(request):
 
 def info(request):
     eventId = request.POST.get('eventForLot', 1)
-    lotId = request.POST['lot']
+    lotId = request.POST.get('lot', 1)
     whichLotId = request.POST.get('whichLot', 1)
     thisEvent = Event.objects.all().get(id=eventId)
     thisLot = ParkingLot.objects.all().get(id=lotId)

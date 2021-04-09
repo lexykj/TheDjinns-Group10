@@ -16,6 +16,7 @@
 	<head>
 		<title>Lot Details</title>
 		<meta charset="utf-8" />
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 		{% load static %}
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href={% static "web/assets/css/main.css" %} />
@@ -48,7 +49,13 @@
 							<br />
 							
 							<section class="box">
-								<p>Map here</p>
+								<div id="map" eventid={{ event.id }} style="height:50em; width:100%;"></div>
+
+								<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+								<script
+								  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlw0MBCKArRLweJTAHNxphjw30njY9agw&callback=initMap&libraries=&v=weekly&map_ids=da9b4daab158add3"
+								  async
+								></script>
 							</section>	
 
 
