@@ -58,12 +58,9 @@
 								></script>
 							</section>
 
-
-							<div class="row">
-								<ul class="actions special">
-									<li><a href={% url "web:reserve" %} class="button">Reserve a Parking Spot</a></li>
-								</ul>
-							</div>
+							<ul class="actions special">
+								<li><a href={% url "web:reserve" %} class="button">Reserve a Parking Spot</a></li>
+							</ul>
 						</section>
 						<section class="box special">
 							<div class="row">
@@ -75,24 +72,26 @@
 								<div class="col-6 col-12-narrower">
 									<h4 class="special">Total Parking Spots: #</h4>
 									<div class="table-wrapper">
-										<table style="text-align: left;">
-											<thead>
-												<tr>
-													<th>Quantity</th>
-													<th>Type</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												{% for spot in spots %}
+										{% for event in allEventsForLot  %}
+											<table style="text-align: left;">
+												<thead>
 													<tr>
-														<td>{{ spot.spots }}</td>
-														<td>{{ spot.spotType }}</td>
-														<td>${{ spot.price }}0</td>
+														<th>Quantity</th>
+														<th>Type</th>
+														<th>Price</th>
 													</tr>
-												{% endfor %}
-											</tbody>
-										</table>
+												</thead>
+												<tbody>
+													{% for spot in spots %}
+														<tr>
+															<td>{{ spot.spots }}</td>
+															<td>{{ spot.spotType }}</td>
+															<td>${{ spot.price }}0</td>
+														</tr>
+													{% endfor %}
+												</tbody>
+											</table>
+										{% endfor %}
 									</div>
 								</div>
 							</div>
