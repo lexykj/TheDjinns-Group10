@@ -37,7 +37,7 @@ def pay(request, eventId, spotId):
     event = Event.objects.get(pk=eventId)
     spot = ParkingSpot.objects.get(pk=spotId)
     user = request.user
-    spot.spots -= 1
+    spot.currentEventAvailableSpots -= 1
     spot.save()
     user.profile.account_balance -= spot.price
     user.profile.save()

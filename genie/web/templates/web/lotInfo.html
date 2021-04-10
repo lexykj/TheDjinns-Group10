@@ -64,10 +64,11 @@
 						</section>
 						<section class="box special">
 							<div class="row">
+								<!--
 								<div class="col-6 col-12-narrower">
-									<!-- Image -->
 									<span class="image fit"><img src={% static "web/images/parkingMeter.jpg" %} alt="" /></span>
 								</div>
+								-->
 
 								<div class="col-6 col-12-narrower">
 									<h4 class="special">Total Parking Spots: #</h4>
@@ -76,7 +77,8 @@
 											<table style="text-align: left;">
 												<thead>
 													<tr>
-														<th>Quantity</th>
+														<th>Total</th>
+														<th>Available for Current Event</th>
 														<th>Type</th>
 														<th>Price</th>
 													</tr>
@@ -84,7 +86,8 @@
 												<tbody>
 													{% for spot in spots %}
 														<tr>
-															<td>{{ spot.spots }}</td>
+															<td>{{ spot.totalSpots }}</td>
+															<td>{{ spot.currentEventAvailableSpots }}</td>
 															<td>{{ spot.spotType }}</td>
 															<td>${{ spot.price }}0</td>
 														</tr>

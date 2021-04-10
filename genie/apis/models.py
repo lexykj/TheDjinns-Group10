@@ -44,7 +44,8 @@ class ParkingLot(models.Model):
 class ParkingSpot(models.Model):
     spotType = models.CharField(max_length=200)
     price = models.FloatField(default=0.0)
-    spots = models.IntegerField(default=1)
+    totalSpots = models.IntegerField(default=1)
+    currentEventAvailableSpots = models.IntegerField(default=1)
 
     lot = models.ForeignKey(ParkingLot, on_delete=models.CASCADE)
 
