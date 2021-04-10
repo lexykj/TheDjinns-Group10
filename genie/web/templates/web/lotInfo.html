@@ -41,15 +41,7 @@
 			<!-- Main -->
 				<section id="main" class="container">
 					<header>
-						{% if lot %}
-							<h2>Details on {{ lot }}</h2>
-						{% elif whichLot %}
-							<h2>Details on {{ whichlot }}</h2>
-						{% elif whichCurrentLot %}
-							<h2>Details on {{ whichCurrentLot }}</h2>
-						{% else %}
-							<h2>ERROR: No Specified Lot</h2>
-						{% endif %}
+						<h2>Details on {{ lot }}</h2>
 					</header>
 
 					<!-- Customer Functionality -->

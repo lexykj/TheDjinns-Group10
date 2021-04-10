@@ -244,39 +244,29 @@ def lots(request):
 def info(request):
     thisProfile = Profile.objects.get(user_id=request.user.id)
     currentEventId = request.POST.get('eventForLot', 1)
+    spots = ParkingSpot.objects.all().filter(lot=currentEventId)
     currentEvent = Event.objects.all().get(id=currentEventId)
     allEventsForLot = []
+
     # Get lot id from various entry points on main
-    # currentReservations
     reservationLotId = request.POST.get('whichCurrentLot', -1)
-    if reservationLotId == -1:
-        reservationLot = None
-    else:
-        reservationLot = ParkingLot.objects.all().get(id=reservationLotId)
-        allEventsForLot = reservationLot.event.all()
-
-    # pastReservations
     whichLotId = request.POST.get('whichLot', -1)
-    if whichLotId == -1:
-        whichLot = None
-    else:
-        whichLot = ParkingLot.objects.all().get(id=whichLotId)
-        allEventsForLot = whichLot.event.all()
-
-
-    # Owner lot function: View current reservations
-    lotId = request.POST.get('lot', 1)
-    if lotId == -1:
-        thisLot = None
-    else:
+    lotId = request.POST.get('lot', -1)
+    if reservationLotId != -1:
+        thisLot = ParkingLot.objects.all().get(id=reservationLotId)
+        allEventsForLot = thisLot.event.all()
+    elif whichLotId != -1:
+        thisLot = ParkingLot.objects.all().get(id=whichLotId)
+        allEventsForLot = thisLot.event.all()
+    elif lotId != -1:
         thisLot = ParkingLot.objects.all().get(id=lotId)
         allEventsForLot = thisLot.event.all()
-    spots = ParkingSpot.objects.all().filter(lot=currentEventId)
+    else:
+        thisLot = None
+
     context = {
         'currentEvent': currentEvent,
         'lot': thisLot,
-        'whichLot': whichLot,
-        'currentReservationLot': reservationLot,
         'spots': spots,
         'profile': thisProfile,
         'allEventsForLot': allEventsForLot,
