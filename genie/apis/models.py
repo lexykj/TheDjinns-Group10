@@ -35,7 +35,7 @@ class ParkingLot(models.Model):
     latitude = models.FloatField(default=41.7429795162564)
     longitude = models.FloatField(default=-111.809492111206)
 
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ManyToManyField(Event)
     owner = models.ForeignKey(User, on_delete=models.CASCADE) # must check if user is_owner
 
     def __str__(self) -> str:
