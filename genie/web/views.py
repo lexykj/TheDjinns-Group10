@@ -242,21 +242,36 @@ def lots(request):
     return render(request, 'web/lotManagement.html')
 
 def info(request):
-    eventId = request.POST.get('eventForLot', 1)
-    lotId = request.POST.get('lot', 1)
-    whichLotId = request.POST.get('whichLot', -1)
     thisProfile = Profile.objects.get(user_id=request.user.id)
+    currentEventId = request.POST.get('eventForLot', 1)
+    currentEvent = Event.objects.all().get(id=currentEventId)
+    # Get lot id from various entry points on main
+    # currentReservations
+    reservationLotId = request.POST.get('whichCurrentLot', -1)
+    if reservationLotId == -1:
+        reservationLot = None
+    else:
+        reservationLot = ParkingLot.objects.all().get(id=reservationLotId)
+
+    # pastReservations
+    whichLotId = request.POST.get('whichLot', -1)
     if whichLotId == -1:
         whichLot = None
     else:
         whichLot = ParkingLot.objects.all().get(id=whichLotId)
-    thisEvent = Event.objects.all().get(id=eventId)
-    thisLot = ParkingLot.objects.all().get(id=lotId)
-    spots = ParkingSpot.objects.all().filter(lot=eventId)
+
+    # Owner lot function: View current reservations
+    lotId = request.POST.get('lot', 1)
+    if lotId == -1:
+        thisLot = None
+    else:
+        thisLot = ParkingLot.objects.all().get(id=lotId)
+    spots = ParkingSpot.objects.all().filter(lot=currentEventId)
     context = {
-        'event': thisEvent,
+        'currentEvent': currentEvent,
         'lot': thisLot,
         'whichLot': whichLot,
+        'currentReservationLot': reservationLot,
         'spots': spots,
         'profile': thisProfile,
     }
