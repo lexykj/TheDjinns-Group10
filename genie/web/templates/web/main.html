@@ -263,7 +263,7 @@
 
 								<section class="box special">
 									<span class="image featured"><img src={% static "web/images/sunset.jpg" %} alt="" /></span>
-									<h3>View current lot reservations</h3>
+									<h3>View my current lot reservations</h3>
 									<form class="col-12" method="post" action="{% url 'web:lot-info' %}">
 										{% csrf_token %}
 										<select name="eventForLot" id="eventForLot">
