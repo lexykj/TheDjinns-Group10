@@ -20,6 +20,8 @@
 		{% load static %}
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href={% static "web/assets/css/main.css" %} />
+
+		<script src={% static "web/assets/js/map.js" %}></script>
 	</head>
 	<body class="is-preload">
 		<div id="page-wrapper">
@@ -36,19 +38,24 @@
 					</nav>
 				</header>
 
-			{% if lot %}
-				<!-- Main -->
+			<!-- Main -->
 				<section id="main" class="container">
 					<header>
-						<h2>Details on {{ lot }}</h2>
+						{% if lot %}
+							<h2>Details on {{ lot }}</h2>
+						{% elif whichLot %}
+							<h2>Details on {{ whichlot }}</h2>
+						{% elif whichCurrentLot %}
+							<h2>Details on {{ whichCurrentLot }}</h2>
+						{% else %}
+							<h2>ERROR: No Specified Lot</h2>
+						{% endif %}
 					</header>
 
 					<!-- Customer Functionality -->
 					<div id="customerFunctions">
 						<section class="box special">
 							<h3>Parking Lot Map</h3>
-							<br />
-
 							<section class="box">
 								<div id="map" eventid={{ currentEvent.id }} style="height:50em; width:100%;"></div>
 
@@ -120,182 +127,48 @@
 					{% endif %}
 
 					<!-- Owner Functionality -->
-					{% if profile.is_owner %}
-						<div id="ownerFunctions">
-							<!-- <h2 style="text-align: center;">Lot Owner Functions</h2> -->
-							<div class="row">
-								<div class="col-6 col-12-narrower">
+				{% if profile.is_owner %}
+					<div id="ownerFunctions">
+						<!-- <h2 style="text-align: center;">Lot Owner Functions</h2> -->
+						<div class="row">
+							<div class="col-6 col-12-narrower">
 
-									<section class="box special">
-										<span class="image featured"><img src={% static "web/images/parkingGarage2.jpg" %} alt="" /></span>
-										<h3>Manage this Parking Lot</h3>
-										<p>Assign new attendants; edit parking types and prices.</p>
+								<section class="box special">
+									<span class="image featured"><img src={% static "web/images/parkingGarage2.jpg" %} alt="" /></span>
+									<h3>Manage this Parking Lot</h3>
+									<p>Assign new attendants; edit parking types and prices.</p>
+									<br />
+									<ul class="actions special">
+										<li><a href={% url "web:lots" %} class="button special">Edit this Lot</a></li>
+									</ul>
+								</section>
+
+							</div>
+							<div class="col-6 col-12-narrower">
+
+								<section class="box special">
+									<span class="image featured"><img src={% static "web/images/sunset.jpg" %} alt="" /></span>
+									<h3>View current lot reservations</h3>
+									<form class="col-12" method="post" action="{% url 'web:lot-info' %}">
+										{% csrf_token %}
+										<select name="eventForLot" id="eventForLot">
+											<option value="">Select Event</option>
+											{% for event in allEventsForLot %}
+												<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
+											{% endfor %}
+										</select>
 										<br />
 										<ul class="actions special">
-											<li><a href={% url "web:lots" %} class="button special">Edit this Lot</a></li>
-										</ul>
-									</section>
-
-								</div>
-								<div class="col-6 col-12-narrower">
-
-									<section class="box special">
-										<span class="image featured"><img src={% static "web/images/sunset.jpg" %} alt="" /></span>
-										<h3>View current lot reservations</h3>
-										<form class="col-12" method="post" action="{% url 'web:lot-info' %}">
-											{% csrf_token %}
-											<select name="eventForLot" id="eventForLot">
-												<option value="">Select Event</option>
-												{% for event in allLotEvents %}
-													<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
-												{% endfor %}
-											</select>
-											<br />
-											<ul class="actions special">
-												<li><input type="submit" class="button special" value="View Lot Reservations" /></li>
-											</ul>
-										</form>
-
-									</section>
-
-								</div>
-							</div>
-						</div>
-					{% endif %}
-
-			{% elif whichLot %}
-				<!-- Main -->
-				<section id="main" class="container">
-					<header>
-						<h2>Details on {{ lot }}</h2>
-					</header>
-
-					<!-- Customer Functionality -->
-					<div id="customerFunctions">
-						<section class="box special">
-							<h3>Parking Lot Map</h3>
-							<br />
-
-							<section class="box">
-								<div id="map" eventid={{ currentEvent.id }} style="height:50em; width:100%;"></div>
-
-								<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-								<script
-								  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlw0MBCKArRLweJTAHNxphjw30njY9agw&callback=initMap&libraries=&v=weekly&map_ids=da9b4daab158add3"
-								  async
-								></script>
-							</section>
-
-
-							<div class="row">
-								<ul class="actions special">
-									<li><a href={% url "web:reserve" %} class="button">Reserve a Parking Spot</a></li>
-								</ul>
-							</div>
-						</section>
-						<section class="box special">
-							<div class="row">
-								<div class="col-6 col-12-narrower">
-									<!-- Image -->
-									<span class="image fit"><img src={% static "web/images/parkingMeter.jpg" %} alt="" /></span>
-								</div>
-
-								<div class="col-6 col-12-narrower">
-									<h4 class="special">Total Parking Spots: #</h4>
-									<div class="table-wrapper">
-										<table style="text-align: left;">
-											<thead>
-												<tr>
-													<th>Quantity</th>
-													<th>Type</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												{% for spot in spots %}
-													<tr>
-														<td>{{ spot.spots }}</td>
-														<td>{{ spot.spotType }}</td>
-														<td>${{ spot.price }}0</td>
-													</tr>
-												{% endfor %}
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
-
-					<!-- Attendant Functionality -->
-					{% if profile.is_attendant %}
-						<div id="attendantFunctions">
-							<h2 style="text-align: center;">Attendant Functions</h2>
-							<section class="box special">
-									<span class="image featured"><img src="{% static 'web/images/checkIn.jpg' %}" alt="" /></span>
-									<h3>Check In Customers for Current Event</h3>
-									<form class="col-12" action="{% url 'web:attendant' %}" method="post" >
-										{% csrf_token %}
-										<input type="hidden" value="{{ currentEvent.id }}" id="eventToCheckIn" />
-										<input type="hidden" value="{{ lot.id }}" id="lotToCheckIn" />
-										<ul class="actions special">
-											<li><input type="submit" value="Fill Event Reservations" class="button special"/></li>
+											<li><input type="submit" class="button special" value="View Lot Reservations" /></li>
 										</ul>
 									</form>
-							</section>
-						</div>
-					{% endif %}
 
-					<!-- Owner Functionality -->
-					{% if profile.is_owner %}
-						<div id="ownerFunctions">
-							<!-- <h2 style="text-align: center;">Lot Owner Functions</h2> -->
-							<div class="row">
-								<div class="col-6 col-12-narrower">
+								</section>
 
-									<section class="box special">
-										<span class="image featured"><img src={% static "web/images/parkingGarage2.jpg" %} alt="" /></span>
-										<h3>Manage this Parking Lot</h3>
-										<p>Assign new attendants; edit parking types and prices.</p>
-										<br />
-										<ul class="actions special">
-											<li><a href={% url "web:lots" %} class="button special">Edit this Lot</a></li>
-										</ul>
-									</section>
-
-								</div>
-								<div class="col-6 col-12-narrower">
-
-									<section class="box special">
-										<span class="image featured"><img src={% static "web/images/sunset.jpg" %} alt="" /></span>
-										<h3>View current lot reservations</h3>
-										<form class="col-12" method="post" action="{% url 'web:lot-info' %}">
-											{% csrf_token %}
-											<select name="eventForLot" id="eventForLot">
-												<option value="">Select Event</option>
-												{% for event in allLotEvents %}
-													<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
-												{% endfor %}
-											</select>
-											<br />
-											<ul class="actions special">
-												<li><input type="submit" class="button special" value="View Lot Reservations" /></li>
-											</ul>
-										</form>
-
-									</section>
-
-								</div>
 							</div>
 						</div>
-					{% endif %}
-					
-			{% elif whichCurrentLot %}
-				<h2>Details on {{ whichCurrentLot }}</h2>
-			{% else %}
-				<h2>ERROR: No Specified Lot</h2>
-			{% endif %}
-
+					</div>
+				{% endif %}
 
 			<!-- Footer -->
 			<footer id="footer">

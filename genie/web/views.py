@@ -245,6 +245,7 @@ def info(request):
     thisProfile = Profile.objects.get(user_id=request.user.id)
     currentEventId = request.POST.get('eventForLot', 1)
     currentEvent = Event.objects.all().get(id=currentEventId)
+    allEventsForLot = []
     # Get lot id from various entry points on main
     # currentReservations
     reservationLotId = request.POST.get('whichCurrentLot', -1)
@@ -252,6 +253,7 @@ def info(request):
         reservationLot = None
     else:
         reservationLot = ParkingLot.objects.all().get(id=reservationLotId)
+        allEventsForLot = reservationLot.event.all()
 
     # pastReservations
     whichLotId = request.POST.get('whichLot', -1)
@@ -259,6 +261,8 @@ def info(request):
         whichLot = None
     else:
         whichLot = ParkingLot.objects.all().get(id=whichLotId)
+        allEventsForLot = whichLot.event.all()
+
 
     # Owner lot function: View current reservations
     lotId = request.POST.get('lot', 1)
@@ -266,6 +270,7 @@ def info(request):
         thisLot = None
     else:
         thisLot = ParkingLot.objects.all().get(id=lotId)
+        allEventsForLot = thisLot.event.all()
     spots = ParkingSpot.objects.all().filter(lot=currentEventId)
     context = {
         'currentEvent': currentEvent,
@@ -274,6 +279,7 @@ def info(request):
         'currentReservationLot': reservationLot,
         'spots': spots,
         'profile': thisProfile,
+        'allEventsForLot': allEventsForLot,
     }
     return render(request, 'web/lotInfo.html', context)
 
