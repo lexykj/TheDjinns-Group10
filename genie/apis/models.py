@@ -58,6 +58,8 @@ class Reservation(models.Model):
     spot = models.ForeignKey(ParkingSpot, on_delete=models.CASCADE) # no more spots than ParkingSpot.spot
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    checked_in = models.BooleanField(default=False)
+
     def __str__(self) -> str:
         return str(self.uuid)
 
