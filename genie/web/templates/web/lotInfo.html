@@ -42,6 +42,7 @@
 				<section id="main" class="container">
 					<header>
 						<h2>Details on {{ lot }}</h2>
+						<h4><i>Reservation Details shown for</i>: {{ currentEvent }} | {{ currentEvent.date }}</h4>
 					</header>
 
 					<!-- Customer Functionality -->
@@ -63,41 +64,38 @@
 							</ul>
 						</section>
 						<section class="box special">
+							<!--
 							<div class="row">
-								<!--
 								<div class="col-6 col-12-narrower">
 									<span class="image fit"><img src={% static "web/images/parkingMeter.jpg" %} alt="" /></span>
 								</div>
-								-->
+                            -->
 
-								<div class="col-6 col-12-narrower">
-									<h4 class="special">Total Parking Spots: #</h4>
+								<div class="">
+									<!-- class for above div if img is added back: col-6 col-12-narrower -->
 									<div class="table-wrapper">
-										{% for event in allEventsForLot  %}
-											<table style="text-align: left;">
-												<thead>
+										<table style="text-align: left;">
+											<h4><i>Reservation Details for:</i> {{ currentEvent }} | {{ currentEvent.date }}</h4>
+											<thead>
+												<tr>
+													<th>Available for Current Event / Total</th>
+													<th>Type</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for spot in spots %}
 													<tr>
-														<th>Total</th>
-														<th>Available for Current Event</th>
-														<th>Type</th>
-														<th>Price</th>
+														<td>{{ spot.currentEventAvailableSpots }} / {{ spot.totalSpots }}</td>
+														<td>{{ spot.spotType }}</td>
+														<td>${{ spot.price }}0</td>
 													</tr>
-												</thead>
-												<tbody>
-													{% for spot in spots %}
-														<tr>
-															<td>{{ spot.totalSpots }}</td>
-															<td>{{ spot.currentEventAvailableSpots }}</td>
-															<td>{{ spot.spotType }}</td>
-															<td>${{ spot.price }}0</td>
-														</tr>
-													{% endfor %}
-												</tbody>
-											</table>
-										{% endfor %}
+												{% endfor %}
+											</tbody>
+										</table>
 									</div>
 								</div>
-							</div>
+							<!-- </div> -->
 						</section>
 					</div>
 
