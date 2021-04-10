@@ -39,7 +39,15 @@
 			<!-- Main -->
 				<section id="main" class="container">
 					<header>
-						<h2>Details on {{ lot }} | {{ whichLot }}</h2>
+						{% if lot %}
+							<h2>Details on {{ lot }}</h2>
+						{% elif whichLot %}
+							<h2>Details on {{ whichlot }}</h2>
+						{% elif whichCurrentLot %}
+							<h2>Details on {{ whichCurrentLot }}</h2>
+						{% else %}
+							<h2>ERROR: No Specified Lot</h2>
+						{% endif %}
 					</header>
 
 					<!-- Customer Functionality -->
@@ -78,38 +86,19 @@
 										<table style="text-align: left;">
 											<thead>
 												<tr>
-													<th>#</th>
+													<th>Quantity</th>
 													<th>Type</th>
 													<th>Price</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Extended/RV</td>
-													<td>$25.00</td>
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>Extended/RV</td>
-													<td>$25.00</td>
-												</tr><tr>
-													<td>1</td>
-													<td>Extended/RV</td>
-													<td>$25.00</td>
-												</tr><tr>
-													<td>1</td>
-													<td>Extended/RV</td>
-													<td>$25.00</td>
-												</tr><tr>
-													<td>1</td>
-													<td>Extended/RV</td>
-													<td>$25.00</td>
-												</tr><tr>
-													<td>1</td>
-													<td>Extended/RV</td>
-													<td>$25.00</td>
-												</tr>
+												{% for spot in spots %}
+													<tr>
+														<td>{{ spot.spots }}</td>
+														<td>{{ spot.spotType }}</td>
+														<td>${{ spot.price }}0</td>
+													</tr>
+												{% endfor %}
 											</tbody>
 										</table>
 									</div>
