@@ -42,3 +42,17 @@ def get_lots(request):
     response = JsonResponse(json)
     response['Access-Control-Allow-Origin'] = '*'
     return response
+
+# http://127.0.0.1:8000/api/lot_data/?lot_id=1
+def get_lot_data(request):
+    lot_id = int(request.GET['lot_id'])
+    lot = get_object_or_404(ParkingLot, pk=lot_id)
+
+    json = {}
+    for field in lot._meta.fields:
+        if field.name != 'event' and field.name != 'owner':
+            json[field.name] = eval('lot.'+field.name)
+
+    response = JsonResponse(json)
+    response['Access-Control-Allow-Origin'] = '*'
+    return response
