@@ -26,6 +26,18 @@ function initMap() {
         });
 }
 
+function initLot() {
+    lot_id = document.getElementById("map").getAttribute("lotid");
+    //The below code is for the defaultMap view
+
+
+    url = "http://127.0.0.1:8000/api/lot_data/?lot_id="+event_id;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => addLotMap(data));
+}
+
 function addMap(data) {
     const Event = { lat: data['latitude'], lng: data['longitude'] };
 
@@ -83,6 +95,40 @@ function addLot(data) {
 
     const lotWindow = new google.maps.InfoWindow({
         content:    lotString,
+    });
+
+    lotMarker.addListener("click", () => {
+        map.setCenter(lotMarker.getPosition());
+        lotWindow.open(map,lotMarker);
+    });
+}
+
+function addLotMap(data) {
+    const Lot = { lat: data['latitude'], lng: data['longitude'] };
+
+    map = new google.maps.Map(document.getElementById("map"), {
+        center:     Lot,
+        zoom:       15,
+        mapId:      'da9b4daab158add3',
+    });
+
+    const lotMarker = new google.maps.Marker({
+        position:   Lot,
+        map:        map,
+    });
+
+    const lotString =
+        '<div id="content">' +
+        '<div id="siteNotice">' +
+        "</div>" +
+        '<h1 id="firstHeading" class="firstHeading">' + data['name'] +'</h1>' +
+        '<div id="bodyContent">' +
+        "<p>" + data['address'] +"</p>" +
+        "</div>" +
+        "</div>";
+
+    const lotWindow = new google.maps.InfoWindow({
+        content: lotString,
     });
 
     lotMarker.addListener("click", () => {
