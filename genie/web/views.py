@@ -230,6 +230,11 @@ def addEvent(request):
     Event.objects.create(name=name, description=description, date=date, address=address, latitude=latitude, longitude=longitude)
     return redirect('/events')
 
+def deleteEvent(request, eventId):
+    event = Event.objects.get(pk=eventId)
+    event.delete()
+    return redirect('/events')
+
 def owners(request):
     return render(request, 'web/ownerManagement.html')
 
@@ -237,16 +242,38 @@ def lots(request):
     return render(request, 'web/lotManagement.html')
 
 def info(request):
-    eventId = request.POST.get('eventForLot', 1)
+    thisProfile = Profile.objects.get(user_id=request.user.id)
+    currentEventId = request.POST.get('eventForLot', 1)
+    currentEvent = Event.objects.all().get(id=currentEventId)
+    # Get lot id from various entry points on main
+    # currentReservations
+    reservationLotId = request.POST.get('whichCurrentLot', -1)
+    if reservationLotId == -1:
+        reservationLot = None
+    else:
+        reservationLot = ParkingLot.objects.all().get(id=reservationLotId)
+
+    # pastReservations
+    whichLotId = request.POST.get('whichLot', -1)
+    if whichLotId == -1:
+        whichLot = None
+    else:
+        whichLot = ParkingLot.objects.all().get(id=whichLotId)
+
+    # Owner lot function: View current reservations
     lotId = request.POST.get('lot', 1)
-    whichLotId = request.POST.get('whichLot', 1)
-    thisEvent = Event.objects.all().get(id=eventId)
-    thisLot = ParkingLot.objects.all().get(id=lotId)
-    whichLot = ParkingLot.objects.all().get(id=whichLotId)
+    if lotId == -1:
+        thisLot = None
+    else:
+        thisLot = ParkingLot.objects.all().get(id=lotId)
+    spots = ParkingSpot.objects.all().filter(lot=currentEventId)
     context = {
-        'event': thisEvent,
+        'currentEvent': currentEvent,
         'lot': thisLot,
         'whichLot': whichLot,
+        'currentReservationLot': reservationLot,
+        'spots': spots,
+        'profile': thisProfile,
     }
     return render(request, 'web/lotInfo.html', context)
 
@@ -256,3 +283,7 @@ def map(request, id):
 
 def defaultMap(request):
     return render(request, 'web/defaultMap.html')
+
+def about(request):
+    return render(request, 'web/about.html')
+

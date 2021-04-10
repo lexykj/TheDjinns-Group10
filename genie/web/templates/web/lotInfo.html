@@ -36,10 +36,11 @@
 					</nav>
 				</header>
 
-			<!-- Main -->
+			{% if lot %}
+				<!-- Main -->
 				<section id="main" class="container">
 					<header>
-						<h2>Details on {{ lot }} | {{ whichLot }}</h2>
+						<h2>Details on {{ lot }}</h2>
 					</header>
 
 					<!-- Customer Functionality -->
@@ -47,16 +48,16 @@
 						<section class="box special">
 							<h3>Parking Lot Map</h3>
 							<br />
-							
+
 							<section class="box">
-								<div id="map" eventid={{ event.id }} style="height:50em; width:100%;"></div>
+								<div id="map" eventid={{ currentEvent.id }} style="height:50em; width:100%;"></div>
 
 								<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 								<script
 								  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlw0MBCKArRLweJTAHNxphjw30njY9agw&callback=initMap&libraries=&v=weekly&map_ids=da9b4daab158add3"
 								  async
 								></script>
-							</section>	
+							</section>
 
 
 							<div class="row">
@@ -78,38 +79,19 @@
 										<table style="text-align: left;">
 											<thead>
 												<tr>
-													<th>#</th>
+													<th>Quantity</th>
 													<th>Type</th>
 													<th>Price</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Extended/RV</td>
-													<td>$25.00</td>
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>Extended/RV</td>
-													<td>$25.00</td>
-												</tr><tr>
-													<td>1</td>
-													<td>Extended/RV</td>
-													<td>$25.00</td>
-												</tr><tr>
-													<td>1</td>
-													<td>Extended/RV</td>
-													<td>$25.00</td>
-												</tr><tr>
-													<td>1</td>
-													<td>Extended/RV</td>
-													<td>$25.00</td>
-												</tr><tr>
-													<td>1</td>
-													<td>Extended/RV</td>
-													<td>$25.00</td>
-												</tr>
+												{% for spot in spots %}
+													<tr>
+														<td>{{ spot.spots }}</td>
+														<td>{{ spot.spotType }}</td>
+														<td>${{ spot.price }}0</td>
+													</tr>
+												{% endfor %}
 											</tbody>
 										</table>
 									</div>
@@ -119,81 +101,216 @@
 					</div>
 
 					<!-- Attendant Functionality -->
-					<div id="attendantFunctions">
-						<h2 style="text-align: center;">Attendant Functions</h2>
-						<section class="box special">
-								<h3>Check In Customers</h3>
-								<div class="col-12">
-									<select name="category" id="category">
-										<option value="">- Select Event -</option>
-										<option value="1">1</option>
-										<option value="1">2</option>
-										<option value="1">3</option>
-										<option value="1">4</option>
-									</select>
+					{% if profile.is_attendant %}
+						<div id="attendantFunctions">
+							<h2 style="text-align: center;">Attendant Functions</h2>
+							<section class="box special">
+									<span class="image featured"><img src="{% static 'web/images/checkIn.jpg' %}" alt="" /></span>
+									<h3>Check In Customers for Current Event</h3>
+									<form class="col-12" action="{% url 'web:attendant' %}" method="post" >
+										{% csrf_token %}
+										<input type="hidden" value="{{ currentEvent.id }}" id="eventToCheckIn" />
+										<input type="hidden" value="{{ lot.id }}" id="lotToCheckIn" />
+										<ul class="actions special">
+											<li><input type="submit" value="Fill Event Reservations" class="button special"/></li>
+										</ul>
+									</form>
+							</section>
+						</div>
+					{% endif %}
+
+					<!-- Owner Functionality -->
+					{% if profile.is_owner %}
+						<div id="ownerFunctions">
+							<!-- <h2 style="text-align: center;">Lot Owner Functions</h2> -->
+							<div class="row">
+								<div class="col-6 col-12-narrower">
+
+									<section class="box special">
+										<span class="image featured"><img src={% static "web/images/parkingGarage2.jpg" %} alt="" /></span>
+										<h3>Manage this Parking Lot</h3>
+										<p>Assign new attendants; edit parking types and prices.</p>
+										<br />
+										<ul class="actions special">
+											<li><a href={% url "web:lots" %} class="button special">Edit this Lot</a></li>
+										</ul>
+									</section>
+
 								</div>
-								<br />
+								<div class="col-6 col-12-narrower">
+
+									<section class="box special">
+										<span class="image featured"><img src={% static "web/images/sunset.jpg" %} alt="" /></span>
+										<h3>View current lot reservations</h3>
+										<form class="col-12" method="post" action="{% url 'web:lot-info' %}">
+											{% csrf_token %}
+											<select name="eventForLot" id="eventForLot">
+												<option value="">Select Event</option>
+												{% for event in allLotEvents %}
+													<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
+												{% endfor %}
+											</select>
+											<br />
+											<ul class="actions special">
+												<li><input type="submit" class="button special" value="View Lot Reservations" /></li>
+											</ul>
+										</form>
+
+									</section>
+
+								</div>
+							</div>
+						</div>
+					{% endif %}
+
+			{% elif whichLot %}
+				<!-- Main -->
+				<section id="main" class="container">
+					<header>
+						<h2>Details on {{ lot }}</h2>
+					</header>
+
+					<!-- Customer Functionality -->
+					<div id="customerFunctions">
+						<section class="box special">
+							<h3>Parking Lot Map</h3>
+							<br />
+
+							<section class="box">
+								<div id="map" eventid={{ currentEvent.id }} style="height:50em; width:100%;"></div>
+
+								<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+								<script
+								  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlw0MBCKArRLweJTAHNxphjw30njY9agw&callback=initMap&libraries=&v=weekly&map_ids=da9b4daab158add3"
+								  async
+								></script>
+							</section>
+
+
+							<div class="row">
 								<ul class="actions special">
-									<li><a href={% url "web:attendant" %} class="button special">Fill Event Reservations</a></li>
+									<li><a href={% url "web:reserve" %} class="button">Reserve a Parking Spot</a></li>
 								</ul>
+							</div>
+						</section>
+						<section class="box special">
+							<div class="row">
+								<div class="col-6 col-12-narrower">
+									<!-- Image -->
+									<span class="image fit"><img src={% static "web/images/parkingMeter.jpg" %} alt="" /></span>
+								</div>
+
+								<div class="col-6 col-12-narrower">
+									<h4 class="special">Total Parking Spots: #</h4>
+									<div class="table-wrapper">
+										<table style="text-align: left;">
+											<thead>
+												<tr>
+													<th>Quantity</th>
+													<th>Type</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for spot in spots %}
+													<tr>
+														<td>{{ spot.spots }}</td>
+														<td>{{ spot.spotType }}</td>
+														<td>${{ spot.price }}0</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
 						</section>
 					</div>
 
+					<!-- Attendant Functionality -->
+					{% if profile.is_attendant %}
+						<div id="attendantFunctions">
+							<h2 style="text-align: center;">Attendant Functions</h2>
+							<section class="box special">
+									<span class="image featured"><img src="{% static 'web/images/checkIn.jpg' %}" alt="" /></span>
+									<h3>Check In Customers for Current Event</h3>
+									<form class="col-12" action="{% url 'web:attendant' %}" method="post" >
+										{% csrf_token %}
+										<input type="hidden" value="{{ currentEvent.id }}" id="eventToCheckIn" />
+										<input type="hidden" value="{{ lot.id }}" id="lotToCheckIn" />
+										<ul class="actions special">
+											<li><input type="submit" value="Fill Event Reservations" class="button special"/></li>
+										</ul>
+									</form>
+							</section>
+						</div>
+					{% endif %}
+
 					<!-- Owner Functionality -->
-					<div id="ownerFunctions">
-						<h2 style="text-align: center;">Lot Owner Functions</h2>
-						<div class="row">
-							<div class="col-6 col-12-narrower">
+					{% if profile.is_owner %}
+						<div id="ownerFunctions">
+							<!-- <h2 style="text-align: center;">Lot Owner Functions</h2> -->
+							<div class="row">
+								<div class="col-6 col-12-narrower">
 
-								<section class="box special">
-									<span class="image featured"><img src={% static "web/images/parkingGarage2.jpg" %} alt="" /></span>
-									<h3>Edit this Parking Lot's Details</h3>
-									<p>Assign new attendants; manage parking types and prices.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button special">Manage this parking lot</a></li>
-									</ul>
-								</section>
+									<section class="box special">
+										<span class="image featured"><img src={% static "web/images/parkingGarage2.jpg" %} alt="" /></span>
+										<h3>Manage this Parking Lot</h3>
+										<p>Assign new attendants; edit parking types and prices.</p>
+										<br />
+										<ul class="actions special">
+											<li><a href={% url "web:lots" %} class="button special">Edit this Lot</a></li>
+										</ul>
+									</section>
 
-							</div>
-							<div class="col-6 col-12-narrower">
+								</div>
+								<div class="col-6 col-12-narrower">
 
-								<section class="box special">
-									<span class="image featured"><img src={% static "web/images/sunset.jpg" %} alt="" /></span>
-									<h3>View current lot reservations</h3>
-									<div class="col-12">
-										<select name="category" id="category">
-											<option value="">- Select Event -</option>
-											<option value="1">1</option>
-											<option value="1">2</option>
-											<option value="1">3</option>
-											<option value="1">4</option>
-										</select>
-									</div>
-									<br />
-									<ul class="actions special">
-										<li><a href="#" class="button special">View Lot Reservations</a></li>
-									</ul>
-								</section>
+									<section class="box special">
+										<span class="image featured"><img src={% static "web/images/sunset.jpg" %} alt="" /></span>
+										<h3>View current lot reservations</h3>
+										<form class="col-12" method="post" action="{% url 'web:lot-info' %}">
+											{% csrf_token %}
+											<select name="eventForLot" id="eventForLot">
+												<option value="">Select Event</option>
+												{% for event in allLotEvents %}
+													<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
+												{% endfor %}
+											</select>
+											<br />
+											<ul class="actions special">
+												<li><input type="submit" class="button special" value="View Lot Reservations" /></li>
+											</ul>
+										</form>
 
+									</section>
+
+								</div>
 							</div>
 						</div>
-					</div>
-				</section>
+					{% endif %}
+					
+			{% elif whichCurrentLot %}
+				<h2>Details on {{ whichCurrentLot }}</h2>
+			{% else %}
+				<h2>ERROR: No Specified Lot</h2>
+			{% endif %}
+
 
 			<!-- Footer -->
-				<footer id="footer">
-					<ul class="icons">
-						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="https://github.com/palani-johnson/TheDjinns-Group10" class="icon brands fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
-					</ul>
-					<ul class="copyright">
-						<li>USU CS 3540. Group 10- The Djinns: Joel Christensen, Autumn Arbon, Lexy Simmons, Palani Johnson.</li><li>HTML Template Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</footer>
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="https://github.com/palani-johnson/TheDjinns-Group10" class="icon brands fa-github"><span class="label">Github</span></a></li>
+					<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+					<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>USU CS 3540. Group 10- The Djinns: Joel Christensen, Autumn Arbon, Lexy Simmons, Palani Johnson.</li><li>HTML Template Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</footer>
 
 		</div>
 

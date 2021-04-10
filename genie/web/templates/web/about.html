@@ -9,37 +9,25 @@
 	<head>
 		<title>About</title>
 		<meta charset="utf-8" />
+        {% load static %}
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel='icon' href='images/favicon.ico' type='image/x-icon' />
+		<link rel="stylesheet" href={% static "web/assets/css/main.css" %}/>
+		<link rel='icon' href={% static 'web/images/favicon.ico' %} type='image/x-icon' />
+
 	</head>
 	<body class="landing is-preload">
 		<div id="page-wrapper">
 
 			<!-- Header -->
 				<header id="header" class="alt">
-					<h1><a href="about.html">About</a></h1>
+					<h1>About</h1>
 					<nav id="nav">
 						<ul>
-							<li><a href="main.html">Home</a></li>
+							<li><a href={% url "web:home"%}>Home</a></li>
 							<!-- <li>
 								<a href="#" class="icon solid fa-angle-down">Layouts</a>
-								<ul>
-									<li><a href="generic.html">Generic</a></li>
-									<li><a href="contact.html">Contact</a></li>
-									<li><a href="elements.html">Elements</a></li>
-									<li>
-										<a href="#">Submenu</a>
-										<ul>
-											<li><a href="#">Option One</a></li>
-											<li><a href="#">Option Two</a></li>
-											<li><a href="#">Option Three</a></li>
-											<li><a href="#">Option Four</a></li>
-										</ul>
-									</li>
-								</ul>
 							</li> -->
-							<li><a href="#cta" class="button">Sign Up</a></li>
+							<li><a href="{% url 'web:home' %}#cta" class="button">Sign Up</a></li>
 						</ul>
 					</nav>
 				</header>
@@ -63,7 +51,7 @@
 							<div class="row-6 row-12-mobilep">
 								<h3>Who Are The Creators?</h3>
 								<p>We are a team goes by the name The Djinns. The four of us (Joel Christensen, Autumn Arbon, Lexy Simmons, and Palani Johnson) have created this for the purpose of fulfilling a school project and to fulfill a need in the community. We are all working toward Bachelor Degrees in Computer Science. We are motivated by two things: our desires to receive those degrees and our mascots (Palani's cats) Mei Mei and Pup.</p>
-								<span class="image featured"><img src="images/mei_and_pup_3.jpg" alt="" /></span>
+								<span class="image featured"><img src={% static "web/images/mei_and_pup_3.jpg" %} alt="Parking Lot at USU" /></span>
 							</div>
 						</div>
 					</div>
@@ -75,37 +63,9 @@
 
 					<section class="box special">
 						<header class="major">
-							<h2><a href="signUp.html">Reserve a spot now!</a></h2>
+							<h2><a href="{% url 'web:home' %}#cta">Reserve a spot now!</a></h2>
 						</header>
 					</section>
-					
-					<div class="row">
-						<div class="col-6 col-12-narrower">
-
-							<section class="box special">
-								<span class="image featured"><img src="images/googleMapsUSU.jpg" alt="" /></span>
-								<h3>Navigate Easily with Maps</h3>
-								<p>Big Blue's Parking Genie interfaces with Google Maps API to provide high quality navigation guidance.</p>
-								<ul class="actions special">
-									<li><a href="#" class="button alt">See Map of USU</a></li>
-								</ul>
-							</section>
-
-						</div>
-						<div class="col-6 col-12-narrower">
-
-							<section class="box special">
-								<span class="image featured"><img src="images/terrace.jpg" alt="" /></span>
-								<h3>Remember your Favorite Spots</h3>
-								<p>See all your past reservations from within your account, making it easy to attend again.</p>
-								<ul class="actions special">
-									<li><a href="#" class="button alt">Login</a></li>
-								</ul>
-							</section>
-
-						</div>
-					</div>
-
 				</section>
 
 			<!-- CTA -->
@@ -115,12 +75,9 @@
 					<p>Create an account with Big Blue's Parking Genie to reserve parking for USU events.</p>
 
 					<form>
-						<div class="row gtr-50 gtr-uniform">
-							<div class="col-8 col-12-mobilep">
-								<input type="email" name="email" id="email" placeholder="Email Address" />
-							</div>
+						<div class="row gtr-50 gtr-uniform aln-center">
 							<div class="col-4 col-12-mobilep">
-								<input type="submit" value="Sign Up" class="fit" />
+								<a href="{% url 'web:home' %}#cta" class="button">Sign Up Now</a>
 							</div>
 						</div>
 					</form>
