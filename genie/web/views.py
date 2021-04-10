@@ -245,6 +245,7 @@ def info(request):
     eventId = request.POST.get('eventForLot', 1)
     lotId = request.POST.get('lot', 1)
     whichLotId = request.POST.get('whichLot', -1)
+    thisProfile = Profile.objects.get(user_id=request.user.id)
     if whichLotId == -1:
         whichLot = None
     else:
@@ -257,6 +258,7 @@ def info(request):
         'lot': thisLot,
         'whichLot': whichLot,
         'spots': spots,
+        'profile': thisProfile,
     }
     return render(request, 'web/lotInfo.html', context)
 
