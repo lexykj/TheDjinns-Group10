@@ -52,7 +52,7 @@
 									<div class="row">
 										<p class="col-4" style="text-align: center;">{{ event.name }}</p>
 										<p class="col-4" style="text-align: center;">{{ event.date }}</p>
-										<p class="col-4 button alt">Delete This Event</p>
+										<a href={% url "web:delete-event" event.id %}><p class="col-4 button alt">Delete This Event</p></a>
 									</div>
 								</li>
 								{% endfor %}

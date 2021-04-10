@@ -230,6 +230,11 @@ def addEvent(request):
     Event.objects.create(name=name, description=description, date=date, address=address, latitude=latitude, longitude=longitude)
     return redirect('/events')
 
+def deleteEvent(request, eventId):
+    event = Event.objects.get(pk=eventId)
+    event.delete()
+    return redirect('/events')
+
 def owners(request):
     return render(request, 'web/ownerManagement.html')
 
@@ -261,3 +266,7 @@ def map(request, id):
 
 def defaultMap(request):
     return render(request, 'web/defaultMap.html')
+
+def about(request):
+    return render(request, 'web/about.html')
+

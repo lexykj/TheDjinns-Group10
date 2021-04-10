@@ -18,6 +18,7 @@ urlpatterns = [
     path('attendant', views.attendant, name='attendant'),
     path('events', views.events, name='events'),
     path('add-event', views.addEvent, name='add-event'),
+    path('delete-event/<int:eventId>', views.deleteEvent, name='delete-event'),
     path('owners', views.owners, name='owners'),
     path('lots', views.lots, name='lots'),
     path('lot-info', views.info, name='lot-info'),
@@ -26,4 +27,6 @@ urlpatterns = [
     path('logout', views.signOut, name='logout'),
     path('map/<int:id>', views.map, name='map'),
     path('map/default', views.defaultMap, name='defaultMap'),
+    path('about', views.about, name='about'),
 ]
+
