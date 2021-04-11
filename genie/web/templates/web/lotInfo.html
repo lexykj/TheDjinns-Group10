@@ -50,11 +50,11 @@
 						<section class="box special">
 							<h3>Parking Lot Map</h3>
 							<section class="box">
-								<div id="map" lotid={{ lot }} style="height:50em; width:100%;"></div>
+								<div id="map" lotid={{ lot.id }} style="height:50em; width:100%;"></div>
 
 								<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 								<script
-								  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlw0MBCKArRLweJTAHNxphjw30njY9agw&callback=initMap&libraries=&v=weekly&map_ids=da9b4daab158add3"
+								  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlw0MBCKArRLweJTAHNxphjw30njY9agw&callback=initLot&libraries=&v=weekly&map_ids=da9b4daab158add3"
 								  async
 								></script>
 							</section>
