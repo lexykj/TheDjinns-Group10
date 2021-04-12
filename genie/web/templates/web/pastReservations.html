@@ -59,8 +59,13 @@
 										<div class="row">
 											<p class="col-3">{{ reservation.event.date }}</p>
 											<a class="button alt col-3">{{ reservation.event }}</a>
-											<p class="col-3"><a href="">Reserve this Spot Again</a></p>
-											<p class="col-3"><a href="{% url 'web:lot-info' %}">See Lot Map and Details</a></p>
+											<p class="col-3"><a href="{% url 'web:lot-info' %}" class="">See Lot Map and Details</a></p>
+											<form class="col-3" action="{% url 'web:reserve' %}" method="post">
+												{% csrf_token %}
+												<input type="hidden" value="{{ reservation.spot.lot.id }}" id="againLotId" name="againLotId" class="button special"/>
+												<input type="hidden" value="{{ reservation.spot.id }}" id="againSpotId" name="againSpotId" class="button special"/>
+												<input class="button special" type="submit" value="Reserve this Spot Again"/>
+											</form>
 										</div>
 									</li>
 								{% endfor %}

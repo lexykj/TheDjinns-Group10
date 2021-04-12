@@ -8,6 +8,7 @@ from django.utils import timezone
 import random
 import string
 
+
 def home(request):
     events = Event.objects.order_by('date')
     upcomingEvents = []
@@ -21,6 +22,7 @@ def home(request):
     }
     return render(request, 'web/signUp.html', context)
 
+
 def reserve(request):
     allEvents = Event.objects.order_by('-date')
     events = []
@@ -31,14 +33,36 @@ def reserve(request):
     lots = ParkingLot.objects.order_by('name')
     spots = ParkingSpot.objects.order_by('price')
 
-    # Get possible pre-filled lot value from the lot-info link to reserve a spot
+    # Lot-Info Reserve Link Autofill
     preFilledId = request.POST.get('lotId', "")
     if preFilledId != "":
         preFilledLotName = ParkingLot.objects.all().get(id=preFilledId).name
     else:
-        preFilledLotName = " -Select a Lot- "
+        preFilledLotName = " -Select Lot- "
 
-    return render(request, 'web/reserveSpot.html', {'events': events[:10], 'lots': lots, 'spots': spots, 'select': True, 'preFilledLotId': preFilledId, 'preFilledLotName': preFilledLotName})
+    # History Reserve Again Autofill
+    againLotId = request.POST.get('againLotId', "")
+    if againLotId != "":
+        againLotName = ParkingLot.objects.all().get(id=againLotId).name
+        againSpotId = request.POST.get('againSpotId', '')
+        againSpotType = ParkingSpot.objects.all().get(id=againSpotId)
+    else:
+        againLotName = " -Select Lot- "
+        againSpotId = ''
+        againSpotType = " -Select Parking Type- "
+
+    return render(request, 'web/reserveSpot.html', {'events': events[:10],
+                                                    'lots': lots,
+                                                    'spots': spots,
+                                                    'select': True,
+                                                    'preFilledLotId': preFilledId,
+                                                    'preFilledLotName': preFilledLotName,
+                                                    'againLotId': againLotId,
+                                                    'againLotName': againLotName,
+                                                    'againSpotId': againSpotId,
+                                                    'againSpotType': againSpotType,
+                                                    })
+
 
 def selectSpot(request):
     eventId = request.GET['eventCategory']
@@ -49,6 +73,7 @@ def selectSpot(request):
     spot = ParkingSpot.objects.get(pk=spotId)
     print(event)
     return render(request, 'web/reserveSpot.html', {'event': event, 'lot': lot, 'spot': spot, 'select': False})
+
 
 def pay(request, eventId, spotId):
     event = Event.objects.get(pk=eventId)
@@ -62,8 +87,10 @@ def pay(request, eventId, spotId):
     Reservation.objects.create(uuid=uuid, event=event, spot=spot, user=user)
     return redirect('/home')
 
+
 def loginpage(request):
     return render(request, 'web/login.html')
+
 
 def signIn(request):
     if request.user.is_authenticated:
@@ -79,6 +106,7 @@ def signIn(request):
         else:
             message = "Invalid username/password"
     return render(request, 'web/login.html', {'message': message})
+
 
 def signUp(request):
     if request.user.is_authenticated:
@@ -100,7 +128,8 @@ def signUp(request):
                 message = "Error creating user"
         else:
             message = "Passwords do not match"
-    return render(request, 'web/signUp.html', {'message': message,})
+    return render(request, 'web/signUp.html', {'message': message, })
+
 
 def change(request):
     message = ''
@@ -120,10 +149,11 @@ def change(request):
         message = "Old password is incorrect"
     return redirect('/account/' + message)
 
+
 def signOut(request):
     logout(request)
     return redirect('/')
-        
+
 
 def main(request):
     events = Event.objects.order_by('date')
@@ -160,6 +190,7 @@ def main(request):
     }
     return render(request, 'web/main.html', context)
 
+
 def account(request, message=""):
     user = request.user
     balance = user.profile.account_balance
@@ -187,12 +218,14 @@ def account(request, message=""):
     }
     return render(request, 'web/account.html', context)
 
+
 def balance(request):
     funds = request.POST['addFunds']
     user = request.user
     user.profile.account_balance += float(funds)
     user.profile.save()
     return redirect('/account')
+
 
 def history(request):
     user = request.user
@@ -216,6 +249,7 @@ def history(request):
     }
     return render(request, 'web/pastReservations.html', context)
 
+
 def attendant(request):
     eventId = request.POST['event']
     thisEvent = Event.objects.all().get(id=eventId)
@@ -223,6 +257,7 @@ def attendant(request):
         'event': thisEvent,
     }
     return render(request, 'web/attendant.html', context)
+
 
 def events(request):
     allEvents = Event.objects.order_by('-date')
@@ -236,6 +271,7 @@ def events(request):
     }
     return render(request, 'web/eventManagement.html', context)
 
+
 def addEvent(request):
     name = request.POST['name']
     date = request.POST['date']
@@ -244,19 +280,24 @@ def addEvent(request):
     latitude = request.POST['latitude']
     longitude = request.POST['longitude']
 
-    Event.objects.create(name=name, description=description, date=date, address=address, latitude=latitude, longitude=longitude)
+    Event.objects.create(name=name, description=description, date=date, address=address, latitude=latitude,
+                         longitude=longitude)
     return redirect('/events')
+
 
 def deleteEvent(request, eventId):
     event = Event.objects.get(pk=eventId)
     event.delete()
     return redirect('/events')
 
+
 def owners(request):
     return render(request, 'web/ownerManagement.html')
 
+
 def lots(request):
     return render(request, 'web/lotManagement.html')
+
 
 def info(request):
     # Common needed context
@@ -306,7 +347,8 @@ def info(request):
         newPrice = request.POST.get('newPrice', 10.0)
 
         # Create new parking lot & parking spot
-        thisNewLot = ParkingLot.objects.create(name=newName, address=newAddress, latitude=newLat, longitude=newLong, owner=User.objects.all().get(id=newOwnerId))
+        thisNewLot = ParkingLot.objects.create(name=newName, address=newAddress, latitude=newLat, longitude=newLong,
+                                               owner=User.objects.all().get(id=newOwnerId))
         chosenEvent = Event.objects.all().get(id=initialEventId)
         thisNewLot.event.add(chosenEvent)
         thisNewLot.save()
@@ -326,13 +368,15 @@ def info(request):
 
     return render(request, 'web/lotInfo.html', context)
 
+
 def map(request, id):
     event = Event.objects.all().get(id=id)
     return render(request, 'web/map.html', {'event': event})
 
+
 def defaultMap(request):
     return render(request, 'web/defaultMap.html')
 
+
 def about(request):
     return render(request, 'web/about.html')
-
