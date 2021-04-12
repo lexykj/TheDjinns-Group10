@@ -30,7 +30,15 @@ def reserve(request):
             events.append(e)
     lots = ParkingLot.objects.order_by('name')
     spots = ParkingSpot.objects.order_by('price')
-    return render(request, 'web/reserveSpot.html', {'events': events[:10], 'lots': lots, 'spots': spots, 'select': True})
+
+    # Get possible pre-filled lot value from the lot-info link to reserve a spot
+    preFilledId = request.POST.get('lotId', "")
+    if preFilledId != "":
+        preFilledLotName = ParkingLot.objects.all().get(id=preFilledId).name
+    else:
+        preFilledLotName = " -Select a Lot- "
+
+    return render(request, 'web/reserveSpot.html', {'events': events[:10], 'lots': lots, 'spots': spots, 'select': True, 'preFilledLotId': preFilledId, 'preFilledLotName': preFilledLotName})
 
 def selectSpot(request):
     eventId = request.GET['eventCategory']
@@ -251,35 +259,71 @@ def lots(request):
     return render(request, 'web/lotManagement.html')
 
 def info(request):
+    # Common needed context
     thisProfile = Profile.objects.get(user_id=request.user.id)
-    currentEventId = request.POST.get('eventForLot', 1)
-    spots = ParkingSpot.objects.all().filter(lot=currentEventId)
-    currentEvent = Event.objects.all().get(id=currentEventId)
-    allEventsForLot = []
 
-    # Get lot id from various entry points on main
-    reservationLotId = request.POST.get('whichCurrentLot', -1)
-    whichLotId = request.POST.get('whichLot', -1)
-    lotId = request.POST.get('lot', -1)
-    if reservationLotId != -1:
-        thisLot = ParkingLot.objects.all().get(id=reservationLotId)
-        allEventsForLot = thisLot.event.all()
-    elif whichLotId != -1:
-        thisLot = ParkingLot.objects.all().get(id=whichLotId)
-        allEventsForLot = thisLot.event.all()
-    elif lotId != -1:
-        thisLot = ParkingLot.objects.all().get(id=lotId)
-        allEventsForLot = thisLot.event.all()
+    # Determine whether this is a new lot request or not
+    if request.POST.get('registerNewLot') != 'doRegisterLot':
+        currentEventId = request.POST.get('eventForLot', 1)
+        currentEvent = Event.objects.all().get(id=currentEventId)
+        allEventsForLot = []
+
+        # Get lot id from various entry points on main
+        reservationLotId = request.POST.get('whichCurrentLot', -1)
+        whichLotId = request.POST.get('whichLot', -1)
+        lotId = request.POST.get('lot', -1)
+        if reservationLotId != -1:
+            thisLot = ParkingLot.objects.all().get(id=reservationLotId)
+            allEventsForLot = thisLot.event.all()
+        elif whichLotId != -1:
+            thisLot = ParkingLot.objects.all().get(id=whichLotId)
+            allEventsForLot = thisLot.event.all()
+        elif lotId != -1:
+            thisLot = ParkingLot.objects.all().get(id=lotId)
+            allEventsForLot = thisLot.event.all()
+        else:
+            thisLot = ParkingLot.objects.all()[0]
+        spots = ParkingSpot.objects.all().filter(lot=thisLot.id)
+
+        context = {
+            'isNew': False,
+            'currentEvent': currentEvent,
+            'lot': thisLot,
+            'spots': spots,
+            'profile': thisProfile,
+            'allEventsForLot': allEventsForLot,
+        }
+
     else:
-        thisLot = None
+        newName = request.POST.get('lotName', None)
+        newAddress = request.POST.get('lotAddress', None)
+        initialEventId = request.POST.get('chooseEvent', 1)
+        newOwnerId = request.POST.get('newOwnerId', request.user.id)
+        newLat = request.POST.get('latitude', 0.0)
+        newLong = request.POST.get('longitude', 0.0)
+        newSpotType = request.POST.get('newSpotType', 'Generic')
+        newQuantity = request.POST.get('newQuantity', 1)
+        newPrice = request.POST.get('newPrice', 10.0)
 
-    context = {
-        'currentEvent': currentEvent,
-        'lot': thisLot,
-        'spots': spots,
-        'profile': thisProfile,
-        'allEventsForLot': allEventsForLot,
-    }
+        # Create new parking lot & parking spot
+        thisNewLot = ParkingLot.objects.create(name=newName, address=newAddress, latitude=newLat, longitude=newLong, owner=User.objects.all().get(id=newOwnerId))
+        chosenEvent = Event.objects.all().get(id=initialEventId)
+        thisNewLot.event.add(chosenEvent)
+        thisNewLot.save()
+        thisNewSpot = ParkingSpot.objects.create(spotType=newSpotType, price=newPrice, totalSpots=newQuantity,
+                                                 currentEventAvailableSpots=newQuantity, lot=thisNewLot)
+        thisNewSpot.save()
+
+        # pass context to template
+        context = {
+            'isNew': True,
+            'currentEvent': chosenEvent,
+            'lot': thisNewLot,
+            'spots': ParkingSpot.objects.all().filter(lot=thisNewLot.id),
+            'profile': thisProfile,
+            'allEventsForLot': thisNewLot.event.all()
+        }
+
     return render(request, 'web/lotInfo.html', context)
 
 def map(request, id):
