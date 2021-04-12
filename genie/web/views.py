@@ -300,7 +300,7 @@ def info(request):
         initialEventId = request.POST.get('chooseEvent', 1)
         newOwnerId = request.POST.get('newOwnerId', request.user.id)
         newLat = request.POST.get('latitude', 0.0)
-        newLong = request.POST.get('longtitude', 0.0)
+        newLong = request.POST.get('longitude', 0.0)
         newSpotType = request.POST.get('newSpotType', 'Generic')
         newQuantity = request.POST.get('newQuantity', 1)
         newPrice = request.POST.get('newPrice', 10.0)
