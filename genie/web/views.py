@@ -309,10 +309,11 @@ def info(request):
         currentEvent = Event.objects.all().get(id=currentEventId)
         allEventsForLot = []
 
-        # Get lot id from various entry points on main
+        # Get lot id from various entry points on main or history
         reservationLotId = request.POST.get('whichCurrentLot', -1)
         whichLotId = request.POST.get('whichLot', -1)
         lotId = request.POST.get('lot', -1)
+        pastResId = request.POST.get('pastReservation', -1)
         if reservationLotId != -1:
             thisLot = ParkingLot.objects.all().get(id=reservationLotId)
             allEventsForLot = thisLot.event.all()
@@ -322,7 +323,16 @@ def info(request):
         elif lotId != -1:
             thisLot = ParkingLot.objects.all().get(id=lotId)
             allEventsForLot = thisLot.event.all()
+
+            # Entry point on history
+            if pastResId != -1:
+                pastReservation = Reservation.objects.all().get(id=pastResId)
+                currentEventId = pastReservation.event.id
+                currentEvent = Event.objects.all().get(id=currentEventId)
+
         else:
+            # this is a default value that should not be passed
+            # TODO: ensure this works as intended and there aren't any associated bugs
             thisLot = ParkingLot.objects.all()[0]
         spots = ParkingSpot.objects.all().filter(lot=thisLot.id)
 
