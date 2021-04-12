@@ -74,7 +74,9 @@
 												<select name="spotCategory" id="spotCategory">
 													<option value="">- Select Parking Type -</option>
 													{% for spot in spots %}
+														{% if spot.currentEventAvailableSpots > 0 %}
 														<option value={{spot.id}}>{{ spot.spotType }}</option>
+														{% endif %}
 													{% endfor %}
 												</select>
 											</div>
