@@ -9,8 +9,17 @@ import random
 import string
 
 def home(request):
-    events = Event.objects.order_by('date')[:4]
-    return render(request, 'web/signUp.html', {'events': events,})
+    events = Event.objects.order_by('date')
+    upcomingEvents = []
+    now = timezone.now()
+    for e in events:
+        dateStr = e.date
+        if not dateStr < now:
+            upcomingEvents.append(e)
+    context = {
+        'events': upcomingEvents[:4],
+    }
+    return render(request, 'web/signUp.html', context)
 
 def reserve(request):
     allEvents = Event.objects.order_by('-date')
