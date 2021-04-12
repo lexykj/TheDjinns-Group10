@@ -58,10 +58,13 @@
 								  async
 								></script>
 							</section>
-
-							<ul class="actions special">
-								<li><a href={% url "web:reserve" %} class="button">Reserve a Parking Spot</a></li>
-							</ul>
+							<form class="col-12" method="post" action="{% url 'web:reserve' %}">
+								{% csrf_token %}
+								<input type="hidden" value={{ lot.id }} id="lotId" name="lotId" />
+								<ul class="actions special">
+									<li><input type="submit" value="Reserve a Parking Spot" class="button" /></li>
+								</ul>
+							</form>
 						</section>
 						<section class="box special">
 							<!--

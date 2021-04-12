@@ -53,6 +53,7 @@
 
 												<select name="eventCategory" id="eventCategory">
 														<option value="">- Select Event -</option>
+
 														{% for event in events %}
 															<option value={{event.id}}>{{ event.name }} - {{event.description}}</option>
 														{% endfor %}
@@ -64,10 +65,24 @@
 
 											<div class="col-12" id="newDiv">
 												<select name="lotCategory" id="lotCategory">
-														<option value="">- Select Lot -</option>
-														{% for lot in lots %}
-															<option value={{lot.id}}>{{ lot.name }} - {{lot.address}}</option>
-														{% endfor %}
+														{% if preFilledLotId %}
+															<option value="{{ preFilledLotId }}">{{ preFilledLotName }} (From previously viewed page)</option>
+															<option value="">- Select Lot -</option>
+
+															{% for lot in lots %}
+																{% if lot.id != preFilledLotId %}
+																	<option value={{lot.id}}>{{ lot.name }} - {{lot.address}}</option>
+																{% endif %}
+															{% endfor %}
+
+														{% else %}
+															<option value="">- Select Lot -</option>
+
+															{% for lot in lots %}
+																<option value={{lot.id}}>{{ lot.name }} - {{lot.address}}</option>
+															{% endfor %}
+
+														{% endif %}
 												</select>
 											</div>
 											<div class="col-12">

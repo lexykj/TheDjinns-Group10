@@ -30,7 +30,15 @@ def reserve(request):
             events.append(e)
     lots = ParkingLot.objects.order_by('name')
     spots = ParkingSpot.objects.order_by('price')
-    return render(request, 'web/reserveSpot.html', {'events': events[:10], 'lots': lots, 'spots': spots, 'select': True})
+
+    # Get possible pre-filled lot value from the lot-info link to reserve a spot
+    preFilledId = request.POST.get('lotId', "")
+    if preFilledId != "":
+        preFilledLotName = ParkingLot.objects.all().get(id=preFilledId).name
+    else:
+        preFilledLotName = " -Select a Lot- "
+
+    return render(request, 'web/reserveSpot.html', {'events': events[:10], 'lots': lots, 'spots': spots, 'select': True, 'preFilledLotId': preFilledId, 'preFilledLotName': preFilledLotName})
 
 def selectSpot(request):
     eventId = request.GET['eventCategory']
