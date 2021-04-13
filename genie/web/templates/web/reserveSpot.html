@@ -51,7 +51,7 @@
 										<div class="row gtr-uniform gtr-50">
 											<div class="col-12">
 
-												<select name="eventCategory" id="eventCategory">
+												<select onchange="eventChange()" name="eventCategory" id="eventCategory">
 														<option value="">- Select Event -</option>
 
 														{% for event in events %}
@@ -62,8 +62,13 @@
 											<div class="col-12">
 												<h5><a href={% url "web:defaultMap" %}>See map of available lots</a></h5>
 											</div>
-
-											<div class="col-12" id="newDiv">
+											<script>
+												var e = document.getElementById("eventCategory");
+												var event = e.value;
+												console.log(event);
+												var x = document.getElementById("lotDiv")
+											</script>
+											<div class="col-12" id="lotDiv">
 												<select name="lotCategory" id="lotCategory">
 														{% if preFilledLotId %}
 															<option value="{{ preFilledLotId }}">{{ preFilledLotName }} (From previously viewed page)</option>
@@ -85,13 +90,35 @@
 														{% endif %}
 												</select>
 											</div>
+											<script>
+												var lotDiv = document.getElementById("lotDiv");
+												if (event === "") {
+													lotDiv.style.display = "none";
+												}
+												else {
+													lotDiv.sytle.display = "block";
+												}
+											function eventChange() {
+												var e = document.getElementById("eventCategory");
+												var event = e.value;
+												console.log(event);
+												if (event === "") {
+													lotDiv.style.display = "none";
+												}
+												else {
+													lotDiv.style.display = "block";
+												}
+											}
+											</script>
 											<div class="col-12">
 												<select name="spotCategory" id="spotCategory">
 													<option value="">- Select Parking Type -</option>
 													{% for spot in spots %}
-														{% if spot.currentEventAvailableSpots > 0 %}
+														<script>
+															var spot = "{{ spot.lot }}";
+															console.log(spot);
+														</script>
 														<option value={{spot.id}}>{{ spot.spotType }}</option>
-														{% endif %}
 													{% endfor %}
 												</select>
 											</div>
