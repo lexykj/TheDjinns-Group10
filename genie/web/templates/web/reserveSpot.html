@@ -80,6 +80,16 @@
 																{% endif %}
 															{% endfor %}
 
+														{% elif againLotId %}
+															<option value="{{ againLotId }}">{{ againLotName }} (From previous reservation)</option>
+															<option value="">- Select Lot -</option>
+
+															{% for lot in lots %}
+																{% if lot.id != againLotId %}
+																	<option value={{lot.id}}>{{ lot.name }} - {{lot.address}}</option>
+																{% endif %}
+															{% endfor %}
+
 														{% else %}
 															<option value="">- Select Lot -</option>
 
@@ -112,14 +122,23 @@
 											</script>
 											<div class="col-12">
 												<select name="spotCategory" id="spotCategory">
-													<option value="">- Select Parking Type -</option>
-													{% for spot in spots %}
-														<script>
-															var spot = "{{ spot.lot }}";
-															console.log(spot);
-														</script>
-														<option value={{spot.id}}>{{ spot.spotType }}</option>
-													{% endfor %}
+													{% if againSpotId %}
+														<option value="{{ againSpotId }}">{{ againSpotType }} (From previous reservation)</option>
+														<option value="">- Select Parking Type -</option>
+
+														{% for spot in spots %}
+															{% if spot.id != againSpotId %}
+																<option value={{spot.id}}>{{ spot.spotType }} @ {{ spot.lot.name }}</option>
+															{% endif %}
+														{% endfor %}
+													{% else %}
+														<option value="">- Select Parking Type -</option>
+
+														{% for spot in spots %}
+															<option value={{spot.id}}>{{ spot.spotType }} @ {{ spot.lot.name }}</option>
+														{% endfor %}
+
+													{% endif %}
 												</select>
 											</div>
 											<div class="col-3 col-12">
