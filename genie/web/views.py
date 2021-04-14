@@ -5,6 +5,7 @@ from apis.models import Event, ParkingLot, ParkingSpot, Reservation, Profile
 
 # import datetime
 from django.utils import timezone
+from datetime import date, time, datetime
 import random
 import string
 
@@ -69,6 +70,7 @@ def selectSpot(request):
     event = Event.objects.get(pk=eventId)
     lotId = request.GET['lotCategory']
     lot = ParkingLot.objects.get(pk=lotId)
+    print(lot)
     spotId = request.GET['spotCategory']
     spot = ParkingSpot.objects.get(pk=spotId)
     print(event)
@@ -275,12 +277,15 @@ def events(request):
 def addEvent(request):
     name = request.POST['name']
     date = request.POST['date']
+    time = request.POST['time']
     description = request.POST['description']
     address = request.POST['address']
     latitude = request.POST['latitude']
     longitude = request.POST['longitude']
 
-    Event.objects.create(name=name, description=description, date=date, address=address, latitude=latitude,
+    fullDate = date + " " + time
+
+    Event.objects.create(name=name, description=description, date=fullDate, address=address, latitude=latitude,
                          longitude=longitude)
     return redirect('/events')
 

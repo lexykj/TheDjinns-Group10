@@ -65,11 +65,14 @@
 							<form method="post" action={% url "web:add-event" %}>
 								{% csrf_token %}
 								<div class="row gtr-uniform gtr-50">
-									<div class="col-6 col-12-mobilep">
-										<input type="text" name="name" id="name" value="" placeholder="Event Name" />
-									</div>
-									<div class="col-6 col-12-mobilep">
+									<div class="col-3.5 col-12-mobilep">
 										<input class="button alt" type="date" name="date" id="date" value="" placeholder="Date" />
+									</div>
+									<div class="col-4 col-12-mobilep">
+										<input class="button alt" type="time" name="time" id="time" value=""/>
+									</div>
+									<div class="col-12">
+										<input type="text" name="name" id="name" value="" placeholder="Event Name" />
 									</div>
 									<div class="col-12">
 										<textarea name="description" id="description" placeholder="Describe the event" rows="4"></textarea>
