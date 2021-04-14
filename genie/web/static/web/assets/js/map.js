@@ -12,7 +12,6 @@ function initMap() {
     event_id = document.getElementById("map").getAttribute("eventid");
     //The below code is for the defaultMap view
 
-
     url = "http://127.0.0.1:8000/api/map_data/?event_id="+event_id;
 
     fetch(url)
@@ -28,14 +27,15 @@ function initMap() {
 
 function initLot() {
     lot_id = document.getElementById("map").getAttribute("lotid");
-    //The below code is for the defaultMap view
+    //The below code is for the lot specific view
 
-
-    url = "http://127.0.0.1:8000/api/lot_data/?lot_id="+event_id;
+    url = "http://127.0.0.1:8000/api/lot_data/?lot_id="+lot_id;
 
     fetch(url)
         .then(response => response.json())
-        .then(data => addLotMap(data));
+        .then(data => {
+            addLotMap(data)
+        });
 }
 
 function addMap(data) {

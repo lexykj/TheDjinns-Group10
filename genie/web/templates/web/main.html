@@ -168,17 +168,17 @@
 							<br />
 							<button class="collapsible button alt fit">Enter Lot Details</button>
 							<div class="content">
-								<form class="" action="{% url 'web:lot-info' %}" method="post">
+								<form action="{% url 'web:lot-info' %}" method="post">
 									{% csrf_token %}
 									<input type="hidden" value="doRegisterLot" id="registerNewLot" name="registerNewLot" />
 									<br />
-									<input type="text" placeholder="Name..." id="lotName" />
+									<input type="text" placeholder="Name..." id="lotName" name="lotName"/>
 									<br />
-									<input type="text" placeholder="Address..." id="lotAddress" />
+									<input type="text" placeholder="Address..." id="lotAddress" name="lotAddress"/>
 									<br />
-									<select name="event" id="chooseEvent">
+									<select name="chooseEvent" id="chooseEvent">
 										<option value="">Select Initial Event to Offer Parking For</option>
-										{% for event in events %}
+										{% for event in upcomingEvents %}
 											<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
 										{% endfor %}
 									</select>
@@ -187,11 +187,11 @@
 									<div class="row row-gtr-uniform">
 										<div class="col-6">
 											<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Latitude</a></h4>
-											<input type="number" class="button alt" id="latitude" />
+											<input type="number" step="any" class="button alt" id="latitude" name="latitude" />
 										</div>
 										<div class="col-6">
 											<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Longtitude</a></h4>
-											<input type="number" class="button alt" id="longtitude" />
+											<input type="number" step="any" class="button alt" id="longitude" name="longitude" />
 										</div>
 									</div>
 									<br />
@@ -199,9 +199,9 @@
 									<br />
 									<!-- Register spots for this parking lot -->
 									<div class="row row-gtr-uniform" style="padding-left: 2em;">
-										<input type="text" class="col-4 button alt" placeholder="Spot Type..." />
-										<input type="number" class="col-4 button alt" placeholder="Quantity..." />
-										<input type="number" class="col-4 button alt" placeholder="Price..." />
+										<input type="text" class="col-4 button alt" name="newSpotType" id="newSpotType" placeholder="Spot Type..." />
+										<input type="number" class="col-4 button alt" name="newQuantity" id="newQuantity" placeholder="Quantity..." />
+										<input type="number" class="col-4 button alt" step="0.1" name="newPrice" id="newPrice" placeholder="Price..." />
 									</div>
 									<br />
 									<input class="button" type="submit" value="Register your New Lot"/>

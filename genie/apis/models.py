@@ -66,3 +66,6 @@ class Reservation(models.Model):
 
 # admin.site.unregister(User)
 # admin.site.register(User)
+
+
+# len(Reservation.objects.all().filter(id=whateverEvent))
