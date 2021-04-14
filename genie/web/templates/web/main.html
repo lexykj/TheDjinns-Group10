@@ -185,13 +185,31 @@
 									<input type="hidden" value="{{ user.id }}" id="newOwnerId" name="newOwnerId" />
 									<br />
 									<div class="row row-gtr-uniform">
-										<div class="col-6">
+										<div class="col-4">
 											<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Latitude</a></h4>
 											<input type="number" step="any" class="button alt" id="latitude" name="latitude" />
 										</div>
-										<div class="col-6">
+										<div class="col-4">
 											<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Longtitude</a></h4>
 											<input type="number" step="any" class="button alt" id="longitude" name="longitude" />
+										</div>
+										<div class="col-4">
+										<h4>Calculate from Address field</a></h4>
+											<input class="button" value="Calculate" id="latLngButton"/>
+											<script>
+												document.getElementById("latLngButton").addEventListener("click", () => {
+													address = document.getElementById("lotAddress").value;
+													url = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDBdkOXzfc2rj7a57BnP3AI0r9TrT2nmxY&address=" + address;
+													fetch(url)
+														.then(response => response.json())
+														.then(data => {
+															document.getElementById("lotAddress").value = data["results"][0]["formatted_address"];
+															geocode = data["results"][0]["geometry"]["location"];
+															document.getElementById("latitude").value = geocode["lat"];
+															document.getElementById("longitude").value = geocode["lng"];
+														});
+												});
+											</script>
 										</div>
 									</div>
 									<br />
