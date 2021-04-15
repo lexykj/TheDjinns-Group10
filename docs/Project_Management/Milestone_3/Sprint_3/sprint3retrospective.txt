@@ -1,0 +1,11 @@
+Sprint 3 Retrospective:
+
+- completed most pages functionality
+
+Functionality working so far:
+- reserve a spot now filters options
+- history page done
+- lotinfo page done
+- about page done
+- events page done
+- main page done
