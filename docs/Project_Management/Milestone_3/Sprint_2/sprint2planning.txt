@@ -2,7 +2,7 @@ Retrospective from Sprint 1:
 -models are mostly done
 -html templates 1/2 to 2/3 done
 
-
+Scrum Master: Autumn Arbon
 
 Sprint 2 Planning:
 
