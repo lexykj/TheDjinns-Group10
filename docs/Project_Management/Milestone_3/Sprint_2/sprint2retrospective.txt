@@ -1,0 +1,10 @@
+Sprint 2 Retrospective:
+
+- 1 html page left
+- all but 1 html page connected to Django
+- Map API is mostly functional - can show an event and lot locations on map
+
+Functionality working so far:
+- reserve spot, still needs to render lots and spots according to previous selections
+- login/create account
+- main page showing upcoming events and conditional rendering
