@@ -40,7 +40,7 @@
 			<!-- Main -->
 				<section id="main" class="container">
 					<header>
-						<h2>Lot Management Page for Owners</h2>
+						<h2>Manage Your Lots</h2>
 						<!-- 
 							1. View all parking spots
 							2. Edit all parking spots
@@ -51,218 +51,54 @@
 								- Change location?
 						-->
 					</header>
+
+					{% if lot_list %}
+
+					{% for parkingLot in lot_list %}
 					<section class="box">
-						<h4 class="special" style="text-align: center;">Total Parking Spots: #</h4>
+						<h3 class="special" style="text-align: center;">{{ parkingLot.name }}</h3>
+						<h4>Address: {{ parkingLot.address }}</h4>
+						<h4>Next Event: NOT IMPLEMENTED</h4>
+						<h4>Attendants: NOT IMPLEMENTED</h4>
+						<h4>Total Parking Spots: NOT IMPLEMENTED</h4>
+
 						<div class="table-wrapper">
 							<table style="text-align: left;">
 								<thead>
 									<tr>
-										<th># & Actions</th>
-										<th>Type</th>
-										<th>Price</th>											
+										<th>Spot Type</th>
+										<th>Quantity</th>
+										<th>Price</th>
 									</tr>
 								</thead>
 								<tbody>
+									<!--
+									{--% for spotType in parking_spot_types %--}
+									-->
 									<tr>
-										<td>1</td>
-										<td>Extended/RV</td>
-										<td>$25.00</td>
+										<td>NOT IMPLEMENTED</td>
+										<td>NOT IMPLEMENTED</td>
+										<td>NOT IMPLEMENTED</td>
 									</tr>
-									<tr class="row">
-										<td class="col-4">
-											<form method="post" action="#">
-												<select name="category" id="category">
-													<option value="">- Select Type -</option>
-													<option value="1">1</option>
-													<option value="1">2</option>
-													<option value="1">3</option>
-													<option value="1">4</option>
-												</select>
-												<div>
-													<input type="submit" value="Change Type" class="small fit" />
-												</div>
-											</form>
-										</td>
-										<td class="col-4">
-											<form method="post" action="#">
-												<div>
-													<input type="text" name="query" id="query" value="" placeholder="Enter New Price" class="small" />
-												</div>
-												<div>
-													<input type="submit" value="Change Price" class="small fit" />
-												</div>
-											</form>
-										</td>
-										<td class="col-4">
-											<a class="button small fit">Delete</a>
-										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Extended/RV</td>
-										<td>$25.00</td>
-									</tr>
-									<tr class="row">
-										<td class="col-4">
-											<form method="post" action="#">
-												<select name="category" id="category">
-													<option value="">- Select Type -</option>
-													<option value="1">1</option>
-													<option value="1">2</option>
-													<option value="1">3</option>
-													<option value="1">4</option>
-												</select>
-												<div>
-													<input type="submit" value="Change Type" class="small fit" />
-												</div>
-											</form>
-										</td>
-										<td class="col-4">
-											<form method="post" action="#">
-												<div>
-													<input type="text" name="query" id="query" value="" placeholder="Enter New Price" class="small" />
-												</div>
-												<div>
-													<input type="submit" value="Change Price" class="small fit" />
-												</div>
-											</form>
-										</td>
-										<td class="col-4">
-											<a class="button small fit">Delete</a>
-										</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Extended/RV</td>
-										<td>$25.00</td>
-									</tr>
-									<tr class="row">
-										<td class="col-4">
-											<form method="post" action="#">
-												<select name="category" id="category">
-													<option value="">- Select Type -</option>
-													<option value="1">1</option>
-													<option value="1">2</option>
-													<option value="1">3</option>
-													<option value="1">4</option>
-												</select>
-												<div>
-													<input type="submit" value="Change Type" class="small fit" />
-												</div>
-											</form>
-										</td>
-										<td class="col-4">
-											<form method="post" action="#">
-												<div>
-													<input type="text" name="query" id="query" value="" placeholder="Enter New Price" class="small" />
-												</div>
-												<div>
-													<input type="submit" value="Change Price" class="small fit" />
-												</div>
-											</form>
-										</td>
-										<td class="col-4">
-											<a class="button small fit">Delete</a>
-										</td>
-									</tr>
-									<tr>
-										<td>>4</td>
-										<td>Extended/RV</td>
-										<td>$25.00</td>
-									</tr>
-									<tr class="row">
-										<td class="col-4">
-											<form method="post" action="#">
-												<select name="category" id="category">
-													<option value="">- Select Type -</option>
-													<option value="1">1</option>
-													<option value="1">2</option>
-													<option value="1">3</option>
-													<option value="1">4</option>
-												</select>
-												<div>
-													<input type="submit" value="Change Type" class="small fit" />
-												</div>
-											</form>
-										</td>
-										<td class="col-4">
-											<form method="post" action="#">
-												<div>
-													<input type="text" name="query" id="query" value="" placeholder="Enter New Price" class="small" />
-												</div>
-												<div>
-													<input type="submit" value="Change Price" class="small fit" />
-												</div>
-											</form>
-										</td>
-										<td class="col-4">
-											<a class="button small fit">Delete</a>
-										</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>Extended/RV</td>
-										<td>$25.00</td>
-									</tr>
-									<tr class="row">
-										<td class="col-4">
-											<form method="post" action="#">
-												<select name="category" id="category">
-													<option value="">- Select Type -</option>
-													<option value="1">1</option>
-													<option value="1">2</option>
-													<option value="1">3</option>
-													<option value="1">4</option>
-												</select>
-												<div>
-													<input type="submit" value="Change Type" class="small fit" />
-												</div>
-											</form>
-										</td>
-										<td class="col-4">
-											<form method="post" action="#">
-												<div>
-													<input type="text" name="query" id="query" value="" placeholder="Enter New Price" class="small" />
-												</div>
-												<div>
-													<input type="submit" value="Change Price" class="small fit" />
-												</div>
-											</form>
-										</td>
-										<td class="col-4">
-											<a class="button small fit">Delete</a>
-										</td>
-									</tr>
+									<!--
+									{--% endfor %--}
+									-->
 								</tbody>
 							</table>
 						</div>
+						<div class="row gtr-50 gtr-uniform aln-center">
+							<div class="col-4 col-12-mobilep">
+								<a href="{% url 'web:home' %}" class="button">Edit Lot (Doesn't work)</a>
+							</div>
+						</div>
 					</section>
+					{% endfor %}
 
+					{% else %}
 					<section class="box">
-						<h3 style="text-align: center;">Add a Parking Spot</h3>
-						<p style="text-align: center;">Enter details:</p>
-						<form method="post" action="#" class="special row">
-							<div class="">
-								<select name="category" id="category">
-									<option value="">- Select Type -</option>
-									<option value="1">1</option>
-									<option value="1">2</option>
-									<option value="1">3</option>
-									<option value="1">4</option>
-								</select>
-							</div>
-							<br />
-							<div class="col-6">
-								<input type="text" name="price" id="price" value="" placeholder="Enter Price" class="small" />
-							</div>
-							<br />
-							<div class="">
-								<ul class="actions">
-									<li><input type="submit" value="Create Event" /></li>
-								</ul>
-							</div>
-						</form>
+						<h4>You do not own any lots</h4>
 					</section>
+					{% endif %}
 
 					<section class="box">
 						<p>Map here</p>
