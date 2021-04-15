@@ -255,8 +255,10 @@ def history(request):
 def attendant(request):
     eventId = request.POST['event']
     thisEvent = Event.objects.all().get(id=eventId)
+    theseLots = ParkingLot.objects.filter(event=eventId)
     context = {
         'event': thisEvent,
+        'lots': theseLots,
     }
     return render(request, 'web/attendant.html', context)
 
