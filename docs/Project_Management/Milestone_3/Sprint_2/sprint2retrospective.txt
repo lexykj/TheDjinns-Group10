@@ -1,10 +1,37 @@
 Sprint 2 Retrospective:
+-----------------------
 
-- 1 html page left
-- all but 1 html page connected to Django
-- Map API is mostly functional - can show an event and lot locations on map
+What went well:
+---------------
+  - 1 html page left
+  - all but 1 html page connected to Django
+  - Map API is mostly functional - can show an event and lot locations on map
 
-Functionality working so far:
-- reserve spot, still needs to render lots and spots according to previous selections
-- login/create account
-- main page showing upcoming events and conditional rendering
+  Functionality working so far:
+    - reserve spot, still needs to render lots and spots according to previous selections
+    - login/create account
+    - main page showing upcoming events and conditional rendering
+
+What didn't go well:
+--------------------
+  - Still have work to do on maps
+  - Didn't get as much functionality done
+
+What specific things we can do to improve:
+-------------------------------------------
+  - Have at least something little done by each standup meeting
+
+
+Measurement criteria:
+---------------------
+- Front-end: Joel and Lexy
+  - 12 html pages: Joel - 35%
+  - 2 html pages: Lexy - 15%
+- Back-end + Django models: Autumn and Palani
+  - Map API: Palani - 25%
+  - Converting html to Django: Autumn - 25%
+TOTAL: 100%
+
+Scrum Master: Autumn
+Members present: Joel, Lexy, Palani
+
