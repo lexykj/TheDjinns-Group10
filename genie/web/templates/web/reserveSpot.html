@@ -261,7 +261,7 @@
 										</div>
 									</form>
 									{% else %}
-										<form method="post" action={% url 'web:pay' event.id spot.id %}>
+										<form method="post" action={% url 'web:pay' event.id lot.id spot.id %}>
 											{% csrf_token %}
 											<div>
 												<div class="row">
