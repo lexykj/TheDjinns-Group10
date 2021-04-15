@@ -33,21 +33,26 @@ def reserve(request):
             events.append(e)
     lots = ParkingLot.objects.order_by('name')
     spots = ParkingSpot.objects.order_by('price')
+    reservations = Reservation.objects.order_by('event')
 
     # Lot-Info Reserve Link Autofill
     preFilledId = request.POST.get('lotId', "")
     if preFilledId != "":
-        preFilledLotName = ParkingLot.objects.all().get(id=preFilledId).name
+        preFilledLot = ParkingLot.objects.all().get(id=preFilledId)
+        preFilledLotName = preFilledLot.name
     else:
+        preFilledLot = None
         preFilledLotName = " -Select Lot- "
 
     # History Reserve Again Autofill
     againLotId = request.POST.get('againLotId', "")
     if againLotId != "":
-        againLotName = ParkingLot.objects.all().get(id=againLotId).name
+        againLot = ParkingLot.objects.all().get(id=againLotId)
+        againLotName = againLot.name
         againSpotId = request.POST.get('againSpotId', '')
         againSpotType = ParkingSpot.objects.all().get(id=againSpotId)
     else:
+        againLot = None
         againLotName = " -Select Lot- "
         againSpotId = ''
         againSpotType = " -Select Parking Type- "
@@ -56,12 +61,15 @@ def reserve(request):
                                                     'lots': lots,
                                                     'spots': spots,
                                                     'select': True,
+                                                    'preFilledLot': preFilledLot,
                                                     'preFilledLotId': preFilledId,
                                                     'preFilledLotName': preFilledLotName,
                                                     'againLotId': againLotId,
+                                                    'againLot': againLot,
                                                     'againLotName': againLotName,
                                                     'againSpotId': againSpotId,
                                                     'againSpotType': againSpotType,
+                                                    'reservations': reservations,
                                                     })
 
 
@@ -211,6 +219,7 @@ def account(request, message=""):
                 currRes.append(r)
             res_list.append(r)
     context = {
+        'user': user,
         'balance': balance,
         'email': email,
         'message': message,
