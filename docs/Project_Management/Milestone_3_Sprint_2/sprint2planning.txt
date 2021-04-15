@@ -1,0 +1,25 @@
+Retrospective from Sprint 1:
+-models are mostly done
+-html templates 1/2 to 2/3 done
+
+
+
+Sprint 2 Planning:
+
+GOALS:
+- Finish creating the last 9 html pages
+- Connect all html pages to django
+- Complete APIs
+   - mostly functional
+
+- Integrate javascript for maps into html
+
+TODO:
+- create issue to finish each html page
+- create issue for each html django page
+- create issue for events/parking lot API
+- create issue for putting map javascript into html
+
+Goal for presentation:
+- be able to login/create account
+- reserve a spot
