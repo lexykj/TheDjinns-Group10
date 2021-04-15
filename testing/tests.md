@@ -7,21 +7,21 @@ home/signUp
 
 Requirements
 
-	1. Sign up for a new account
+	1. Sign up for a new account - PASS
 
 
 reserve
 
 Requirements
 
-	1. Reserve a parking spot for an upcoming event
+	1. Reserve a parking spot for an upcoming event - PASS
 
 
 loginpage/signIn
 
 Requirements
 
-	1. Log into an account
+	1. Log into an account - PASS
 
 
 main
@@ -36,9 +36,9 @@ account
 
 Requirements
 
-	1. Change a password
-	2. Add to an account balance
-	3. View owner revenue
+	1. Change a password - PASS
+	2. Add to an account balance - PASS
+	3. View owner revenue - FAIL
 
 
 history
@@ -60,7 +60,7 @@ events
 
 Requirements
 
-	1. Add an event
+	1. Add an event - PASS
 
 
 owners
