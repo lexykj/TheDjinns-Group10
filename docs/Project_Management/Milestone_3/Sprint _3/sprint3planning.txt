@@ -1,0 +1,11 @@
+Retrospective from Sprint 2:
+- 1 html page left
+- all but 1 html page connected to Django
+- Map API is mostly functional - can show an event and lot locations on map
+
+Scrum Master: Palani Johnson
+
+Sprint 2 Planning:
+
+GOALS:
+- Complete functionality for most pages
