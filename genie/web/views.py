@@ -319,8 +319,13 @@ def owners(request):
 def lots(request):
     user = request.user
     lot_list = ParkingLot.objects.filter(owner=user)
+    event_limit = 5
+    attendant_limit = 5
 
-    return render(request, 'web/lotManagement.html', {'lot_list': lot_list})
+    return render(request, 'web/lotManagement.html', {
+        'lot_list': lot_list,
+        'event_limit': event_limit,
+    })
 
 
 def info(request):

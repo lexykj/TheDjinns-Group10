@@ -53,14 +53,27 @@
 					</header>
 
 					{% if lot_list %}
-
 					{% for parkingLot in lot_list %}
 					<section class="box">
 						<h3 class="special" style="text-align: center;">{{ parkingLot.name }}</h3>
-						<h4>Address: {{ parkingLot.address }}</h4>
-						<h4>Next Event: NOT IMPLEMENTED</h4>
-						<h4>Attendants: NOT IMPLEMENTED</h4>
-						<h4>Total Parking Spots: NOT IMPLEMENTED</h4>
+						<h4><strong>Address:</strong> {{ parkingLot.address }}</h4>
+						<h4><strong>Upcoming Events:</strong>
+							{% if parkingLot.event.all %}
+								{% for event in parkingLot.event.all %}
+									{% if forloop.counter0 < event_limit %}
+										{% if forloop.last %}
+											{{ event }}
+										{% else %}
+											{{ event }},
+										{% endif %}
+									{% endif %}
+								{% endfor %}
+							{% else %}
+								No events
+							{% endif %}
+						</h4>
+						<h4><strong>Attendants:</strong> NOT IMPLEMENTED</h4>
+						<h4><strong>Total Parking Spots:</strong> NOT IMPLEMENTED</h4>
 
 						<div class="table-wrapper">
 							<table style="text-align: left;">
