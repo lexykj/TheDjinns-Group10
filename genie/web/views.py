@@ -1,14 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from apis.models import Event, ParkingLot, ParkingSpot, Reservation, Profile
+from django.core.exceptions import ObjectDoesNotExist
+from apis.models import Revenue, Event, ParkingLot, ParkingSpot, Reservation, Profile
 
 # import datetime
 from django.utils import timezone
 from datetime import date, time, datetime
 import random
 import string
-
 
 def home(request):
     events = Event.objects.order_by('date')
@@ -85,12 +85,17 @@ def selectSpot(request):
     return render(request, 'web/reserveSpot.html', {'event': event, 'lot': lot, 'spot': spot, 'select': False})
 
 
-def pay(request, eventId, spotId):
+def pay(request, eventId, lotId, spotId):
     event = Event.objects.get(pk=eventId)
     spot = ParkingSpot.objects.get(pk=spotId)
+    lot = ParkingLot.objects.get(pk=lotId)
+    # try:
+    #     revenue = Revenue.objects.get(event)
+    # except ObjectDoesNotExist:
+    #     revenue = Revenue.objects.create(event=event, lot=lot)
+    # revenue.amount += spot.price
+    # revenue.save()
     user = request.user
-    spot.currentEventAvailableSpots -= 1
-    spot.save()
     user.profile.account_balance -= spot.price
     user.profile.save()
     uuid = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(8))

@@ -64,6 +64,11 @@ class Reservation(models.Model):
     def __str__(self) -> str:
         return str(self.uuid)
 
+class Revenue(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    lot = models.ForeignKey(ParkingLot, on_delete=models.CASCADE)
+    amount = models.FloatField(default=0.0)
+
 # admin.site.unregister(User)
 # admin.site.register(User)
 
