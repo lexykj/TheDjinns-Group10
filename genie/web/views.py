@@ -349,7 +349,9 @@ def info(request):
 
     # Determine whether this is a new lot request or not
     if request.POST.get('registerNewLot') != 'doRegisterLot':
-        currentEventId = request.POST.get('eventForLot', 1)
+        currentEventId = request.POST.get('eventForLot', -1)
+        if currentEventId == -1:
+            currentEventId = request.POST.get('passEvent', -1)
         currentEvent = Event.objects.all().get(id=currentEventId)
         allEventsForLot = []
 
@@ -376,10 +378,15 @@ def info(request):
 
         else:
             # this is a default value that should not be passed
-            # TODO: ensure this works as intended and there aren't any associated bugs
             thisLot = ParkingLot.objects.all()[0]
         spots = ParkingSpot.objects.all().filter(lot=thisLot.id)
-
+        reservations = Reservation.objects.all().filter(event=currentEvent)
+        reservationTotals = {}
+        for spot in spots:
+            reservationTotals[spot] = spot.totalSpots
+            for reservation in reservations:
+                if reservation.spot == spot:
+                    reservationTotals[spot] -= 1
         context = {
             'isNew': False,
             'currentEvent': currentEvent,
@@ -387,6 +394,8 @@ def info(request):
             'spots': spots,
             'profile': thisProfile,
             'allEventsForLot': allEventsForLot,
+            'allReservations': reservations,
+            'availableSpots': reservationTotals,
         }
 
     else:
