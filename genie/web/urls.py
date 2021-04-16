@@ -21,6 +21,7 @@ urlpatterns = [
     path('delete-event/<int:eventId>', views.deleteEvent, name='delete-event'),
     path('owners', views.owners, name='owners'),
     path('lots', views.lots, name='lots'),
+    path('lotEdit/<int:parkingLot_id>', views.lotEdit, name='lotEdit'),
     path('lot-info', views.info, name='lot-info'),
     path('signIn', views.signIn, name='signIn'),
     path('signUp', views.signUp, name='signUp'),

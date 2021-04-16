@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -335,6 +335,12 @@ def lots(request):
         'lot_list': lot_list,
         'total_spots': total_spots,
     })
+
+
+def lotEdit(request, parkingLot_id):
+    parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
+
+    return render(request, 'web/lotEdit.html')
 
 
 def info(request):
