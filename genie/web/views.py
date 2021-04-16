@@ -339,8 +339,22 @@ def lots(request):
 
 def lotEdit(request, parkingLot_id):
     parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
+    user = request.user
+    event_list = parkingLot.event.all()
+    attendant_list = parkingLot.profile_set.all()
+    spot_list = parkingLot.parkingspot_set.all()
+    total_spots = 0
 
-    return render(request, 'web/lotEdit.html')
+    for spot in spot_list:
+        total_spots += spot.totalSpots
+
+    return render(request, 'web/lotEdit.html', {
+        'attendant_list': attendant_list,
+        'event_list': event_list,
+        'parkingLot': parkingLot,
+        'spot_list': spot_list,
+        'total_spots': total_spots,
+    })
 
 
 def info(request):
