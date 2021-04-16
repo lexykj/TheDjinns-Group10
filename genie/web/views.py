@@ -321,11 +321,19 @@ def lots(request):
     lot_list = ParkingLot.objects.filter(owner=user)
     event_limit = 5
     attendant_limit = 5
+    total_spots = [0]*len(lot_list)
 
+    for i in range(len(lot_list)):
+        for spot in lot_list[i].parkingspot_set.all():
+            total_spots[i] += spot.totalSpots
+
+    data_list = zip(lot_list, total_spots)
     return render(request, 'web/lotManagement.html', {
         'attendant_limit': attendant_limit,
+        'data_list': data_list,
         'event_limit': event_limit,
         'lot_list': lot_list,
+        'total_spots': total_spots,
     })
 
 

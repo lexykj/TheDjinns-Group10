@@ -52,14 +52,14 @@
 						-->
 					</header>
 
-					{% if lot_list %}
-					{% for parkingLot in lot_list %}
+					{% if data_list %}
+					{% for parkingLot in data_list %}
 					<section class="box">
-						<h3 class="special" style="text-align: center;">{{ parkingLot.name }}</h3>
-						<h4><strong>Address:</strong> {{ parkingLot.address }}</h4>
+						<h3 class="special" style="text-align: center;">{{ parkingLot.0.name }}</h3>
+						<h4><strong>Address:</strong> {{ parkingLot.0.address }}</h4>
 						<h4><strong>Upcoming Events:</strong>
-							{% if parkingLot.event.all %}
-								{% for event in parkingLot.event.all %}
+							{% if parkingLot.0.event.all %}
+								{% for event in parkingLot.0.event.all %}
 									{% if forloop.counter0 < event_limit %}
 										{% if forloop.last %}
 											{{ event }}
@@ -73,8 +73,8 @@
 							{% endif %}
 						</h4>
 						<h4><strong>Attendants (usernames):</strong>
-							{% if parkingLot.profile_set.all %}
-								{% for attendant in parkingLot.profile_set.all %}
+							{% if parkingLot.0.profile_set.all %}
+								{% for attendant in parkingLot.0.profile_set.all %}
 									{% if forloop.counter0 < attendant_limit %}
 										{% if forloop.last %}
 											{{ attendant }}
@@ -87,21 +87,22 @@
 								No Attendants yet
 							{% endif %}
 						</h4>
-						<h4><strong>Total Parking Spots:</strong> NOT IMPLEMENTED</h4>
+
+						<h4><strong>Total Parking Spots: </strong>{{ parkingLot.1 }}</h4>
 
 						<div class="table-wrapper">
 							<table style="text-align: left;">
 								<thead>
 									<tr>
-										<th>Spot Type</th>
-										<th>Quantity</th>
-										<th>Price</th>
+										<th><strong>Spot Type</strong></th>
+										<th><strong>Quantity</strong></th>
+										<th><strong>Price</strong></th>
 									</tr>
 								</thead>
 
 								<tbody>
-									{% if parkingLot.parkingspot_set.all %}
-										{% for spot in parkingLot.parkingspot_set.all %}
+									{% if parkingLot.0.parkingspot_set.all %}
+										{% for spot in parkingLot.0.parkingspot_set.all %}
 										<tr>
 											<td>{{ spot.spotType }}</td>
 											<td>{{ spot.totalSpots }}</td>
