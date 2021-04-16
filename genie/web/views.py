@@ -323,8 +323,9 @@ def lots(request):
     attendant_limit = 5
 
     return render(request, 'web/lotManagement.html', {
-        'lot_list': lot_list,
+        'attendant_limit': attendant_limit,
         'event_limit': event_limit,
+        'lot_list': lot_list,
     })
 
 

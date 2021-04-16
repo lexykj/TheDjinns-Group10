@@ -72,7 +72,21 @@
 								No events
 							{% endif %}
 						</h4>
-						<h4><strong>Attendants:</strong> NOT IMPLEMENTED</h4>
+						<h4><strong>Attendants (usernames):</strong>
+							{% if parkingLot.profile_set.all %}
+								{% for attendant in parkingLot.profile_set.all %}
+									{% if forloop.counter0 < attendant_limit %}
+										{% if forloop.last %}
+											{{ attendant }}
+										{% else %}
+											{{ attendant }},
+										{% endif %}
+									{% endif %}
+								{% endfor %}
+							{% else %}
+								No Attendants yet
+							{% endif %}
+						</h4>
 						<h4><strong>Total Parking Spots:</strong> NOT IMPLEMENTED</h4>
 
 						<div class="table-wrapper">
@@ -84,19 +98,25 @@
 										<th>Price</th>
 									</tr>
 								</thead>
+
 								<tbody>
-									<!--
-									{--% for spotType in parking_spot_types %--}
-									-->
-									<tr>
-										<td>NOT IMPLEMENTED</td>
-										<td>NOT IMPLEMENTED</td>
-										<td>NOT IMPLEMENTED</td>
-									</tr>
-									<!--
-									{--% endfor %--}
-									-->
+									{% if parkingLot.parkingspot_set.all %}
+										{% for spot in parkingLot.parkingspot_set.all %}
+										<tr>
+											<td>{{ spot.spotType }}</td>
+											<td>{{ spot.totalSpots }}</td>
+											<td>${{ spot.price|stringformat:".2f" }}</td>
+										</tr>
+										{% endfor %}
+									{% else %}
+										<tr>
+											<td>No spots available</td>
+											<td></td>
+											<td></td>
+										</tr>
+									{% endif %}
 								</tbody>
+
 							</table>
 						</div>
 						<div class="row gtr-50 gtr-uniform aln-center">
