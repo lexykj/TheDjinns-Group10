@@ -223,6 +223,11 @@ def account(request, message=""):
             else:
                 currRes.append(r)
             res_list.append(r)
+    revenueList = Revenue.objects.order_by('lot')
+    revenueAmount=0
+    for rev in revenueList:
+        if rev.lot.owner == user:
+            revenueAmount += rev.amount
     context = {
         'user': user,
         'balance': balance,
@@ -231,6 +236,7 @@ def account(request, message=""):
         'reservations': res_list,
         'pastReservations': pastRes[:4],
         'currentReservations': currRes,
+        'revenue': revenueAmount
     }
     return render(request, 'web/account.html', context)
 
@@ -389,6 +395,7 @@ def info(request):
         thisNewSpot = ParkingSpot.objects.create(spotType=newSpotType, price=newPrice, totalSpots=newQuantity,
                                                  currentEventAvailableSpots=newQuantity, lot=thisNewLot)
         thisNewSpot.save()
+        Revenue.objects.create(event=chosenEvent, lot=thisNewLot, amount=0.0)
 
         # pass context to template
         context = {
