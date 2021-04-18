@@ -46,16 +46,26 @@
 							<div class="col-6 col-12-narrower">
 								<!-- Form -->
 								<h3>Enter customer reservation codes here...</h3>
-								<form method="post" action="#">
+								<form action="{% url 'web:attendant' %}" method="post" >
+									{% csrf_token %}
 									<div class="row gtr-uniform gtr-50">
 										<div class="col-6 col-12-mobilep">
 											<input type="text" name="query" id="query" value="" placeholder="Reservation Code" />
 										</div>
+										<input type="hidden" name="event" value={{ event.id }} id="event" />
 										<div class="col-4 col-12-mobilep">
 											<input type="submit" value="Check In" class="fit" />
 										</div>
 									</div>
 								</form>
+								
+								{% if checked_in != None %}
+									{% if checked_in %}
+										<h1> Checked {{ user.username }} into a {{ spot }} spot! </h1>
+									{% else %}
+										<h1> Invalid UUID! </h1>
+									{% endif%}
+								{% endif%}
 							</div>
 
 							<div class="col-6 col-12-narrower">

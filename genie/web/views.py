@@ -268,12 +268,25 @@ def history(request):
 
 def attendant(request):
     eventId = request.POST['event']
-    thisEvent = Event.objects.all().get(id=eventId)
-    theseLots = ParkingLot.objects.filter(event=eventId)
+    event = Event.objects.all().get(id=eventId)
     context = {
-        'event': thisEvent,
-        'lots': theseLots,
+        'event': event,
+        'checked_in': None
     }
+    if 'query' in request.POST:
+        context['checked_in'] = False
+        uuid = request.POST['query']
+
+        for res in Reservation.objects.filter(uuid=uuid):
+            if res.event == event:
+                for lot in request.user.profile.attendant_for.all():
+                    if lot == res.spot.lot:
+                        context['checked_in'] = True
+                        res.checked_in = True
+                        res.save()
+                        context['user'] = res.user
+                        context['spot'] = res.spot.spotType
+        
     return render(request, 'web/attendant.html', context)
 
 
