@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from apis.models import Revenue, Event, ParkingLot, ParkingSpot, Reservation, Profile
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.db.models import Q
 
 
 # import datetime
@@ -365,12 +366,29 @@ def lotEdit(request, parkingLot_id):
     parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
     user = request.user
     # event_list = parkingLot.event.order_by('-date')
-    allEvents = Event.objects.filter(parkinglot__id=parkingLot.id).order_by('date')
+    event_list, other_event_list, attendant_list, spot_list, total_spots = get_lot_details(parkingLot)
+
+    return render(request, 'web/lotEdit.html', {
+        'attendant_list': attendant_list,
+        'event_list': event_list,
+        'other_event_list': other_event_list,
+        'parkingLot': parkingLot,
+        'spot_list': spot_list,
+        'total_spots': total_spots,
+    })
+
+
+def get_lot_details(parkingLot):
+    all_events = Event.objects.order_by('date')
     event_list = []
+    other_events = []
     now = timezone.now()
-    for event in allEvents:
+    for event in all_events:
         if event.date > now:
-            event_list.append(event)
+            if Event.objects.filter(id=event.id).filter(parkinglot__id=parkingLot.id).exists():
+                event_list.append(event)
+            else:
+                other_events.append(event)
     attendant_list = parkingLot.profile_set.all()
     spot_list = parkingLot.parkingspot_set.all()
     total_spots = 0
@@ -378,10 +396,26 @@ def lotEdit(request, parkingLot_id):
     for spot in spot_list:
         total_spots += spot.totalSpots
 
+    return event_list, other_events, attendant_list, spot_list, total_spots
+
+
+def renderLotEdit(request, parkingLot, errorKey, errorMessage):
+    event_list, other_events, attendant_list, spot_list, total_spots = get_lot_details(parkingLot)
+    if errorKey and errorMessage:
+        return render(request, 'web/lotEdit.html', {
+            'parkingLot': parkingLot,
+            'name_error_message': errorMessage,
+            'event_list': event_list,
+            'other_event_list': other_events,
+            'attendant_list': attendant_list,
+            'spot_list': spot_list,
+            'total_spots': total_spots,
+        })
     return render(request, 'web/lotEdit.html', {
-        'attendant_list': attendant_list,
-        'event_list': event_list,
         'parkingLot': parkingLot,
+        'event_list': event_list,
+        'other_event_list': other_events,
+        'attendant_list': attendant_list,
         'spot_list': spot_list,
         'total_spots': total_spots,
     })
@@ -395,15 +429,10 @@ def change_name(request, parkingLot_id):
             parkingLot.name = name
             parkingLot.save()
         else:
-            return render(request, 'web/lotEdit.html', {
-                'parkingLot': parkingLot,
-                'name_error_message': "Empty text field",
-            })
+            return renderLotEdit(request, parkingLot, 'name_error_message', "Name not changed: Empty text field")
     except(KeyError, ParkingLot.DoesNotExist):
-        return render(request, 'web/lotEdit.html', {
-            'parkingLot': parkingLot,
-            'name_error_message': "Name was not changed",
-        })
+
+        return renderLotEdit(request, parkingLot, 'name_error_message', "Name was not changed")
     else:
         return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
 
@@ -416,17 +445,22 @@ def change_address(request, parkingLot_id):
             parkingLot.address = address
             parkingLot.save()
         else:
-            return render(request, 'web/lotEdit.html', {
-                'parkingLot': parkingLot,
-                'address_error_message': "Empty text field",
-            })
+            return renderLotEdit(request, parkingLot, 'address_error_message', "Address not changed: Empty text field")
+
     except(KeyError, ParkingLot.DoesNotExist):
-        return render(request, 'web/lotEdit.html', {
-            'parkingLot': parkingLot,
-            'name_error_message': "Address was not changed",
-        })
+        return renderLotEdit(request, parkingLot, 'address_error_message', "Address was not changed")
+
     else:
         return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
+
+
+def delete_events(request, parkingLot_id, event_list):
+    parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
+    try:
+        for event in event_list:
+            key = request.POST['']
+    except(KeyError, Event.DoesNotExist):
+        pass
 
 
 def info(request):

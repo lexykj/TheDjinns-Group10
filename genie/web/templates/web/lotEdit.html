@@ -103,19 +103,56 @@
 					</section>
 
 					<section class="box">
-						<p><strong>Future Events: </strong>
-							{% if event_list %}
-								{% for event in event_list %}
-									{% if forloop.last %}
-										{{ event }}
-									{% else %}
-										{{ event }},
-									{% endif %}
-								{% endfor %}
-							{% else %}
-								No events
-							{% endif %}
-						</p>
+						<div class="row row-gtr-uniform">
+							<div class="col-4">
+								<button class="collapsible button fit">Lot's Events</button>
+									<div class="content">
+										{% if event_list %}
+											<ul>
+											{% for event in event_list %}
+												<li>{{ event }}: {{ event.date }}</li>
+											{% endfor %}
+											</ul>
+										{% else %}
+											No events
+										{% endif %}
+									</div>
+							</div>
+							<div class="col-4">
+								<button class="collapsible button fit">Add Events</button>
+									<div class="content">
+										<form method="post">
+											{% csrf_token %}
+											{% if other_event_list %}
+												{% for other_event in other_event_list %}
+													<input type="checkbox" id="{{ other_event.id }}" name="{{ other_event.id }}">
+													<label for="{{ other_event.id }}">{{ other_event }}: {{ other_event.date }}</label>
+												{% endfor %}
+											{% else %}
+												No events to delete
+											{% endif %}
+											<input type="submit" value="Add Events">
+										</form>
+									</div>
+							</div>
+							<div class="col-4">
+								<button class="collapsible button fit">Delete Events</button>
+									<div class="content">
+										<form method="post">
+											{% csrf_token %}
+											{% if event_list %}
+												{% for event in event_list %}
+													<input type="checkbox" id="{{ event.id }}" name="{{ event.id }}">
+													<label for="{{ event.id }}">{{ event }}: {{ event.date }}</label>
+												{% endfor %}
+											{% else %}
+												No events to delete
+											{% endif %}
+											<input type="submit" value="Delete Events">
+										</form>
+									</div>
+							</div>
+						</div>
 					</section>
 
 					<section class="box">
@@ -413,6 +450,8 @@
 			<script src={% static "assets/js/breakpoints.min.js" %}></script>
 			<script src={% static "assets/js/util.js" %}></script>
 			<script src={% static "assets/js/main.js" %}></script>
+			<script src="{% static 'web/assets/js/custom.js' %}"></script>
+
 
 	</body>
 </html>
