@@ -390,12 +390,40 @@ def lotEdit(request, parkingLot_id):
 def change_name(request, parkingLot_id):
     parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
     try:
-        parkingLot.name = request.POST['name']
-        parkingLot.save()
+        name = request.POST['name']
+        if name != "":
+            parkingLot.name = name
+            parkingLot.save()
+        else:
+            return render(request, 'web/lotEdit.html', {
+                'parkingLot': parkingLot,
+                'name_error_message': "Empty text field",
+            })
     except(KeyError, ParkingLot.DoesNotExist):
         return render(request, 'web/lotEdit.html', {
             'parkingLot': parkingLot,
             'name_error_message': "Name was not changed",
+        })
+    else:
+        return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
+
+
+def change_address(request, parkingLot_id):
+    parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
+    try:
+        address = request.POST['address']
+        if address != "":
+            parkingLot.address = address
+            parkingLot.save()
+        else:
+            return render(request, 'web/lotEdit.html', {
+                'parkingLot': parkingLot,
+                'address_error_message': "Empty text field",
+            })
+    except(KeyError, ParkingLot.DoesNotExist):
+        return render(request, 'web/lotEdit.html', {
+            'parkingLot': parkingLot,
+            'name_error_message': "Address was not changed",
         })
     else:
         return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))

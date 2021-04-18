@@ -23,6 +23,7 @@ urlpatterns = [
     path('lots', views.lots, name='lots'),
     path('lotEdit/<int:parkingLot_id>', views.lotEdit, name='lotEdit'),
     path('lot_name/<int:parkingLot_id>', views.change_name, name='change_name'),
+    path('lot_address/<int:parkingLot_id>', views.change_address, name='change_address'),
     path('lot-info', views.info, name='lot-info'),
     path('signIn', views.signIn, name='signIn'),
     path('signUp', views.signUp, name='signUp'),

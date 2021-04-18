@@ -44,24 +44,66 @@
 					</header>
 
 					<section class="box">
-						<h4><strong>Name: </strong>{{ parkingLot.name }}</h4>
+						<p><strong>Name: </strong>{{ parkingLot.name }}</p>
 						<form action="{% url 'web:change_name' parkingLot.id %}" method="post">
 							{% csrf_token %}
-							<label for="name">New lot Name: </label>
-							<input type="text" name="name" id="name">
+							<input type="text" placeholder="Enter New Parking Lot Name" name="name" id="name">
 							<br>
-							<input type="submit" value="Change Name">
+							<div class="row aln-center">
+								<input type="submit" value="Change Name">
+							</div>
 						</form>
-						{% if name_error_message %}<p><strong>{{ name_error_message }}</strong></p>
+						{% if name_error_message %}<p><strong class="error">{{ name_error_message }}</strong></p>
 						{% endif %}
 					</section>
 
 					<section class="box">
-						<h4><strong>Address: </strong>{{ parkingLot.address }}</h4>
+						<p><strong>Address: </strong>{{ parkingLot.address }}</p>
+						<form action="{% url 'web:change_address' parkingLot.id %}" method="post">
+							{% csrf_token %}
+							<input type="text" placeholder="Enter New Parking Lot Address" name="address" id="address">
+							<br>
+							<div class="row row-gtr-uniform">
+								<div class="col-4">
+									<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Latitude</a></h4>
+									<input type="number" step="any" class="button alt" id="latitude" name="latitude" />
+								</div>
+
+								<div class="col-4">
+									<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Longtitude</a></h4>
+									<input type="number" step="any" class="button alt" id="longitude" name="longitude" />
+								</div>
+
+								<div class="col-4">
+									<h4>Calculate from Address field</a></h4>
+									<input class="button" value="Calculate" id="latLngButton"/>
+									<script>
+										document.getElementById("latLngButton").addEventListener("click", () => {
+											address = document.getElementById("address").value;
+											url = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDBdkOXzfc2rj7a57BnP3AI0r9TrT2nmxY&address=" + address;
+											fetch(url)
+												.then(response => response.json())
+												.then(data => {
+													document.getElementById("address").value = data["results"][0]["formatted_address"];
+														geocode = data["results"][0]["geometry"]["location"];
+														document.getElementById("latitude").value = geocode["lat"];
+														document.getElementById("longitude").value = geocode["lng"];
+													});
+											});
+									</script>
+								</div>
+							</div>
+							<br>
+							<div class="row aln-center">
+								<input type="submit" value="Change Address">
+							</div>
+						</form>
+						{% if address_error_message %}<p><strong class="error">{{ address_error_message }}</strong></p>
+						{% endif %}
 					</section>
 
 					<section class="box">
-						<h4><strong>Future Events: </strong>
+						<p><strong>Future Events: </strong>
 							{% if event_list %}
 								{% for event in event_list %}
 									{% if forloop.last %}
@@ -73,11 +115,11 @@
 							{% else %}
 								No events
 							{% endif %}
-						</h4>
+						</p>
 					</section>
 
 					<section class="box">
-						<h4><strong>Attendants (usernames):</strong>
+						<p><strong>Attendants (usernames):</strong>
 							{% if attendant_list %}
 								{% for attendant in attendant_list %}
 									{% if forloop.last %}
@@ -89,11 +131,11 @@
 							{% else %}
 								No Attendants yet
 							{% endif %}
-						</h4>
+						</p>
 					</section>
 
 					<section class="box">
-						<h4><strong>Total Parking Spots: </strong>{{ total_spots }}</h4>
+						<p><strong>Total Parking Spots: </strong>{{ total_spots }}</p>
 
 						<div class="table-wrapper">
 							<table style="text-align: left;">

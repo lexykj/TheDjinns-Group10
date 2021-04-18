@@ -111,6 +111,12 @@
 	    content: "\2796";
 	}
 
+    /* Lot Edit page */
+
+    .error {
+        color: #FF0000;
+    }
+
 /* Basic */
 
 	@-ms-viewport {
