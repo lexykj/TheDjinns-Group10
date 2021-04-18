@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -274,12 +274,25 @@ def history(request):
 
 def attendant(request):
     eventId = request.POST['event']
-    thisEvent = Event.objects.all().get(id=eventId)
-    theseLots = ParkingLot.objects.filter(event=eventId)
+    event = Event.objects.all().get(id=eventId)
     context = {
-        'event': thisEvent,
-        'lots': theseLots,
+        'event': event,
+        'checked_in': None
     }
+    if 'query' in request.POST:
+        context['checked_in'] = False
+        uuid = request.POST['query']
+
+        for res in Reservation.objects.filter(uuid=uuid):
+            if res.event == event:
+                for lot in request.user.profile.attendant_for.all():
+                    if lot == res.spot.lot:
+                        context['checked_in'] = True
+                        res.checked_in = True
+                        res.save()
+                        context['user'] = res.user
+                        context['spot'] = res.spot.spotType
+        
     return render(request, 'web/attendant.html', context)
 
 
@@ -325,8 +338,42 @@ def owners(request):
 def lots(request):
     user = request.user
     lot_list = ParkingLot.objects.filter(owner=user)
+    event_limit = 5
+    attendant_limit = 5
+    total_spots = [0]*len(lot_list)
 
-    return render(request, 'web/lotManagement.html', {'lot_list': lot_list})
+    for i in range(len(lot_list)):
+        for spot in lot_list[i].parkingspot_set.all():
+            total_spots[i] += spot.totalSpots
+
+    data_list = zip(lot_list, total_spots)
+    return render(request, 'web/lotManagement.html', {
+        'attendant_limit': attendant_limit,
+        'data_list': data_list,
+        'event_limit': event_limit,
+        'lot_list': lot_list,
+        'total_spots': total_spots,
+    })
+
+
+def lotEdit(request, parkingLot_id):
+    parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
+    user = request.user
+    event_list = parkingLot.event.all()
+    attendant_list = parkingLot.profile_set.all()
+    spot_list = parkingLot.parkingspot_set.all()
+    total_spots = 0
+
+    for spot in spot_list:
+        total_spots += spot.totalSpots
+
+    return render(request, 'web/lotEdit.html', {
+        'attendant_list': attendant_list,
+        'event_list': event_list,
+        'parkingLot': parkingLot,
+        'spot_list': spot_list,
+        'total_spots': total_spots,
+    })
 
 
 def info(request):
@@ -335,7 +382,9 @@ def info(request):
 
     # Determine whether this is a new lot request or not
     if request.POST.get('registerNewLot') != 'doRegisterLot':
-        currentEventId = request.POST.get('eventForLot', 1)
+        currentEventId = request.POST.get('eventForLot', -1)
+        if currentEventId == -1:
+            currentEventId = request.POST.get('passEvent', -1)
         currentEvent = Event.objects.all().get(id=currentEventId)
         allEventsForLot = []
 
@@ -362,10 +411,15 @@ def info(request):
 
         else:
             # this is a default value that should not be passed
-            # TODO: ensure this works as intended and there aren't any associated bugs
             thisLot = ParkingLot.objects.all()[0]
         spots = ParkingSpot.objects.all().filter(lot=thisLot.id)
-
+        reservations = Reservation.objects.all().filter(event=currentEvent)
+        reservationTotals = {}
+        for spot in spots:
+            reservationTotals[spot] = spot.totalSpots
+            for reservation in reservations:
+                if reservation.spot == spot:
+                    reservationTotals[spot] -= 1
         context = {
             'isNew': False,
             'currentEvent': currentEvent,
@@ -373,6 +427,8 @@ def info(request):
             'spots': spots,
             'profile': thisProfile,
             'allEventsForLot': allEventsForLot,
+            'allReservations': reservations,
+            'availableSpots': reservationTotals,
         }
 
     else:

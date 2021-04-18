@@ -1,0 +1,24 @@
+Sprint Retrospective (1)
+Sprint Leader: Lexy Simmons
+
+What went well:
+- We were able to get the database made
+- We were able to make most of the html pages
+
+What didn't go well:
+- We didn't really use the sprint backlog until the last two days
+- Most of us didn't use the sprint backlog
+
+What specific things you can do to improve:
+- Everyone can use the sprint backlog
+- A little more communication via slack
+
+List the measurement criteria:
+- each issue in the sprint backlog
+- items that should have been issues, but we forgot to create
+
+Assign a percentage to each team member based on your metric specified in this sprint's planning:
+- Autumn: 25%	(Present)
+- Joel: 30%		(Present)
+- Lexy: 15%		(Present)
+- Palani: 30%	(Present)

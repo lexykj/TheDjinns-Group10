@@ -89,7 +89,14 @@
 											<tbody>
 												{% for spot in spots %}
 													<tr>
-														<td>{{ spot.currentEventAvailableSpots }} / {{ spot.totalSpots }}</td>
+														<td>
+														{% for key, value in availableSpots.items %}
+															{% if key == spot %}
+																{{ value }}
+															{% endif %}
+														{% endfor %}
+
+															/ {{ spot.totalSpots }}</td>
 														<td>{{ spot.spotType }}</td>
 														<td>${{ spot.price }}0</td>
 													</tr>
