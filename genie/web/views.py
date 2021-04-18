@@ -3,6 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from apis.models import Revenue, Event, ParkingLot, ParkingSpot, Reservation, Profile
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 
 # import datetime
 from django.utils import timezone
@@ -341,6 +344,7 @@ def lots(request):
     event_limit = 5
     attendant_limit = 5
     total_spots = [0]*len(lot_list)
+    current_date = timezone.now()
 
     for i in range(len(lot_list)):
         for spot in lot_list[i].parkingspot_set.all():
@@ -349,6 +353,7 @@ def lots(request):
     data_list = zip(lot_list, total_spots)
     return render(request, 'web/lotManagement.html', {
         'attendant_limit': attendant_limit,
+        'current_date': current_date,
         'data_list': data_list,
         'event_limit': event_limit,
         'lot_list': lot_list,
@@ -359,7 +364,13 @@ def lots(request):
 def lotEdit(request, parkingLot_id):
     parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
     user = request.user
-    event_list = parkingLot.event.all()
+    # event_list = parkingLot.event.order_by('-date')
+    allEvents = Event.objects.filter(parkinglot__id=parkingLot.id).order_by('date')
+    event_list = []
+    now = timezone.now()
+    for event in allEvents:
+        if event.date > now:
+            event_list.append(event)
     attendant_list = parkingLot.profile_set.all()
     spot_list = parkingLot.parkingspot_set.all()
     total_spots = 0
@@ -374,6 +385,20 @@ def lotEdit(request, parkingLot_id):
         'spot_list': spot_list,
         'total_spots': total_spots,
     })
+
+
+def change_name(request, parkingLot_id):
+    parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
+    try:
+        parkingLot.name = request.POST['name']
+        parkingLot.save()
+    except(KeyError, ParkingLot.DoesNotExist):
+        return render(request, 'web/lotEdit.html', {
+            'parkingLot': parkingLot,
+            'name_error_message': "Name was not changed",
+        })
+    else:
+        return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
 
 
 def info(request):

@@ -45,8 +45,23 @@
 
 					<section class="box">
 						<h4><strong>Name: </strong>{{ parkingLot.name }}</h4>
+						<form action="{% url 'web:change_name' parkingLot.id %}" method="post">
+							{% csrf_token %}
+							<label for="name">New lot Name: </label>
+							<input type="text" name="name" id="name">
+							<br>
+							<input type="submit" value="Change Name">
+						</form>
+						{% if name_error_message %}<p><strong>{{ name_error_message }}</strong></p>
+						{% endif %}
+					</section>
+
+					<section class="box">
 						<h4><strong>Address: </strong>{{ parkingLot.address }}</h4>
-						<h4><strong>Upcoming Events: </strong>
+					</section>
+
+					<section class="box">
+						<h4><strong>Future Events: </strong>
 							{% if event_list %}
 								{% for event in event_list %}
 									{% if forloop.last %}
@@ -59,6 +74,9 @@
 								No events
 							{% endif %}
 						</h4>
+					</section>
+
+					<section class="box">
 						<h4><strong>Attendants (usernames):</strong>
 							{% if attendant_list %}
 								{% for attendant in attendant_list %}
@@ -72,7 +90,9 @@
 								No Attendants yet
 							{% endif %}
 						</h4>
+					</section>
 
+					<section class="box">
 						<h4><strong>Total Parking Spots: </strong>{{ total_spots }}</h4>
 
 						<div class="table-wrapper">

@@ -57,7 +57,7 @@
 					<section class="box">
 						<h3 class="special" style="text-align: center;">{{ parkingLot.0.name }}</h3>
 						<h4><strong>Address:</strong> {{ parkingLot.0.address }}</h4>
-						<h4><strong>Upcoming Events:</strong>
+						<h4><strong>All Events:</strong>
 							{% if parkingLot.0.event.all %}
 								{% for event in parkingLot.0.event.all %}
 									{% if forloop.counter0 < event_limit %}
