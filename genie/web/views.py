@@ -350,7 +350,13 @@ def owners(request):
 
 
 def lots(request):
-    user = request.user
+    # Determine whether this request is from the ownerManagement page on behalf of an admin
+    thisOwner = request.POST.get('thisOwner', -1)
+    if thisOwner != -1:
+        user = User.objects.all().get(username=thisOwner)
+    else:
+        user = request.user
+
     lot_list = ParkingLot.objects.filter(owner=user)
     event_limit = 5
     attendant_limit = 5

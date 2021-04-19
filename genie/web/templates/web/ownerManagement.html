@@ -52,7 +52,12 @@
 										<div class="row">
 											<p class="col-4" style="text-align: center;">{{ owner }}</p>
 											<p class="col-4 button alt">Revoke Lot Owner Permissions</p>
-											<p class="col-3 button special" style="text-align: center; margin-left: 2em;">View Parking Lots</p>
+											<form method="post" action="{% url 'web:lots' %}">
+												{% csrf_token %}
+												<input type="hidden" name="thisOwner" value="{{ owner }}" />
+												<input type="submit" class="col-3 button special" style="text-align: center; margin-left: 2em;" value="View Parking Lots" />
+											</form>
+
 										</div>
 									</li>
 								{% endfor %}
