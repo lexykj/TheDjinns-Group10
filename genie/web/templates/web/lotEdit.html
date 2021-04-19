@@ -103,9 +103,10 @@
 					</section>
 
 					<section class="box">
+						<h3 style="text-align: center;">Events</h3>
 						<div class="row row-gtr-uniform">
 							<div class="col-4">
-								<button class="collapsible button fit">Lot's Events</button>
+								<button class="collapsible button fit">Current</button>
 									<div class="content">
 										{% if event_list %}
 											<ul>
@@ -156,19 +157,57 @@
 					</section>
 
 					<section class="box">
-						<p><strong>Attendants (usernames):</strong>
-							{% if attendant_list %}
-								{% for attendant in attendant_list %}
-									{% if forloop.last %}
-										{{ attendant }}
-									{% else %}
-										{{ attendant }},
-									{% endif %}
-								{% endfor %}
-							{% else %}
-								No Attendants yet
-							{% endif %}
-						</p>
+						<h3 style="text-align: center;">Attendants</h3>
+						<div class="row row-gtr-uniform">
+							<div class="col-4">
+								<button class="collapsible button fit">Current</button>
+									<div class="content">
+										{% if attendant_list %}
+											<ul>
+											{% for attendant in attendant_list %}
+												<li><strong>{{ attendant }}:</strong> {{ attendant.user.email }}</li>
+											{% endfor %}
+											</ul>
+										{% else %}
+											No attendants
+										{% endif %}
+									</div>
+							</div>
+							<div class="col-4">
+								<button class="collapsible button fit">Add</button>
+									<div class="content">
+										{% if other_attendant_list %}
+										<form action="{% url 'web:lot_add_attendants' parkingLot.id %}" method="post">
+											{% csrf_token %}
+											{% for other_attendant in other_attendant_list %}
+												<input type="checkbox" id="{{ other_attendant.id }}" name="{{ other_attendant.id }}">
+											<label for="{{ other_attendant.id }}"><strong>{{ other_attendant }}:</strong> {{ other_attendant.user.email }}</label>
+											{% endfor %}
+											<input type="submit" value="Add Attendants">
+										</form>
+										{% else %}
+											No attendants to add
+										{% endif %}
+									</div>
+							</div>
+							<div class="col-4">
+								<button class="collapsible button fit">Delete</button>
+									<div class="content">
+										{% if attendant_list %}
+										<form action="{% url 'web:lot_delete_attendants' parkingLot.id %}" method="post">
+											{% csrf_token %}
+											{% for attendant in attendant_list %}
+												<input type="checkbox" id="{{ attendant.id }}" name="{{ attendant.id }}">
+											<label for="{{ attendant.id }}"><strong>{{ attendant }}:</strong> {{ attendant.user.email }}</label>
+											{% endfor %}
+											<input type="submit" value="Delete Attendants">
+										</form>
+										{% else %}
+											No attendants to delete
+										{% endif %}
+									</div>
+							</div>
+						</div>
 					</section>
 
 					<section class="box">

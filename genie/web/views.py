@@ -366,10 +366,11 @@ def lotEdit(request, parkingLot_id):
     parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
     user = request.user
     # event_list = parkingLot.event.order_by('-date')
-    event_list, other_event_list, attendant_list, spot_list, total_spots = get_lot_details(parkingLot)
+    event_list, other_event_list, attendant_list, other_attendants, spot_list, total_spots = get_lot_details(parkingLot)
 
     return render(request, 'web/lotEdit.html', {
         'attendant_list': attendant_list,
+        'other_attendant_list': other_attendants,
         'event_list': event_list,
         'other_event_list': other_event_list,
         'parkingLot': parkingLot,
@@ -390,17 +391,18 @@ def get_lot_details(parkingLot):
             else:
                 other_events.append(event)
     attendant_list = parkingLot.profile_set.all()
+    other_attendants = Profile.objects.all().exclude(attendant_for__id=parkingLot.id)
     spot_list = parkingLot.parkingspot_set.all()
     total_spots = 0
 
     for spot in spot_list:
         total_spots += spot.totalSpots
 
-    return event_list, other_events, attendant_list, spot_list, total_spots
+    return event_list, other_events, attendant_list, other_attendants, spot_list, total_spots
 
 
 def renderLotEdit(request, parkingLot, errorKey, errorMessage):
-    event_list, other_events, attendant_list, spot_list, total_spots = get_lot_details(parkingLot)
+    event_list, other_events, attendant_list, other_attendants, spot_list, total_spots = get_lot_details(parkingLot)
     if errorKey and errorMessage:
         return render(request, 'web/lotEdit.html', {
             'parkingLot': parkingLot,
@@ -408,6 +410,7 @@ def renderLotEdit(request, parkingLot, errorKey, errorMessage):
             'event_list': event_list,
             'other_event_list': other_events,
             'attendant_list': attendant_list,
+            'other_attendant_list': other_attendants,
             'spot_list': spot_list,
             'total_spots': total_spots,
         })
@@ -416,6 +419,7 @@ def renderLotEdit(request, parkingLot, errorKey, errorMessage):
         'event_list': event_list,
         'other_event_list': other_events,
         'attendant_list': attendant_list,
+        'other_attendant_list': other_attendants,
         'spot_list': spot_list,
         'total_spots': total_spots,
     })
@@ -478,6 +482,36 @@ def lot_add_events(request, parkingLot_id):
                 parkingLot.save()
     except(KeyError, Event.DoesNotExist):
         return renderLotEdit(request, parkingLot, 'add_events_error_message', "No events added: no items selected")
+    else:
+        return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
+
+
+def lot_delete_attendants(request, parkingLot_id):
+    parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
+    attendant_list = parkingLot.profile_set.all()
+    try:
+        for attendant in attendant_list:
+            if str(attendant.id) in request.POST:
+                attendant.attendant_for.remove(parkingLot)
+                attendant.save()
+                # TODO: check if they're an attendant for any other lot. If not, switch "is_attendant" to false.
+    except(KeyError, Event.DoesNotExist):
+        return renderLotEdit(request, parkingLot, 'delete_events_error_message', "No events deleted: no items selected")
+    else:
+        return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
+
+
+def lot_add_attendants(request, parkingLot_id):
+    parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
+    attendant_list = Profile.objects.all()
+    try:
+        for attendant in attendant_list:
+            if str(attendant.id) in request.POST:
+                attendant.is_attendant = True
+                attendant.attendant_for.add(parkingLot)
+                attendant.save()
+    except(KeyError, Event.DoesNotExist):
+        return renderLotEdit(request, parkingLot, 'add_attendant_error_message', "No Attendant added: no items selected")
     else:
         return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
 
