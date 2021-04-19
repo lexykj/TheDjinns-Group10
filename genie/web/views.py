@@ -421,7 +421,7 @@ def renderLotEdit(request, parkingLot, errorKey, errorMessage):
     })
 
 
-def change_name(request, parkingLot_id):
+def lot_change_name(request, parkingLot_id):
     parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
     try:
         name = request.POST['name']
@@ -437,7 +437,7 @@ def change_name(request, parkingLot_id):
         return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
 
 
-def change_address(request, parkingLot_id):
+def lot_change_address(request, parkingLot_id):
     parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
     try:
         address = request.POST['address']
@@ -454,13 +454,32 @@ def change_address(request, parkingLot_id):
         return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
 
 
-def delete_events(request, parkingLot_id, event_list):
+def lot_delete_events(request, parkingLot_id):
     parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
+    event_list = Event.objects.filter(parkinglot__id=parkingLot.id)
     try:
         for event in event_list:
-            key = request.POST['']
+            if str(event.id) in request.POST:
+                parkingLot.event.remove(event)
+                parkingLot.save()
     except(KeyError, Event.DoesNotExist):
-        pass
+        return renderLotEdit(request, parkingLot, 'delete_events_error_message', "No events deleted: no items selected")
+    else:
+        return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
+
+
+def lot_add_events(request, parkingLot_id):
+    parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
+    event_list = Event.objects.all()
+    try:
+        for event in event_list:
+            if str(event.id) in request.POST:
+                parkingLot.event.add(event)
+                parkingLot.save()
+    except(KeyError, Event.DoesNotExist):
+        return renderLotEdit(request, parkingLot, 'add_events_error_message', "No events added: no items selected")
+    else:
+        return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
 
 
 def info(request):
