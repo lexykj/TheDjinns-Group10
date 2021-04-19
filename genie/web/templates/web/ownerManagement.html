@@ -50,27 +50,40 @@
 								{% for owner in allOwners %}
 									<li>
 										<div class="row">
-											<p class="col-4" style="text-align: center;">{{ owner }}</p>
-											<form method="post" action="{% url 'web:owners' %}">
-												{% csrf_token %}
-												<input type="hidden" name="revokeOwner" value="{{ owner.id }}" />
-												<input type="submit" class="col-4 button alt" value="Revoke Owner Permissions" />
-											</form>
-											<form method="post" action="{% url 'web:owners' %}">
-												{% csrf_token %}
-												<input type="hidden" name="makeAdmin" value="{{ owner }}" />
-												<input type="submit" class="col-3 button alt" value="Give Admin Permissions" />
-											</form>
-										</div>
-										<div class="row">
-											<p class="col-4"></p>
-											<p class="col-4"></p>
-											<form method="post" action="{% url 'web:lots' %}">
-												{% csrf_token %}
-												<input type="hidden" name="thisOwner" value="{{ owner }}" />
-												<input type="submit" class="col-3 button special" style="text-align: center; margin-left: 2em;" value="View Parking Lots" />
-											</form>
-										</div>
+											{% if owner.is_admin %}
+												<p class="col-4" style="text-align: center;">{{ owner }}</p>
+												<p class="col-4" style="text-align: center;">Admin: True</p>
+												<form method="post" action="{% url 'web:lots' %}">
+													{% csrf_token %}
+													<input type="hidden" name="thisOwner" value="{{ owner }}" />
+													<input type="submit" class="col-3 button special" style="text-align: center; margin-left: 2em;" value="View Parking Lots" />
+												</form>
+											</div>
+											{% else %}
+												<p class="col-4" style="text-align: center;">{{ owner }}</p>
+												<form method="post" action="{% url 'web:owners' %}">
+													{% csrf_token %}
+													<input type="hidden" name="revokeOwner" value="{{ owner.id }}" />
+													<input type="submit" class="col-4 button alt" value="Revoke Owner Permissions" />
+												</form>
+												<form method="post" action="{% url 'web:owners' %}">
+													{% csrf_token %}
+													<input type="hidden" name="makeAdmin" value="{{ owner.id }}" />
+													<input type="submit" class="col-3 button alt" value="Give Admin Permissions" />
+												</form>
+											</div>
+											<div class="row">
+												<p class="col-4"></p>
+												<p class="col-4"></p>
+												<form method="post" action="{% url 'web:lots' %}">
+													{% csrf_token %}
+													<input type="hidden" name="thisOwner" value="{{ owner }}" />
+													<input type="submit" class="col-3 button special" style="text-align: center; margin-left: 2em;" value="View Parking Lots" />
+												</form>
+											</div>
+											{% endif %}
+
+
 									</li>
 								{% endfor %}
 							</ul>

@@ -354,7 +354,10 @@ def owners(request):
         for lot in previousLots:
             lot.owner = user
     elif makeAdmin != -1:
-        pass
+        newAdminUser = User.objects.all().get(id=makeAdmin)
+        newAdminProfile = Profile.objects.all().get(user=newAdminUser)
+        newAdminProfile.is_admin = 1
+        newAdminProfile.save()
 
     allOwners = Profile.objects.all().filter(is_owner=1)
     context = {
