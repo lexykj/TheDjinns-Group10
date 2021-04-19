@@ -336,6 +336,16 @@ def deleteEvent(request, eventId):
 
 
 def owners(request):
+    user = request.user
+    profile = Profile.objects.all().get(user=user)
+    # Ensure user is not bypassing permissions
+    if not profile.is_admin:
+        return redirect('/home')
+
+    allOwners = Profile.objects.all().filter(is_owner=True)
+    context = {
+        'allOwners': allOwners,
+    }
     return render(request, 'web/ownerManagement.html')
 
 
