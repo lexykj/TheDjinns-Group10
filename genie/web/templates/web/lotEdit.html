@@ -110,7 +110,7 @@
 										{% if event_list %}
 											<ul>
 											{% for event in event_list %}
-												<li>{{ event }}: {{ event.date }}</li>
+												<li><strong>{{ event }}:</strong> {{ event.date }}</li>
 											{% endfor %}
 											</ul>
 										{% else %}
@@ -121,35 +121,35 @@
 							<div class="col-4">
 								<button class="collapsible button fit">Add Events</button>
 									<div class="content">
+										{% if other_event_list %}
 										<form action="{% url 'web:lot_add_events' parkingLot.id %}" method="post">
 											{% csrf_token %}
-											{% if other_event_list %}
-												{% for other_event in other_event_list %}
-													<input type="checkbox" id="{{ other_event.id }}" name="{{ other_event.id }}">
-													<label for="{{ other_event.id }}">{{ other_event }}: {{ other_event.date }}</label>
-												{% endfor %}
-											{% else %}
-												No events to delete
-											{% endif %}
+											{% for other_event in other_event_list %}
+												<input type="checkbox" id="{{ other_event.id }}" name="{{ other_event.id }}">
+											<label for="{{ other_event.id }}"><strong>{{ other_event }}:</strong> {{ other_event.date }}</label>
+											{% endfor %}
 											<input type="submit" value="Add Events">
 										</form>
+										{% else %}
+											No events to add
+										{% endif %}
 									</div>
 							</div>
 							<div class="col-4">
 								<button class="collapsible button fit">Delete Events</button>
 									<div class="content">
+										{% if event_list %}
 										<form action="{% url 'web:lot_delete_events' parkingLot.id %}" method="post">
 											{% csrf_token %}
-											{% if event_list %}
-												{% for event in event_list %}
-													<input type="checkbox" id="{{ event.id }}" name="{{ event.id }}">
-													<label for="{{ event.id }}">{{ event }}: {{ event.date }}</label>
-												{% endfor %}
-											{% else %}
-												No events to delete
-											{% endif %}
+											{% for event in event_list %}
+												<input type="checkbox" id="{{ event.id }}" name="{{ event.id }}">
+											<label for="{{ event.id }}"><strong>{{ event }}:</strong> {{ event.date }}</label>
+											{% endfor %}
 											<input type="submit" value="Delete Events">
 										</form>
+										{% else %}
+											No events to delete
+										{% endif %}
 									</div>
 							</div>
 						</div>
@@ -181,25 +181,54 @@
 										<th><strong>Spot Type</strong></th>
 										<th><strong>Quantity</strong></th>
 										<th><strong>Price</strong></th>
+										<th> </th>
 									</tr>
 								</thead>
 
 								<tbody>
-									{% if spot_list %}
-										{% for spot in spot_list %}
+								{% if spot_list %}
+								{% for spot in spot_list %}
+								<div style="border-style: solid; border-color: black;">
+									<tr>
+										<td>{{ spot.spotType }}</td>
+										<td>{{ spot.totalSpots }}</td>
+										<td>${{ spot.price|stringformat:".2f" }}</td>
+										<td> </td>
+									</tr>
+									<form action="{% url 'web:lot_edit_spot' spot.id %}" method="post">
+										{% csrf_token %}
 										<tr>
-											<td>{{ spot.spotType }}</td>
-											<td>{{ spot.totalSpots }}</td>
-											<td>${{ spot.price|stringformat:".2f" }}</td>
+											<td><input type="text" placeholder="New Type" name="type"></td>
+											<td><input type="number" placeholder="New Quantity" name="quantity" min="1"></td>
+											<td><input type="number" placeholder="New Price" name="price" min="0" step=".01"></td>
+											<td><input type="submit" value="Save Changes"></td>
 										</tr>
-										{% endfor %}
-									{% else %}
+									</form>
+									<form action="{% url 'web:lot_delete_spot' spot.id %}" method="post">
+										{% csrf_token %}
 										<tr>
-											<td>No spots available</td>
-											<td></td>
-											<td></td>
+											<td> </td>
+											<td><input type="submit" value="Delete {{ spot.spotType }} spot"></td>
+											<td> </td>
+											<td> </td>
 										</tr>
-									{% endif %}
+									</form>
+									<tr>
+										<td> </td>
+										<td> </td>
+										<td> </td>
+										<td> </td>
+									</tr>
+								</div>
+
+								{% endfor %}
+								{% else %}
+									<tr>
+										<td>No spots available</td>
+										<td></td>
+										<td></td>
+									</tr>
+								{% endif %}
 								</tbody>
 
 							</table>

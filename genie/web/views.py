@@ -482,6 +482,37 @@ def lot_add_events(request, parkingLot_id):
         return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
 
 
+def lot_delete_spot(request, spot_id):
+    parkingSpot = get_object_or_404(ParkingSpot, pk=spot_id)
+    parkingLot = ParkingLot.objects.get(parkingspot__id=parkingSpot.id)
+    try:
+        parkingSpot.delete()
+    except(KeyError, ParkingSpot.DoesNotExist):
+        return renderLotEdit(request, parkingLot, 'delete_spot_error_message', "Parking spot not deleted")
+    else:
+        return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
+
+
+def lot_edit_spot(request, spot_id):
+    parkingSpot = get_object_or_404(ParkingSpot, pk=spot_id)
+    parkingLot = ParkingLot.objects.get(parkingspot__id=parkingSpot.id)
+    try:
+        type = request.POST['type']
+        quantity = request.POST['quantity']
+        price = request.POST['price']
+        if type != "":
+            parkingSpot.spotType = type
+        if quantity != "":
+            parkingSpot.totalSpots = quantity
+        if price != "":
+            parkingSpot.price = price
+        parkingSpot.save()
+    except(KeyError, ParkingSpot.DoesNotExist):
+        return renderLotEdit(request, parkingLot, 'edit_spot_error_message', "Unable to Edit Parking Spot")
+    else:
+        return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
+
+
 def info(request):
     # Common needed context
     thisProfile = Profile.objects.get(user_id=request.user.id)
