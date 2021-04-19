@@ -39,7 +39,7 @@
 				<section id="main" class="container">
 					<header>
 						<h2>Lot Owner Management</h2>
-						<p>Add or remove parking lot owners here.</p>
+						<p>View owners' lots or remove parking lot owners here.</p>
 					</header>
 					<div class="box">
 						<span class="image fit"><img src={% static "web/images/lotGuy.jpg" %} alt="" /></span>
@@ -47,31 +47,19 @@
 						<section class="box">
 							<h3 style="text-align: center;">All Current Parking Lot Owners</h3>
 							<ul class="alt">
-								<li>
-									<div class="row">
-										<!--TODO: get owners and their lots-->
-										<p class="col-4" style="text-align: center;">Owner 1</p>
-										<p class="col-4" style="text-align: center;"><a href="map.html">Parking Lots</a></p>
-										<p class="col-4 button alt">Revoke Lot Owner Permissions</p>
-									</div>
-								</li>
-								<li>
-									<div class="row">
-										<p class="col-4" style="text-align: center;">Owner 2</p>
-										<p class="col-4" style="text-align: center;"><a href="map.html">Parking Lots</a></p>
-										<p class="col-4 button alt">Revoke Lot Owner Permissions</p>
-									</div>
-								</li>
-								<li>
-									<div class="row">
-										<p class="col-4" style="text-align: center;">Owner 3</p>
-										<p class="col-4" style="text-align: center;"><a href="map.html">Parking Lots</a></p>
-										<p class="col-4 button alt">Revoke Lot Owner Permissions</p>
-									</div>
-								</li>
-								<li><p style="text-align: center;">...</p></li>
+								{% for owner in allOwners %}
+									<li>
+										<div class="row">
+											<p class="col-4" style="text-align: center;">{{ owner }}</p>
+											<p class="col-4 button alt">Revoke Lot Owner Permissions</p>
+											<p class="col-3 button special" style="text-align: center; margin-left: 2em;">View Parking Lots</p>
+										</div>
+									</li>
+								{% endfor %}
 							</ul>
 						</section>
+						<!--
+						Deprecated
 						<section class="box">
 							<h3 style="text-align: center;">Add a Parking Lot Owner</h3>
 							<p style="text-align: center;">Enter the new owner's account information here...</p>
@@ -91,6 +79,7 @@
 								</div>
 							</form>
 						</section>
+						-->
 					</div>
 				</section>
 

@@ -342,11 +342,11 @@ def owners(request):
     if not profile.is_admin:
         return redirect('/home')
 
-    allOwners = Profile.objects.all().filter(is_owner=True)
+    allOwners = Profile.objects.all().filter(is_owner=1)
     context = {
         'allOwners': allOwners,
     }
-    return render(request, 'web/ownerManagement.html')
+    return render(request, 'web/ownerManagement.html', context)
 
 
 def lots(request):
