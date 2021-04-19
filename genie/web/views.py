@@ -375,6 +375,7 @@ def lots(request):
         'event_limit': event_limit,
         'lot_list': lot_list,
         'total_spots': total_spots,
+        'user': user,
     })
 
 
