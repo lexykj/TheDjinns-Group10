@@ -467,7 +467,7 @@ def lot_delete_events(request, parkingLot_id):
                 parkingLot.event.remove(event)
                 parkingLot.save()
     except(KeyError, Event.DoesNotExist):
-        return renderLotEdit(request, parkingLot, 'delete_events_error_message', "No events deleted: no items selected")
+        return renderLotEdit(request, parkingLot, 'events_error_message', "No events deleted: no items selected")
     else:
         return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
 
@@ -481,7 +481,7 @@ def lot_add_events(request, parkingLot_id):
                 parkingLot.event.add(event)
                 parkingLot.save()
     except(KeyError, Event.DoesNotExist):
-        return renderLotEdit(request, parkingLot, 'add_events_error_message', "No events added: no items selected")
+        return renderLotEdit(request, parkingLot, 'events_error_message', "No events added: no items selected")
     else:
         return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
 
@@ -496,7 +496,7 @@ def lot_delete_attendants(request, parkingLot_id):
                 attendant.save()
                 # TODO: check if they're an attendant for any other lot. If not, switch "is_attendant" to false.
     except(KeyError, Event.DoesNotExist):
-        return renderLotEdit(request, parkingLot, 'delete_events_error_message', "No events deleted: no items selected")
+        return renderLotEdit(request, parkingLot, 'attendants_error_message', "No events deleted: no items selected")
     else:
         return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
 
@@ -511,7 +511,7 @@ def lot_add_attendants(request, parkingLot_id):
                 attendant.attendant_for.add(parkingLot)
                 attendant.save()
     except(KeyError, Event.DoesNotExist):
-        return renderLotEdit(request, parkingLot, 'add_attendant_error_message', "No Attendant added: no items selected")
+        return renderLotEdit(request, parkingLot, 'attendants_error_message', "No Attendant added: no items selected")
     else:
         return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
 
@@ -524,7 +524,7 @@ def lot_delete_spot(request, spot_id):
         parkingSpot.delete()
         parkingLot.save()
     except(KeyError, ParkingSpot.DoesNotExist):
-        return renderLotEdit(request, parkingLot, 'delete_spot_error_message', "Parking spot not deleted")
+        return renderLotEdit(request, parkingLot, 'spot_error_message', "Parking spot not deleted")
     else:
         return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
 
@@ -544,7 +544,7 @@ def lot_edit_spot(request, spot_id):
             parkingSpot.price = price
         parkingSpot.save()
     except(KeyError, ParkingSpot.DoesNotExist):
-        return renderLotEdit(request, parkingLot, 'edit_spot_error_message', "Unable to Edit Parking Spot")
+        return renderLotEdit(request, parkingLot, 'spot_error_message', "Unable to Edit Parking Spot")
     else:
         return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
 

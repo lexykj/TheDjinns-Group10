@@ -44,6 +44,7 @@
 					</header>
 
 					<section class="box">
+						<h3 style="text-align:center;">Name</h3>
 						<p><strong>Name: </strong>{{ parkingLot.name }}</p>
 						<form action="{% url 'web:lot_change_name' parkingLot.id %}" method="post">
 							{% csrf_token %}
@@ -58,6 +59,7 @@
 					</section>
 
 					<section class="box">
+						<h3 style="text-align: center;">Address</h3>
 						<p><strong>Address: </strong>{{ parkingLot.address }}</p>
 						<form action="{% url 'web:lot_change_address' parkingLot.id %}" method="post">
 							{% csrf_token %}
@@ -104,6 +106,8 @@
 
 					<section class="box">
 						<h3 style="text-align: center;">Events</h3>
+						{% if events_error_message %}<p><strong class="error">{{ events_error_message }}</strong></p>
+						{% endif %}
 						<div class="row row-gtr-uniform">
 							<div class="col-4">
 								<button class="collapsible button fit">Current</button>
@@ -120,7 +124,7 @@
 									</div>
 							</div>
 							<div class="col-4">
-								<button class="collapsible button fit">Add Events</button>
+								<button class="collapsible button fit">Add</button>
 									<div class="content">
 										{% if other_event_list %}
 										<form action="{% url 'web:lot_add_events' parkingLot.id %}" method="post">
@@ -137,7 +141,7 @@
 									</div>
 							</div>
 							<div class="col-4">
-								<button class="collapsible button fit">Delete Events</button>
+								<button class="collapsible button fit">Delete</button>
 									<div class="content">
 										{% if event_list %}
 										<form action="{% url 'web:lot_delete_events' parkingLot.id %}" method="post">
@@ -158,6 +162,8 @@
 
 					<section class="box">
 						<h3 style="text-align: center;">Attendants</h3>
+						{% if attendants_error_message %}<p><strong class="error">{{ attendants_error_message }}</strong></p>
+						{% endif %}
 						<div class="row row-gtr-uniform">
 							<div class="col-4">
 								<button class="collapsible button fit">Current</button>
@@ -211,8 +217,9 @@
 					</section>
 
 					<section class="box">
-						<p><strong>Total Parking Spots: </strong>{{ total_spots }}</p>
-
+						<h3 style="text-align: center;">Total Parking Spots: {{ total_spots }}</h3>
+						{% if spot_error_message %}<p><strong class="error">{{ spot_error_message }}</strong></p>
+						{% endif %}
 						<div class="table-wrapper">
 							<table style="text-align: left;">
 								<thead>
@@ -297,6 +304,8 @@
 								</div>
 							</div>
 						</form>
+						{% if add_spot_error_message %}<p><strong class="error">{{ add_spot_error_message }}</strong></p>
+						{% endif %}
 					</section>
 
 				</section>
