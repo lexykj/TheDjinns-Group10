@@ -404,7 +404,7 @@ def renderLotEdit(request, parkingLot, errorKey, errorMessage):
     if errorKey and errorMessage:
         return render(request, 'web/lotEdit.html', {
             'parkingLot': parkingLot,
-            'name_error_message': errorMessage,
+            errorKey: errorMessage,
             'event_list': event_list,
             'other_event_list': other_events,
             'attendant_list': attendant_list,
@@ -486,7 +486,9 @@ def lot_delete_spot(request, spot_id):
     parkingSpot = get_object_or_404(ParkingSpot, pk=spot_id)
     parkingLot = ParkingLot.objects.get(parkingspot__id=parkingSpot.id)
     try:
+        # parkingLot.parkingspot_set.remove(parkingSpot)
         parkingSpot.delete()
+        parkingLot.save()
     except(KeyError, ParkingSpot.DoesNotExist):
         return renderLotEdit(request, parkingLot, 'delete_spot_error_message', "Parking spot not deleted")
     else:
@@ -509,6 +511,21 @@ def lot_edit_spot(request, spot_id):
         parkingSpot.save()
     except(KeyError, ParkingSpot.DoesNotExist):
         return renderLotEdit(request, parkingLot, 'edit_spot_error_message', "Unable to Edit Parking Spot")
+    else:
+        return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
+
+
+def lot_add_spot(request, parkingLot_id):
+    parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
+    try:
+        parkingLot.parkingspot_set.create(
+            spotType=request.POST['type'],
+            price=request.POST['price'],
+            totalSpots=request.POST['quantity'],
+            lot=parkingLot
+        )
+    except(KeyError, ParkingSpot.DoesNotExist):
+        return renderLotEdit(request, parkingLot, 'add_spot_error_message', "Unable to add Parking Spot(s)")
     else:
         return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
 
