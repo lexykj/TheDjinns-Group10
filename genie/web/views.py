@@ -342,6 +342,20 @@ def owners(request):
     if not profile.is_admin:
         return redirect('/home')
 
+    revokeOwner = request.POST.get('revokeOwner', -1)
+    makeAdmin = request.POST.get('makeAdmin', -1)
+    if revokeOwner != -1:
+        revokedUser = User.objects.all().get(id=revokeOwner)
+        revokedProfile = Profile.objects.all().get(user=revokedUser)
+        previousLots = ParkingLot.objects.all().filter(owner=revokedUser)
+        revokedProfile.is_owner = 0
+        revokedProfile.save()
+        # Transfer ownership to current admin
+        for lot in previousLots:
+            lot.owner = user
+    elif makeAdmin != -1:
+        pass
+
     allOwners = Profile.objects.all().filter(is_owner=1)
     context = {
         'allOwners': allOwners,

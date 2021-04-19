@@ -51,8 +51,16 @@
 									<li>
 										<div class="row">
 											<p class="col-4" style="text-align: center;">{{ owner }}</p>
-											<p class="col-4 button alt">Revoke Lot Owner Permissions</p>
-											<p class="col-3 button alt" style="margin-left: 3em;">Give Admin Permissions</p>
+											<form method="post" action="{% url 'web:owners' %}">
+												{% csrf_token %}
+												<input type="hidden" name="revokeOwner" value="{{ owner.id }}" />
+												<input type="submit" class="col-4 button alt" value="Revoke Owner Permissions" />
+											</form>
+											<form method="post" action="{% url 'web:owners' %}">
+												{% csrf_token %}
+												<input type="hidden" name="makeAdmin" value="{{ owner }}" />
+												<input type="submit" class="col-3 button alt" value="Give Admin Permissions" />
+											</form>
 										</div>
 										<div class="row">
 											<p class="col-4"></p>
