@@ -241,7 +241,7 @@
 								<h3>Check In Customers</h3>
 								<form class="col-12" action="{% url 'web:attendant' %}" method="post" >
 									{% csrf_token %}
-									<select name="event" id="event">
+									<select name="event" id="event" required>
 										<option value="">Select Event</option>
 										{% for event in events %}
 											<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
