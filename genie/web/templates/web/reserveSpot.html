@@ -117,7 +117,12 @@
 																		if (x == event) {
 																			var option = document.createElement('option');
 																			option.value = "{{lot.id}}";
-																			option.append(document.createTextNode("{{lot.name}}" + " - " + "{{lot.address}}"));
+																			var name = "{{lot.name}}";
+																			if (name.includes("&#x27;")) {
+																				name = name.replace("&#x27;", "'");
+																			}
+																			console.log(name);
+																			option.append(document.createTextNode(name + " - " + "{{lot.address}}"));
 																			l.appendChild(option);
 																		}
 																		"{% endfor %}"
@@ -221,7 +226,15 @@
 																if (count < "{{spot.totalSpots}}") {
 																	var option = document.createElement('option');
 																	option.value = "{{spot.id}}";
-																	option.append(document.createTextNode("{{spot.spotType}}" + " @ " + "{{spot.lot.name}}"));
+																	var name = "{{spot.lot.name}}";
+																	if (name.includes("&#x27;")) {
+																		name = name.replace("&#x27;", "'");
+																	}
+																	var type = "{{spot.spotType}}";
+																	if (type.includes("&#x27;")) {
+																		type = type.replace("&#x27;", "'");
+																	}
+																	option.append(document.createTextNode(type + " @ " + name));
 																	s.appendChild(option);
 																}
 															}
