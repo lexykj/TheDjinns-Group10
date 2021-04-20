@@ -50,7 +50,7 @@
 									{% csrf_token %}
 									<div class="row gtr-uniform gtr-50">
 										<div class="col-6 col-12-mobilep">
-											<input type="text" name="query" id="query" value="" placeholder="Reservation Code" />
+											<input type="text" name="query" id="query" value="" placeholder="Reservation Code" required />
 										</div>
 										<input type="hidden" name="event" value={{ event.id }} id="event" />
 										<div class="col-4 col-12-mobilep">
