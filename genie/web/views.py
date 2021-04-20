@@ -617,6 +617,16 @@ def lot_add_spot(request, parkingLot_id):
         return HttpResponseRedirect(reverse('web:lotEdit', args=(parkingLot.id,)))
 
 
+def delete_lot(request, parkingLot_id):
+    parkingLot = get_object_or_404(ParkingLot, pk=parkingLot_id)
+    try:
+        parkingLot.delete()
+    except(KeyError, ParkingLot.DoesNotExist):
+        return renderLotEdit(request, parkingLot, 'delete_lot_error_message', "Unable to delete Parking Lot")
+    else:
+        return HttpResponseRedirect(reverse('web:lots'))
+
+
 def info(request):
     # Common needed context
     thisProfile = Profile.objects.get(user_id=request.user.id)

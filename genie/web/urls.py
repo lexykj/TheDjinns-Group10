@@ -31,6 +31,7 @@ urlpatterns = [
     path('lot_delete_spot/<int:spot_id>', views.lot_delete_spot, name='lot_delete_spot'),
     path('lot_edit_spot/<int:spot_id>', views.lot_edit_spot, name='lot_edit_spot'),
     path('lot_add_spot/<int:parkingLot_id>', views.lot_add_spot, name='lot_add_spot'),
+    path('delete_lot/<int:parkingLot_id>', views.delete_lot, name='delete_lot'),
     path('lot-info', views.info, name='lot-info'),
     path('signIn', views.signIn, name='signIn'),
     path('signUp', views.signUp, name='signUp'),

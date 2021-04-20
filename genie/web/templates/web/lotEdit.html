@@ -307,7 +307,16 @@
 						{% if add_spot_error_message %}<p><strong class="error">{{ add_spot_error_message }}</strong></p>
 						{% endif %}
 					</section>
-
+					<section class="box">
+						<form action="{% url 'web:delete_lot' parkingLot.id %}" method="post">
+							{% csrf_token %}
+							<h3 class="row aln-center">Delete Lot</h3>
+							<p class="row aln-center">Warning: this action cannot be undone. Any information pertaining to this lot will become inaccessible.</p>
+							<div class="row aln-center">
+								<input type="submit" value="Delete {{ parkingLot }}">
+							</div>
+						</form>
+					</section>
 				</section>
 
 			<!-- Footer -->
