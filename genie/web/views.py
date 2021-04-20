@@ -515,7 +515,7 @@ def lot_delete_events(request, parkingLot_id):
     event_list = Event.objects.filter(parkinglot__id=parkingLot.id)
     try:
         for event in event_list:
-            if str(event.id) in request.POST:
+            if ('e' + str(event.id)) in request.POST:
                 parkingLot.event.remove(event)
                 parkingLot.save()
     except(KeyError, Event.DoesNotExist):
@@ -529,7 +529,7 @@ def lot_add_events(request, parkingLot_id):
     event_list = Event.objects.all()
     try:
         for event in event_list:
-            if str(event.id) in request.POST:
+            if ('e' + str(event.id)) in request.POST:
                 parkingLot.event.add(event)
                 parkingLot.save()
                 Revenue.objects.create(event=event, lot=parkingLot, amount=0)
@@ -544,7 +544,7 @@ def lot_delete_attendants(request, parkingLot_id):
     attendant_list = parkingLot.profile_set.all()
     try:
         for attendant in attendant_list:
-            if str(attendant.id) in request.POST:
+            if ('a' + str(attendant.id)) in request.POST:
                 attendant.attendant_for.remove(parkingLot)
                 attendant.save()
                 # TODO: check if they're an attendant for any other lot. If not, switch "is_attendant" to false.
@@ -559,7 +559,7 @@ def lot_add_attendants(request, parkingLot_id):
     attendant_list = Profile.objects.all()
     try:
         for attendant in attendant_list:
-            if str(attendant.id) in request.POST:
+            if ('a' + str(attendant.id)) in request.POST:
                 attendant.is_attendant = True
                 attendant.attendant_for.add(parkingLot)
                 attendant.save()
