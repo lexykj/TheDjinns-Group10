@@ -93,12 +93,12 @@ def pay(request, eventId, lotId, spotId):
     event = Event.objects.get(pk=eventId)
     spot = ParkingSpot.objects.get(pk=spotId)
     lot = ParkingLot.objects.get(pk=lotId)
-    # try:
-    #     revenue = Revenue.objects.get(event)
-    # except ObjectDoesNotExist:
-    #     revenue = Revenue.objects.create(event=event, lot=lot)
-    # revenue.amount += spot.price
-    # revenue.save()
+    try:
+        revenue = Revenue.objects.get(event=event, lot=lot)
+    except ObjectDoesNotExist:
+        revenue = Revenue.objects.create(event=event, lot=lot)
+    revenue.amount += (spot.price)
+    revenue.save()
     user = request.user
     user.profile.account_balance -= spot.price
     user.profile.save()
@@ -228,10 +228,26 @@ def account(request, message=""):
                 currRes.append(r)
             res_list.append(r)
     revenueList = Revenue.objects.order_by('lot')
-    revenueAmount=0
+    revenueAmount = 0.0
+    revenueLots = {}
+    revenueEvents = {}
     for rev in revenueList:
         if rev.lot.owner == user:
-            revenueAmount += rev.amount
+            revenueAmount += (rev.amount * 0.85)
+            if rev.lot in revenueLots:
+                revenueLots[rev.lot] += (rev.amount * 0.85)
+            else:
+                revenueLots[rev.lot] = (rev.amount * 0.85)
+        if user.profile.is_admin:
+            revenueAmount += (rev.amount * 0.1)
+            if rev.event in revenueEvents:
+                revenueEvents[rev.event] += (rev.amount * 0.1)
+            else:
+                revenueEvents[rev.event] = (rev.amount * 0.1)
+        # if user.profile.is_attendant:
+        #     if user.profile.attendant_for
+        #     revenueAmount +=
+            
     context = {
         'user': user,
         'balance': balance,
@@ -240,7 +256,9 @@ def account(request, message=""):
         'reservations': res_list,
         'pastReservations': pastRes[:4],
         'currentReservations': currRes,
-        'revenue': revenueAmount
+        'revenue': revenueAmount,
+        'revenueLots': revenueLots,
+        'revenueEvents': revenueEvents,
     }
     return render(request, 'web/account.html', context)
 
@@ -497,7 +515,7 @@ def lot_delete_events(request, parkingLot_id):
     event_list = Event.objects.filter(parkinglot__id=parkingLot.id)
     try:
         for event in event_list:
-            if str(event.id) in request.POST:
+            if ('e' + str(event.id)) in request.POST:
                 parkingLot.event.remove(event)
                 parkingLot.save()
     except(KeyError, Event.DoesNotExist):
@@ -511,9 +529,10 @@ def lot_add_events(request, parkingLot_id):
     event_list = Event.objects.all()
     try:
         for event in event_list:
-            if str(event.id) in request.POST:
+            if ('e' + str(event.id)) in request.POST:
                 parkingLot.event.add(event)
                 parkingLot.save()
+                Revenue.objects.create(event=event, lot=parkingLot, amount=0)
     except(KeyError, Event.DoesNotExist):
         return renderLotEdit(request, parkingLot, 'events_error_message', "No events added: no items selected")
     else:
@@ -525,7 +544,7 @@ def lot_delete_attendants(request, parkingLot_id):
     attendant_list = parkingLot.profile_set.all()
     try:
         for attendant in attendant_list:
-            if str(attendant.id) in request.POST:
+            if ('a' + str(attendant.id)) in request.POST:
                 attendant.attendant_for.remove(parkingLot)
                 attendant.save()
                 # TODO: check if they're an attendant for any other lot. If not, switch "is_attendant" to false.
@@ -540,7 +559,7 @@ def lot_add_attendants(request, parkingLot_id):
     attendant_list = Profile.objects.all()
     try:
         for attendant in attendant_list:
-            if str(attendant.id) in request.POST:
+            if ('a' + str(attendant.id)) in request.POST:
                 attendant.is_attendant = True
                 attendant.attendant_for.add(parkingLot)
                 attendant.save()
@@ -673,6 +692,9 @@ def info(request):
         thisNewSpot = ParkingSpot.objects.create(spotType=newSpotType, price=newPrice, totalSpots=newQuantity,
                                                  currentEventAvailableSpots=newQuantity, lot=thisNewLot)
         thisNewSpot.save()
+        ownerProfile = Profile.objects.get(user_id=newOwnerId)
+        ownerProfile.is_owner = True
+        ownerProfile.save()
         Revenue.objects.create(event=chosenEvent, lot=thisNewLot, amount=0.0)
 
         # pass context to template
