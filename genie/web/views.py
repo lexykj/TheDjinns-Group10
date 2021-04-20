@@ -692,6 +692,9 @@ def info(request):
         thisNewSpot = ParkingSpot.objects.create(spotType=newSpotType, price=newPrice, totalSpots=newQuantity,
                                                  currentEventAvailableSpots=newQuantity, lot=thisNewLot)
         thisNewSpot.save()
+        ownerProfile = Profile.objects.get(user_id=newOwnerId)
+        ownerProfile.is_owner = True
+        ownerProfile.save()
         Revenue.objects.create(event=chosenEvent, lot=thisNewLot, amount=0.0)
 
         # pass context to template
