@@ -262,6 +262,11 @@
 														<!-- Table -->
 														<section class="box">
 														<h3>Reservation Details</h3>
+															{% if message %}
+															<div>
+																<p style="color:red">{{message}}</p>
+															</div>
+															{% endif %}
 															<div class="table-wrapper">
 																<table>
 																	<thead>
@@ -277,13 +282,13 @@
 																			<td name='lot' value='{{lot.id}}'><a href='#'>{{lot}}</a></td> <!-- Link to lot map page here -->
 																			<td name='spotId' value='{{spot.id}}'>{{spot.spotType}}</td>
 																			<td name='eventId'>{{event.date | date}}</td>
-																			<td>${{spot.price}}0</td>
+																			<td>${{spot.price|floatformat:2}}</td>
 																		</tr>
 																	</tbody>
 																	<tfoot>
 																		<tr>
 																			<td colspan="3"></td>
-																			<td><b>${{spot.price}}0</b></td>
+																			<td><b>${{spot.price|floatformat:2}}</b></td>
 																		</tr>
 																	</tfoot>
 																</table>
@@ -293,7 +298,7 @@
 											</div>
 											<div class="row gtr-uniform gtr-50">
 												<div class="col-5 col-6-mobilep">
-													<h3>Total: ${{spot.price}}0</h3>
+													<h3>Total: ${{spot.price|floatformat:2}}</h3>
 												</div>
 												<div class="col-3 col-12-mobilep">
 													<input type="submit" value="Pay and Reserve" class="fit" />

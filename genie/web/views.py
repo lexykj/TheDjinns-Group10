@@ -93,6 +93,10 @@ def pay(request, eventId, lotId, spotId):
     event = Event.objects.get(pk=eventId)
     spot = ParkingSpot.objects.get(pk=spotId)
     lot = ParkingLot.objects.get(pk=lotId)
+    user = request.user
+    if user.profile.account_balance < spot.price:
+        message = "Not enough money in balance. Please add more money on account page"
+        return render(request, 'web/reserveSpot.html', {'event': event, 'lot': lot, 'spot': spot, 'select': False, 'message': message})
     try:
         revenue = Revenue.objects.get(event=event, lot=lot)
     except ObjectDoesNotExist:
