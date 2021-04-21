@@ -228,25 +228,34 @@ def account(request, message=""):
                 currRes.append(r)
             res_list.append(r)
     revenueList = Revenue.objects.order_by('lot')
-    revenueAmount = 0.0
+    lotAmount = 0.0
+    eventAmount = 0.0
+    attendantAmount = 0.0
     revenueLots = {}
     revenueEvents = {}
+    attendantLots = {}
+    if user.profile.is_attendant:
+        attendantList = user.profile.attendant_for.all()
     for rev in revenueList:
         if rev.lot.owner == user:
-            revenueAmount += (rev.amount * 0.85)
+            lotAmount += round((rev.amount * 0.85), 2)
             if rev.lot in revenueLots:
-                revenueLots[rev.lot] += (rev.amount * 0.85)
+                revenueLots[rev.lot] += round((rev.amount * 0.85), 2)
             else:
-                revenueLots[rev.lot] = (rev.amount * 0.85)
+                revenueLots[rev.lot] = round((rev.amount * 0.85), 2)
         if user.profile.is_admin:
-            revenueAmount += (rev.amount * 0.1)
+            eventAmount += (rev.amount * 0.1)
             if rev.event in revenueEvents:
                 revenueEvents[rev.event] += (rev.amount * 0.1)
             else:
                 revenueEvents[rev.event] = (rev.amount * 0.1)
-        # if user.profile.is_attendant:
-        #     if user.profile.attendant_for
-        #     revenueAmount +=
+        if user.profile.is_attendant:
+            if rev.lot in attendantList:
+                attendantAmount += (rev.amount * 0.05)
+                if rev.lot in attendantLots:
+                    attendantLots[rev.lot] += (rev.amount * 0.05)
+                else:
+                    attendantLots[rev.lot] = (rev.amount * 0.05)
             
     context = {
         'user': user,
@@ -256,9 +265,12 @@ def account(request, message=""):
         'reservations': res_list,
         'pastReservations': pastRes[:4],
         'currentReservations': currRes,
-        'revenue': revenueAmount,
+        'lotAmount': lotAmount,
+        'eventAmount': eventAmount,
         'revenueLots': revenueLots,
         'revenueEvents': revenueEvents,
+        'attendantAmount': attendantAmount,
+        'attendantLots': attendantLots,
     }
     return render(request, 'web/account.html', context)
 

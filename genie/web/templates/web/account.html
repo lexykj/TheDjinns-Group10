@@ -73,7 +73,7 @@
 								<div class="row gtr-50 gtr-uniform">
 									<br />
 									<div class="col-12 col-12-mobilep">
-										<h4>Current Balance: ${{balance}}0</h4>
+										<h4>Current Balance: ${{balance|floatformat:2}}</h4>
 									</div>
 									<form method="post" action={% url 'web:balance' %}>
 										{% csrf_token %}
@@ -87,22 +87,34 @@
 										</div>
 									</form>
 								</div>
-								{% if user.profile.is_owner or user.profile.is_admin %}
+								{% if user.profile.is_owner or user.profile.is_admin or user.profile.is_attendant %}
 								<h3>Revenue</h3>
 								<div class="col-12 col-12-mobilep">
-									<h4>Total Revenue: ${{revenue}}0</h4>
+									{% if user.profile.is_attendant %}
+									<h4><b>Attendant Revenue: ${{attendantAmount|floatformat:2}}</b></h4>
 									<ul class="alt">
-										{% if user.profile.is_owner %}
-											{% for lot, value in revenueLots.items %}
-												<li>{{ lot }}: ${{ value }}0</li>
-											{% endfor %}
-										{% endif %}
-										{% if user.profile.is_admin %}
-											{% for event, value in revenueEvents.items %}
-												<li>{{ event }}: ${{ value }}0</li>
-												{% endfor %}
-										{% endif %}
+										{% for lot, value in attendantLots.items %}
+											<li>{{ lot }}: ${{ value|floatformat:2 }}</li>
+										{% endfor %}
 									</ul>
+									{% endif %}
+									{% if user.profile.is_owner %}
+									<h4><b>Lot Revenue: ${{lotAmount|floatformat:2}}</b></h4>
+									<ul class="alt">
+										{% for lot, value in revenueLots.items %}
+											<li>{{ lot }}: ${{ value|floatformat:2 }}</li>
+										{% endfor %}
+									{% endif %}
+									</ul>
+									{% if user.profile.is_admin %}
+									<h4><b>Event Revenue: ${{eventAmount|floatformat:2}}</b></h4>
+									<ul class="alt">
+										{% for event, value in revenueEvents.items %}
+											<li>{{ event }}: ${{ value|floatformat:2 }}</li>
+										{% endfor %}
+									</ul>
+									{% endif %}
+									
 								</div>
 								{% endif %}
 							</section>
@@ -123,10 +135,11 @@
 								<h3>Previous Reservations</h3>
 								<ul class="alt">
 									{% for r in pastReservations %}
-										<li>{{r.event.date | date }}: {{r.spot.lot}} - ${{r.spot.price}}0</li>
+										<li>{{r.event.date | date }}: {{r.spot.lot}} - ${{r.spot.price|floatformat:2}}</li>
 									{% endfor %}
 								</ul>
-								<p><a href={% url "web:history" %}>See all past reservations...</a></p>
+								<p><a href={% url "web:history" %}>See all past reservations...</a><br>
+								<a href="{% url 'web:main' %}#currentRes">See all current reservations...</a></p>
 							</section>
 						</div>
 					</section>

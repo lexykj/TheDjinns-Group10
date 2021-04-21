@@ -78,24 +78,8 @@
 												<select onchange="lotChange()" name="lotCategory" id="lotCategory">
 														{% if preFilledLotId %}
 															<option value="{{ preFilledLotId }}">{{ preFilledLotName }} (From previously viewed page)</option>
-															<!-- <option value="">- Select Lot -</option> -->
-
-															<!-- {% for lot in lots %}
-																{% if lot.id != preFilledLotId %}
-																	<option value={{lot.id}}>{{ lot.name }} - {{lot.address}}</option>
-																{% endif %}
-															{% endfor %} -->
-
 														{% elif againLotId %}
 															<option value="{{ againLotId }}">{{ againLotName }} (From previous reservation)</option>
-															<!-- <option value="">- Select Lot -</option>
-
-															{% for lot in lots %}
-																{% if lot.id != againLotId %}
-																	<option value={{lot.id}}>{{ lot.name }} - {{lot.address}}</option>
-																{% endif %}
-															{% endfor %} -->
-
 														{% else %}
 															<option value="">- Select Lot -</option>
 															<script>
@@ -179,6 +163,9 @@
 														}
 
 													}
+													else if("{{preFilledLotId" != "") {
+														chooseSpots();
+													}
 												}
 											}
 											</script>
@@ -190,13 +177,6 @@
 												<select  name="spotCategory" id="spotCategory">
 													{% if againSpotId %}
 														<option value="{{ againSpotId }}">{{ againSpotType }} (From previous reservation)</option>
-														<!-- <option value="">- Select Parking Type -</option>
-
-														{% for spot in spots %}
-															{% if spot.id != againSpotId %}
-																<option value={{spot.id}}>{{ spot.spotType }} @ {{ spot.lot.name }}</option>
-															{% endif %}
-														{% endfor %} -->
 													{% else %}
 														<option value="">- Select Parking Type -</option>
 														<script>
