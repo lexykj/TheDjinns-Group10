@@ -63,6 +63,7 @@
 								<input type="hidden" value={{ lot.id }} id="lotId" name="lotId" />
 								<ul class="actions special">
 									<li><input type="submit" value="Reserve a Parking Spot" class="button" /></li>
+									<li><a href="{% url 'web:lotEdit' lot.id %}" class="button">Edit Lot</a></li>
 								</ul>
 							</form>
 						</section>
