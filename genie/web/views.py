@@ -562,8 +562,10 @@ def lot_delete_attendants(request, parkingLot_id):
         for attendant in attendant_list:
             if ('a' + str(attendant.id)) in request.POST:
                 attendant.attendant_for.remove(parkingLot)
+                if not ParkingLot.objects.filter(profile__id=attendant.id):
+                    attendant.is_attendant = False
                 attendant.save()
-                # TODO: check if they're an attendant for any other lot. If not, switch "is_attendant" to false.
+
     except(KeyError, Event.DoesNotExist):
         return renderLotEdit(request, parkingLot, 'attendants_error_message', "No events deleted: no items selected")
     else:
