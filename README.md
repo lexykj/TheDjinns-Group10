@@ -29,7 +29,11 @@ While Git and Bash are already likely to be set up on your system, Django and Py
 $ pip install --user django
 ```
 
-Any other required softwere will also be listed here as the need develops
+You will also need to install a font package:
+
+```
+$ pip install --user django-static-fontawesome
+```
 
 ## Build instructions
 
@@ -63,3 +67,12 @@ $ python -m django --version
 
 If you see 3.1 or higher your system can run the server!
 
+## Using the website for the first time
+
+If you are the first user to run the website on your device then a few additional steps are necessary.  First create a superuser in order to access `localhost:8000/admin` by running:
+
+```
+$ python genie/manage.py createsuperuser
+```
+
+And then entering a username and password. This will create the first system user and allow you admin privileges. Because this first user is created by Django and not by the website itself, an additional step is necessary. Navigate to the Profile tab in `localhost:8000/admin` and press the 'Add Profile' button in the top right of the screen. Fill in the necessary information, including permissions, and then select your existing superuser account as the user tied to the profile. Press 'Save' and you will be done. Navigate to `localhost:8000` and you will be ready to use the website.

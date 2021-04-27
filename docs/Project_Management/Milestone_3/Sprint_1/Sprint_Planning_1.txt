@@ -1,0 +1,7 @@
+Sprint Planning (1)
+Sprint leader: Lexy Simmons
+
+Notes:
+- Decide on pages needed
+- Decide on database details
+- We don't really know what we're doing yet, so we'll add to the sprint board as the sprint goes on

@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<!--
+	Big Blue's Parking Genie
+	USU CS3450
+	Group 10 - The Djinns
+	Autumn Arbon, Joel Christensen, Palani Johnson, Lexy Simmons
+	https://github.com/palani-johnson/TheDjinns-Group10
+
+
+	TEMPLATE: 
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Parking Maps</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!-- The following tags are taken straight from the high fidelity prototype -->
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	    {% load static %}
+	    <link rel="stylesheet" type="text/css" href={% static "web/assets/css/main.css" %} />
+	    
+		<script src={% static "web/assets/js/map.js" %}></script>
+	</head>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1>Big Blue's Parking Genie</h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="{% url 'web:main' %}">Home</a></li>
+							<li><a href="{% url 'web:account' %}" class="button">My Account</a></li>
+							<li><a href="{% url 'web:logout' %}" class="button">Log Out</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+						<h2>Available Lots for {{ event.name }}</h2>
+						<p>{{ event.description }}</p>
+					</header>
+					<div class="box">
+						<div id="map" eventid={{ event.id }} style="height:50em; width:100%;"></div>
+
+					    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+					    <script
+					      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlw0MBCKArRLweJTAHNxphjw30njY9agw&callback=initMap&libraries=&v=weekly&map_ids=da9b4daab158add3"
+					      async
+					    ></script>
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>USU CS 3540. Group 10- The Djinns: Joel Christensen, Autumn Arbon, Lexy Simmons, Palani Johnson.</li><li>HTML Template Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src={% static "web/assets/js/jquery.min.js" %}></script>
+			<script src={% static "web/assets/js/jquery.dropotron.min.js" %}></script>
+			<script src={% static "web/assets/js/jquery.scrollex.min.js" %}></script>
+			<script src={% static "web/assets/js/browser.min.js" %}></script>
+			<script src={% static "web/assets/js/breakpoints.min.js" %}></script>
+			<script src={% static "web/assets/js/util.js" %}></script>
+			<script src={% static "web/assets/js/main.js" %}></script>
+	</body>
+</html>

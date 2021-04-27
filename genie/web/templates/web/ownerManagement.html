@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<!--
+	Big Blue's Parking Genie
+	USU CS3450
+	Group 10 - The Djinns
+	Autumn Arbon, Joel Christensen, Palani Johnson, Lexy Simmons
+	https://github.com/palani-johnson/TheDjinns-Group10
+
+
+	TEMPLATE: 
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Lot Owner Management</title>
+		<meta charset="utf-8" />
+		{% load static %}
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href={% static "web/assets/css/main.css" %}/>
+	</head>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1>Big Blue's Parking Genie</h1>
+					<nav id="nav">
+						<ul>
+							<li><a href={% url "web:main" %}>Home</a></li>
+							<li><a href={% url "web:account" %} class="button">My Account</a></li>
+							<li><a href={% url "web:logout" %} class="button">Log Out</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+						<h2>Lot Owner Management</h2>
+						<p>View owners' lots or remove parking lot owners here.</p>
+					</header>
+					<div class="box">
+						<span class="image fit"><img src={% static "web/images/lotGuy.jpg" %} alt="" /></span>
+						<!-- Upcoming Events -->
+						<section class="box">
+							<h3 style="text-align: center;">All Current Parking Lot Owners</h3>
+							<ul class="alt">
+								{% for owner in allOwners %}
+									<li>
+										<div class="row">
+											{% if owner.is_admin %}
+												<p class="col-4" style="text-align: center;">{{ owner }}</p>
+												<p class="col-4" style="text-align: center;">Admin: True</p>
+												<form method="post" action="{% url 'web:lots' %}">
+													{% csrf_token %}
+													<input type="hidden" name="thisOwner" value="{{ owner }}" />
+													<input type="submit" class="col-3 button special" style="text-align: center; margin-left: 2em;" value="View Parking Lots" />
+												</form>
+											</div>
+											{% else %}
+												<p class="col-4" style="text-align: center;">{{ owner }}</p>
+												<form method="post" action="{% url 'web:owners' %}">
+													{% csrf_token %}
+													<input type="hidden" name="revokeOwner" value="{{ owner.id }}" />
+													<input type="submit" class="col-4 button alt" value="Revoke Owner Permissions" />
+												</form>
+												<form method="post" action="{% url 'web:owners' %}">
+													{% csrf_token %}
+													<input type="hidden" name="makeAdmin" value="{{ owner.id }}" />
+													<input type="submit" class="col-3 button alt" value="Give Admin Permissions" />
+												</form>
+											</div>
+											<div class="row">
+												<p class="col-4"></p>
+												<p class="col-4"></p>
+												<form method="post" action="{% url 'web:lots' %}">
+													{% csrf_token %}
+													<input type="hidden" name="thisOwner" value="{{ owner }}" />
+													<input type="submit" class="col-3 button special" style="text-align: center; margin-left: 2em;" value="View Parking Lots" />
+												</form>
+											</div>
+											{% endif %}
+
+
+									</li>
+								{% endfor %}
+							</ul>
+						</section>
+						<!--
+						Deprecated
+						<section class="box">
+							<h3 style="text-align: center;">Add a Parking Lot Owner</h3>
+							<p style="text-align: center;">Enter the new owner's account information here...</p>
+							<form method="post" action="#">
+								<div class="row gtr-uniform gtr-50">
+									<div class="col-6 col-12-mobilep">
+										<input type="text" name="name" id="name" value="" placeholder="Username" />
+									</div>
+									<div class="col-6 col-12-mobilep">
+										<input type="email" name="email" id="email" value="" placeholder="Email" />
+									</div>
+									<div class="col-12">
+										<ul class="actions special">
+											<li><input type="submit" value="Add Owner" /></li>
+										</ul>
+									</div>
+								</div>
+							</form>
+						</section>
+						-->
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://github.com/palani-johnson/TheDjinns-Group10" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>USU CS 3540. Group 10- The Djinns: Joel Christensen, Autumn Arbon, Lexy Simmons, Palani Johnson.</li><li>HTML Template Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src={% static "assets/js/jquery.min.js" %}></script>
+			<script src={% static "assets/js/jquery.dropotron.min.js" %}></script>
+			<script src={% static "assets/js/jquery.scrollex.min.js" %}></script>
+			<script src={% static "assets/js/browser.min.js" %}></script>
+			<script src={% static "assets/js/breakpoints.min.js" %}></script>
+			<script src={% static "assets/js/util.js" %}></script>
+			<script src={% static "assets/js/main.js" %}></script>
+
+	</body>
+</html>

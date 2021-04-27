@@ -1,0 +1,340 @@
+<!DOCTYPE HTML>
+<!--
+	Big Blue's Parking Genie
+	USU CS3450
+	Group 10 - The Djinns
+	Autumn Arbon, Joel Christensen, Palani Johnson, Lexy Simmons
+	https://github.com/palani-johnson/TheDjinns-Group10
+
+
+	TEMPLATE: 
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Reserve Parking Spot</title>
+		<meta charset="utf-8" />
+		{% load static %}
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href={% static "web/assets/css/main.css" %} />
+	</head>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1>Big Blue's Parking Genie</h1>
+					<nav id="nav">
+						<ul>
+							<li><a href={% url "web:main" %}>Home</a></li>
+							<li><a href={% url "web:account" %} class="button">My Account</a></li>
+							<li><a href={% url "web:logout" %} class="button">Log Out</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+						<h2>Reserve a Parking Spot</h2>
+					</header>
+					<div class="box">
+						<span class="image featured"><img src={% static "web/images/parkingIvy.jpg" %} alt="" /></span>
+						<!-- Form -->
+								<section class="box">
+									{% if select %}
+									<h3>Just tell us a little about the parking you're looking for...</h3>
+									<form method="get" action={% url "web:selectSpot" %}>
+										{% csrf_token %}
+										<div class="row gtr-uniform gtr-50">
+											<div class="col-12">
+
+												<select onchange="eventChange()" name="eventCategory" id="eventCategory">
+														<option value="">- Select Event -</option>
+														{% if preFilledLotId %}
+															{% for event in preFilledLot.event.all %}
+																<option value={{event.id}}>{{ event.name }} - {{event.description}}</option>
+															{% endfor %}
+														{% elif againLotId %}
+															{% for event in againLot.event.all %}
+																<option value={{event.id}}>{{ event.name }} - {{event.description}}</option>
+															{% endfor %}
+														{% else %}
+															{% for event in events %}
+															<option value={{event.id}}>{{ event.name }} - {{event.description}}</option>
+															{% endfor %}
+														{% endif %}
+												</select>
+											</div>
+											<div class="col-12" id="eventMap">
+												<h5><a id="link">See map of available lots</a></h5>
+											</div>
+											<div class="col-12" id="message">
+												<h5 id="newMessage" style="color: red;"></h5>
+											</div>
+											<div class="col-12" id="lotDiv">
+												<select onchange="lotChange()" name="lotCategory" id="lotCategory">
+														{% if preFilledLotId %}
+															<option value="{{ preFilledLotId }}">{{ preFilledLotName }} (From previously viewed page)</option>
+														{% elif againLotId %}
+															<option value="{{ againLotId }}">{{ againLotName }} (From previous reservation)</option>
+														{% else %}
+															<option value="">- Select Lot -</option>
+															<script>
+																function chooseLots() {
+																	var l = document.getElementById("lotCategory");
+																	var length = l.options.length - 1;
+																	for (var i = length; i >= 0; i--) {
+																		l.remove(i);
+																	}
+																	var opt = document.createElement('option');
+																	opt.append(document.createTextNode("- Select Lot -"));
+																	l.appendChild(opt);
+																	"{% for lot in lots %}"
+																	console.log(l);
+																	console.log("In choose lot");
+																		"{% for e in lot.event.all %}"
+																		var x = "{{e.id}}";
+																		console.log(x);
+																		if (x == event) {
+																			var option = document.createElement('option');
+																			option.value = "{{lot.id}}";
+																			var name = "{{lot.name}}";
+																			if (name.includes("&#x27;")) {
+																				name = name.replace("&#x27;", "'");
+																			}
+																			console.log(name);
+																			option.append(document.createTextNode(name + " - " + "{{lot.address}}"));
+																			l.appendChild(option);
+																		}
+																		"{% endfor %}"
+																	"{% endfor %}"
+																}
+															</script>
+
+														{% endif %}
+												</select>
+											</div>
+											<script>
+												var e = document.getElementById("eventCategory");
+												var event = e.value;
+												var lotDiv = document.getElementById("lotDiv");
+												var eventMap = document.getElementById("eventMap");
+												if (event === "" && "{{againLotId}}" === "" && "{{preFilledLotId}}" === "") {
+													console.log("No lot");
+													lotDiv.style.display = "none";
+													eventMap.style.display = "none";
+												}
+												else {
+													lotDiv.style.display = "block";
+													if (event === "") {
+														eventMap.style.display = "none";
+													}
+													else
+														eventMap.style.display = "block";
+												}
+											function eventChange() {
+												event = e.value;
+												if (event === "") {
+													lotDiv.style.display = "none";
+													eventMap.style.display = "none";												}
+												else {
+													if ("{{preFilledLotId}}" === "" && "{{againSpotId}}" === "") {
+														chooseLots();
+														lotDiv.style.display = "block";
+														eventMap.style.display = "block";
+														var a = document.getElementById("link");
+														var url = "{% url 'web:map' 1 %}";
+														a.href = url.replace('1', event);
+													}
+													else if ("{{againSpotId}}" != "") {
+														var count = 0;
+														"{% for r in reservations %}"
+															if ("{{r.event.id}}" == event) {
+																if ("{{r.spot}}" == "{{againSpot}}")
+																	count += 1;
+															}
+														"{% endfor %}"
+														if (count > "{{againSpot.totalSpots}}") {
+															var m = document.getElementById("message");
+															m.textContent("This event does not have any of the selected spot available")
+														}
+
+													}
+													else if("{{preFilledLotId" != "") {
+														chooseSpots();
+													}
+												}
+											}
+											</script>
+											<script>
+												var l = document.getElementById("lotCategory");
+												var lot = l.value;
+											</script>
+											<div class="col-12" id="spotDiv">
+												<select  name="spotCategory" id="spotCategory">
+													{% if againSpotId %}
+														<option value="{{ againSpotId }}">{{ againSpotType }} (From previous reservation)</option>
+													{% else %}
+														<option value="">- Select Parking Type -</option>
+														<script>
+														function chooseSpots() {
+															var s = document.getElementById("spotCategory");
+															var length = s.options.length - 1;
+															for (var i = length; i >= 0; i--) {
+																s.remove(i);
+															}
+															var opt = document.createElement('option');
+															opt.append(document.createTextNode("- Select Parking Type -"));
+															s.appendChild(opt);
+															"{% for spot in spots %}"
+															console.log(s);
+															console.log("In choose spot");
+															var x = "{{spot.lot.id}}";
+															console.log(x);
+															
+															if (x == lot) {
+																var count = 0;
+																"{% for r in reservations %}"
+																if ("{{r.event.id}}" == event) {
+																	if ("{{r.spot}}" == "{{spot}}")
+																		count += 1;
+																}
+																"{% endfor %}"
+																if (count < "{{spot.totalSpots}}") {
+																	var option = document.createElement('option');
+																	option.value = "{{spot.id}}";
+																	var name = "{{spot.lot.name}}";
+																	if (name.includes("&#x27;")) {
+																		name = name.replace("&#x27;", "'");
+																	}
+																	var type = "{{spot.spotType}}";
+																	if (type.includes("&#x27;")) {
+																		type = type.replace("&#x27;", "'");
+																	}
+																	option.append(document.createTextNode(type + " @ " + name));
+																	s.appendChild(option);
+																}
+															}
+															"{% endfor %}"
+														}
+														</script>
+															<!--<option value={{spot.id}}>{{ spot.spotType }} @ {{ spot.lot.name }}</option>-->
+													{% endif %}
+												</select>
+											</div>
+											<script>
+												var spotDiv = document.getElementById("spotDiv");
+												if ((lot === "" || "{{preFilledLotId}}" === "") && "{{againSpotId}}" === "") {
+													spotDiv.style.display = "none";
+												}
+												else {
+													if ("{{preFilledLotId}}" != "")
+														var lot = "{{preFilledLotId}}"
+														chooseSpots();
+													spotDiv.style.display = "block";
+												}
+											function lotChange() {
+												lot = l.value;
+												chooseSpots();
+												console.log(lot);
+												if (lot === "") {
+													spotDiv.style.display = "none";
+												}
+												else {
+													spotDiv.style.display = "block";
+												}
+											}
+											</script>
+											<div class="col-3 col-12">
+												<input type="submit" value="Select" class="fit" />
+											</div>
+										</div>
+									</form>
+									{% else %}
+										<form method="post" action={% url 'web:pay' event.id lot.id spot.id %}>
+											{% csrf_token %}
+											<div>
+												<div class="row">
+													<div class="col-12">
+														<!-- Table -->
+														<section class="box">
+														<h3>Reservation Details</h3>
+															{% if message %}
+															<div>
+																<p style="color:red">{{message}}</p>
+															</div>
+															{% endif %}
+															<div class="table-wrapper">
+																<table>
+																	<thead>
+																		<tr>
+																			<th>Parking Lot</th>
+																			<th>Type</th>
+																			<th>Reserved Hours</th>
+																			<th>Price</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+																			<td name='lot' value='{{lot.id}}'>{{lot}}</td> <!-- Link to lot map page here -->
+																			<td name='spotId' value='{{spot.id}}'>{{spot.spotType}}</td>
+																			<td name='eventId'>{{event.date | date}}</td>
+																			<td>${{spot.price|floatformat:2}}</td>
+																		</tr>
+																	</tbody>
+																	<tfoot>
+																		<tr>
+																			<td colspan="3"></td>
+																			<td><b>${{spot.price|floatformat:2}}</b></td>
+																		</tr>
+																	</tfoot>
+																</table>
+															</div>
+													</div>
+												</div>
+											</div>
+											<div class="row gtr-uniform gtr-50">
+												<div class="col-5 col-6-mobilep">
+													<h3>Total: ${{spot.price|floatformat:2}}</h3>
+												</div>
+												<div class="col-3 col-12-mobilep">
+													<input type="submit" value="Pay and Reserve" class="fit" />
+												</div>
+											</div>
+										</form>
+									{% endif %}
+								</section>
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://github.com/palani-johnson/TheDjinns-Group10" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>USU CS 3540. Group 10- The Djinns: Joel Christensen, Autumn Arbon, Lexy Simmons, Palani Johnson.</li><li>HTML Template Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src={% static "assets/js/jquery.min.js" %}></script>
+			<script src={% static "assets/js/jquery.dropotron.min.js" %}></script>
+			<script src={% static "assets/js/jquery.scrollex.min.js" %}></script>
+			<script src={% static "assets/js/browser.min.js" %}></script>
+			<script src={% static "assets/js/breakpoints.min.js" %}></script>
+			<script src={% static "assets/js/util.js" %}></script>
+			<script src={% static "assets/js/main.js" %}></script>
+
+	</body>
+</html>

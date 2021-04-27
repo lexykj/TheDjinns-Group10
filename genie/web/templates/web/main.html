@@ -1,0 +1,377 @@
+<!DOCTYPE HTML>
+<!--
+	Big Blue's Parking Genie
+	USU CS3450
+	Group 10 - The Djinns
+	Autumn Arbon, Joel Christensen, Palani Johnson, Lexy Simmons
+	https://github.com/palani-johnson/TheDjinns-Group10
+
+
+	TEMPLATE: 
+	Template:
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>My Parking</title>
+		<meta charset="utf-8" />
+		{% load static %}
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href={% static "web/assets/css/main.css" %}/>
+		<link rel='icon' href={% static 'web/images/favicon.ico' %} type='image/x-icon' />
+		{% block style %}
+        <link rel="stylesheet" type="text/css" href="{% static "web/assets/css/fontawesome-all.min.css" %}" />
+	    {% endblock %}
+	</head>
+	<body class="landing is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+			<header id="header" class="alt">
+				<h1><a href={% url "web:main" %}>Big Blue's Parking Genie</a></h1>
+				<nav id="nav">
+					<ul>
+						<li><a href="https://github.com/palani-johnson/TheDjinns-Group10" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href={% url "web:main" %}>Home</a></li>
+						<li><a href={% url "web:account" %} class="button">My Account</a></li>
+						<li><a href={% url "web:logout" %} class="button">Log Out</a></li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Banner -->
+			<section id="banner" style="background-image: url('images/overlay.png'), url({% static 'web/images/banner.jpg' %});">
+				<h2>My Parking</h2>
+			</section>
+
+		<!-- Main -->
+			<section id="main" class="container navMain">
+				<section class="box special">
+					<header class="major">
+						<h2>A Hub for All Your Parking Needs</h2>
+						<h3>Welcome {{profile}}</h3>
+						<br />
+						<a style=" text-decoration: none; border-bottom: none;" href="#customerFunctions"><span class="icon solid major fa-long-arrow-alt-down accent4"></span></a>
+					</header>
+				</section>
+
+				<!-- Customer Functionality -->
+				{% if profile.is_customer %}
+					<br />
+					<div id="customerFunctions">
+						<!-- <h2 style="text-align: center;">Customer Functions</h2> -->
+						<section class="box special">
+						<header class="major">
+							<h2>Upcoming Utah State Events</h2>
+							<br />
+							<div id="monthTitle"></div>
+							<script>
+								//Get and display current Month
+								var staticTitle = document.createElement('h4');
+								var d = new Date();
+								var month = new Array();
+								month[0] = "January";
+								month[1] = "February";
+								month[2] = "March";
+								month[3] = "April";
+								month[4] = "May";
+								month[5] = "June";
+								month[6] = "July";
+								month[7] = "August";
+								month[8] = "September";
+								month[9] = "October";
+								month[10] = "November";
+								month[11] = "December";
+								var month = month[d.getMonth()];
+								var titleText = document.createTextNode(month);
+								staticTitle.appendChild(titleText);
+								document.getElementById('monthTitle').insertBefore(staticTitle, document.getElementById('eventTable'));
+							</script>
+							<div id="eventTable" class="table-wrapper">
+									<table>
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Description</th>
+												<th>Date/Time</th>
+											</tr>
+										</thead>
+										<tbody>
+										{% for event in upcomingEvents %}
+											<tr>
+												<td>{{ event.name }}</td>
+												<td>{{ event.description|truncatewords:8 }}</td>
+												<td>{{ event.date }}</td>
+											</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							<div class="row">
+							<ul class="actions special">
+								<li><a href={% url "web:reserve" %} class="button">Reserve a Parking Spot</a></li>
+							</ul>
+						</div>
+						</header>
+					</section>
+
+					<section class="box special" id="currentRes">
+
+							<h3>Current Upcoming Reservations</h3>
+							<ul class="alt">
+								{% for reservation in currentReservations %}
+									<li>
+										<div class="row">
+											<p class="col-3">{{ reservation.event.date }}</p>
+											<a class="button alt col-3">{{ reservation.event }}</a>
+											<p class="col-3"><a data-code="{{ reservation.uuid }}" class="code">Reservation Code</a></p>
+											<form class="col-3" action="{% url 'web:lot-info' %}" method="post">
+												{% csrf_token %}
+												<input type="hidden" value="{{ reservation.event.id }}" name="passEvent" class="button special"/>
+												<input type="hidden" value="{{ reservation.spot.lot.id }}" id="whichCurrentLot" name="whichCurrentLot" class="button special"/>
+												<input class="button" type="submit" value="See Lot Map and Details"/>
+											</form>
+										</div>
+									</li>
+								{% endfor %}
+							</ul>
+
+							<h3>Recent Previous Reservations</h3>
+							<ul class="alt">
+								{% for reservation in pastReservations %}
+									<li>
+										<div class="row">
+											<p class="col-3">{{ reservation.event.date }}</p>
+											<a class="button alt col-3">{{ reservation.event }}</a>
+											<p class="col-3"><a data-code="{{ reservation.uuid }}" class="code">Reservation Code</a></p>
+											<form class="col-3" action="{% url 'web:lot-info' %}" method="post">
+												{% csrf_token %}
+												<input type="hidden" value="{{ reservation.spot.lot.id }}" id="whichLot" name="lot" class="button special"/>
+												<input class="button" type="submit" value="See Lot Map and Details"/>
+											</form>
+										</div>
+									</li>
+								{% endfor %}
+								<li><a href={% url "web:history" %} class="button special fit">See all past reservations</a></li>
+							</ul>
+						</section>
+					</div>
+
+					<!-- Become an Owner Functionality -->
+					<section class="box special">
+						<header class="major">
+							<h3>Register to Own a Parking Lot</h3>
+							<p>Do you live close to the university? Have you ever wanted to rent out space in your driveway, but not known how to advertise? Wonder no more. Big Blue's Parking Genie will allow you to register, advertise, and manage reservations for your personal lot. Sign up here!</p>
+							<br />
+							<br />
+							<br />
+							<button class="collapsible button alt fit">Enter Lot Details</button>
+							<div class="content">
+								<form action="{% url 'web:lot-info' %}" method="post">
+									{% csrf_token %}
+									<input type="hidden" value="doRegisterLot" id="registerNewLot" name="registerNewLot" />
+									<br />
+									<input type="text" placeholder="Name..." id="lotName" name="lotName"/>
+									<br />
+									<input type="text" placeholder="Address..." id="lotAddress" name="lotAddress"/>
+									<br />
+									<select name="chooseEvent" id="chooseEvent">
+										<option value="">Select Initial Event to Offer Parking For</option>
+										{% for event in upcomingEvents %}
+											<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
+										{% endfor %}
+									</select>
+									<input type="hidden" value="{{ user.id }}" id="newOwnerId" name="newOwnerId" />
+									<br />
+									<div class="row row-gtr-uniform">
+										<div class="col-4">
+											<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Latitude</a></h4>
+											<input type="number" step="any" class="button alt" id="latitude" name="latitude" />
+										</div>
+										<div class="col-4">
+											<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Longtitude</a></h4>
+											<input type="number" step="any" class="button alt" id="longitude" name="longitude" />
+										</div>
+										<div class="col-4">
+										<h4>Calculate from Address field</a></h4>
+											<input class="button" value="Calculate" id="latLngButton"/>
+											<script>
+												document.getElementById("latLngButton").addEventListener("click", () => {
+													address = document.getElementById("lotAddress").value;
+													url = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDBdkOXzfc2rj7a57BnP3AI0r9TrT2nmxY&address=" + address;
+													fetch(url)
+														.then(response => response.json())
+														.then(data => {
+															document.getElementById("lotAddress").value = data["results"][0]["formatted_address"];
+															geocode = data["results"][0]["geometry"]["location"];
+															document.getElementById("latitude").value = geocode["lat"];
+															document.getElementById("longitude").value = geocode["lng"];
+														});
+												});
+											</script>
+										</div>
+									</div>
+									<br />
+									<br />
+									<br />
+									<!-- Register spots for this parking lot -->
+									<div class="row row-gtr-uniform" style="padding-left: 2em;">
+										<input type="text" class="col-4 button alt" name="newSpotType" id="newSpotType" placeholder="Spot Type..." />
+										<input type="number" class="col-4 button alt" name="newQuantity" id="newQuantity" placeholder="Quantity..." />
+										<input type="number" class="col-4 button alt" step="0.1" name="newPrice" id="newPrice" placeholder="Price..." />
+									</div>
+									<br />
+									<input class="button" type="submit" value="Register your New Lot"/>
+								</form>
+							</div>
+						</header>
+					</section>
+
+				{% endif %}
+
+
+				<!-- Attendant Functionality -->
+				{% if profile.is_attendant %}
+					<div id="attendantFunctions">
+						<!-- <h2 style="text-align: center;">Attendant Functions</h2> -->
+						<section class="box special">
+								<span class="image featured"><img src={% static "web/images/checkIn.jpg" %} alt="" /></span>
+								<h3>Check In Customers</h3>
+								<form class="col-12" action="{% url 'web:attendant' %}" method="post" >
+									{% csrf_token %}
+									<select name="event" id="event" required>
+										<option value="">Select Event</option>
+										{% for event in events %}
+											<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
+										{% endfor %}
+									</select>
+									<br />
+									<ul class="actions special">
+										<li><input type="submit" value="Fill Event Reservations" class="button special"/></li>
+									</ul>
+								</form>
+
+						</section>
+					</div>
+				{% endif %}
+
+				<!-- Owner Functionality -->
+				{% if profile.is_owner %}
+					<div id="ownerFunctions">
+						<!-- <h2 style="text-align: center;">Lot Owner Functions</h2> -->
+						<div class="row">
+							<div class="col-6 col-12-narrower">
+
+								<section class="box special">
+									<span class="image featured"><img src={% static "web/images/parkingGarage2.jpg" %} alt="" /></span>
+									<h3>Manage my Parking Lots</h3>
+									<p>Assign new attendants; manage parking types and prices.</p>
+									<br />
+									<br />
+									<br />
+									<ul class="actions special">
+										<li><a href={% url "web:lots" %} class="button special">See my parking lots</a></li>
+									</ul>
+									<br />
+								</section>
+
+							</div>
+							<div class="col-6 col-12-narrower">
+
+								<section class="box special">
+									<span class="image featured"><img src={% static "web/images/sunset.jpg" %} alt="" /></span>
+									<h3>View my current lot reservations</h3>
+									<form class="col-12" method="post" action="{% url 'web:lot-info' %}">
+										{% csrf_token %}
+										<select name="eventForLot" id="eventForLot">
+											<option value="">Select Event</option>
+											{% for event in events %}
+												<option value="{{ event.id }}">{{ event.name }} | {{ event.date }}</option>
+											{% endfor %}
+										</select>
+										<br />
+										<select name="lot" id="lot">
+											<option value="">Select Parking Lot</option>
+											{% for lot in lots %}
+												{% if lot.owner == user %}
+												<option value="{{ lot.id }}">{{ lot.name }}</option>
+												{% endif %}
+											{% endfor %}
+										</select>
+										<br />
+										<ul class="actions special">
+											<li><input type="submit" class="button special" value="View Lot Reservations" /></li>
+										</ul>
+									</form>
+
+								</section>
+
+							</div>
+						</div>
+					</div>
+				{% endif %}
+
+
+				<!-- University Admin Functionality -->
+				{% if profile.is_admin %}
+					<div id="adminFunctions">
+						<!-- <h2 style="text-align: center;">University Admin Functions</h2> -->
+						<section class="box special">
+								<span class="image featured"><img src={% static "web/images/desk.jpg" %} alt="" /></span>
+								<h3>Manage Upcoming USU Events</h3>
+								<ul class="actions special">
+									<li><a href="{% url 'web:events' %}" class="button special">See All</a></li>
+								</ul>
+								<h3>Manage Parking Lot Owners</h3>
+								<ul class="actions special">
+									<li><a href="{% url 'web:owners' %}" class="button special">See All</a></li>
+								</ul>
+						</section>
+					</div>
+				{% endif %}
+					
+
+				</section>
+
+			<!-- CTA -->
+				<section id="cta">
+
+					<h2>Manage Your Account</h2>
+					<p>Change account details, update your balance, access useful tools, and more.</p>
+
+					<a href="{% url 'web:account' %}" class="button alt">My Account</a>
+
+				</section>
+
+
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>USU CS 3540. Group 10- The Djinns: Joel Christensen, Autumn Arbon, Lexy Simmons, Palani Johnson.</li><li>HTML Template Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'web/assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'web/assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'web/assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'web/assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'web/assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'web/assets/js/util.js' %}"></script>
+			<script src="{% static 'web/assets/js/main.js' %}"></script>
+			<script src="{% static 'web/assets/js/custom.js' %}"></script>
+	</body>
+</html>

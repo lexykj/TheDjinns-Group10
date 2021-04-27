@@ -1,0 +1,361 @@
+<!DOCTYPE HTML>
+<!--
+	Big Blue's Parking Genie
+	USU CS3450
+	Group 10 - The Djinns
+	Autumn Arbon, Joel Christensen, Palani Johnson, Lexy Simmons
+	https://github.com/palani-johnson/TheDjinns-Group10
+
+
+	TEMPLATE: 
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Lot Management</title>
+		<meta charset="utf-8" />
+		{% load static %}
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href={% static "web/assets/css/main.css" %}/>
+		<link rel='icon' href={% static 'web/images/favicon.ico' %} type='image/x-icon' />
+
+	</head>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1>Big Blue's Parking Genie</h1>
+					<nav id="nav">
+						<ul>
+							<li><a href={% url "web:main" %}>Home</a></li>
+							<li><a href={% url "web:account" %} class="button">My Account</a></li>
+							<li><a href={% url "web:logout" %} class="button">Log Out</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+						<h2>{{ parkingLot.name }}</h2>
+					</header>
+
+					<section class="box">
+						<h3 style="text-align:center;">Name</h3>
+						<p><strong>Name: </strong>{{ parkingLot.name }}</p>
+						<form action="{% url 'web:lot_change_name' parkingLot.id %}" method="post">
+							{% csrf_token %}
+							<input type="text" placeholder="Enter New Parking Lot Name" name="name" id="name">
+							<br>
+							<div class="row aln-center">
+								<input type="submit" value="Change Name">
+							</div>
+						</form>
+						{% if name_error_message %}<p><strong class="error">{{ name_error_message }}</strong></p>
+						{% endif %}
+					</section>
+
+					<section class="box">
+						<h3 style="text-align: center;">Address</h3>
+						<p><strong>Address: </strong>{{ parkingLot.address }}</p>
+						<form action="{% url 'web:lot_change_address' parkingLot.id %}" method="post">
+							{% csrf_token %}
+							<input type="text" placeholder="Enter New Parking Lot Address" name="address" id="address">
+							<br>
+							<div class="row row-gtr-uniform">
+								<div class="col-4">
+									<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Latitude</a></h4>
+									<input type="number" step="any" class="button alt" id="latitude" name="latitude" />
+								</div>
+
+								<div class="col-4">
+									<h4>Enter <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=en">Longtitude</a></h4>
+									<input type="number" step="any" class="button alt" id="longitude" name="longitude" />
+								</div>
+
+								<div class="col-4">
+									<h4>Calculate from Address field</a></h4>
+									<input class="button" value="Calculate" id="latLngButton"/>
+									<script>
+										document.getElementById("latLngButton").addEventListener("click", () => {
+											address = document.getElementById("address").value;
+											url = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDBdkOXzfc2rj7a57BnP3AI0r9TrT2nmxY&address=" + address;
+											fetch(url)
+												.then(response => response.json())
+												.then(data => {
+													document.getElementById("address").value = data["results"][0]["formatted_address"];
+														geocode = data["results"][0]["geometry"]["location"];
+														document.getElementById("latitude").value = geocode["lat"];
+														document.getElementById("longitude").value = geocode["lng"];
+													});
+											});
+									</script>
+								</div>
+							</div>
+							<br>
+							<div class="row aln-center">
+								<input type="submit" value="Change Address">
+							</div>
+						</form>
+						{% if address_error_message %}<p><strong class="error">{{ address_error_message }}</strong></p>
+						{% endif %}
+					</section>
+
+					<section class="box">
+						<h3 style="text-align: center;">Events</h3>
+						{% if events_error_message %}<p><strong class="error">{{ events_error_message }}</strong></p>
+						{% endif %}
+						<div class="row row-gtr-uniform">
+							<div class="col-4">
+								<button class="collapsible button fit">Current</button>
+									<div class="content">
+										{% if event_list %}
+											<ul>
+											{% for event in event_list %}
+												<li><strong>{{ event }}:</strong> {{ event.date }}</li>
+											{% endfor %}
+											</ul>
+										{% else %}
+											No events
+										{% endif %}
+									</div>
+							</div>
+							<div class="col-4">
+								<button class="collapsible button fit">Add</button>
+									<div class="content">
+										{% if other_event_list %}
+										<form action="{% url 'web:lot_add_events' parkingLot.id %}" method="post">
+											{% csrf_token %}
+											{% for other_event in other_event_list %}
+												<input type="checkbox" id="e{{ other_event.id }}" name="e{{ other_event.id }}">
+											<label for="e{{ other_event.id }}"><strong>{{ other_event }}:</strong> {{ other_event.date }}</label>
+											{% endfor %}
+											<input type="submit" value="Add Events">
+										</form>
+										{% else %}
+											No events to add
+										{% endif %}
+									</div>
+							</div>
+							<div class="col-4">
+								<button class="collapsible button fit">Delete</button>
+									<div class="content">
+										{% if event_list %}
+										<form action="{% url 'web:lot_delete_events' parkingLot.id %}" method="post">
+											{% csrf_token %}
+											{% for event in event_list %}
+												<input type="checkbox" id="e{{ event.id }}" name="e{{ event.id }}">
+											<label for="e{{ event.id }}"><strong>{{ event }}:</strong> {{ event.date }}</label>
+											{% endfor %}
+											<input type="submit" value="Delete Events">
+										</form>
+										{% else %}
+											No events to delete
+										{% endif %}
+									</div>
+							</div>
+						</div>
+					</section>
+
+					<section class="box">
+						<h3 style="text-align: center;">Attendants</h3>
+						{% if attendants_error_message %}<p><strong class="error">{{ attendants_error_message }}</strong></p>
+						{% endif %}
+						<div class="row row-gtr-uniform">
+							<div class="col-4">
+								<button class="collapsible button fit">Current</button>
+									<div class="content">
+										{% if attendant_list %}
+											<ul>
+											{% for attendant in attendant_list %}
+												<li><strong>{{ attendant }}:</strong> {{ attendant.user.email }}</li>
+											{% endfor %}
+											</ul>
+										{% else %}
+											No attendants
+										{% endif %}
+									</div>
+							</div>
+							<div class="col-4">
+								<button class="collapsible button fit">Add</button>
+									<div class="content">
+										{% if other_attendant_list %}
+										<form action="{% url 'web:lot_add_attendants' parkingLot.id %}" method="post">
+											{% csrf_token %}
+											{% for other_attendant in other_attendant_list %}
+												<input type="checkbox" id="a{{ other_attendant.id }}" name="a{{ other_attendant.id }}">
+											<label for="a{{ other_attendant.id }}"><strong>{{ other_attendant }}:</strong> {{ other_attendant.user.email }}</label>
+											{% endfor %}
+											<input type="submit" value="Add Attendants">
+										</form>
+										{% else %}
+											No attendants to add
+										{% endif %}
+									</div>
+							</div>
+							<div class="col-4">
+								<button class="collapsible button fit">Delete</button>
+									<div class="content">
+										{% if attendant_list %}
+										<form action="{% url 'web:lot_delete_attendants' parkingLot.id %}" method="post">
+											{% csrf_token %}
+											{% for attendant in attendant_list %}
+												<input type="checkbox" id="a{{ attendant.id }}" name="a{{ attendant.id }}">
+											<label for="a{{ attendant.id }}"><strong>{{ attendant }}:</strong> {{ attendant.user.email }}</label>
+											{% endfor %}
+											<input type="submit" value="Delete Attendants">
+										</form>
+										{% else %}
+											No attendants to delete
+										{% endif %}
+									</div>
+							</div>
+						</div>
+					</section>
+
+					<section class="box">
+						<h3 style="text-align: center;">Total Parking Spots: {{ total_spots }}</h3>
+						{% if spot_error_message %}<p><strong class="error">{{ spot_error_message }}</strong></p>
+						{% endif %}
+						<div class="table-wrapper">
+							<table style="text-align: left;">
+								<thead>
+									<tr>
+										<th><strong>Spot Type</strong></th>
+										<th><strong>Quantity</strong></th>
+										<th><strong>Price</strong></th>
+										<th> </th>
+									</tr>
+								</thead>
+
+								<tbody>
+								{% if spot_list %}
+								{% for spot in spot_list %}
+								<div style="border-style: solid; border-color: black;">
+									<tr>
+										<td>{{ spot.spotType }}</td>
+										<td>{{ spot.totalSpots }}</td>
+										<td>${{ spot.price|stringformat:".2f" }}</td>
+										<td> </td>
+									</tr>
+									<form action="{% url 'web:lot_edit_spot' spot.id %}" method="post">
+										{% csrf_token %}
+										<tr>
+											<td><input type="text" placeholder="New Type" name="type"></td>
+											<td><input type="number" placeholder="New Quantity" name="quantity" min="1"></td>
+											<td><input type="number" placeholder="New Price" name="price" min="0" step=".01"></td>
+											<td><input type="submit" value="Save Changes"></td>
+										</tr>
+									</form>
+									<form action="{% url 'web:lot_delete_spot' spot.id %}" method="post">
+										{% csrf_token %}
+										<tr>
+											<td> </td>
+											<td><input type="submit" value="Delete {{ spot.spotType }} spot"></td>
+											<td> </td>
+											<td> </td>
+										</tr>
+									</form>
+									<tr>
+										<td> </td>
+										<td> </td>
+										<td> </td>
+										<td> </td>
+									</tr>
+								</div>
+
+								{% endfor %}
+								{% else %}
+									<tr>
+										<td>No spots available</td>
+										<td></td>
+										<td></td>
+									</tr>
+								{% endif %}
+								</tbody>
+
+							</table>
+						</div>
+					</section>
+
+					<section class="box">
+						<h3 style="text-align: center;">Add a New Type of Parking Spot</h3>
+						<form action="{% url 'web:lot_add_spot' parkingLot.id %}" method="post">
+							{% csrf_token %}
+							<div class="row row-gtr-uniform">
+								<div class="col-3">
+									<label for="type">Parking Spot Type:</label>
+									<input type="text" placeholder="Enter Type" name="type" id="type" required>
+								</div>
+								<div class="col-3">
+									<label for="quantity">Number of Spots:</label>
+									<input type="number" placeholder="Enter quantity" name="quantity" id="quantity" min="0" step=".01" required>
+								</div>
+								<div class="col-3">
+									<label for="price">Cost per Spot:</label>
+									<input type="number" placeholder="Enter Price" name="price" id="price" required>
+								</div>
+								<div class="col-3">
+									<br>
+									<input type="submit" value="Create Parking Spots">
+								</div>
+							</div>
+						</form>
+						{% if add_spot_error_message %}<p><strong class="error">{{ add_spot_error_message }}</strong></p>
+						{% endif %}
+					</section>
+					<section class="box">
+						<form action="{% url 'web:delete_lot' parkingLot.id %}" method="post">
+							{% csrf_token %}
+							<h3 class="row aln-center">Delete Lot</h3>
+							<p class="row aln-center">Warning: this action cannot be undone. Any information pertaining to this lot will become inaccessible.</p>
+							<div class="row aln-center">
+								<input type="submit" value="Delete {{ parkingLot }}">
+							</div>
+						</form>
+					</section>
+					<div class="row gtr-50 gtr-uniform aln-center">
+						<!--
+						<div class="col-3 col-12-mobilep">
+							<a href="{-% url 'web:lot-info' %-}" class="button">View Lot Details</a>
+						</div>
+						-->
+						<div class="col-12-mobilep">
+							<a href="{% url 'web:lots' %}" class="button">View All Lots</a>
+						</div>
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://github.com/palani-johnson/TheDjinns-Group10" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>USU CS 3540. Group 10- The Djinns: Joel Christensen, Autumn Arbon, Lexy Simmons, Palani Johnson.</li><li>HTML Template Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src={% static "assets/js/jquery.min.js" %}></script>
+			<script src={% static "assets/js/jquery.dropotron.min.js" %}></script>
+			<script src={% static "assets/js/jquery.scrollex.min.js" %}></script>
+			<script src={% static "assets/js/browser.min.js" %}></script>
+			<script src={% static "assets/js/breakpoints.min.js" %}></script>
+			<script src={% static "assets/js/util.js" %}></script>
+			<script src={% static "assets/js/main.js" %}></script>
+			<script src="{% static 'web/assets/js/custom.js' %}"></script>
+
+
+	</body>
+</html>

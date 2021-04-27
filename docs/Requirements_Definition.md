@@ -23,7 +23,7 @@ Requirements Definition
 | University Admin | View and manage all parking lot owners, their lots, and lot attendants. Manage and add upcoming events. | Owner permissions, event permissions. |
 
 
-![Figure 1 - Add Event](Use_Case_Diagrams/Add_Event.png "Add Event")  
+![Figure 1 - Add Event](Diagrams/Use_Case_Diagrams/Add_Event.png "Add Event")  
 **Figure 1.** Admin Adds Event  
 Participating Actor:
 - University Admin
@@ -40,7 +40,7 @@ Event Flow:
 3. Database saves and displays event
 
 
-![Figure 2 - Add Lot](Use_Case_Diagrams/Add_Lot.png "Add Lot")  
+![Figure 2 - Add Lot](Diagrams/Use_Case_Diagrams/Add_Lot.png "Add Lot")  
 **Figure 2.** Owner Adds Parking Lot  
 Participating Actor:
 - Parking Lot Owner
@@ -57,7 +57,7 @@ Event Flow:
 3. Database saves parking lot and associated spots
 
 
-![Figure 3 - Add Spot](Use_Case_Diagrams/Add_Spot.png "Add Spot")  
+![Figure 3 - Add Spot](Diagrams/Use_Case_Diagrams/Add_Spot.png "Add Spot")  
 **Figure 3.** Owner Adds Parking Spot  
 Participating Actor:
 - Parking Lot Owner
@@ -76,7 +76,7 @@ Event Flow:
 5. Designated parking lot is updated with new spot(s)
 
 
-![Figure 4 - Check In](Use_Case_Diagrams/Check_in.png "Check In")  
+![Figure 4 - Check In](Diagrams/Use_Case_Diagrams/Check_in.png "Check In")  
 **Figure 4.** Attendant Checks In Customer  
 Participating Actor:
 - Parking Attendant
@@ -97,7 +97,7 @@ Event Flow:
 6. Customer enters parking lot
 
 
-![Figure 5 - Create Account](Use_Case_Diagrams/CreateAccount.png "Create Account")  
+![Figure 5 - Create Account](Diagrams/Use_Case_Diagrams/CreateAccount.png "Create Account")  
 **Figure 5.** Public User Creates Account  
 Participating Actor(s):
 - All users: Customer, Parking Attendant, Parkint Lot Owner, or University Admin
@@ -116,7 +116,7 @@ Event Flow:
 5. Account is saved in the database
 
 
-![Figure 6 - Open Lot](Use_Case_Diagrams/Open_Lot.png "Open Lot")  
+![Figure 6 - Open Lot](Diagrams/Use_Case_Diagrams/Open_Lot.png "Open Lot")  
 **Figure 6.** Owner Opens Lot for Reservations  
 Participating Actor:
 - Parking Lot Owner
@@ -136,7 +136,7 @@ Event Flow:
 5. Added lots are available for reservation
 
 
-![Figure 7 - Reserve Spot](Use_Case_Diagrams/Reserve_Spot.png "Reserve Spot")  
+![Figure 7 - Reserve Spot](Diagrams/Use_Case_Diagrams/Reserve_Spot.png "Reserve Spot")  
 **Figure 7.** Customer Reserves Parking Spot  
 Participating Actor:
 - Customer
@@ -158,7 +158,7 @@ Event Flow:
 5. Reservation information is available for Customer
 
 
-![Figure 8 - Use Reservation](Use_Case_Diagrams/Use_Reservation.png "Use Reservation")  
+![Figure 8 - Use Reservation](Diagrams/Use_Case_Diagrams/Use_Reservation.png "Use Reservation")  
 **Figure 8.** Customer Uses their Reserved Parking Spot  
 Participating Actor:
 - Customer
@@ -179,30 +179,29 @@ Event Flow:
 ## 3.	Functional Requirements
 
 1. Sign-up Page (no permissions)
-    - Allows for sign up and registration of diffrent actors
-    - Client and Lot Owners can register as such
+    - 1.1. Allows for sign up and registration of diffrent actors
+    - 1.2. Client and Lot Owners can register as such
 2. Map Page (Client-level permissions)
-    - Contains a map of avalible lots for a given event
+    - 2.1. Contains a map of avalible lots for a given event
 3. Lot Page (Client-level permissions)
-    - Linked from map page
-    - Contains specific information about the lot including owner name, number of spots, reservation options, etc.
+    - 3.1.  Linked from map page
+    - 3.2. Contains specific information about the lot including owner name, number of spots, reservation options, etc.
 4. Lot Attendant Page (Lot Attendent permissions)
-    - Allows Lot Attendants to view current reservations and events.
-    - Allows Lot Attendants to check-in Clients.
+    - 4.1. Allows Lot Attendants to view current reservations and events.
+    - 4.2. Allows Lot Attendants to check-in Clients.
 5. Lot Owner Page (Lot Owner permissions)
-    - Allows Lot Owners to add/remove avalible lots, set reservation price for lot, and manage parking space types
+    - 5.1. Allows Lot Owners to add/remove avalible lots, set reservation price for lot, and manage parking space types
 6. Event Management Page (University Admin permissions)
-    - Allows University Admins to create new events and manage lot owners.
+    - 6.1. Allows University Admins to create new events and manage lot owners.
 7. Lot Attendant admin page (Lot Owner permissions)
-    - Allows Lot Owners and University Admins to add/remive Lot attendents
-    - University Admins can also add new University Admins
-    - Sends a private sign up link to new new Attendent/Admin
-8. Main Page (all permissions)
-    - Allows navigation of all pages based on permissions of diffrent actors
-    - Shows information like current reservations and event information
+    - 7.1. Allows Lot Owners and University Admins to add/remive Lot attendents
+    - 7.2. University Admins can also add new University Admins
+8. Main Page (any permissions)
+    - 8.1. Allows navigation of all pages based on permissions of diffrent actors
+    - 8.2. Shows information like current reservations and event information
 9. About Page (no permissions)
-    - Information page
-    - Tells potential actors about Parking Genie
+    - 9.1. Information page
+    - 9.2. Tells potential actors about Parking Genie
 
 
 ## 4.	Non-functional Requirements

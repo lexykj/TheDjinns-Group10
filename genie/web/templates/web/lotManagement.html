@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<!--
+	Big Blue's Parking Genie
+	USU CS3450
+	Group 10 - The Djinns
+	Autumn Arbon, Joel Christensen, Palani Johnson, Lexy Simmons
+	https://github.com/palani-johnson/TheDjinns-Group10
+
+
+	TEMPLATE: 
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Lot Management</title>
+		<meta charset="utf-8" />
+		{% load static %}
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href={% static "web/assets/css/main.css" %}/>
+		<link rel='icon' href={% static 'web/images/favicon.ico' %} type='image/x-icon' />
+
+	</head>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1>Big Blue's Parking Genie</h1>
+					<nav id="nav">
+						<ul>
+							<li><a href={% url "web:main" %}>Home</a></li>
+							<li><a href={% url "web:account" %} class="button">My Account</a></li>
+							<li><a href={% url "web:logout" %} class="button">Log Out</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+						<h2>Manage Lots Owned By {{ user }}</h2>
+						<!-- 
+							1. View all parking spots
+							2. Edit all parking spots
+							3. Add parking spots??
+							4. View map
+								- Additional features?
+									- Attendants
+								- Change location?
+						-->
+					</header>
+
+					{% if data_list %}
+					{% for parkingLot in data_list %}
+					<section class="box">
+						<h3 class="special" style="text-align: center;">{{ parkingLot.0.name }}</h3>
+						<h4><strong>Address:</strong> {{ parkingLot.0.address }}</h4>
+						<h4><strong>All Events:</strong>
+							{% if parkingLot.0.event.all %}
+								{% for event in parkingLot.0.event.all %}
+									{% if forloop.counter0 < event_limit %}
+										{% if forloop.last %}
+											{{ event }}
+										{% else %}
+											{{ event }},
+										{% endif %}
+									{% endif %}
+								{% endfor %}
+							{% else %}
+								No events
+							{% endif %}
+						</h4>
+						<h4><strong>Attendants (usernames):</strong>
+							{% if parkingLot.0.profile_set.all %}
+								{% for attendant in parkingLot.0.profile_set.all %}
+									{% if forloop.counter0 < attendant_limit %}
+										{% if forloop.last %}
+											{{ attendant }}
+										{% else %}
+											{{ attendant }},
+										{% endif %}
+									{% endif %}
+								{% endfor %}
+							{% else %}
+								No Attendants yet
+							{% endif %}
+						</h4>
+
+						<h4><strong>Total Parking Spots: </strong>{{ parkingLot.1 }}</h4>
+
+						<div class="table-wrapper">
+							<table style="text-align: left;">
+								<thead>
+									<tr>
+										<th><strong>Spot Type</strong></th>
+										<th><strong>Quantity</strong></th>
+										<th><strong>Price</strong></th>
+									</tr>
+								</thead>
+
+								<tbody>
+									{% if parkingLot.0.parkingspot_set.all %}
+										{% for spot in parkingLot.0.parkingspot_set.all %}
+										<tr>
+											<td>{{ spot.spotType }}</td>
+											<td>{{ spot.totalSpots }}</td>
+											<td>${{ spot.price|stringformat:".2f" }}</td>
+										</tr>
+										{% endfor %}
+									{% else %}
+										<tr>
+											<td>No spots available</td>
+											<td></td>
+											<td></td>
+										</tr>
+									{% endif %}
+								</tbody>
+
+							</table>
+						</div>
+						<div class="row gtr-50 gtr-uniform aln-center">
+							<div class="col-4 col-12-mobilep">
+								<a href="{% url 'web:lotEdit' parkingLot.0.id %}" class="button">Edit Lot</a>
+							</div>
+						</div>
+					</section>
+					{% endfor %}
+
+					{% else %}
+					<section class="box">
+						<h4>You do not own any lots</h4>
+					</section>
+					{% endif %}
+
+					<section class="box">
+						<p>Map here</p>
+					</section>
+
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://github.com/palani-johnson/TheDjinns-Group10" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>USU CS 3540. Group 10- The Djinns: Joel Christensen, Autumn Arbon, Lexy Simmons, Palani Johnson.</li><li>HTML Template Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src={% static "assets/js/jquery.min.js" %}></script>
+			<script src={% static "assets/js/jquery.dropotron.min.js" %}></script>
+			<script src={% static "assets/js/jquery.scrollex.min.js" %}></script>
+			<script src={% static "assets/js/browser.min.js" %}></script>
+			<script src={% static "assets/js/breakpoints.min.js" %}></script>
+			<script src={% static "assets/js/util.js" %}></script>
+			<script src={% static "assets/js/main.js" %}></script>
+
+	</body>
+</html>

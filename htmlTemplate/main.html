@@ -1,0 +1,282 @@
+<!DOCTYPE HTML>
+<!--
+	Big Blue's Parking Genie
+	USU CS3450
+	Group 10 - The Djinns
+	Autumn Arbon, Joel Christensen, Palani Johnson, Lexy Simmons
+	https://github.com/palani-johnson/TheDjinns-Group10
+
+
+	TEMPLATE: 
+	Template:
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>My Parking</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel='icon' href='images/favicon.ico' type='image/x-icon' />
+	</head>
+	<body class="landing is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header" class="alt">
+					<h1><a href="main.html">Big Blue's Parking Genie</a></h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="https://github.com/palani-johnson/TheDjinns-Group10" class="icon brands fa-github"><span class="label">Github</span></a></li>	
+							<li><a href="main.html">Home</a></li>
+							<li><a href="account.html" class="button">My Account</a></li>
+							<li><a href="signUp.html" class="button">Log Out</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Banner -->
+				<section id="banner">
+					<h2>My Parking</h2>
+				</section>
+
+			<!-- Main -->
+				<section id="main" class="container navMain">
+					<section class="box special">
+						<header class="major">
+							<h2>A Hub for All Your Parking Needs</h2>
+							<br />
+							<a style=" text-decoration: none; border-bottom: none;" href="#customerFunctions"><span class="icon solid major fa-long-arrow-alt-down accent4"></span></a>
+						</header>
+					</section>
+
+					<!-- Customer Functionality -->
+					<br />
+					<div id="customerFunctions">
+						<h2 style="text-align: center;">Customer Functions</h2>
+						<section class="box special">
+							<header class="major">
+							<h3>Upcoming Utah State Events</h3>
+							<br />
+							<h4>{{--INSERT MONTH HERE--}}</h4>
+									<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Date/Time</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>{{MonthEvent 1}}</td>
+													<td>{{Description?}}}</td>
+													<td>{{DATE/TIME}}</td>
+												</tr>
+												<tr>
+													<td>{{MonthEvent 2}}</td>
+													<td>{{Description?}}}</td>
+													<td>{{DATE/TIME}}</td>
+												</tr>
+												<tr>
+													<td>{{MonthEvent 3}}</td>
+													<td>{{Description?}}}</td>
+													<td>{{DATE/TIME}}</td>
+												</tr>
+												<tr>
+													<td>{{MonthEvent 4}}</td>
+													<td>{{Description?}}}</td>
+													<td>{{DATE/TIME}}</td>
+												</tr>
+												<tr>
+													<td>{{MonthEvent 5}}</td>
+													<td>{{Description?}}}</td>
+													<td>{{DATE/TIME}}</td>
+												</tr>
+											</tbody>
+											<!-- <tfoot>
+												<tr>
+													<td colspan="2"></td>
+													<td>100.00</td>
+												</tr>
+											</tfoot> -->
+										</table>
+									</div>
+						</header>
+						<div class="row">
+							<ul class="actions special">
+								<li><a href="reserveSpot.html" class="button">Reserve a Parking Spot</a></li>
+							</ul>
+						</div>
+					</section>
+					<section class="box special">
+
+							<h3>Current Upcoming Reservations</h3>
+							<ul class="alt">
+								<li>
+									<div class="row">
+										<a href="#" class="button alt col-4">{{Reservation 1}}</a>
+										<p class="col-4"><a href="map.html">View Map</a></p>
+										<p class="col-4"><a href="">Reservation Code</a></p>
+									</div>
+								</li>
+							</ul>
+
+							<h3>Previous Reservations</h3>
+							<ul class="alt">
+								<li>
+									<div class="row">
+										<a href="#" class="button alt col-4">{{Reservation 1}}</a>
+										<p class="col-4"><a href="map.html">View Map</a></p>
+										<p class="col-4"><a href="">Reservation Code</a></p>
+									</div>
+								</li>
+								<li>
+									<div class="row">
+										<a href="#" class="button alt col-4">{{Reservation 2}}</a>
+										<p class="col-4"><a href="map.html">View Map</a></p>
+										<p class="col-4"><a href="">Reservation Code</a></p>
+									</div>
+								</li>
+								<li>
+									<div class="row">
+										<a href="#" class="button alt col-4">{{Reservation 3}}</a>
+										<p class="col-4"><a href="map.html">View Map</a></p>
+										<p class="col-4"><a href="">Reservation Code</a></p>
+									</div>
+								</li>
+								<li><a href="pastReservations.html" class="button special fit">See all past reservations</a></li>
+							</ul>
+						</section>
+					</div>
+
+					<!-- Attendant Functionality -->
+					<div id="attendantFunctions">
+						<h2 style="text-align: center;">Attendant Functions</h2>
+						<section class="box special">
+								<span class="image featured"><img src="images/checkIn.jpg" alt="" /></span>
+								<h3>Check In Customers</h3>
+								<div class="col-12">
+									<select name="category" id="category">
+										<option value="">- Select Event -</option>
+										<option value="1">{{1}}</option>
+										<option value="1">{{2}}</option>
+										<option value="1">{{3}}</option>
+										<option value="1">{{4}}</option>
+									</select>
+								</div>
+								<br />
+								<ul class="actions special">
+									<li><a href="#" class="button special">Fill Event Reservations</a></li>
+								</ul>
+						</section>
+					</div>
+
+					<!-- Owner Functionality -->
+					<div id="ownerFunctions">
+						<h2 style="text-align: center;">Lot Owner Functions</h2>
+						<div class="row">
+							<div class="col-6 col-12-narrower">
+
+								<section class="box special">
+									<span class="image featured"><img src="images/parkingGarage2.jpg" alt="" /></span>
+									<h3>Manage my Parking Lots</h3>
+									<p>Assign new attendants; manage parking types and prices.</p>
+									<ul class="actions special">
+										<li><a href="lotManagement.html" class="button special">See my parking lots</a></li>
+									</ul>
+								</section>
+
+							</div>
+							<div class="col-6 col-12-narrower">
+
+								<section class="box special">
+									<span class="image featured"><img src="images/sunset.jpg" alt="" /></span>
+									<h3>View current lot reservations</h3>
+									<div class="col-12">
+										<select name="category" id="category">
+											<option value="">- Select Event -</option>
+											<option value="1">{{1}}</option>
+											<option value="1">{{2}}</option>
+											<option value="1">{{3}}</option>
+											<option value="1">{{4}}</option>
+										</select>
+										<br />
+										<select name="category" id="category">
+											<option value="">- Select Parking Lot -</option>
+											<option value="1">{{1}}</option>
+											<option value="1">{{2}}</option>
+											<option value="1">{{3}}</option>
+											<option value="1">{{4}}</option>
+										</select>
+									</div>
+									<br />
+									<ul class="actions special">
+										<li><a href="#" class="button special">View Lot Reservations</a></li>
+									</ul>
+								</section>
+
+							</div>
+						</div>
+					</div>
+
+					<!-- University Admin Functionality -->
+					<div id="adminFunctions">
+						<h2 style="text-align: center;">University Admin Functions</h2>
+						<section class="box special">
+								<span class="image featured"><img src="images/desk.jpg" alt="" /></span>
+								<h3>Manage Upcoming USU Events</h3>
+								<ul class="actions special">
+									<li><a href="eventManagement.html" class="button special">See All</a></li>
+								</ul>
+								<h3>Manage Parking Lot Owners</h3>
+								<ul class="actions special">
+									<li><a href="ownerManagement.html" class="button special">See All</a></li>
+								</ul>
+						</section>
+					</div>
+					
+
+				</section>
+
+			<!-- CTA -->
+				<section id="cta">
+
+					<h2>Manage Your Account</h2>
+					<p>Change account details, update your balance, access useful tools, and more.</p>
+
+					<a href="account.html" class="button alt">My Account</a>
+
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>USU CS 3540. Group 10- The Djinns: Joel Christensen, Autumn Arbon, Lexy Simmons, Palani Johnson.</li><li>HTML Template Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
